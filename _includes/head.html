@@ -21,9 +21,15 @@
   <link rel="apple-touch-icon" href="{% asset_path apple-touch-icon.png %}">
   <link href="{{ site.url }}feed.xml" type="application/rss+xml" rel="alternate" title="{{ site.name }} Last 10 blog posts" />
 
+  <script src="https://use.typekit.net/red7ojk.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
   {% if site.blog_theme == "light" %}
     {% stylesheet light %}
   {% else %}
-    {% stylesheet dark %}
+    {% stylesheet style %}
   {% endif %}
+  {% stylesheet style %}
+
+
 </head>

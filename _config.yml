@@ -65,13 +65,3 @@ gems:
   - neat
 permalink: posts/:slug
 
-group: jekyll_plugins do
-  gem "bourbon"
-end
-
-group: jekyll_plugins do
-  gem "bourbon"
-  gem "kramdown"
-  gem "rouge"
-  gem "jekyll-watch"
-end
