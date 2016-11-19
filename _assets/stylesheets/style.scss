@@ -680,3 +680,31 @@ h2 {
 
   }
 }
+
+.grid-cell {
+  display: inline-block;
+  width: 100%;
+  padding: 0
+}
+
+.article-list li {
+  position: relative;
+  display: block;
+  padding: 1.25em 0;
+}
+
+.article-list-item a {
+  text-decoration: none;
+}
+
+
+
+.title {
+  font-size:ms(5);
+
+}
+
+.article-list-item p {
+  margin: .5em 0 .5em;
+  font-size: ms(0);
+}

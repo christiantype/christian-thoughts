@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="297d7d79-e99e-42ca-a44e-19b118abdadf" name="Christian Solorzano Thoughts" url="http://tealc.asoshared.com">
+        <fileTransfer host="tealc.asoshared.com" port="21" rootFolder="/public_html/demo" password="dfe9dfc2dfd8dfc3dfd9dfdedfc3dfcbdfc4dff9dfcbdfc3dfcfdfcedf9bdf98df99df8b" username="christ61">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
