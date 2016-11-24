@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>//posts/writingmore</loc>
+<lastmod>2016-11-18T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>//posts/writing</loc>
+<lastmod>2016-11-18T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>//about</loc>
+</url>
+<url>
+<loc>//</loc>
+</url>
+<url>
+<loc>//tag/design/</loc>
+</url>
+<url>
+<loc>//tag/opinion/</loc>
+</url>
+<url>
+<loc>//tag/personal/</loc>
+</url>
+</urlset>
