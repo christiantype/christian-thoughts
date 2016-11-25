@@ -37,10 +37,10 @@ description: "An online blog frequently updated by graphic designer, Christian S
   {% if paginator.total_pages > 1 %}
     <li class="article-pagination reveal">
       {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path }}" class="article-pagination-right">Newer posts <span class="icon icon-ios-arrow-thin-right"></span></a>
+        <a href="{{ paginator.previous_page_path }}" class="article-pagination-right">Newer posts </a>
       {% endif %}
       {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path }}"><span class="icon icon-ios-arrow-thin-left"></span> Older posts</a>
+        <a href="{{ paginator.next_page_path }}"></span> Older posts</a>
       {% endif %}
     </li>
   {% endif %}
