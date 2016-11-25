@@ -1,10 +1,10 @@
 # Mandatory settings
 
-baseurl: /
-name: Chalk
-paginate: 25
+baseurl: /demo
+name: Christian Solorzano' Thoughts
+paginate: 5
 paginate_path: "/posts/page/:num/"
-url: # add site url http://example.com/
+url: http://christiansolorzano.com/demo
 blog_theme: light # Or use dark
 
 # Optional settings
@@ -40,6 +40,7 @@ collections:
   my_tags:
     output: true
     permalink: /tag/:slug/
+
 defaults:
   -
     scope:
