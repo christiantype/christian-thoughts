@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Asking questions"
+title: "What is my new project, Faculty, about?"
 description: "how can i write better?"
 og_image: "documentation/sample-image.jpg"
 tags: [design, jekyll]
