@@ -51,7 +51,7 @@ $darkcolor: #e8e8e8;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
-$font-family-serif: 'Cardo', serif;
+$font-family-serif: 'leitura-news', serif;
 $font-family-sans: 'neuzeit-grotesk',sans-serif;
 $light:300;
 $regular:400;
@@ -157,7 +157,7 @@ header {
     @include outer-container(80%);
   }
   @include media($grid) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
   }
 
 }
@@ -676,7 +676,7 @@ h2 {
     @include outer-container(80%);
   }
   @include media($grid) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
 
   }
 }
@@ -699,6 +699,7 @@ h2 {
 .article-list li h1  {
   @include ms-respond(font-size, 2);
   color:$maincolor;
+  font-weight:700;
 
 }
 
@@ -740,9 +741,14 @@ h2 {
 .article-header h1 {
   font-size:ms(5);
   color:$maincolor;
+  font-weight:700;
+  line-height:1em;
 }
 
 .article-header p {
   margin:.25em;
 }
 
+.article-content p {
+  font-family: $font-family-serif;
+}
