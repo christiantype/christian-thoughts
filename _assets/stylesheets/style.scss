@@ -712,6 +712,16 @@ h2 {
   margin:1em 0;
 }
 
+.article-list p {
+  margin:1em 0;
+
+}
+
+.article-list-item {
+  font-size:ms(-1);
+
+}
+
 .article-list-item a {
   text-decoration: none;
 }
@@ -719,6 +729,12 @@ h2 {
 
 .article {
   margin:2.5em 0;
+  @include media($small) { // As defined in _grid-settings.scss
+    margin:0;
+  }
+  @include media($grid) { // As defined in _grid-settings.scss
+    margin:0;
+  }
 
 }
 
@@ -747,8 +763,21 @@ h2 {
 
 .article-header p {
   margin:.25em;
+  line-height: initial;
+
 }
 
 .article-content p {
   font-family: $font-family-serif;
+  @include media($grid) { // As defined in _grid-settings.scss
+  font-size:ms(-1);
+  }
+}
+
+footer {
+  font-size:ms(-1);
+}
+
+.article-list-divider {
+  margin: 0 5px;
 }
