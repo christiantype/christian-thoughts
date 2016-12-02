@@ -64,5 +64,5 @@ gems:
   - jekyll-sitemap
   - bourbon
   - neat
-permalink: posts/:slug
+permalink: posts/:slug/
 
