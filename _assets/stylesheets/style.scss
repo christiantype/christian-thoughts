@@ -772,6 +772,7 @@ h2 {
   @include media($grid) { // As defined in _grid-settings.scss
   font-size:ms(-1);
   }
+  line-height:2.25em;
 }
 
 footer {
@@ -780,4 +781,8 @@ footer {
 
 .article-list-divider {
   margin: 0 5px;
+}
+
+.article-list-tags {
+  visibility:hidden;
 }
