@@ -16,13 +16,13 @@ html {
 }
 
 body {
-  margin: 0 auto;
-  font-family: $base-font-family;
-  -webkit-font-smoothing: antialiased;
-  font-weight: $base-font-weight;
-  line-height: $base-line-height;
-  color: $base-font-color;
-  background: $body-background;
+ // margin: 0 auto;
+  // font-family: $base-font-family;
+  //-webkit-font-smoothing: antialiased;
+ // font-weight: $base-font-weight;
+  // line-height: $base-line-height;
+  // color: $base-font-color;
+  // background: $body-background;
 }
 
 // Typography
@@ -30,7 +30,7 @@ body {
 
 p {
   margin: 0;
-  font-weight: $base-font-weight;
+ // font-weight: $base-font-weight;
 }
 
 b,
@@ -45,11 +45,11 @@ h4,
 h5,
 h6 {
   margin: 0;
-  line-height: 1.5;
+ // line-height: 1.5;
   text-rendering: optimizeLegibility;
 }
 
-h1 {
+/* h1 {
   font-size: $base-font-size * 1.6;
   font-weight: 400;
   letter-spacing: -.03em;
@@ -127,10 +127,11 @@ blockquote {
   color: $gray-light;
   border-left: 3px solid $gray-dark;
 }
+*/
 
 // Other
 // =============================================================================
-
+/*
 hr {
   margin: 0;
   border-top: 0;
@@ -149,3 +150,5 @@ img {
   color: $white;
   background-color: $gray-darkest;
 }
+
+*/
