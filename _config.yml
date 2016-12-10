@@ -1,10 +1,10 @@
 # Mandatory settings
 
-baseurl: /demo
-name: Christian Solorzano' Thoughts
+baseurl: /journal
+name: Christian Solorzano's Journal
 paginate: 5
 paginate_path: "/posts/page/:num/"
-url: http://christiansolorzano.com/demo
+url: http://christiansolorzano.com/journal
 blog_theme: light # Or use dark
 
 # Optional settings

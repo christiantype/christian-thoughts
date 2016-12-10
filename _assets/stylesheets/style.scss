@@ -44,10 +44,9 @@ $max-width: em(62.5em) !default;
 
 
 $backgroundc: #ffffff;
-$lightcolor: #646464;
+$lightcolor: #cecece;
 $midcolor: #636363;
 $maincolor: #181818;
-$darkcolor: #e8e8e8;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
@@ -378,9 +377,7 @@ li.block img:hover {
 
 
 .aboutsection ul {
-  padding-left: opx ;
   margin-left: -40px ;
-  text-indent: opx ;
 }
 
 
@@ -399,12 +396,7 @@ li.block img:hover {
   letter-spacing: 1px;
   font-weight: 300;
 }
-.aboutsection lh {
-  padding-bottom:3px;
-  font-size:ms(0);
-  font-weight:300;
-  margin-bottom: 10px;
-}
+
 
 
 
@@ -670,7 +662,7 @@ h2 {
 
 /* BLOG */
 
-.grid-centered, {
+.grid-centered {
   @include outer-container(45%);
   @include media($small) { // As defined in _grid-settings.scss
     @include outer-container(80%);
@@ -692,7 +684,7 @@ h2 {
   display: block;
   padding: 0;
   margin-bottom: 1.25em;
-  border-bottom: .5px solid $darkcolor;
+  border-bottom: .5px solid $lightcolor;
 
 }
 
@@ -767,16 +759,24 @@ h2 {
 
 }
 
-.article-content p {
+.article-content  {
   font-family: $font-family-serif;
+  font-size:ms(1);
+  line-height:2em;
   @include media($grid) { // As defined in _grid-settings.scss
   font-size:ms(-1);
+  line-height:1.5em;
+
   }
-  line-height:2.25em;
 }
 
-footer {
-  font-size:ms(-1);
+.article-content a {
+  vertical-align: inherit;
+}
+
+footer p {
+  font-size:ms(-2);
+  color:$lightcolor;
 }
 
 .article-list-divider {

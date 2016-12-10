@@ -4,7 +4,8 @@
   <title>{{ site.name }} | {{ page.title }}</title>
   <meta name="description" content="{{ page.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="google-site-verification" content="ClMV3EaPmg270PHuFGygXYZXB6zNYOok7-qSbvTjrCE">
+  <script async="" src="//www.google-analytics.com/analytics.js"></script>
   <meta property="og:title" content="{{ page.title }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
@@ -18,7 +19,6 @@
   <meta name="twitter:description" content="{{ page.description }}">
   <meta name="twitter:image" content="{{ site.url }}{% if page.og_image %}{{ page.og_image | asset_path }}{% else %}{% asset_path og-image.jpg %}{% endif %}">
 
-  <link rel="apple-touch-icon" href="{% asset_path apple-touch-icon.png %}">
   <link href="{{ 'feed.xml' | absolute_url }}" type="application/rss+xml" rel="alternate" title="{{ site.name }} Last 10 blog posts" />
 
   <script src="https://use.typekit.net/red7ojk.js"></script>
