@@ -89,30 +89,30 @@ html:before,html:after,body:before,body:after{
   background:black;
   position:fixed;
   display:block;
-  z-index:5;
+  z-index:1000;
 }
 
 /* ...and position them! */
 html:before{
-  height:10px;
+  height:15px;
   left:0;
   right:0;
   top:0;
 }
 html:after{
-  width:10px;
+  width:15px;
   top:0;
   right:0;
   bottom:0;
 }
 body:before{
-  height:10px;
+  height:15px;
   right:0;
   bottom:0;
   left:0;
 }
 body:after{
-  width:10px;
+  width:15px;
   top:0;
   bottom:0;
   left:0;
@@ -153,7 +153,7 @@ header {
   padding: 2em 0 2em 0;
 
   @include media($small) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
   }
   @include media($grid) { // As defined in _grid-settings.scss
     @include outer-container(85%);
@@ -177,8 +177,9 @@ header {
 
 #logo a {
   vertical-align: text-bottom;
+  font-family: $font-family-serif;
   font-size: ms(1);
-  font-weight: $regular;
+  font-weight:800;
   letter-spacing: 1px;
   -webkit-animation: color-change 5s infinite;
   -moz-animation: color-change 5s infinite;
@@ -266,10 +267,10 @@ nav ul li:nth-last-child(1) {
   }
   }
 
-#work h1 {
-  text-align: left;
-  font-size:ms(13);
+#work img {
+  width:100%;
 }
+
 
 li.block {
   @include span-columns(3);
@@ -381,21 +382,8 @@ li.block img:hover {
 }
 
 
-.about h1 {
-  font-family: $font-family-sans;
-  clear:both;
-  color:$maincolor;
-  font-weight: 300;
-  @include ms-respond(font-size, 4);
-}
 
 
-.about h3 {
-  font-size:ms(-1);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 300;
-}
 
 
 
@@ -442,12 +430,7 @@ li.block img:hover {
 
 }
 
-.social h2 {
-  font-size: ms(-2);
-  font-weight:400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+
 
 .social p {
   font-size: ms(-2);
@@ -462,12 +445,8 @@ li.block img:hover {
   text-align: center;
 }
 
-.colophon h2 {
-  font-size: ms(-2);
-  font-weight:400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+
+
 
 .colophon p {
   font-size: ms(-2);
@@ -482,10 +461,10 @@ li.block img:hover {
 .worktext {
   @include outer-container(70%);
   @include media($small) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
   }
   @include media($grid) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
   }
 
 }
@@ -511,12 +490,7 @@ li.block img:hover {
   }
 }
 
-.projectinfo h1 {
-  @include ms-respond(font-size, 1);
-  font-weight:$light;
-  border-bottom: 1px solid black;
-  padding-bottom: .6em;
-}
+
 
 
 .projecttype {
@@ -528,10 +502,8 @@ li.block img:hover {
   }
 }
 
-.projecttype h1 {
-  @include ms-respond (font-size, 1);
-  font-weight: $light;
-}
+
+
 
 .projectinfo p {
   font-size: ms(0);
@@ -561,18 +533,7 @@ li.block img:hover {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  opacity:0;  /* make things invisible upon start */
-  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
-
-  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  z-index: 1;
 
   @include media($small) { // As defined in _grid-settings.scss
     max-width:100%;
@@ -635,17 +596,48 @@ header p {
 
 h1 {
   font-family: $font-family-sans;
-  font-size: ms(0);
-  font-weight: 400;
-  color:blue;
+  font-size: ms(2);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: inset 0 -8px 0 #eeeaec;
 }
 
 h2 {
   font-family: $font-family-sans;
-  font-size: ms(0);
-  font-weight: 400;
+  font-size: ms(3);
+  font-weight: 600;
+  margin-top: 1em;
 
 }
+
+
+h3 {
+  font-family: $font-family-sans;
+  font-size: ms(2);
+  font-weight: 400;
+  margin-top: 1em;
+
+}
+
+h4 {
+  font-family: $font-family-sans;
+  font-size: ms(1);
+  font-weight: 400;
+  margin-top: 1em;
+
+}
+
+h5 {
+  font-family: $font-family-sans;
+  font-size: ms(-2);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 1em;
+
+}
+
 
 
 .words {
@@ -688,12 +680,7 @@ h2 {
 
 }
 
-.article-list li h1  {
-  @include ms-respond(font-size, 2);
-  color:$maincolor;
-  font-weight:700;
 
-}
 
 .article-list-footer {
   display: block;
@@ -746,12 +733,6 @@ h2 {
 
 }
 
-.article-header h1 {
-  font-size:ms(5);
-  color:$maincolor;
-  font-weight:700;
-  line-height:1em;
-}
 
 .article-header p {
   margin:.25em;
