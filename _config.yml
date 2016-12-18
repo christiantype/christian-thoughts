@@ -1,7 +1,7 @@
 # Mandatory settings
 
 baseurl: /journal
-name: Christian Solorzano's Journal
+name: Christian Solorzano
 paginate: 5
 paginate_path: "/posts/page/:num/"
 url: http://christiansolorzano.com/journal
