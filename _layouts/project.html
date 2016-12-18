@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body>
+{% include navigation.html %}
+
+  <main role="main">
+    <div class="work">
+      <div class="worktext">
+        <article class="projectinfo">
+          <h1>{{ page.title }}</h1>
+          <hr>
+          <h3>Client: {{ page.client }}</h3>
+          <h5>Brief</h5>
+          <p>{{ page.brief }} </p>
+          <h5>Research</h5>
+          <p>{{ page.research }}</p>
+          <h5>Solution</h5>
+          <p> {{ page.solution }}</p>
+        </article>
+        <article class="projecttype">
+          <h1>Project Type</h1>
+          <hr>
+          <p>{{ page.type }}</p>
+        </article>
+
+        </div>
+      <article class="workimages">
+        {{ content }}
+      </article>
+
+
+    </div>
+
+
+
+  </main>
+{% include footer.html %}
+  {% include javascripts.html %}
+</body>
+</html>
