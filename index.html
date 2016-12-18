@@ -3,7 +3,6 @@ layout: portfolio
 title: "Christian Solorzano's Journal"
 description: "An online blog frequently updated by graphic designer, Christian Solorzano."
 ---
-    {% for post in site.posts %}
     {% for post in site.tags.project %}
 
 
@@ -12,16 +11,12 @@ description: "An online blog frequently updated by graphic designer, Christian S
         <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
 
             <img src="./assets/projects/{{ post.image }}"/>
-            <h2>
-                {{ post.title }}
-            </h2>
+
         </a>
 
 
     </li>
     {% endfor %}
-    {% endfor %}
 
 
 
-</ul>
