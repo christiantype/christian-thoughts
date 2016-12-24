@@ -2,7 +2,7 @@
 
 baseurl: /journal
 name: Christian Solorzano
-paginate: 5
+paginate: 1
 paginate_path: "/posts/page/:num/"
 url: http://christiansolorzano.com/journal
 blog_theme: light # Or use dark
