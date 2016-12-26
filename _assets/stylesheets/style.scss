@@ -275,19 +275,23 @@ nav ul li:nth-last-child(1) {
 li.block {
   @include span-columns(4);
   // @include omega(4n);
-  margin: .2em;
+  margin: 0 0 1.5em 0;
+  width:33.33%;
   @include media($small) { // As defined in _grid-settings.scss
+    @include span-columns(6);
+    width:50%;
+    margin: 0 0 1.5em 0;
+
+
+  }
+  @include media($grid) { // As defined in _grid-settings.scss
+    @include span-columns(12);
+    @include omega-reset(3n);
+    @include omega(2n);
     margin: 0 auto;
-   @include span-columns(4);
-    @include omega(3n);
   }
- @include media($grid) { // As defined in _grid-settings.scss
-   @include span-columns(6);
-   @include omega-reset(3n);
-   @include omega(2n);
-   margin: 0 auto;
- }
-  }
+}
+
 
 .block {
   text-align: center;
@@ -766,4 +770,16 @@ footer p {
 
 .article-list-tags {
   visibility:hidden;
+}
+
+
+.journal {
+  margin:0 auto;
+  @include span-columns(4);
+
+
+}
+
+.post-title {
+  text-transform: uppercase;
 }
