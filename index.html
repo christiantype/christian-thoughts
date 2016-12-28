@@ -10,12 +10,16 @@ description: "An online blog frequently updated by graphic designer, Christian S
     <li class="block" id="#work">
         <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
 
-            <img src="./assets/projects/{{ post.image }}"/>
+            <img src="{{ '/' | relative_url }}{{ post.image }}"/>
 
+
+<h1>{{ post.title }}</h1>
         </a>
 
 
     </li>
+
+
     {% endfor %}
 
 
