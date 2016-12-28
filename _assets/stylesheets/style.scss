@@ -342,6 +342,14 @@ li.block img:hover {
   }
 }
 
+
+.introtext    {
+  @include ms-respond(font-size, 4);
+  margin-bottom: 2em;
+  font-family: $font-family-serif;
+
+
+}
 .about {
   /* @include linear-gradient(#4d64ff, #ffd0d9, white); */
   background-repeat:no-repeat;
