@@ -8,7 +8,7 @@ description: "An online blog frequently updated by graphic designer, Christian S
 
 <ul class="article-list">
 <li class="article-list-item">
-  <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><h5>{{ post.title }}</h5></a>
+  <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><h1>{{ post.title }}</h1></a>
 
   <div class="article-list-footer">
 
@@ -16,6 +16,9 @@ description: "An online blog frequently updated by graphic designer, Christian S
 
 </div>
 
+  <hr>
+
 </li>
+
 </ul>
 {% endfor %}
