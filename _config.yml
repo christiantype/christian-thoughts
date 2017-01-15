@@ -1,10 +1,10 @@
 # Mandatory settings
 
-baseurl: /journal
+baseurl:
 name: Christian Solorzano
 paginate: 1
-paginate_path: "/posts/page/:num/"
-url: http://christiansolorzano.com/journal
+paginate_path: "posts/page/:num/"
+url: http://christiansolorzano.com
 blog_theme: light # Or use dark
 
 # Optional settings
@@ -41,7 +41,7 @@ assets:
 collections:
   my_tags:
     output: true
-    permalink: /tag/:slug/
+    permalink: tag/:slug/
 
 defaults:
   -

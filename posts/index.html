@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "Christian Solorzano's Journal"
-description: "An online blog frequently updated by graphic designer, Christian Solorzano."
+title: "Christian Solorzano | Online Website. Journal"
+description: "Christian Solorzano is a Chicago based designer who specializes in creating identities, design systems, interfaces, and thoughtful ideas for diverse audiences."
 ---
 {% for post in site.tags.personal %}
 
 
 <ul class="article-list">
 <li class="article-list-item">
-  <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><h1>{{ post.title }}</h1></a>
+  <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><span class="introtext">{{ post.title }}</span></a>
 
   <div class="article-list-footer">
 
@@ -16,7 +16,6 @@ description: "An online blog frequently updated by graphic designer, Christian S
 
 </div>
 
-  <hr>
 
 </li>
 

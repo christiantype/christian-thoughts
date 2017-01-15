@@ -46,7 +46,7 @@ $max-width: em(62.5em) !default;
 $backgroundc: #ffffff;
 $lightcolor: #cecece;
 $midcolor: #636363;
-$maincolor: #181818;
+$maincolor: #575757;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
@@ -94,25 +94,25 @@ html:before,html:after,body:before,body:after{
 
 /* ...and position them! */
 html:before{
-  height:15px;
+  height:5px;
   left:0;
   right:0;
   top:0;
 }
 html:after{
-  width:15px;
+  width:5px;
   top:0;
   right:0;
   bottom:0;
 }
 body:before{
-  height:15px;
+  height:5px;
   right:0;
   bottom:0;
   left:0;
 }
 body:after{
-  width:15px;
+  width:5px;
   top:0;
   bottom:0;
   left:0;
@@ -273,10 +273,10 @@ nav ul li:nth-last-child(1) {
 
 
 li.block {
-  @include span-columns(4);
+  @include span-columns(6);
   // @include omega(4n);
   margin: 0 0 1.5em 0;
-  width:33.33%;
+  width:50%;
   @include media($small) { // As defined in _grid-settings.scss
     @include span-columns(6);
     width:50%;
@@ -288,7 +288,7 @@ li.block {
     @include span-columns(12);
     @include omega-reset(3n);
     @include omega(2n);
-    margin: 0 auto;
+    margin: 1em auto;
   }
 }
 
@@ -334,10 +334,10 @@ li.block img:hover {
 #about {
   @include outer-container(70%);
     @include media($small) { // As defined in _grid-settings.scss
-     @include outer-container(80%);
+     @include outer-container(85%);
   }
   @include media($grid) { // As defined in _grid-settings.scss
-    @include outer-container(80%);
+    @include outer-container(85%);
 
   }
 }
@@ -347,14 +347,18 @@ li.block img:hover {
   @include ms-respond(font-size, 4);
   margin-bottom: 2em;
   font-family: $font-family-serif;
-
-
+  font-weight:800;
+  @include media($grid) {
+  line-height:1.25em; }
 }
 .about {
   /* @include linear-gradient(#4d64ff, #ffd0d9, white); */
   background-repeat:no-repeat;
-  height:100vh;
   font-family: $font-family-sans;
+  margin-top:2.5em;
+  @include media($small) { // As defined in _grid-settings.scss
+    margin: 0em;
+  }
 
 
 
@@ -427,6 +431,7 @@ li.block img:hover {
   margin-top: 2.5em;
   @include span-columns(12);
   text-align: center;
+  padding:2em;
 
 }
 
@@ -445,7 +450,9 @@ li.block img:hover {
 
 
 .social p {
-  font-size: ms(-2);
+  font-size: ms(-1);
+  color: $midcolor;
+  margin-bottom: .75em;
 }
 
 .social a {
@@ -461,7 +468,11 @@ li.block img:hover {
 
 
 .colophon p {
-  font-size: ms(-2);
+  font-size: ms(-1);
+  color:$midcolor;
+  margin-bottom: .75em;
+
+
 }
 
 .colophon a {
@@ -518,6 +529,7 @@ li.block img:hover {
 
 
 .projectinfo p {
+  margin-bottom:2em;
   font-size: ms(0);
   font-weight: $light;
   line-height:1.5em;
@@ -554,6 +566,10 @@ li.block img:hover {
 
 }
 
+
+.credits {
+  margin-top: 3em;
+}
 figcaption {
   margin-top: 1em;
   font-size:ms(-1);
@@ -608,7 +624,7 @@ header p {
 
 h1 {
   font-family: $font-family-sans;
-  font-size: ms(2);
+  font-size: ms(1);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -646,10 +662,15 @@ h5 {
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-top: 1em;
+  margin-top: .25em;
 
 }
 
+h7 {
+  text-align: center;
+  font-size: ms(-2);
+
+}
 
 
 .words {
@@ -765,6 +786,14 @@ h5 {
 
 .article-content a {
   vertical-align: inherit;
+}
+
+.article-content p {
+  margin-bottom: 2em;
+}
+
+.article-content img {
+  width:100%;
 }
 
 footer p {
