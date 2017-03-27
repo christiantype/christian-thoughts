@@ -2,71 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/misc/about-me.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/posts/2016-11-27-writing.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/anger_box-1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/anger_dvds.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/anger_poster.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/cdm_cover.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/cdm_poster.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/cdm_spread_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/cdm_spread_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/faculty-0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/faculty-1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/faculty-2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/logo_depaul_aiga_logo-1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/logo_depaul_aiga_logo-2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/logo_rel_edu_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/logo_young_adults.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/maestro_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/maestro_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/maestro_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/rsna-covers.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/rsna-spread-1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/rsna-spread-2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/s4sj_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/s4sj_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/s4sj_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vatic_0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vatic_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vatic_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vatic_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_assets/images/projects/vu_thumb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2016-12-25-finally.md" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/images/og-image.jpg" afterPath="$PROJECT_DIR$/_assets/images/og-image.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/favicon.ico" afterPath="$PROJECT_DIR$/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webServers.xml" afterPath="$PROJECT_DIR$/.idea/webServers.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2017-1-28-onenjoyingdifficulties.md" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2017-1-20-newyear.md" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/solorzano_christian_resume_design.pdf" afterPath="$PROJECT_DIR$/files/solorzano_christian_resume_design.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/404.html" afterPath="$PROJECT_DIR$/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/_variables.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/modules/_about.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/modules/_about.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/modules/_header.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/modules/_header.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/notfound-dark.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/notfound-dark.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/notfound-light.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/notfound-light.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_assets/stylesheets/style.scss" afterPath="$PROJECT_DIR$/_assets/stylesheets/style.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/head.html" afterPath="$PROJECT_DIR$/_includes/head.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/post.html" afterPath="$PROJECT_DIR$/_layouts/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/project.html" afterPath="$PROJECT_DIR$/_layouts/project.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-cdm.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-cdm.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-faculty.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-faculty.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-logos.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-logos.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-maestro.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-maestro.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-rsna.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-rsna.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-s4sj.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-s4sj.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-16-vatic.md" afterPath="$PROJECT_DIR$/_posts/2016-11-16-vatic.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-26-anger.md" afterPath="$PROJECT_DIR$/_posts/2016-11-26-anger.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-11-27-velvet-undeground.md" afterPath="$PROJECT_DIR$/_posts/2016-11-27-velvet-undeground.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2016-12-26-musicof2016.md" afterPath="$PROJECT_DIR$/_posts/2016-12-26-musicof2016.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.html" afterPath="$PROJECT_DIR$/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/index.html" afterPath="$PROJECT_DIR$/posts/index.html" />
     </list>
     <ignored path="chalk-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,55 +25,13 @@
     <favorites_list name="chalk-master" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016-12-24-goleta.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2016-12-24-goleta.md">
+    <leaf>
+      <file leaf-file-name="2017-3-20-onboringmeetings.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2017-3-20-onboringmeetings.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.111111">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="24" selection-end-column="6" />
+            <state vertical-scroll-proportion="1.1955556">
+              <caret line="29" column="214" selection-start-line="29" selection-start-column="214" selection-end-line="29" selection-end-column="214" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_assets/stylesheets/style.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.1153846">
-              <caret line="670" column="0" selection-start-line="670" selection-start-column="0" selection-end-line="670" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016-11-16-rsna.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2016-11-16-rsna.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.666667">
-              <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016-11-16-vatic.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2016-11-16-vatic.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6304348">
-              <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_layouts/project.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5882354">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#h5#0;n#article#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -154,9 +51,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_my_tags/til.md" />
-        <option value="$PROJECT_DIR$/_posts/2016-11-26-TIL.md" />
-        <option value="$PROJECT_DIR$/_assets/stylesheets/modules/_icons.scss" />
         <option value="$PROJECT_DIR$/feed.xml" />
         <option value="$PROJECT_DIR$/_layouts/articles_by_tag.html" />
         <option value="$PROJECT_DIR$/_assets/stylesheets/typography.scss" />
@@ -205,6 +99,9 @@
         <option value="$PROJECT_DIR$/_posts/2016-12-24-goleta.md" />
         <option value="$PROJECT_DIR$/_posts/2016-11-16-rsna.md" />
         <option value="$PROJECT_DIR$/_posts/2016-11-16-vatic.md" />
+        <option value="$PROJECT_DIR$/_posts/2017-1-20-newyear.md" />
+        <option value="$PROJECT_DIR$/_posts/2017-1-20-onboringmeetings.md" />
+        <option value="$PROJECT_DIR$/_posts/2017-3-20-onboringmeetings.md" />
       </list>
     </option>
   </component>
@@ -214,8 +111,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1420" />
+    <option name="y" value="39" />
+    <option name="width" value="1440" />
     <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -252,6 +149,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="christian-thoughts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="christian-thoughts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="christian-thoughts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="christian-thoughts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -272,19 +193,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/_layouts" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/_posts" />
-      <recent name="$PROJECT_DIR$/_assets/images/projects" />
-      <recent name="$PROJECT_DIR$/_my_tags" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/files" />
       <recent name="$PROJECT_DIR$/thumbnails" />
       <recent name="$PROJECT_DIR$/_assets/images" />
       <recent name="$PROJECT_DIR$/_assets/images/projects/rsna" />
       <recent name="$PROJECT_DIR$/_assets/images/projects" />
-      <recent name="$PROJECT_DIR$/images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts" />
+      <recent name="$PROJECT_DIR$/_layouts" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/_assets/images/projects" />
+      <recent name="$PROJECT_DIR$/_my_tags" />
     </key>
   </component>
   <component name="RunManager">
@@ -351,13 +272,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1420" height="835" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="39" width="1440" height="835" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1371553" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22931786" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28969958" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1881259" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32032302" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -368,7 +290,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32080537" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3499327" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -390,6 +311,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/_posts/2017-1-28-onenjoyingdifficulties.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_layouts/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../christian-solorzano-online/portfolio/images/vatic_0.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -534,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_site/posts/faculty/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.916666">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_assets/bower/jquery/AUTHORS.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18881118">
@@ -629,7 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -637,7 +564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,7 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5">
           <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -653,7 +578,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20634921">
           <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -661,7 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.875">
           <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -669,15 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17316018">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2017-1-20-newyear.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04347826">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -685,7 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47826087">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -693,7 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04347826">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -701,48 +613,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45454547">
           <caret line="21" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_layouts/project.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5882354">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#h5#0;n#article#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2016-12-24-goleta.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.111111">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="24" selection-end-column="6" />
-          <folding />
+        <state vertical-scroll-proportion="0.26086956">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_assets/stylesheets/style.scss">
+    <entry file="file://$PROJECT_DIR$/_layouts/project.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.1153846">
-          <caret line="670" column="0" selection-start-line="670" selection-start-column="0" selection-end-line="670" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2016-11-16-rsna.md">
+    <entry file="file://$PROJECT_DIR$/_posts/2017-1-28-onenjoyingdifficulties.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.666667">
-          <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
-          <folding />
+        <state vertical-scroll-proportion="0.5217391">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2016-11-16-vatic.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6304348">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.3478261">
+          <caret line="8" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2016-11-16-rsna.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73913044">
+          <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_assets/stylesheets/style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.021645023">
+          <caret line="670" column="0" selection-start-line="670" selection-start-column="0" selection-end-line="670" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-3-20-onboringmeetings.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1955556">
+          <caret line="29" column="214" selection-start-line="29" selection-start-column="214" selection-end-line="29" selection-end-column="214" />
           <folding />
         </state>
       </provider>
