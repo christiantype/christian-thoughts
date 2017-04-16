@@ -273,10 +273,10 @@ nav ul li:nth-last-child(1) {
 
 
 li.block {
-  @include span-columns(6);
+  @include span-columns(4);
   // @include omega(4n);
   margin: 0 0 1.5em 0;
-  width:50%;
+  width:33.33%;
   @include media($small) { // As defined in _grid-settings.scss
     @include span-columns(6);
     width:50%;

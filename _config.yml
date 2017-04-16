@@ -1,7 +1,7 @@
 # Mandatory settings
 
 baseurl:
-name: Christian Solorzano
+name: Christian Solorzano | Designer
 paginate: 1
 paginate_path: "posts/page/:num/"
 url: http://christiansolorzano.com
