@@ -50,7 +50,7 @@ $maincolor: #575757;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
-$font-family-serif: 'leitura-news', serif;
+$font-family-serif: 'jaf-lapture', serif;
 $font-family-sans: 'neuzeit-grotesk',sans-serif;
 $light:300;
 $regular:400;
@@ -342,15 +342,68 @@ li.block img:hover {
   }
 }
 
+#about-top {
+  @include span-columns(12);
+  margin-bottom: 3em;
+}
 
+.introleft    {
+  @include span-columns(6);
+  @include media($grid) {
+    @include span-columns(12);
+  }
+}
+
+.introleft img {
+  width:100%;
+}
+
+.introright {
+  @include span-columns(6);
+  @include media($grid) {
+    @include span-columns(12);
+  }
+}
+
+.introright h2 {
+  font-family: $font-family-serif;
+  @include ms-respond(font-size, 3);
+  margin-bottom: 1em;
+  font-weight:800;
+  @include media($grid) {
+    margin-bottom: .5em;
+
+  }
+
+}
+
+.introright p {
+  margin-top: 2em;
+  @include media($grid) {
+    margin-top: 1em;
+
+  }
+}
 .introtext    {
-  @include ms-respond(font-size, 4);
+   @include ms-respond(font-size, 3);
+   margin-bottom: 2em;
+   font-family: $font-family-serif;
+   font-weight:800;
+   @include media($grid) {
+     line-height:1.25em; }
+ }
+
+
+.subtext    {
+  @include ms-respond(font-size, 1);
   margin-bottom: 2em;
   font-family: $font-family-serif;
   font-weight:800;
   @include media($grid) {
-  line-height:1.25em; }
+    line-height:1.25em; }
 }
+
+
 .about {
   /* @include linear-gradient(#4d64ff, #ffd0d9, white); */
   background-repeat:no-repeat;
@@ -465,7 +518,14 @@ li.block img:hover {
 }
 
 
-
+.social h3 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-family: $font-family-serif;
+  text-transform: uppercase;
+  font-size:ms(-1);
+  letter-spacing: .05em;
+}
 
 .colophon p {
   font-size: ms(-1);
