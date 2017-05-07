@@ -54,7 +54,7 @@ $font-family-serif: 'jaf-lapture', serif;
 $font-family-sans: 'neuzeit-grotesk',sans-serif;
 $light:300;
 $regular:400;
-$maxwidth-desktop:62.5em;
+$maxwidth-desktop:64em;
 
 
 
@@ -145,9 +145,9 @@ body:after{
 
 
 header {
-
+  width:$maxwidth-desktop;
   clear: both;
-  max-width: 70%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding: 2em 0 2em 0;
@@ -542,7 +542,8 @@ li.block img:hover {
 /* =============== WORK =============== */
 
 .worktext {
-  @include outer-container(70%);
+  width:$maxwidth-desktop;
+  @include outer-container(100%);
   @include media($small) { // As defined in _grid-settings.scss
     @include outer-container(85%);
   }
@@ -726,11 +727,7 @@ h5 {
 
 }
 
-h7 {
-  text-align: center;
-  font-size: ms(-2);
 
-}
 
 
 .words {
