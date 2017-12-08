@@ -3,6 +3,7 @@ layout: post
 title: "On boring meetings"
 description: "It's Monday and these meetings are boring."
 tags: [personal]
+published: false
 ---
 
 <h2>This was written during a Monday work meeting</h2>

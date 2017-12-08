@@ -44,9 +44,10 @@ $max-width: em(62.5em) !default;
 
 
 $backgroundc: #ffffff;
-$lightcolor: #cecece;
+$lightcolor: #c0bcbe;
 $midcolor: #636363;
-$maincolor: #575757;
+$maincolor: #1a1a1a;
+$accent: #ff3c79;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
@@ -179,7 +180,7 @@ header {
   vertical-align: text-bottom;
   font-family: $font-family-serif;
   font-size: ms(1);
-  font-weight:800;
+  font-weight:700;
   letter-spacing: 1px;
   -webkit-animation: color-change 5s infinite;
   -moz-animation: color-change 5s infinite;
@@ -190,9 +191,9 @@ header {
 
 @-webkit-keyframes color-change {
   0% { color: #1d131c; }
-  25% { color: #0035ff; }
+  25% { color: $accent; }
   50% { color: #232636; }
-  75% { color: #0035ff; }
+  75% { color: $accent; }
   100% { color: #000000; }
 }
 
@@ -332,7 +333,8 @@ li.block img:hover {
 
 
 #about {
-  @include outer-container(70%);
+  width:$maxwidth-desktop;
+  @include outer-container(100%);
     @include media($small) { // As defined in _grid-settings.scss
      @include outer-container(85%);
   }
@@ -366,10 +368,11 @@ li.block img:hover {
 }
 
 .introright h2 {
+  color:$accent;
   font-family: $font-family-serif;
   @include ms-respond(font-size, 3);
   margin-bottom: 1em;
-  font-weight:800;
+  font-weight:700;
   @include media($grid) {
     margin-bottom: .5em;
 
@@ -378,9 +381,9 @@ li.block img:hover {
 }
 
 .introright p {
-  margin-top: 2em;
+  margin-top: 1em;
   @include media($grid) {
-    margin-top: 1em;
+    margin-top: .1em;
 
   }
 }
@@ -388,7 +391,7 @@ li.block img:hover {
    @include ms-respond(font-size, 3);
    margin-bottom: 2em;
    font-family: $font-family-serif;
-   font-weight:800;
+   font-weight:700;
    @include media($grid) {
      line-height:1.25em; }
  }
@@ -398,7 +401,7 @@ li.block img:hover {
   @include ms-respond(font-size, 1);
   margin-bottom: 2em;
   font-family: $font-family-serif;
-  font-weight:800;
+  font-weight:700;
   @include media($grid) {
     line-height:1.25em; }
 }
@@ -413,7 +416,13 @@ li.block img:hover {
     margin: 0em;
   }
 
-
+.resume, .resume a {
+  color:$accent;
+  font-size: ms(1);
+  font-family: $font-family-serif;
+  text-decoration: none;
+  vertical-align: bottom;
+}
 
 }
 
@@ -450,6 +459,10 @@ li.block img:hover {
   margin-left: -40px ;
 }
 
+.aboutsection ul lh {
+  font-size:ms(1);
+}
+
 
 
 
@@ -463,7 +476,8 @@ li.block img:hover {
 }
 
 .date {
-  font-size:ms(-2);
+  font-size:ms(-1);
+  letter-spacing: 1px;
   color:$lightcolor;
 }
 
@@ -477,7 +491,6 @@ li.block img:hover {
   list-style:none;
   padding-left:0;
   margin-bottom: 1em;
-  font-weight: 300;
 }
 
 .social {
@@ -489,7 +502,7 @@ li.block img:hover {
 }
 
 .social img {
-  width:70%;
+  width:$maxwidth-desktop;
   @include media($small) { // As defined in _grid-settings.scss
     width:90%;
   }
@@ -503,13 +516,14 @@ li.block img:hover {
 
 
 .social p {
+  margin-top: 1em;
   font-size: ms(-1);
   color: $midcolor;
   margin-bottom: .75em;
 }
 
 .social a {
-  color: #ff3c79;
+  color: $accent;
 }
 
 .colophon {
@@ -518,22 +532,9 @@ li.block img:hover {
 }
 
 
-.social h3 {
-  margin-top: 2em;
-  margin-bottom: 1em;
-  font-family: $font-family-serif;
-  text-transform: uppercase;
-  font-size:ms(-1);
-  letter-spacing: .05em;
-}
-
-.colophon p {
-  font-size: ms(-1);
-  color:$midcolor;
-  margin-bottom: .75em;
 
 
-}
+
 
 .colophon a {
   color: #ff3c79;
@@ -661,12 +662,14 @@ footer {
   @include span-columns(12);
   padding: 2em;
   text-align: center;
+  font-size:ms(1);
+  line-height: 1em;
 
 }
 
 footer a {
   color:$midcolor;
-  font-weight:$light;
+
   font-size: ms(0);
 }
 
@@ -702,9 +705,9 @@ h2 {
 
 
 h3 {
-  font-family: $font-family-sans;
+  font-family: $font-family-serif;
   font-size: ms(2);
-  font-weight: 400;
+  font-weight: 300;
   margin-top: 1em;
 
 }
@@ -764,6 +767,7 @@ h5 {
 .article-list li {
   position: relative;
   display: block;
+  font-weight: 600;
   padding: 0;
   margin-bottom: 1.25em;
   border-bottom: .5px solid $lightcolor;
