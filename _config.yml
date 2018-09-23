@@ -1,6 +1,6 @@
 # Mandatory settings
 
-baseurl:
+baseurl: 
 name: Christian Solorzano | Designer
 paginate: 1
 paginate_path: "posts/page/:num/"
@@ -60,7 +60,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - vendor/
-gems:
+plugins:
   - jekyll-assets
   - jekyll-paginate
   - jekyll-sitemap

@@ -4,24 +4,38 @@ title: "Christian Solorzano | Online Portfolio"
 description: "Christian Solorzano is a Graphic Designer from Chicago. His work employs strategic solutions centered around collaboration and a deep understanding of client needs."
 ---
 
+<h1>
+    Hey, what's up?
+</h1>
+<br>
+
+<h1>
+    You're probably wondering <br><br> <em>“Oh no! Where are the links to Christian’s work?” </em> <br><br> Well, I'm in the process of updating this page with recent work from 2017 and on.
+</h1>
+<br>
+<h1>
+    Check back later.
+</h1>
     {% for post in site.tags.project %}
 
+<!--
+
+<ul class="article-list">
 
 
-    <li class="block" id="#work">
-        <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
+    <li class="article-list-item">
+        <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><span class="introtext">{{ post.title }}</span></a>
 
-            <img src="{{ '/' | relative_url }}{{ post.image }}"/>
-
-
-<h5>{{ post.title }}</h5>
-        </a>
-
-
+        <div class="article-list-footer">
+            <span class="article-list-date">{{ post.category }}</span>
+        </div>
     </li>
+
+</ul>
 
 
     {% endfor %}
 
 
 
+-->
