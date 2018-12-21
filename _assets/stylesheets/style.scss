@@ -92,7 +92,7 @@ body {
 /* Create a series of empty pseudo-elements... */
 html:before,html:after,body:before,body:after{
   content:"";
-  background: #e1a2f5;
+  background: $accent;
   position:fixed;
   display:block;
   z-index:1000;
