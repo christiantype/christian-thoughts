@@ -270,6 +270,15 @@ nav ul li:nth-last-child(1) {
 
 /* =============== HOME =============== */
 
+#play {
+  margin:0 auto;
+  text-align: center;
+}
+
+#play img {
+  width:80%;
+
+}
 
 
 
@@ -281,7 +290,7 @@ nav ul li:nth-last-child(1) {
     @include outer-container(95%);
 
   }
-  }
+}
 
 #work img {
   width:100%;
@@ -747,7 +756,7 @@ header p {
 
 h1 {
   font-family: $font-family-serif;
-  margin-bottom: .25em;
+  margin: 1em;
   font-size: ms(4);
   font-weight: 600;
   // box-shadow: inset 0 -8px 0 #eeeaec;
