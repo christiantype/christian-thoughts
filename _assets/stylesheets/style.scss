@@ -43,16 +43,16 @@ $max-width: em(62.5em) !default;
 /* =============== VARIABLES =============== */
 
 
-$backgroundc: #f6f7f5;
+$backgroundc: #ffffff;
 $lightcolor: #3d3a59;
 $midcolor: #636363;
 $maincolor: #151e00;
-$accent: #3809e2;
+$accent: #639c8f;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
 $font-family-serif: 'ltc-kennerley', serif;
-$font-family-sans: 'neuzeit-grotesk',sans-serif;
+$font-family-sans: 'acumin-pro',sans-serif;
 $light:300;
 $regular:400;
 $maxwidth-desktop:40em;
@@ -68,8 +68,9 @@ $maxwidth-desktop:40em;
 
 .body-list li, .body-list ul, .body-list  {
   list-style: none;
-  font-size:ms(1);
+  font-size:ms(0);
   margin-top: 1em;
+  line-height: 1em;
 
 }
 
@@ -84,7 +85,7 @@ body {
   width:$maxwidth-desktop;
   background-color: $backgroundc;
   color:$maincolor;
-  font-family: $font-family-serif;
+  font-family: $font-family-sans;
   font-size: ms(1);
   /* @include linear-gradient(to top, #324146, #b7c4ff, #adffe4 ); */
   @include media($small) { // As defined in _grid-settings.scss
@@ -716,10 +717,10 @@ footer a {
 /* =============== TYPOGRAPHY =============== */
 
 .large-p {
-  font-family: $font-family-serif;
+  font-family: $font-family-sans;
   margin-bottom: .5em;
-  font-size:ms(2);
-  line-height: 1.25em;
+  font-size:ms(1);
+  line-height: 1.55em;
 
 }
 
@@ -746,7 +747,7 @@ footer a {
 
 
 header {
-  margin-bottom: 2em;
+  margin-bottom: 4em;
 }
 
 header p {
@@ -763,9 +764,10 @@ h1 {
 }
 
 h2 {
-  font-family: $font-family-serif;
-  font-size: ms(3);
-  font-weight: 600;
+  font-family: $font-family-sans;
+  font-size: ms(2);
+  font-weight: 300;
+  line-height: 1.25em;
   margin-top: 1em;
 
 }
@@ -893,12 +895,12 @@ h4 {
 }
 
 .article-content  {
-  font-family: $font-family-serif;
-  font-size:ms(1);
-  line-height:2em;
+  font-family: $font-family-sans;
+  font-size:ms(0);
+  line-height:3em;
   @include media($grid) { // As defined in _grid-settings.scss
   font-size:ms(-1);
-  line-height:1.5em;
+  line-height:3em;
 
   }
 }
@@ -908,9 +910,10 @@ h4 {
 }
 
 .article-content p {
+  color:$lightcolor;
   margin-bottom: 2em;
-  font-size: ms(2);
-  line-height:ms(3);
+  font-size: ms(1);
+  line-height:ms(4);
 }
 
 .article-content img {
