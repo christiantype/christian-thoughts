@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "On enjoying difficulties"
-description: "Don't expect things to be easy—rather hope for things to be challenging.."
+title: "On Enjoying Difficulties"
+description: "Embrace challenges and don't take life so serious."
 tags: [personal]
 ---
 
@@ -14,19 +14,27 @@ Looking back at all the accomplishments and things I consider worthwhile—they'
 I've compiled a list of advice that I'd love to share with those who are entering the early stages of their career; those who find themselves facing difficulties and challenges. Keep in mind that you ought to enjoy the difficulties. Imagine that you're on a river and rather than fighting the current, I recommend that you go with the flow. It'll be fine. I promise.
 
 
-<ul>
-<li>It's okay to say "I don't know"</li>
-<li>Have a life</li>
-<li>Connect with others</li>
-<li>Don't work for jerks</li>
-<li>Design for good</li>
-<li>Work for a greater purpose</li>
-<li>Mentor others</li>
-<li>Prioritize your mental health</li>
-<li>Be nice, be patient, have good intentions</li>
-<li>Be part of a community</li>
-<li>Embrace difficulties</li>
-</ul>
+
+👉 It's okay to say "I don't know"
+
+👉 Have a life
+
+👉 Be part of a community
+
+👉 Don't work for jerks
+
+👉 Design for good
+
+👉 Work for a greater purpose
+
+👉 Mentor others
+
+👉 Prioritize your mental health
+
+👉 Be nice, be patient, have good intentions
+
+👉 Embrace difficulties
+
 
 
 
