@@ -43,19 +43,21 @@ $max-width: em(62.5em) !default;
 /* =============== VARIABLES =============== */
 
 
-$backgroundc: #ffffff;
-$lightcolor: #3d3a59;
-$midcolor: #636363;
-$maincolor: #151e00;
-$accent: #3e619c;
+$backgroundc: #ebebeb;
+$lightcolor: #ffffea;
+$midcolor: #9d9d9d;
+$maincolor: #0c0c0c;
+$accent: #ff8480;
 $max-width: em(400);
 $small: new-breakpoint(max-width 64em 12);
 $grid: new-breakpoint(max-width 40em 12);
-$font-family-serif: 'ltc-kennerley', serif;
+$font-family-serif: 'blackoak-std', serif;
 $font-family-sans: 'acumin-pro',sans-serif;
 $light:300;
 $regular:400;
-$maxwidth-desktop:40em;
+$maxwidth-desktop:60em;
+
+
 
 
 
@@ -195,7 +197,7 @@ header {
 #logo a {
   vertical-align: text-bottom;
   font-family: $font-family-serif;
-  font-size: ms(2);
+  font-size: ms(-1);
   font-weight:700;
   letter-spacing: 1px;
   -webkit-animation: color-change 5s infinite;
@@ -418,10 +420,10 @@ li.block img:hover {
   }
 }
 .introtext    {
-   font-size:ms(3);
+   font-size:ms(1);
    margin-bottom: 2em;
    font-family: $font-family-serif;
-   font-weight:700;
+   font-weight:300;
    @include media($grid) {
      line-height:1.25em; }
  }
@@ -720,21 +722,22 @@ footer a {
 .large-p {
   font-family: $font-family-sans;
   margin-bottom: .5em;
-  font-size:ms(1);
-  line-height: 1.55em;
+  font-size:ms(8);
+  line-height: 1.2em;
+  font-weight: 600;
+  -webkit-text-stroke: 1px black;
+  color:$backgroundc;
 
 }
 
 .article-list-date, .article-list-footer, h5 {
   font-size: ms(-2);
   text-transform: uppercase;
-  font-weight: 400;
   letter-spacing: 1px;
+  font-weight: 600;
+  color:$midcolor;
 }
 
-.article-list-footer span {
-  color:$maincolor;
-}
 
 .large-p a {
   -webkit-animation: color-change 5s infinite;
@@ -757,27 +760,28 @@ header p {
 }
 
 h1 {
-  color: $accent;
+  color:$maincolor;
   font-family: $font-family-serif;
   margin: 1em;
-  font-size: ms(4);
+  font-size: ms(2);
   font-weight: 600;
   line-height:1.25em;
   // box-shadow: inset 0 -8px 0 #eeeaec;
 }
 
 h2 {
-  font-family: $font-family-sans;
-  font-size: ms(2);
-  font-weight: 300;
+  font-family: $font-family-serif;
+  font-size: ms(1);
+  font-weight: 800;
   line-height: 1.25em;
   margin-top: 1em;
+  color:$maincolor;
 
 }
 
 
 h3 {
-  font-family: $font-family-serif;
+  font-family: $font-family-sans;
   font-size: ms(2);
   font-weight: 300;
   margin-top: 1em;
@@ -916,7 +920,7 @@ h4 {
 }
 
 .article-content p {
-  color:$lightcolor;
+  color: $maincolor;
   margin-bottom: 2em;
   font-size: ms(1);
   line-height:ms(4);
@@ -928,7 +932,7 @@ h4 {
 
 footer p {
   font-size:ms(-2);
-  color:$lightcolor;
+  color: $maincolor;
 }
 
 .article-list-divider {

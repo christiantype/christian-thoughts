@@ -5,37 +5,36 @@ description: "Christian Solorzano is a Designer from Chicago. His work employs s
 ---
 
 <p class="large-p">
-    Okay, my name is Christian Solorzano
+    I am a— <br>
+    Designer. Mentor. Writer.<br>
+    Living in Chicago.
 </p>
 
-
-<p class="large-p">
-    I am devoted to human-centered design and experimental art-making.
-<p class="large-p">
-    Currently, I work at <a href="https://digital.pwc.com/en.html" target="_blank">PwC's Experience Center</a> where I concentrate on crafting digital experiences, through thoughtful strategy and execution. I'm passionate about mentorship and facilitating conversations, which is an essential part of my practice, and something I do through <a href="https://chicago.aiga.org/mentorship/mentor-program/" target="_blank">the AIGA Chicago Mentorship Program</a>.
-</p>
-
-<p class="large-p">
-    My inspiration is found in writing, photography, my community, philosophy, history, diversity & inclusion, my design book club, and kindness.
-</p>
-
-
-<p class="large-p">
-    I'm currently unavailable for work but open to collaboration/conversation.
-</p>
-
-<p class="large-p">
-    Contact me at <b>cs@christiansolorzano.com</b>
-</p>
+<hr>
 
 
 
-<div id="about-top">
-    {% img about-self.png alt:'Christian Solorzano 2017' %}
+<h3>latest writing</h3>
+
+{% for post in site.tags.personal %}
 
 
+<ul class="article-list">
+    <li class="article-list-item">
+        <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><span class="introtext">{{ post.title }}</span></a>
 
-</div>
+        <div class="article-list-footer">
+
+            <span class="article-list-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+
+        </div>
+
+
+    </li>
+
+</ul>
+{% endfor %}
+
 
 
 
