@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On Jiu-Jitsu and Design"
+title: "On jiu-jitsu and design"
 description: "Martial arts and design are one and the same. They embody the same principles. Having an understanding of people’s energy encourages compassion and empathy. These are the pillars of good design and they can be obtained through jiu-jitsu."
 page.og_image: post-2018-10-21-on-jiu-jitsu.png
 tags: [personal]

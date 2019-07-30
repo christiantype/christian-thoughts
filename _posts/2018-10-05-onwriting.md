@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On Writing"
+title: "On writing"
 description: "The act of writing our thoughts encourages us to confront the fragility or strength of our ideas."
 page.og_image: post-2018-10-05-on-writing.png
 tags: [personal]

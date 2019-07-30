@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On Quality"
+title: "On quality"
 description: "Quality should extend the senses and provide alternative methods that amplify our existence."
 tags: [personal]
 ---

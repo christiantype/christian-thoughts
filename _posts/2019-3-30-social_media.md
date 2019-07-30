@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On My Relationship with Social Media"
+title: "On my relationship with social media"
 description: "Several lists consisting of some of my favorite films, music, and books, from 2018."
 page.og_image: post-2019-03-30-social-media.png
 tags: [personal]
