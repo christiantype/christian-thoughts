@@ -1,0 +1,225 @@
+@import
+"faculty"
+;
+
+$modularscale: (
+        base: 1em,
+        ratio: 1.125
+);
+
+a, a:visited {
+  text-decoration: none;
+  color:$accent1;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+
+h1 {
+  font-size:ms(9);
+  line-height: ms(2);
+  letter-spacing: 1px;
+  font-family: $base-font;
+  margin: .25em 0 0em 0;
+  color: $maincolor;
+  font-weight:300;
+  @media (max-width: 750px) {
+    font-size:ms(4);
+  }
+}
+
+h2 {
+  font-size:ms(5);
+  font-weight:400;
+  font-family: $base-font;
+  color:$maincolor;
+  margin-bottom: .25em;
+  line-height: ms(2);
+  margin-top: .5em;
+  @media (max-width: 750px) {
+    font-size:ms(1);
+  }
+}
+
+h3 {
+  font-size:ms(0);
+  margin-top:.25em;
+  font-weight:500;
+  font-family: $base-font;
+  text-transform: uppercase;
+  @media (max-width: 750px) {
+    font-size:ms(-1);
+  }
+}
+
+h4 {
+  font-family: $base-font;
+  font-weight: 600;
+  font-size:ms(-1);
+  margin-top: 2em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-weight:400;
+  font-family: $accent-font;
+}
+
+
+#logo, #logo a, #logo a:visited {
+  vertical-align: text-bottom;
+  font-family: $accent-font;
+  font-size: ms(1);
+  letter-spacing: 0px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  font-weight: 300;
+  line-height: ms(-1);
+  -webkit-animation: color-change 5s infinite;
+  -moz-animation: color-change 5s infinite;
+  -o-animation: color-change 5s infinite;
+  -ms-animation: color-change 5s infinite;
+  animation: color-change 5s infinite;
+  grid-column: span 2;
+  text-align: left;
+  @media only screen and (max-width: 600px) {
+    grid-column: span 2; }
+
+}
+
+nav {
+  font-family: $accent-font;
+  margin:0;
+  grid-column: span 2;
+  @media only screen and (max-width: 600px) {
+    grid-column: span 2;
+  }
+}
+
+nav ul li {
+  grid-column: span 2;
+  //float:right;
+  list-style-type: none;
+  //display:inline;
+  margin: 0;
+  margin-right: 0em;
+  text-align: right;
+}
+
+
+
+nav a {
+  text-transform: capitalize;
+  text-align: right;
+  font-weight:400;
+  font-size:ms(-1);
+}
+
+
+
+em {
+  font-weight:900;
+  font-family: $base-font;
+  font-style: normal;
+  font-size:ms(-1);
+}
+
+figcaption {
+  margin-top: 1em;
+  font-size:ms(-2);
+  padding-bottom: 1em;
+  line-height: 2em;
+  font-weight:400;
+  font-style:italic;
+}
+
+.post-link {
+  text-decoration: none;
+  margin-bottom: .5em;
+}
+
+.post-link h1 {
+  color:$accent;
+}
+
+
+
+.post-link p {
+  font-size:ms(-1);
+  line-height:ms(3);
+  font-weight:400;
+  font-family: $base-font;
+}
+
+.post-link:hover {
+  -webkit-animation: color-change 5s infinite;
+  -moz-animation: color-change 5s infinite;
+  -o-animation: color-change 5s infinite;
+  -ms-animation: color-change 5s infinite;
+  animation: color-change 5s infinite;
+}
+
+
+
+a:hover {
+  color:$accent1;
+  text-decoration: none;
+  -webkit-animation: color-change 5s infinite;
+  -moz-animation: color-change 5s infinite;
+  -o-animation: color-change 5s infinite;
+  -ms-animation: color-change 5s infinite;
+  animation: color-change 5s infinite;
+}
+
+body {
+  font-family: $base-font;
+  font-weight:300;
+  letter-spacing: 1px;
+  font-size:ms(0);
+}
+
+
+header a {
+  font-family: $base-font;
+  margin: .5em 0 0em 0;
+  font-size:ms(0);
+}
+
+footer a {
+  font-size:ms(-2);
+  font-weight:400;
+  font-family: $base-font;
+}
+
+.writing p {
+  margin-bottom: 2em;
+}
+
+a {
+  font-family: $accent-font;
+  color:$accent1;
+  font-weight:400;
+}
+
+a:hover {
+  -webkit-animation: color-change 5s infinite;
+  -moz-animation: color-change 5s infinite;
+  -o-animation: color-change 5s infinite;
+  -ms-animation: color-change 5s infinite;
+  animation: color-change 5s infinite;
+}
+
+.black {
+  color: $maincolor;
+}
+
+em {
+  font-weight:300;
+  font-family: $accent-font;
+  font-style: italic;
+  font-size:inherit;
+}

@@ -1,0 +1,30 @@
+---
+layout: default
+title: "Christian Solorzano's Writing"
+description: "Christian Solorzano is a experience designer & consultant, working in the digital landscape."
+permalink: /writing/
+---
+  {%- if site.posts.size > 0 -%}
+    <h1 class="full-width">{{ page.list_title | default: "Writing" }}</h1>
+      {%- for post in site.posts -%}
+      <div class="full-width">
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        <figcaption>{{ post.date | date: "%B %Y" }}</figcaption>
+        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+  </div>
+
+  {%- endif -%}
+
+
+
+
+
+

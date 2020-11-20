@@ -1,47 +1,40 @@
 ---
-layout: portfolio
-title: "Christian Solorzano | Online Portfolio"
-description: "Christian Solorzano is a Designer from Chicago. His work employs strategic solutions focused on collaboration and human-centered design."
+layout: default
+title: "Christian Solorzano | Website"
 ---
 
-<p class="large-p">
-    I am a— <br>
-    Designer. Mentor. Writer.<br>
-    Living in Chicago.
-</p>
-
-<hr>
 
 
+<div class="full-width">
 
-<h3>latest writing</h3>
-
-{% for post in site.tags.personal %}
-
-
-<ul class="article-list">
-    <li class="article-list-item">
-        <a href="{{ post.url | relative_url }}" title="{{ post.title }}"><span class="introtext">{{ post.title }}</span></a>
-
-        <div class="article-list-footer">
-
-            <span class="article-list-date">{{ post.date | date: "%B %-d, %Y" }}</span>
-
-        </div>
+    <h2>Christian is — </h2>
+        <h1>
+            — currently using <em>empathy & strategy</em> to design thoughtful experiences at <a href="http://digital.pwc.com/" target="_blank">PwC</a> — and is also the founder of the <a href="http://chicagographicdesign.club" target="_blank">Chicago Graphic Design Club</a>, where he fosters <em>education & community</em>.
+        </h1>
+</div>
+<hr class="full-width">
+{%- if site.posts.size > 0 -%}
+<h3 class="full-width">projects</h3>
+{% for post in site.categories.work %}
 
 
-    </li>
+<div class="half-container">
+    <a class="post-link" href="{{ post.url | relative_url }}">
+    <h2>
 
-</ul>
-{% endfor %}
+         <img class="portfolio-thumbnail no-shadow" src="{{ site.baseurl }}../{{ post.image }}" alt="{{ post.title }}" title="{{ post.title }}">
+        {{ post.title | escape }} <br>
+
+    </h2>
+        <p class="black">{{ post.caption | escape }}</p>
+    {%- if site.show_excerpts -%}
+    {{ post.excerpt }}
+    {%- endif -%}
+    </a>
+</div>
+{%- endfor -%}
 
 
-
-
-
-
-
-
-
+{%- endif -%}
 
 

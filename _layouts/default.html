@@ -1,17 +1,24 @@
-<!doctype html>
-<html lang="en">
-{% include head.html %}
-<body>
-{% include navigation.html %}
-<main role="main">
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
 
 
+    {%- include header.html -%}
+
+    <main aria-label="Content" class="container">
         {{ content }}
+    </main>
 
+    {%- include footer.html -%}
+    <div>
+    <div id="square"></div>
+    <div id="circle"></div>
+    <div id="triangle"></div>
+    </div>
 
+  </body>
 
-</main>
-  {% include javascripts.html %}
-{% include footer.html %}
-</body>
 </html>
