@@ -1,18 +1,31 @@
 
 
-$backgroundc: #fafafa;
-$lightcolor: #ffff00;
-$maincolor: #121212;
-$accent1: #ff0000;
-$accent: #0000ff;
-$midcolor: #282828;
+$backgroundc: #000000;
 
+$maincolor: #e3e3e1;
+$accent: #eeeeee;
+$accent1: #eeeeee;
+$lightcolor: #eeeeee;
+$midcolor: #000000;
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 @-webkit-keyframes color-change {
   0% { color: $maincolor;}
   25% { color: $accent; }
   75% { color: $accent1; }
-  50% { color: $midcolor; }
+  50% { color: $accent; }
   100% { color: $maincolor;}
 }
 
@@ -25,15 +38,33 @@ $midcolor: #282828;
 
 }
 
+header {
+  //border-bottom: 1px solid $accent;
+  padding-bottom: 1em;
+  font-size:ms(-1);
+  line-height:ms(3);
+  text-align: left;
+}
+
 body {
   display: grid;
-  background-color: $backgroundc;
+  background: radial-gradient( $backgroundc, $backgroundc, $backgroundc, $backgroundc);
+  background-size: 400% 400%;
+  animation: gradient 80s ease infinite;
+  background-color:$backgroundc;
   color:$maincolor;
   line-height: 1.5em;
   margin: 0 auto;
   padding:1.5em;
-  max-width: 75em;
-  font-size:ms(2);
+  max-width: 60em;
+  font-size:ms(1);
+  //background-image: url("/assets/images/bg.jpg");
+  //background-size: cover;
+  //background-attachment: fixed;
+
+
+
+
 
   @media only screen and (max-width: 600px)   {
 
@@ -59,7 +90,7 @@ html:before,html:after,body:before,body:after{
 
 /* ...and position them! */
 html:before{
-  height:3px;
+  height:0px;
   left:0;
   right:0;
   top:0;
@@ -67,7 +98,7 @@ html:before{
   //filter: blur(5px);
 }
 html:after{
-  width:3px;
+  width:0px;
   top:0;
   right:0;
   bottom:0;
@@ -75,7 +106,7 @@ html:after{
   //filter: blur(5px);
 }
 body:before{
-  height:3px;
+  height:0px;
   right:0;
   bottom:0;
   left:0;
@@ -83,7 +114,7 @@ body:before{
   //filter: blur(5px);
 }
 body:after{
-  width:3px;
+  width:0px;
   top:0;
   bottom:0;
   left:0;
@@ -92,8 +123,8 @@ body:after{
 }
 
 footer {
-  border-top: 1px solid $grey-color-light;
-  margin-top: 3em;
+  //border-top: 1px solid $grey-color-light;
+  margin-top: 1em;
   padding: $spacing-unit 0;
 }
 
@@ -107,29 +138,35 @@ footer ul li, footer li {
 }
 
 .portfolio-thumbnail {
-  //filter: drop-shadow(0 0 0.75rem $lightcolor);
+  //filter: drop-shadow(0 0 0.75rem $accent);
   margin-bottom: 1em;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
+
+
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-auto-flow: row;
-  grid-column-gap: 1.5em;
-  grid-row-gap: 1.5em;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
   margin-bottom: 1em;
+  align-items: center;
 }
 
 .full-width {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 7;
 }
 
 .half-container {
-  grid-column: span 2;
+  grid-column: span 3;
   align-items: center;
   @media only screen and (max-width: 600px)   {
-    grid-column: span 4;
+    grid-column: span 6;
   //grid-column-start: 1;
   // grid-column-end: 3;}
 
@@ -147,6 +184,22 @@ footer ul li, footer li {
    }
  }
 
+
+.two-columns {
+  grid-column: span 2;
+  @media only screen and (max-width: 600px)   {
+    grid-column: span 6;
+  }
+}
+
+
+.four-columns {
+  grid-column: span 4;
+  @media only screen and (max-width: 600px)   {
+    grid-column: span 6;
+  }
+}
+
 .one-fourth {
   grid-column: span 1;
   @media only screen and (max-width: 600px)   {
@@ -163,7 +216,7 @@ footer ul li, footer li {
 
 .workimages {
   margin-bottom: 2em;
-  text-align:center;
+  text-align:left;
   grid-column: span 4;
   @media only screen and (max-width: 600px) {
     grid-column: span 4;
@@ -173,15 +226,23 @@ footer ul li, footer li {
 .workimages p img {
   margin-top: 2em;
   margin-bottom: .5em;
+  box-shadow: none;
+  border:1px solid $maincolor;
+
 }
 
 img {
-  box-shadow: 0 1px 10px 1px lighten($maincolor, 70%);
+  //border:1px solid $maincolor;
+}
+
+.no-border{
+  border:0px solid $maincolor;
 }
 
 .post-link img {
   box-shadow: none;
   border-radius: 5px;
+  margin-bottom:1em;
 }
 
 .no-shadow {
@@ -191,8 +252,10 @@ img {
 
 .library-item {
   grid-column: span 1;
+  align-items: start;
+  width:100%;
   @media only screen and (max-width: 600px) {
-    grid-column: span 2;
+    grid-column: span 3;
   }
 }
 
@@ -201,8 +264,10 @@ img {
 }
 
 hr {
-  margin-top:3em;
-  background-color:$lightcolor;
+  margin-top:1em;
+  margin-bottom:1em;
+  border-top: .5px solid $lightcolor;
+  border-top: .5px solid $backgroundc;
 }
 
 #square {
@@ -233,4 +298,132 @@ hr {
   border-radius: 20px;
   margin-bottom: .25em;
   margin-left: .25em;
+}
+
+
+.start-second {
+  grid-column-start: 2;
+  @media only screen and (max-width: 600px) {
+    grid-column-start: 1;
+  }
+}
+
+.start-third {
+  grid-column-start: 3;
+  @media only screen and (max-width: 600px) {
+    grid-column-start: 1;
+  }
+}
+
+
+#footer-bar-1 {
+  height:20px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+
+#footer-bar-2 {
+  height:18px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+
+#footer-bar-3 {
+  height:16px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+#footer-bar-4 {
+  height:14px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+
+#footer-bar-5 {
+  height:12px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+#footer-bar-6 {
+  height:10px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+#footer-bar-7 {
+  height:8px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+#footer-bar-8 {
+  height:6px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+#footer-bar-9 {
+  height:4px;
+  background-color: $maincolor;
+  margin-bottom: .25em;
+}
+
+.diary-post, .diary-post a {
+  //grid-column: span 2;
+  //display: inline;
+  padding:0;
+  font-size:ms(0);
+  line-height: ms(0);
+  margin-bottom: 1em;
+  font-family: $base-font;
+  @media only screen and (max-width: 600px) {
+    //grid-column: span 6;
+    font-size:ms(-1);
+  }
+}
+
+
+——————
+
+.hover-title {
+  display: inline;
+  pointer-events: auto;
+}
+
+.hover-image {
+  visibility: hidden;
+}
+
+body:not(.mobile) .hover-title:hover + .hover-image {
+  visibility: visible;
+  pointer-events: none;
+}
+
+.hover-image {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Change width and height to scale images */
+  width: 100vw;
+  height: 100vh;
+}
+
+.hover-image img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  margin-bottom: 0;
+}
+
+.half-navigation {
+  grid-column: span 3;
+  @media only screen and (max-width: 600px) {
+  grid-column: span 3;
+  }
 }

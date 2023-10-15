@@ -1,0 +1,48 @@
+---
+layout: diary
+
+title:  "Everything comes from sh!t"
+
+date:   2023-09-28 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/004.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I admire the musicians Daniel Lanois and Brian Eno and in Lanois' album, Here is What Is (2007), there is a 
+conversation with him and Eno. It is a conversation that I always come back to. It is about possibility, beauty, and 
+agency. But most importantly, it is about getting things done. Making things.
+
+**Lanois**:
+I’m trying to make a film that's beautiful in itself, about beauty, about the source of the art rather than 
+everything that surrounds the art and I was hoping that you might say a couple of words about that subject matter 
+'cause you've always operated in a relatively quiet way, and yet, you're like a world artist
+
+**Eno**: Well, I tell you, one thing I would say about your film is that, what would be really interesting for 
+people to see, is how beautiful things grow out of shit. Because nobody ever believes that. You know, everybody 
+thinks that Beethoven had his string quartets completely in his head. They'd somehow appeared there and formed in 
+his head. And all he had to do was write them down and they would kind of be manifested into the world.
+
+But I think what's, what's so interesting and what would really be a lesson that everybody should learn is that things come out of nothing. Things evolve out of nothing. You know, the tiniest seed in the right situation turns into the most beautiful forest. And then the most promising seed in the wrong situation turns into nothing. 
+
+And I think this would be important for people to understand, because it gives people confidence in their own lives to know that that's how things work. 
+
+If you walk around with the idea that there are some people who are so gifted, they have these wonderful things in their head, but you're not one of them, you're just sort of a normal person, you could never do anything like that, then you live a different kind of life, you know. 
+
+You could have another kind of life where you can say, “Well, I know that things come from nothing 
+very much and start from unpromising beginnings, and I’m an unpromising beginning, and I could start something”

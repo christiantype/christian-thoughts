@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Booker T. Washington   "
+
+date:   2023-10-01 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/005.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/005.jpg">
+
+I keep a photo on my bookshelf of Booker T. Washington. Years ago, I read his autobiography, *Up From Slavery*. You can 
+read his 
+autobiography [here](https://docsouth.unc.edu/fpn/washington/washing.html). But, I suggest 
+you pick up a printed copy instead. Reading on a screen sucks. :) I recommend that designers read this. 
+
+
+

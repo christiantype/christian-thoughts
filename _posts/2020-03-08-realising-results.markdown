@@ -1,7 +1,7 @@
 ---
 layout: project
 
-title:  "Realising results"
+title:  "Simplified a complex process for new business"
 
 date:   2020-03-08 18:45:17 -0500
 
@@ -19,23 +19,27 @@ caption: "Unleashing potential with a guided digital experience."
 
 client: "PwC Deals"
 
-about: "PwC's Deals platform needs to achieve a 17% growth. Currently, the process is labor intensive and manual. New engagements are often created from scratch and a central hub of resources does not exist. The challenge was to provide a user experience that partners and staff can utilize to initiate new engagements and delegate tasks. This experience and concept is called Retina."
+about: "PwC's Deals platform needed to achieve a X% growth. The process that was in place was labor-intensive and manual. New engagements were often created from scratch and a central hub of resources was not existent. The challenge was to provide a user experience that partners and staff can utilize to initiate new engagements and delegate tasks. This experience and concept is called Retina."
+
+role: "UI Designer"
 
 
 ---
 
-<h2>Experience both mobile & desktop friendly</h2>
-<p>Both desktop and mobile concepts were designed.</p>
+## Building trust and confidence through design
+The initial brand explorations were rooted in bold and direct components that provide the user with a quick snapshot of what is most important. We expanded upon the existing PwC brand, to provide a solution that feels familiar, yet distinct.
+<img src="/assets/images/deals/Deals_00.png">
+<figcaption>Two initial brand direction concepts</figcaption>
+
 <img src="/assets/images/deals/Deals_0.png">
-<hr>
-
-<h2>Partner checks current engagement for value-add solutions</h2>
-<p>A Deals Partner has been using Retina for the last few months. They have not checked it in a few days, and decide to check if there have been any new value-add solutions identified within any of their engagements.</p>
+<figcaption>The chosen look & feel represents both the PwC brand and familiar design patterns.</figcaption>
 <img src="/assets/images/deals/deals_1.png">
+<figcaption>Key screens that demonstrate the breadth of the brand.</figcaption>
 <hr>
-
-<h2>Partner receives new opportunity, delegates to Director. </h2>
-<p>The CFO of Sentri, one of the Partner's clients, reaches out with an opportunity to handle the FDD work on the divestiture of one of their subsideries, CentralPoint. The Partner contacts one of their Directors to take lead. The UI/UX uses progressive disclosure to emphasize one question at a time. </p>
+## User flow example
+Here are some example screens that demonstrate that the experience we designed is very focused on a particular task. We used progressive disclosure to guide the user through very critical steps in the experience. We thus reduced cognitive overload.
 <img src="/assets/images/deals/deals_2.png">
-<hr>
+
+
+
 

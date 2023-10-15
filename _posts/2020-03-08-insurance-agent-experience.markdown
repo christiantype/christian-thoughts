@@ -1,7 +1,7 @@
 ---
 layout: project
 
-title:  "Insurance Agent experience"
+title:  "Making the job of insurance agents easier"
 
 date:   2020-03-08 18:45:17 -0500
 
@@ -21,40 +21,72 @@ about: "We rebuilt Agent trust through an enhanced digital experience that showe
 
 client: "Encova Insurance"
 
+published: true
+
+role: "Lead UI/UX Designer"
 
 ---
-<h2>The client recently changed brands, going from the name Motorists Insurance Group to Encova</h2>
-<p> The first item on the agenda was to create a new pattern library with a new look and feel.  </p>
+#### Impact
+From a public statement made published by Encova
+
+*“Feedback from agents we’ve onboarded so far has been very positive,” Encova Executive Vice President, Personal Lines Matt Wilcox said. “We knew we needed to do more for our agents and policyholders to be competitive in the personal lines market, and we’re proud to finally be able to do that. Our agents are able to offer their clients outstanding protection at a great rate, and they’re able to do it efficiently through modern technology. It’s a seamless transaction that benefits everyone.”*
+
+Read more <a href="https://www.encova.com/news/encova-insurance-releases-cutting-edge-personal-lines-products-and-technology-to-three-states/" target="_blank">here</a>
+<hr>
+## First task. Rebrand the digital experience
+
+The client had recently gone through a rebrand, going from Motorist Insurance Group to Encova. Our PwC team was in 
+charge of rebranding the digital experience using updated brand guidelines.
+
+
+
 
 <img src="/assets/images/encova/encova_0.png">
-<figcaption>Old Motorist Group look & feel</figcaption>
+<figcaption>A before and after of key components.</figcaption>
+<hr class="full-width">
 
 <img src="/assets/images/encova/encova_00.png">
 <figcaption>Updated brand identity</figcaption>
+<hr class="full-width">
 
-<hr>
+## Building a collaborative design system
+<img src="/assets/images/encova/encova_7.png">
+<img src="/assets/images/encova/encova_9.png">
+<img src="/assets/images/encova/encova_11.png">
+<figcaption>Brand guidelines were shared in Zeplin with stakeholders and the dev team to make way for easy iterations, 
+collaboration, and production </figcaption>
+<hr class="full-width">
 
-<h2>Making actions obvious.</h2>
-<p>The users we tested and interviewed implied the need to be able to come in and perform repetitive tasks daily. They mentioned that the interface needs to be simple and focused on a single task at a time. </p>
+
+<img src="/assets/images/encova/encova_10.png">
+<figcaption>User flows were presented in Zeplin. This helped teams annoate designs and allow the design 
+team to manage feedback.</figcaption>
+<hr class="full-width">
+
 <img src="/assets/images/encova/encova_1.png">
+<figcaption>Navigation</figcaption>
 <hr>
 
-<h2>A unique dashboard experience for agents.</h2>
-<p>Important metrics and actions available at a glance and easy to access. The average user rating was 4.6/5. </p>
+## General Liability claim process
+Examples of screens that demonstrate key interactions and patterns throughout the experience.
+
 <img src="/assets/images/encova/encova_2.png">
-<hr>
-
-
-<h2>Quick processing </h2>
-<i>This seems to be fast and real-time, which is important to me. — User</i>
+<figcaption>Large buttons with iconography provide an association with particular lines of businesses and coverages that later appear.</figcaption>
 <img src="/assets/images/encova/encova_3.png">
+<figcaption>As the lead designer, the typographic hierarchy was challenging. I had to ensure that regardless of the amount of content on the pages, agents could scan and understand the information at a glance.</figcaption>
 <hr>
 
-<h2>Relevant information </h2>
-<i>I like that there isn't much information required to get the process started. — User</i>
+
+## “If you wanted to start a claim, how would you do so?”
+We did various rounds of testings with agents to ensure that our designs met expectations. We designed several prototypes in InVision and had the agents accomplish tasks and then we summarized their results.
+
 <img src="/assets/images/encova/encova_4.png">
-<img src="/assets/images/encova/encova_5.png">
+<figcaption>I like that there isn't much information required to get the process started. — User</figcaption>
+
 <hr>
-<h2>Intuitive flow</h2>
-<i>This makes it pretty easy to file a claim without having to talk to anyone. — User</i>
+## What I learned
+This project taught me ways to manage the expectations of a large team. We had recurring meetings where I was in charge of walking business analysts and stakeholders through the rationale and experience of the designs. The creative had to constantly pivot direction due to requirements changing frequently. Overall though, I'm proud of the work that we did. The client and user were pleased which is always the most important part of an engagement. I helped foster trust and strengthened the relationship between the client and PwC.
 <img src="/assets/images/encova/encova_6.png">
+<figcaption>This is only a fraction of the screens I designed. 🤯</figcaption>
+
+

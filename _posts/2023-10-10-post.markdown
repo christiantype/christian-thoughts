@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Teaching entry"
+
+date:   2023-10-10 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/008.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/008.jpg">
+
+Students are assigned to take a series of 25 photographs in 1:1 aspect ratio in B&W. They are asked to show their 
+understanding of several design principles such as: harmony, stress, attraction. They then hang their photos on the 
+wall and engage in discussion amongst their peers. 

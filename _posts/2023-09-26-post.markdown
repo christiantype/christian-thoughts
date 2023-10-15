@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "What is in a role?"
+
+date:   2023-09-26 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/003.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I am thinking about what roles mean. Often, we get carried away with ways to define ourselves. Today, there are 
+more and more ways to self-identify. But at the end of 
+the 
+day, identity is much more complex than roles, accolades, awards, recognition, titles, etc. Who we are goes beyond 
+language and words. Language is limiting — it is a safety net at best. I think we should take our roles serious but 
+not so serious to the point of rigidity and clout.

@@ -1,25 +1,28 @@
 ---
 layout: default
-title: "Christian Solorzano's Writing"
+title: "Christian Solorzano's Portfolio"
 description: "Christian Solorzano is a experience designer & consultant, working in the digital landscape."
 permalink: /work/
 ---
+<h1 class="full-width start-third">Projects</h1>
+<p class="full-width start-third">These are a collection of projects that demonstrate the breath of my experience. </p>
+
   {%- if site.posts.size > 0 -%}
-    <h1 class="full-width">{{ page.list_title | default: "Writing" }}</h1>
+
       {%- for post in site.posts -%}
       <div class="half-container">
-        <h4>
+        <p>
           <a class="post-link" href="{{ post.url | relative_url }}">
              <img src="{{ site.baseurl }}../{{ post.image }}" alt="{{ post.title }}" title="{{ post.title }}">
             {{ post.title | escape }}
           </a>
-        </h4>
+        </p>
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
       </div>
       {%- endfor -%}
-  </div>
+
 
   {%- endif -%}
 
