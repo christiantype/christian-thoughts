@@ -1,11 +1,11 @@
 
 
-$backgroundc: #000000;
+$backgroundc: #ffffff;
 
-$maincolor: #e3e3e1;
-$accent: #eeeeee;
-$accent1: #eeeeee;
-$lightcolor: #eeeeee;
+$maincolor: #0042ec;
+$accent: #0042ec;
+$accent1: #d70d0d;
+$lightcolor: #0042ec;
 $midcolor: #000000;
 
 
@@ -22,11 +22,11 @@ $midcolor: #000000;
 }
 
 @-webkit-keyframes color-change {
-  0% { color: $maincolor;}
+  0% { color: $accent1;}
   25% { color: $accent; }
   75% { color: $accent1; }
   50% { color: $accent; }
-  100% { color: $maincolor;}
+  100% { color: $accent1;}
 }
 
 .page-content {
@@ -51,8 +51,6 @@ body {
   background: radial-gradient( $backgroundc, $backgroundc, $backgroundc, $backgroundc);
   background-size: 400% 400%;
   animation: gradient 80s ease infinite;
-  background-color:$backgroundc;
-  color:$maincolor;
   line-height: 1.5em;
   margin: 0 auto;
   padding:1.5em;
