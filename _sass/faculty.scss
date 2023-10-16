@@ -1,12 +1,12 @@
 
 
-$backgroundc: #ffffff;
+$backgroundc: #101010;
 
-$maincolor: #0042ec;
-$accent: #0042ec;
+$maincolor: #f6f6f6;
+$accent: #f6f6f6;
 $accent1: #d70d0d;
-$lightcolor: #0042ec;
-$midcolor: #000000;
+$lightcolor: #f6f6f6;
+$midcolor: #f6f6f6;
 
 
 @keyframes gradient {
@@ -152,7 +152,7 @@ footer ul li, footer li {
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   margin-bottom: 1em;
-  align-items: center;
+  align-items: start;
 }
 
 .full-width {
