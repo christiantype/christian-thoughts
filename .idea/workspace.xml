@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="" />
+    <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/13/89c325d0145d21e9208f12246bc4f270845b81ff8e98b679f63f97d4b23e69" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/2b/48372ffbfe273c7c3c0759eb2b1a239be0ae01c4eca90e05bd717c0469605c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/faculty.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/faculty.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/diary/010a.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/diary/010a.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -247,7 +255,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_posts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -258,9 +266,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/_layouts" />
-      <recent name="$PROJECT_DIR$/_posts" />
       <recent name="$PROJECT_DIR$/_assets/images" />
       <recent name="$PROJECT_DIR$/files" />
     </key>
@@ -344,7 +352,8 @@
       <workItem from="1696868720728" duration="5531000" />
       <workItem from="1696946778109" duration="1649000" />
       <workItem from="1696949340453" duration="6117000" />
-      <workItem from="1697203115906" duration="17528000" />
+      <workItem from="1697203115906" duration="21084000" />
+      <workItem from="1697639330416" duration="1064000" />
     </task>
     <servers />
   </component>

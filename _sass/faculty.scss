@@ -405,10 +405,11 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  object-fit: cover;
 
   /* Change width and height to scale images */
-  width: 100vw;
-  height: 100vh;
+  width: 80%;
+  height: 80%;
 }
 
 .hover-image img {
@@ -417,6 +418,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   width: auto !important;
   height: auto !important;
   margin-bottom: 0;
+
 }
 
 .half-navigation {
@@ -424,4 +426,28 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   @media only screen and (max-width: 600px) {
   grid-column: span 3;
   }
+}
+
+#spin {
+  color:red;
+}
+#spin:after {
+  content:"";
+  animation: spin 5s linear infinite;
+}
+@keyframes spin {
+  7% { content:"a product designer";}
+  14% { content:"a community leader";}
+  21% { content:"an educator";}
+  28% { content:"a podcast host";}
+  35% { content:"a brother";}
+  42% { content: "a jiu-jitsu student"; }
+  49% { content: "a writer"; }
+  56% { content: "an amateur musician"; }
+  63% { content: "an occasional artist"; }
+  70% { content: "a tea drinker"; }
+  77% { content: "a music collector"; }
+  84% { content: "a tai chi student"; }
+  100% { content: "a meditation instructor"; }
+
 }
