@@ -436,18 +436,9 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   animation: spin 5s linear infinite;
 }
 @keyframes spin {
-  7% { content:"a product designer";}
-  14% { content:"a community leader";}
-  21% { content:"an educator";}
-  28% { content:"a podcast host";}
-  35% { content:"a brother";}
-  42% { content: "a jiu-jitsu student"; }
-  49% { content: "a writer"; }
-  56% { content: "an amateur musician"; }
-  63% { content: "an occasional artist"; }
-  70% { content: "a tea drinker"; }
-  77% { content: "a music collector"; }
-  84% { content: "a tai chi student"; }
-  100% { content: "a meditation instructor"; }
+  0% { content:"a product designer ›";}
+  25% { content:"a community leader ›";}
+  50% { content:"an educator ›";}
+  100% { content:"a podcast host ›";}
 
 }
