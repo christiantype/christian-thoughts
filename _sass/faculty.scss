@@ -271,10 +271,10 @@ hr {
 #square {
   height: 20px;
   width:20px;
-  background-color: $maincolor;
+  background-color: $accent1;
   float:right;
   margin-bottom: .25em;
-  margin-left: .25em;
+  margin-left: 1em;
 }
 
 #triangle {
@@ -282,20 +282,20 @@ hr {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid $maincolor;
+  background-color: $accent1;
   float:right;
   margin-bottom: .25em;
-  margin-left: .25em;
+  margin-left: 1em;
 }
 
 #circle {
   height: 20px;
   width:20px;
-  background-color: $maincolor;
+  background-color: $accent1;
   float:right;
   border-radius: 20px;
   margin-bottom: .25em;
-  margin-left: .25em;
+  margin-left: 1em;
 }
 
 
@@ -436,9 +436,9 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   animation: spin 5s linear infinite;
 }
 @keyframes spin {
-  0% { content:"a product designer ›";}
-  25% { content:"a community leader ›";}
-  50% { content:"an educator ›";}
-  100% { content:"a podcast host ›";}
+  0% { content:"a product designer";}
+  25% { content:"a community leader";}
+  50% { content:"an educator";}
+  100% { content:"a podcast host";}
 
 }

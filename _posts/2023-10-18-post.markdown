@@ -1,0 +1,42 @@
+---
+layout: diary
+
+title:  "Upcoming talk"
+
+date:   2023-10-18 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/011.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/011.jpg">
+
+Next month, Thursday, November 9th, I will be speaking at the *[Chicago Design Archive](https://www.eventbrite.
+com/e/past-present-future-20-years-of-the-chicago-design-archive-tickets-738923689647?aff=oddtdtcreator)'s Past, 
+Present, and Future, 20th Anniversary* event. I'll be speaking about the Chicago Graphic Design Club and the role we 
+play within our communities and our 
+vision for the future. 
+
+The event description is. 
+> Since 2003, the Chicago Design Archive has been the premiere and permanent online record featuring Chicago-related experiential design, graphic design, and product design created from the 1920s to the present. It is a collection of historically important design as well as a living, growing record of the vibrant Chicago design scene. 
+> A celebration of Chicago Design, past, present, and future, this 20th anniversary event will display work from the 
+archive, featuring the newest additions. Guests will be able to peruse the work, mingle, take photos in front of the CDA backdrop, and partake in light refreshments. Following drinks and appetizers, there will be a set of presentations related to the past, present, and future of Chicago Design and the CDA. Following the presentations, guests are invited to continue the conversation in the gallery area over drinks.
+
+
+Register [here](https://www.eventbrite.
+com/e/past-present-future-20-years-of-the-chicago-design-archive-tickets-738923689647?aff=oddtdtcreator)
