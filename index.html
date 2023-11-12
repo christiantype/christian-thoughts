@@ -4,14 +4,19 @@ title: "Christian Solorzano | Website"
 ---
 
 
-<div class="full-width">
+<span class="full-width">
     <a href="{{ '/about' | relative_url }}" class="hover-title">
     <h1>
         Christian Solorzano <br> is  <span id="spin"></span> ›
     </h1>
     </a>
-    <img class="no-shadow hover-image" src="/assets/images/me.jpg">
-</div>
+    <span class="hover-image">
+        <img src="/assets/images/me.jpg">
+    </span>
+
+</span>
+
+
 
 
 
@@ -38,7 +43,7 @@ title: "Christian Solorzano | Website"
 
 
     {% for post in site.categories.diary %}
-    <div class="hover-title diary-post">
+    <span class="hover-title diary-post">
         <a href="{{ post.url | relative_url }}">
             {{ post.title | escape }} •
             {{ post.date | date: "%F" }}
@@ -46,13 +51,13 @@ title: "Christian Solorzano | Website"
             {%- if site.show_excerpts -%}
             {{ post.excerpt }}
             {%- endif -%}
-        </a> ¶
-    </div>
+        </a>
+    </span>
 
-    <div class="hover-image">
+    <span class="hover-image">
         <img class="portfolio-thumbnail no-shadow" src="{{ site.baseurl }}../{{ post.image }}"
           alt="{{ post.title }}" title="{{ post.title }} ">
-    </div>
+    </span>
 
 {%- endfor -%}
 

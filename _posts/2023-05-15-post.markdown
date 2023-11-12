@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "I was interviewed"
+
+date:   2023-05-15 14:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/012.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/012.jpg">
+
+My friend interviewed me for their podcast, Infinte Search. 
+You can listen to our conversation here.
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/5SvAlEtxpHebB9jqdO3Tm3?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>

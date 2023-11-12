@@ -2,11 +2,11 @@
 
 $backgroundc: #101010;
 
-$maincolor: #f6f6f6;
-$accent: #f6f6f6;
-$accent1: #d70d0d;
-$lightcolor: #f6f6f6;
-$midcolor: #f6f6f6;
+$maincolor: #ffffff;
+$accent: #d70d0d;
+$accent1: #0042ec;
+$lightcolor: #fcf423;
+$midcolor: #2f2f2f;
 
 
 @keyframes gradient {
@@ -56,6 +56,7 @@ body {
   padding:1.5em;
   max-width: 60em;
   font-size:ms(1);
+  text-shadow: 1px 1px 1px  $backgroundc;
   //background-image: url("/assets/images/bg.jpg");
   //background-size: cover;
   //background-attachment: fixed;
@@ -100,7 +101,7 @@ html:after{
   top:0;
   right:0;
   bottom:0;
-  background: $accent;
+  background: $accent1;
   //filter: blur(5px);
 }
 body:before{
@@ -108,7 +109,7 @@ body:before{
   right:0;
   bottom:0;
   left:0;
-  background: $lightcolor;
+  background: $accent;
   //filter: blur(5px);
 }
 body:after{
@@ -271,7 +272,7 @@ hr {
 #square {
   height: 20px;
   width:20px;
-  background-color: $accent1;
+  background-color: $accent;
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -282,7 +283,7 @@ hr {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  background-color: $accent1;
+  border-bottom: 20px solid $maincolor;
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -291,7 +292,7 @@ hr {
 #circle {
   height: 20px;
   width:20px;
-  background-color: $accent1;
+  background-color: $maincolor;
   float:right;
   border-radius: 20px;
   margin-bottom: .25em;
@@ -365,11 +366,11 @@ hr {
 
 .diary-post, .diary-post a {
   //grid-column: span 2;
-  //display: inline;
-  padding:0;
+  display: inline;
   font-size:ms(0);
   line-height: ms(0);
   margin-bottom: 1em;
+  margin-right: 1em;
   font-family: $base-font;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
@@ -395,50 +396,129 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 }
 
 .hover-image {
-  display: flex;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
+  top:0px;
+  right:0px;
+  z-index: -200;
   pointer-events: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   object-fit: cover;
-
+  background-color:$backgroundc;
   /* Change width and height to scale images */
-  width: 80%;
-  height: 80%;
 }
 
 .hover-image img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  margin-bottom: 0;
+  mix-blend-mode: lighten;
+  width: 100vw;
+  height: 100vh;
+  //filter: blur(.25em);
+
+
 
 }
 
 .half-navigation {
-  grid-column: span 3;
+  grid-column: span 6;
   @media only screen and (max-width: 600px) {
-  grid-column: span 3;
+  grid-column: span 6;
   }
 }
 
 #spin {
-  color:red;
+  color:$accent;
 }
 #spin:after {
   content:"";
-  animation: spin 5s linear infinite;
+  animation: spin 2s linear infinite;
 }
 @keyframes spin {
-  0% { content:"a product designer";}
-  25% { content:"a community leader";}
-  50% { content:"an educator";}
+  0% { content:"a graphic designer";}
+  25% { content:"a product designer";}
+  50% { content:"a community leader";}
+  75% { content:"an educator";}
   100% { content:"a podcast host";}
 
 }
+
+
+
+.nagy-line {
+  width:1200px;
+  height:1800px;
+  background-color:$lightcolor;
+  opacity: 1;
+  z-index: -100;
+  position: fixed;
+  transform: rotate(20deg);
+  bottom:10px;
+  left: 100px;
+  animation-name: shape-1-animate;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  filter: blur(1em);
+  mix-blend-mode: lighten;
+}
+
+.nagy-circle {
+  width:1600px;
+  height:1600px;
+  border-radius: 50%;
+  opacity: 1;
+  background-color:$accent;
+  z-index: -100;
+  position: fixed;
+  bottom:100px;
+  right: 100px;
+  animation-name: shape-2-animate;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  filter: blur(1em);
+  mix-blend-mode: lighten;
+}
+
+.nagy-rect {
+  width:1600px;
+  height:2000px;
+  background-color:$accent1;
+  z-index: -100;
+  position: fixed;
+  transform: rotate(90deg);
+  opacity: 1;
+  top:100px;
+  right: 300px;
+  animation-name: shape-3-animate;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  filter: blur(1em);
+  mix-blend-mode: lighten;
+}
+
+
+
+@keyframes shape-1-animate {
+  0%   {bottom:5%;left: 100%;}
+  25%  {bottom:20%;left: 90%;}
+  50%  {bottom:50%;left: 40%;}
+  75%  {bottom:80%;left: 70%;}
+  100% {bottom:40%;left: 100%;}
+}
+
+
+@keyframes shape-2-animate {
+  0%   {bottom:100%;left: 100%;}
+  25%  {bottom:30%;left: 20%;}
+  50%  {bottom:50%;left: 50%;}
+  75%  {bottom:10%;left: 40%;}
+  100% {bottom:100%;left: 100%;}
+}
+
+@keyframes shape-3-animate {
+  0%   {bottom:30%;left: 20%;}
+  25%  {bottom:80%;left: 10%;}
+  50%  {bottom:20%;left: 80%;}
+  75%  {bottom:90%;left: 20%;}
+  100% {bottom:30%;left: 100%;}
+}
+
