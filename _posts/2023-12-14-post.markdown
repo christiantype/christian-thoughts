@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "When does the party begin?"
+
+date:   2023-12-14 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231214.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231214.jpg" alt="Mic">
+
+Damn, I have been spending most evenings for the last few weeks in my home, 
+
+alone, 
+
+working mostly in the dark. 
+
+When do the big glamorous parties begin? 

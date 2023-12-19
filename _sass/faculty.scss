@@ -1,12 +1,13 @@
 
 
-$backgroundc: #101010;
+
+$backgroundc: #000000;
 
 $maincolor: #ffffff;
-$accent: #d70d0d;
-$accent1: #0042ec;
-$lightcolor: #fcf423;
-$midcolor: #2f2f2f;
+$accent: #ffffff;
+$accent1: #ffffff;
+$lightcolor: #ffffff;
+$midcolor: #000000;
 
 
 @keyframes gradient {
@@ -39,8 +40,8 @@ $midcolor: #2f2f2f;
 }
 
 header {
-  //border-bottom: 1px solid $accent;
-  padding-bottom: 1em;
+  border-bottom: 1px solid $accent;
+  padding-bottom: 0em;
   font-size:ms(-1);
   line-height:ms(3);
   text-align: left;
@@ -48,21 +49,18 @@ header {
 
 body {
   display: grid;
-  background: radial-gradient( $backgroundc, $backgroundc, $backgroundc, $backgroundc);
+  background: radial-gradient($backgroundc, $backgroundc, $backgroundc, $backgroundc);
   background-size: 400% 400%;
   animation: gradient 80s ease infinite;
   line-height: 1.5em;
   margin: 0 auto;
   padding:1.5em;
   max-width: 60em;
-  font-size:ms(1);
+  font-size:ms(2);
   text-shadow: 1px 1px 1px  $backgroundc;
   //background-image: url("/assets/images/bg.jpg");
   //background-size: cover;
   //background-attachment: fixed;
-
-
-
 
 
   @media only screen and (max-width: 600px)   {
@@ -364,14 +362,19 @@ hr {
   margin-bottom: .25em;
 }
 
+.diary-post {
+  grid-column: span 6;
+}
+
+.diary-post a {
+  padding:1em;
+  border: 1px solid white;
+}
+
 .diary-post, .diary-post a {
-  //grid-column: span 2;
-  display: inline;
+  display: block;
   font-size:ms(0);
   line-height: ms(0);
-  margin-bottom: 1em;
-  margin-right: 1em;
-  font-family: $base-font;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
     font-size:ms(-1);
@@ -379,7 +382,7 @@ hr {
 }
 
 
-——————
+
 
 .hover-title {
   display: inline;
@@ -397,37 +400,37 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 
 .hover-image {
   position: fixed;
-  top:0px;
-  right:0px;
-  z-index: -200;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
   pointer-events: none;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  object-fit: cover;
-  background-color:$backgroundc;
+
+
   /* Change width and height to scale images */
 }
 
 .hover-image img {
   mix-blend-mode: lighten;
-  width: 100vw;
-  height: 100vh;
   //filter: blur(.25em);
+  width:100%;
+  height:100%;
 
 
 
 }
 
 .half-navigation {
-  grid-column: span 6;
+  grid-column: span 3;
   @media only screen and (max-width: 600px) {
-  grid-column: span 6;
+  grid-column: span 3;
   }
 }
 
 #spin {
-  color:$accent;
+  color:$maincolor;
 }
 #spin:after {
   content:"";
@@ -447,7 +450,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 .nagy-line {
   width:1200px;
   height:1800px;
-  background-color:$lightcolor;
+  background-color:$backgroundc;
   opacity: 1;
   z-index: -100;
   position: fixed;
@@ -457,7 +460,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   animation-name: shape-1-animate;
   animation-duration: 30s;
   animation-iteration-count: infinite;
-  filter: blur(1em);
+  //filter: blur(1em);
   mix-blend-mode: lighten;
 }
 
@@ -466,7 +469,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   height:1600px;
   border-radius: 50%;
   opacity: 1;
-  background-color:$accent;
+  background-color:$backgroundc;
   z-index: -100;
   position: fixed;
   bottom:100px;
@@ -474,14 +477,14 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   animation-name: shape-2-animate;
   animation-duration: 30s;
   animation-iteration-count: infinite;
-  filter: blur(1em);
+  //filter: blur(1em);
   mix-blend-mode: lighten;
 }
 
 .nagy-rect {
   width:1600px;
   height:2000px;
-  background-color:$accent1;
+  background-color:$backgroundc;
   z-index: -100;
   position: fixed;
   transform: rotate(90deg);
@@ -491,7 +494,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   animation-name: shape-3-animate;
   animation-duration: 30s;
   animation-iteration-count: infinite;
-  filter: blur(1em);
+  //filter: blur(1em);
   mix-blend-mode: lighten;
 }
 

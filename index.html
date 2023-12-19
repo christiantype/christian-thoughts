@@ -4,20 +4,6 @@ title: "Christian Solorzano | Website"
 ---
 
 
-<span class="full-width">
-    <a href="{{ '/about' | relative_url }}" class="hover-title">
-    <h1>
-        Christian Solorzano <br> is  <span id="spin"></span> ›
-    </h1>
-    </a>
-    <span class="hover-image">
-        <img src="/assets/images/me.jpg">
-    </span>
-
-</span>
-
-
-
 
 
 
@@ -39,13 +25,13 @@ title: "Christian Solorzano | Website"
 
 
     <h2 class="full-width">journal</h2>
-<span class="full-width">
+
 
 
     {% for post in site.categories.diary %}
     <span class="hover-title diary-post">
         <a href="{{ post.url | relative_url }}">
-            {{ post.title | escape }} •
+            {{ post.title | escape }} . . .
             {{ post.date | date: "%F" }}
             <!-- <p class="black">{{ post.caption | escape }}</p> -->
             {%- if site.show_excerpts -%}

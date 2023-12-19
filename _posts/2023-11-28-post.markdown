@@ -1,0 +1,51 @@
+---
+layout: diary
+
+title:  "Thoughts on the creative practice"
+
+date:   2023-11-28 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/017.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/017.jpg" alt="image out my window">
+
+For almost two years, I have been having conversations with designers and creatives on a whole range of topics. I am 
+most interested in their process and understanding the intricacies of the qualities that move them to *create*. I 
+admire people that *create* because I know that *creating* often 
+requires rigorous discipline that is not always enjoyable. This discipline asks that you show up on both sunny and 
+rainy days. But the lessons of breathing life into an idea and seeing it flourish — or wilt, are worth every moment.
+
+But having an idea is easy. Seeing them through completion is the challenging part. And even more so, continuity and 
+practice 
+matters. This messy life of *creativity* and *wonder* often comes with accepting the dreadful reality that, and I 
+quote designer, [Sean Fermoyle](https://seanfermoyle.com/){:target="_blank"} , *there
+are more ideas than time*. 
+
+But regardless, we wake up, we do our jobs, and if we are lucky, we are creatively fulfilled there — and when not, 
+there presents the opportunity to seek new challenges and opportunities, through self-initiated projects or 
+collaborations or research. 
+
+In this arena of *graphic design* — this practice/discipline, comes with the necessity to be surveyors of the world. 
+I recently spoke with the artist, [Benjamin Edgar](https://www.benjaminedgar.com/){:target="_blank"} , in which he described the creative process as a form of *walking 
+meditation*, in which *we* 
+form close relationships with the world around us, suspending our intellect and letting *intuition* lead the way. I 
+couldn't agree more.
+
+Christian

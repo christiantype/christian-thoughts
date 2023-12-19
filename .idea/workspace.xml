@@ -6,31 +6,109 @@
   <component name="ChangeListManager">
     <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/13/ecc4c0230b7ffef996890776aa3402c102d9be2ab08015bf90477cfbb73c42" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3c/ad4bf889143ac08811576bc7d7d4f9054c64ae6097867eed49297b0a8dfedf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/4d/872314c3f47bd9d123e574a58ee8d22478e81a956a8ebb0faa06637c986dc5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b3/3f391fc7c28eb0b2b4a5aacdeb292fb7cbf6b5bcb486161d342e49c6ec2d9d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/11/eb2c28193760593f4613133bdcc97ad7a55607af76cca6e784f5281a50e184" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/33/0d38df439f3f7fd68f6fc4984cb48dd1e9e63a41ab443e7f4e515bc294efdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/36/c935d101e0a6803ec91338ad6843850a1ce022cdaebf103fca42bbe536e43f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3d/d45c1863cc60d43273568222efa5450fcaa8f715543de7e2be5932675ee6d2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3f/9682da94fd6fd93f0dccd09d990cc4f8578b53f6d66b54934b0eb392ed1d0a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/45/92d21b28762f0bad2accdbb4a3a125929969951a34447b31af26f907c88a27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/57/9f004240e488b00162a28ccaba657dfb9d6430716802110e760805364520be" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/64/e02eaa107c9fd8818ceb56f34844d9b6aafd4ae8c393aa78138209dc14c601" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/65/3f0db6bfc520426aa01da788bc46a19540b92647efe54586086bb260bdac43" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/90/a76591a4cee249a658e665ddf49d5669432e140ca821f6cdec59a2220da0b4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9a/895d363676b45efc1e217b7d4fcc09d5a47a487285c5107384e9d4f8f6612a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a3/fbab55bde52c14a6c10be3b842c7c76c52de65d82143cabfe35d55ad5f023c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/cf/94790e1cf916b00be2257b527b3876033a661a66b67eb09045c604d56d500f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/da/feac14b73e12afbe518e76554fae88d7353712cbc3e3895e96547ce0253484" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/dc/510a11534a58f0a626e537561b3466904598e351e32c9e004f146d932f4706" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/eb/461e8716c3fb4ed3139c9ef74955750051ce00cc9f668e23a00238cfd16f08" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2023-10-13-post.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-10-13-post.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-03-08-community.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-03-08-inclusive-design.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-03-08-insurance-agent-experience.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2020-03-08-realising-results.markdown" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_sass/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_typography.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_sass/faculty.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/faculty.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_sass/minima.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/minima.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/me.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/me.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/photography/DSCF0373.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/photography/DSCF9802-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/photography/DSCF9802.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-18.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-6.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-9.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/cgdc/cgdc-9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/csl/csl-9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/deals/Deals_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/deals/Deals_00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/deals/deals_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/deals/deals_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/deals/deals_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/diary/016.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/diary/016.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/efx/efx_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/encova/encova_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/id/id_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/play/play-3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design.html" beforeDir="false" afterPath="$PROJECT_DIR$/design.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.html" beforeDir="false" afterPath="$PROJECT_DIR$/library.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photos.html" beforeDir="false" afterPath="$PROJECT_DIR$/photography.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrapbook.html" beforeDir="false" afterPath="$PROJECT_DIR$/design.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photography.html" beforeDir="false" afterPath="$PROJECT_DIR$/photography.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +458,17 @@
       <workItem from="1699228482820" duration="7051000" />
       <workItem from="1699309441202" duration="8370000" />
       <workItem from="1699727287578" duration="1341000" />
-      <workItem from="1699805767614" duration="4890000" />
+      <workItem from="1699805767614" duration="5708000" />
+      <workItem from="1700671417339" duration="4489000" />
+      <workItem from="1700934351811" duration="4857000" />
+      <workItem from="1701019853359" duration="642000" />
+      <workItem from="1701228539971" duration="6010000" />
+      <workItem from="1701451956809" duration="2192000" />
+      <workItem from="1701879210311" duration="630000" />
+      <workItem from="1702049361251" duration="11065000" />
+      <workItem from="1702267780910" duration="6747000" />
+      <workItem from="1702612335624" duration="2038000" />
+      <workItem from="1702959441535" duration="3294000" />
     </task>
     <servers />
   </component>
