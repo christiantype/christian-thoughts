@@ -40,7 +40,7 @@ $midcolor: #000000;
 }
 
 header {
-  border-bottom: 1px solid $accent;
+  border-bottom: .5px solid $accent;
   padding-bottom: 0em;
   font-size:ms(-1);
   line-height:ms(3);
@@ -182,10 +182,18 @@ footer ul li, footer li {
  }
 
 
+.one-column {
+  grid-column: span 1;
+  @media only screen and (max-width: 600px)   {
+    grid-column: span 2;
+  }
+}
+
+
 .two-columns {
   grid-column: span 2;
   @media only screen and (max-width: 600px)   {
-    grid-column: span 6;
+    grid-column: span 3;
   }
 }
 
@@ -363,12 +371,16 @@ hr {
 }
 
 .diary-post {
-  grid-column: span 6;
+  grid-column: span 3;
+  @media only screen and (max-width: 600px) {
+    grid-column: span 6;
+}
 }
 
 .diary-post a {
   padding:1em;
-  border: 1px solid white;
+  background-color: $backgroundc;
+  border-bottom: .5px solid white;
 }
 
 .diary-post, .diary-post a {
@@ -400,27 +412,29 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 
 .hover-image {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
+  top:0px;
+  right:0px;
+  z-index: -200;
   pointer-events: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-
+  object-fit: cover;
+  background-color:$backgroundc;
   /* Change width and height to scale images */
 }
 
 .hover-image img {
   mix-blend-mode: lighten;
-  //filter: blur(.25em);
-  width:100%;
-  height:100%;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(.5em);
 
 
 
 }
+
+
 
 .half-navigation {
   grid-column: span 3;
@@ -434,14 +448,20 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 }
 #spin:after {
   content:"";
-  animation: spin 2s linear infinite;
+  animation: spin 5s linear infinite;
 }
 @keyframes spin {
   0% { content:"a graphic designer";}
-  25% { content:"a product designer";}
-  50% { content:"a community leader";}
-  75% { content:"an educator";}
-  100% { content:"a podcast host";}
+  10% { content:"a design educator";}
+  20% { content:"a community leader";}
+  30% { content:"a zen student";}
+  40% { content:"a martial arts practioner";}
+  50% { content:"a music collector";}
+  60% { content:"a writer";}
+  70% { content:"an occasional artist";}
+  80% { content:"a brother";}
+  90% { content:"a tea drinker";}
+  100% { content:"a graphic designer";}
 
 }
 

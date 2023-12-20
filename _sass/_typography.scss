@@ -58,13 +58,13 @@ h2 {
 }
 
 h3 {
-  font-size:ms(1);
-  margin-top:.5em;
-  margin-bottom:.5em;
+  font-size:ms(0);
   font-weight:400;
+  letter-spacing: 2px;
   line-height:ms(3);
   color:$maincolor;
-  font-family: $base-font;
+  font-family: $accent-font;
+  font-variation-settings: "GAME" 100;
   @media (max-width: 750px) {
     font-size:ms(-1);
   }

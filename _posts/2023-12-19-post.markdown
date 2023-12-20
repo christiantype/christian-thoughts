@@ -1,0 +1,29 @@
+---
+layout: diary
+
+title:  "Morning dog routine"
+
+date:   2023-12-19 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231219.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231219.jpg" alt="Dog">
+
+Walk dog. Vacuum dog hairs. Mop floors. Then focus can begin. 
