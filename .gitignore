@@ -4,5 +4,5 @@
 /.asset-cache/*
 /_site/*
 /_assets/bower/*
-.jekyll-cache/Jekyll*
-.idea*
+/.jekyll-cache/Jekyll*
+/.idea/workspace.xml*
