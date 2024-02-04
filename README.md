@@ -1,11 +1,16 @@
 # Christian Solorzano
 
-*This is my personal website which is built on Jekyll while customizing the default theem, Minima.
+*This is my personal website which is built on Jekyll while customizing the default theme, Minima.
 
-## Installation
+## Why
 
-Add this line to your Jekyll site's Gemfile:
+As a graphic designer, I ask myself — why build a website in a manual way. Why not use a website builder with 
+drag-and-drop editing... The answer is: becoming familiar with the medium and technology that enables you to share 
+work and thoughts with the world is crucial. So, this website is my personal heaven and hell. Often, I break things 
+by accident and must find a way to troubleshoot and fix things. It is a practice of technology dexterity.
 
+
+#Jekyll things below
 ```ruby
 gem "minima"
 ```
