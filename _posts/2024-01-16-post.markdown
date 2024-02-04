@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "Seventeen Years Ago "
+
+date:   2024-01-16 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+17 years ago, in 2007, in 7th grade I was tasked with completing a career assessment. I answered a series of 
+questions and then I received a career recommendation based on my answers. My recommended career path was graphic 
+design. Afterwards, I had to create a “career blueprint” of all the facets that there are in graphic design. I 
+assume this activity was provided by the instructor to get the students to get into a mindset of *I know what I want 
+to do after college*. Needless to say, here I am, in 2024 still doing graphic design and loving every minute of it. 
+If there is one takeaway from this, it is to follow your dreams. I know it sounds damn cliché but like that blimp in 
+Scarface says “the World is Yours”. 
+
+Peace!
+
+<img src="/assets/images/diary/20240116.JPG" alt="image">
+

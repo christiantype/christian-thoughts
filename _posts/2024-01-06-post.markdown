@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "A thought"
+
+date:   2024-01-06 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Sometimes big means small
+
+Sometimes small means big
+
+Sometimes light is dark
+
+Sometimes dark is light

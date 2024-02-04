@@ -1,12 +1,12 @@
 
 
 
-$backgroundc: #000000;
+$backgroundc: #ffffff;
 
-$maincolor: #ffffff;
-$accent: #ffffff;
+$maincolor: #000000;
+$accent: #d70dd4;
 $accent1: #ffffff;
-$lightcolor: #ffffff;
+$lightcolor: #efefe9;
 $midcolor: #000000;
 
 
@@ -42,22 +42,21 @@ $midcolor: #000000;
 header {
   border-bottom: .5px solid $accent;
   padding-bottom: 0em;
-  font-size:ms(-1);
-  line-height:ms(3);
+  font-size:ms(0);
+  line-height:ms(5);
   text-align: left;
 }
 
 body {
   display: grid;
-  background: radial-gradient($backgroundc, $backgroundc, $backgroundc, $backgroundc);
-  background-size: 400% 400%;
-  animation: gradient 80s ease infinite;
+  background: linear-gradient($backgroundc, $accent1);
+  background-size: 100% 100%;
+  //animation: gradient 80s ease infinite;
   line-height: 1.5em;
   margin: 0 auto;
   padding:1.5em;
   max-width: 60em;
-  font-size:ms(2);
-  text-shadow: 1px 1px 1px  $backgroundc;
+  font-size:ms(0);
   //background-image: url("/assets/images/bg.jpg");
   //background-size: cover;
   //background-attachment: fixed;
@@ -87,23 +86,23 @@ html:before,html:after,body:before,body:after{
 
 /* ...and position them! */
 html:before{
-  height:0px;
+  height:5px;
   left:0;
   right:0;
   top:0;
-  background: $accent1;
+  background: $accent;
   //filter: blur(5px);
 }
 html:after{
-  width:0px;
+  width:5px;
   top:0;
   right:0;
   bottom:0;
-  background: $accent1;
+  background: $accent;
   //filter: blur(5px);
 }
 body:before{
-  height:0px;
+  height:5px;
   right:0;
   bottom:0;
   left:0;
@@ -111,11 +110,11 @@ body:before{
   //filter: blur(5px);
 }
 body:after{
-  width:0px;
+  width:5px;
   top:0;
   bottom:0;
   left:0;
-  background: $maincolor;
+  background: $accent;
   //filter: blur(5px);
 }
 
@@ -185,7 +184,7 @@ footer ul li, footer li {
 .one-column {
   grid-column: span 1;
   @media only screen and (max-width: 600px)   {
-    grid-column: span 2;
+    grid-column: span 3;
   }
 }
 
@@ -193,7 +192,7 @@ footer ul li, footer li {
 .two-columns {
   grid-column: span 2;
   @media only screen and (max-width: 600px)   {
-    grid-column: span 3;
+    grid-column: span 6;
   }
 }
 
@@ -370,26 +369,23 @@ hr {
   margin-bottom: .25em;
 }
 
+
 .diary-post {
-  grid-column: span 3;
-  @media only screen and (max-width: 600px) {
-    grid-column: span 6;
-}
+  grid-column: span 6;
+  text-align: justify;
 }
 
-.diary-post a {
-  padding:1em;
-  background-color: $backgroundc;
-  border-bottom: .5px solid white;
-}
 
 .diary-post, .diary-post a {
-  display: block;
-  font-size:ms(0);
+  display: inline;
+  font-size:ms(2);
   line-height: ms(0);
+  text-transform: lowercase;
+  letter-spacing: -3px;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
-    font-size:ms(-1);
+    font-size:ms(1);
+    letter-spacing: -2px;
   }
 }
 
@@ -545,3 +541,31 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   100% {bottom:30%;left: 100%;}
 }
 
+.BG1 {
+  position:fixed;
+  mix-blend-mode: difference;
+  opacity: 0.5;
+  z-index: -9999;
+  left:50px;
+  top:-20px;
+  width:500px;
+
+}
+
+.BG2 {
+  position:fixed;
+  mix-blend-mode: lighten;
+  z-index: -9999;
+  right:20px;
+  top: 30px;
+  width:300px;
+}
+
+.BG3 {
+  position:fixed;
+  mix-blend-mode: lighten;
+  z-index: -9999;
+  right:490px;
+  bottom: 20px;
+  width:300px;
+}

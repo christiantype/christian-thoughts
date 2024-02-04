@@ -1,0 +1,51 @@
+---
+layout: diary
+
+title:  "Films enjoyed in 2023"
+
+date:   2024-01-11 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+These are the films I remember watching in 2023. I know there were more but these are what come to mind. I will come 
+back to update this if more come to mind. See ya!
+
+- The Retirement Plan (2013) 
+- The Holdovers (2023)
+- Girl Shy (1924)
+- Asteroid City (2023)
+- Fallen Leaves (2023)
+- A Touch of Zen (1971)
+- Chameleon Street (1989)
+- Hardcore (1979)
+- The Premature Burial (1962)
+- Deep Cover (1992)
+- Insidious, The Red Door (2023)
+- Barbie (2023)
+- Royal Warriors (1986)
+- Ryuichi Sakamoto: Coda (2017)
+- Geographies of Solitude (2022)
+- Dressed to Kill (1980)
+- Yes, Madam! (1985)
+- Pyscho (1960)
+- The Birds (1963)
+- The Incredibly True Adventure of Two Girls in Love (1995)
+- M3GAN (2022)
+- The Whale (2022)

@@ -17,7 +17,7 @@ p {
   margin-top: .5em;
   margin-bottom: 1.5em;
   @media (max-width: 750px) {
-    font-size:ms(-2);
+    font-size:ms(0);
     line-height: ms(3);
     margin-bottom: 1em;
   }
@@ -26,17 +26,17 @@ p {
 
 
 h1 {
-  font-size:ms(5);
+  font-size:ms(8);
   line-height: ms(1);
   text-transform: lowercase;
-  letter-spacing: 5px;
+  letter-spacing: -6px;
   font-family: $base-font;
   font-variation-settings: "GAME" 500;
   margin: .25em 0 0em 0;
   color:$maincolor;
   font-weight:400;
   @media (max-width: 750px) {
-    font-size:ms(2);
+    font-size:ms(3);
     letter-spacing: 0px;
     line-height: ms(3);
     margin-bottom: .25em;
@@ -44,10 +44,12 @@ h1 {
 }
 
 h2 {
-  font-size:ms(4);
+  font-size:ms(2);
   font-weight:400;
-  text-transform: uppercase;
-  font-family: $accent-font;
+  text-transform: lowercase;
+  border-bottom: 0.5px solid #0042ec;
+  font-family: $base-font;
+  padding-bottom: 1em;
   color:$maincolor;
   margin-bottom: .25em;
   line-height: ms(2);
@@ -60,7 +62,6 @@ h2 {
 h3 {
   font-size:ms(0);
   font-weight:400;
-  letter-spacing: 2px;
   line-height:ms(3);
   color:$maincolor;
   font-family: $accent-font;
@@ -107,11 +108,13 @@ nav {
   font-family: $base-font;
   font-weight:400;
   margin:0;
+  text-align: justify;
   // grid-column: span 2;
   @media only screen and (max-width: 600px) {
     grid-column-start: 1;
   }
 }
+
 
 nav ul li {
   grid-column: span 2;
@@ -125,19 +128,18 @@ nav ul li {
 
 
 ul li {
-  margin-left:0em;
-  margin-bottom:2em;
-  font-size:ms(-1);
+  margin-left:1em;
+  margin-top:1em;
+  font-size:ms(0);
   line-height: ms(3);
   @media (max-width: 750px) {
     line-height: ms(4);
-    font-size:ms(-2);
   }
 
 }
 
 ul {
-  margin-left: 0;
+  margin-left: 0em;
 }
 
 
@@ -154,7 +156,9 @@ em {
 
 figcaption {
   margin-top: 1em;
-  font-size:ms(-2);
+  font-size:ms(-1);
+  letter-spacing: 1px;
+  font-style:italic;
   padding-bottom: 1em;
   line-height: ms(3);
   font-weight:400;
@@ -203,7 +207,7 @@ a:hover {
 
 body {
   font-family: $base-font;
-  font-weight:300;
+  font-weight:400;
   letter-spacing: 0px;
   font-size:ms(1);
   text-transform: lowercase;
@@ -231,8 +235,9 @@ footer a {
 a, a:visited {
   font-family: $base-font;
   font-weight:400;
+  color: $accent;
+  text-transform: uppercase;
 }
-
 
 
 a:hover {
@@ -247,15 +252,37 @@ a:hover {
 
 
 blockquote {
-  font-size: ms(1);
   font-family: $accent-font;
-  color:$backgroundc;
   font-weight: 400;
-  line-height: ms(3);
+  color:$maincolor;
   font-style: normal;
+  letter-spacing: 0px;
+  line-height: ms(3);
+  font-size:ms(0);
 }
 
 .half-navigation a {
   margin-right: .25em;
+}
+
+.myname {
+  font-size:ms(9);
+  text-transform: lowercase;
+  letter-spacing: -5px;
+  font-weight:300;
+  line-height: ms(1);
+  @media (max-width: 750px) {
+    font-size:ms(8);
+  }
+}
+
+.mylast {
+  font-size:ms(9);
+  text-transform: lowercase;
+  letter-spacing: -8px;
+  font-weight:300;
+  @media (max-width: 750px) {
+    font-size:ms(7);
+  }
 }
 

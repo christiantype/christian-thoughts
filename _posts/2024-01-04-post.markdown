@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Design Museum of Chicago"
+
+date:   2024-01-04 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20240104.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20240104.jpg" alt="DMoC">
+
+The Chicago Graphic Design Club's team, Jeffrey, Cheryl, Hamid, John, and myself — have a display at the Design 
+Museum of Chicago. It is promoting our club AND our upcoming publication, Faculty. Go check it out! 
+
+Special thanks to our friends Kevin and Tanner of the museum for offering the space and helping promote what we do. 
+Much love.
