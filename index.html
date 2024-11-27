@@ -19,38 +19,20 @@ title: "Christian Solorzano | Website"
 
 
 
-<h1 class="full-width">journal</h1>
+<h1 class="full-width">Journal</h1>
 <span class="hover-title diary-post">
     {% for post in site.categories.diary %}
 
 
         <a href="{{ post.url | relative_url }}">
-            {{ post.date | date: "%F" }}—
-            {{ post.title | escape }}
+            {{post.date | date: "%m %d %Y"}}
+            {{post.title | escape}}
             <!-- <p class="black">{{ post.caption | escape }}</p> -->
-            {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
+            {%- if site.show_excerpts -%} {{ post.excerpt }}
             {%- endif -%}
-                ¶
-
         </a>
 
 {%- endfor -%}
 {%- endif -%}
 </span>
 
-<span class="full-width">
-    <h2>work samples</h2>
-    <p>case studies available upon request</p>
-</span>
-<img src="assets/images/play/play-28.jpg" class="half-container">
-<img src="assets/images/play/play-30.jpg" class="half-container">
-<img src="assets/images/play/play-1.png" class="two-columns">
-<img src="assets/images/play/play-2.png" class="two-columns">
-<img src="assets/images/play/play-21.jpg" class="two-columns">
-<img src="assets/images/play/play-3.jpg" class="one-column">
-<img src="assets/images/play/play-4.jpg" class="one-column">
-<img src="assets/images/play/play-11.jpg" class="one-column">
-<img src="assets/images/play/play-12.jpg" class="one-column">
-<img src="assets/images/play/play-13.jpg" class="one-column">
-<img src="assets/images/play/play-14.jpg" class="one-column">

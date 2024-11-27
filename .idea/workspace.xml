@@ -5,7 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-02-03-post.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-02-03-post.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_typography.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/faculty.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/faculty.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/minima/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/minima/_base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/play/play-28.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-28.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/play/play-30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-30.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/10arguements.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/arewehuman.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/bluesteye.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/designasanattitude.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/designasart.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/designingdesign.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/designjustice.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/discourses.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/lostconnections.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/manandhissymbols.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/metapatterns.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/mirror.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/mismatch.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/selfreliance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/theuininhabitableearth.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/uncletoms.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/wabisabi.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/zenandthe.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/zenmind.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/library/zenof.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design.html" beforeDir="false" afterPath="$PROJECT_DIR$/design.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +288,6 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -367,7 +399,44 @@
       <workItem from="1702612335624" duration="2038000" />
       <workItem from="1702959441535" duration="12126000" />
       <workItem from="1707018029749" duration="1640000" />
-      <workItem from="1707019799599" duration="829000" />
+      <workItem from="1707019799599" duration="3541000" />
+      <workItem from="1707229389897" duration="6804000" />
+      <workItem from="1708917187105" duration="3353000" />
+      <workItem from="1710122816839" duration="18104000" />
+      <workItem from="1711029500109" duration="9948000" />
+      <workItem from="1712260728587" duration="3911000" />
+      <workItem from="1713801825033" duration="4667000" />
+      <workItem from="1714142667256" duration="1458000" />
+      <workItem from="1714486852099" duration="5971000" />
+      <workItem from="1715797081450" duration="9449000" />
+      <workItem from="1716347424256" duration="3482000" />
+      <workItem from="1716486484827" duration="1496000" />
+      <workItem from="1716734511202" duration="9695000" />
+      <workItem from="1717165757323" duration="3440000" />
+      <workItem from="1717295082091" duration="4758000" />
+      <workItem from="1717426775722" duration="1211000" />
+      <workItem from="1717442080150" duration="1446000" />
+      <workItem from="1717619263431" duration="744000" />
+      <workItem from="1717728563601" duration="3301000" />
+      <workItem from="1717798347642" duration="3018000" />
+      <workItem from="1718121021602" duration="4743000" />
+      <workItem from="1718654869384" duration="1247000" />
+      <workItem from="1718766600891" duration="605000" />
+      <workItem from="1719288220833" duration="1830000" />
+      <workItem from="1719406094929" duration="1424000" />
+      <workItem from="1719503873940" duration="17000" />
+      <workItem from="1719677502612" duration="5611000" />
+      <workItem from="1720025406498" duration="104000" />
+      <workItem from="1720150269030" duration="7000" />
+      <workItem from="1722912057937" duration="3691000" />
+      <workItem from="1723605869009" duration="13248000" />
+      <workItem from="1724254744582" duration="963000" />
+      <workItem from="1724535450644" duration="2945000" />
+      <workItem from="1726626925141" duration="729000" />
+      <workItem from="1727541161478" duration="5424000" />
+      <workItem from="1728653161961" duration="3007000" />
+      <workItem from="1729306910377" duration="8560000" />
+      <workItem from="1732678307610" duration="1137000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "Music Mix"
+
+date:   2024-03-29 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I published a new mix on Mu Radio. This mix starts off with a remix of Marilyn Manson‘s Lunchbox and ends with Hello 
+Hooray by Alice Cooper. And in between is a collection of songs that evoke a sense of slowness and tranquility. Enjoy.
+.. The photograph used for the cover art is a spider exoskeleton. 
+
+<iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FChicagoGraphicDesignClub%2F03-22-2024-set-by-christian-solorzano%2F" frameborder="0" ></iframe>
+
+
+

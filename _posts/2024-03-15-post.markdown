@@ -1,0 +1,50 @@
+---
+layout: diary
+
+title:  "If you are reading this"
+
+date:   2024-03-15 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+If you are reading this... 
+
+Hello.
+
+It is Friday and it is almost 4 PM. I am drinking Kukicha Green Tea. 
+
+It is the second steep. Sometimes the second steep is rich. 
+
+Other times it is bland. Either way, both are enjoyable.
+
+
+Have a nice Friday... 
+
+Wherever you are. 
+
+Whoever you are.
+
+Whatever you are.
+
+It is now 4 PM.
+
+
+
+

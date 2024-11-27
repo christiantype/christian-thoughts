@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Faculty meets Juan"
+
+date:   2024-06-04 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Type designer [Juan Villanueva](https://www.juankafka.com/){:target="_blank"} visits Chicago and meets with several 
+members of the Chicago Graphic Design Club. Here he is holding Faculty — which you can still purchase through the 
+CGDC website... 
+
+![Juan Holds Faculty](/assets/images/diary/20240604.png)

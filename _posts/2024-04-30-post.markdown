@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "Dream Big"
+
+date:   2024-04-30 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I bought Roy Orbison's 1963 album, Dreams and I love the back of the album artwork. It has a Big O and within the 
+counter of the O, sits blocks of texts. The text ends with a wonderful quote to Dream Big. Yes... I will...
+
+![Roy Orbison](/assets/images/diary/20240430.jpg)
+
+
+
+
+
+

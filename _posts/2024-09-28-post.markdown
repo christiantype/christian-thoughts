@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Confronting Design No.2"
+
+date:   2024-09-28 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The Chicago Graphic Design Club is pleased to announce our second installment of our series, Confronting Design... 
+Once again in collaboration with One Design. 
+
+You can get more information [here](https://chicagographicdesign.club/programming/confronting-values/
+){:target="_blank"}.
+
+![CD](/assets/images/diary/20240928a.png)
+
+![CD](/assets/images/diary/20240928b.png)
+
+![CD](/assets/images/diary/20240928c.png)
+
+![CD](/assets/images/diary/20240928d.png)

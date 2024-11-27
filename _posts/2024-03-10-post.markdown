@@ -1,0 +1,55 @@
+---
+layout: diary
+
+title:  "Faculty"
+
+date:   2024-03-12 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+![Faculty Release Party](/assets/images/diary/20240312.jpg)
+
+The Chicago Graphic Design Club recently launched its first publication, [Faculty](https://chicagographicdesign.
+shop/products/faculty-issue-1){:target="_blank"}. This is a big milestone not just for the Chicago Graphic Design 
+Club but also for me. For years, I've wanted to publish a printed publication. In 2016, the name Faculty became 
+something that occupied head space. For a brief while, it existed as an online publication where I interviewed 
+designers in Chicago. Then Faculty became a private design studio — it was my pseudonym for personal work that I would 
+create. In 2023, I decided to finally move forward with my ambition of creating a printed publication and today, 
+finally to be 
+here in my house, sitting beside boxes of publications and envelopes and mailing slips... It is an amazing feeling. 
+This publication however, could not have been done without the support of the Chicago design community. I 
+specifically want to shout out Cheryl Bever, who was a thought partner and collaborator throughout the production of 
+this first issue. Also, big shout to Sean Fermoyle who graciously allowed us to use his typeface, [Process](https://chicagographicdesign.club/articles/chronicle-of-a-typeface-the-genesis-of-process/){:target="_blank"} for 
+the masthead.
+
+In less than a month since Faculty's release, we've sold 50% of our inventory. So, thanks to everybody that has 
+purchased a copy. Oh, and also thanks to M&G Graphics — Angie and John Weiss, who printed our issue, 
+which if you've held in your hands, you know it feels, so damn good. Quality is amazing. So, you can thank them for 
+that. AND, Ray over at the American Legion Tattler Post #973, who loaned us their space for a welcoming and joyous 
+release party.
+
+# You can still purchase a copy [here](https://chicagographicdesign.shop/products/faculty-issue-1){:target="_blank"}. 
+<hr>
+
+![Faculty Release Party](/assets/images/diary/20240312a.png)
+
+
+
+

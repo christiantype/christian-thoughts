@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Rick Valicenti Day"
+
+date:   2024-10-19 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Today was a great day. Rick Valicenti gave a talk. The event took place at the Ryerson & Burnham Art and Architecture Archives at The Art Institute of Chicago. Here 
+are some photos...
+
+![Rick V](/assets/images/diary/20241019a.jpeg)
+Rick said “Old School. New School”.
+
+![Rick V](/assets/images/diary/20241019b.jpeg)
+Left to Right: Andrea Villasenor, Cheryl Bever (my best friend), ME!!, Bart Crosby, & Rick. Photo taken by Hamid 
+Alavi (the celebrity)

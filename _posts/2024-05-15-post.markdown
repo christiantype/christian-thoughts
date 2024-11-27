@@ -1,0 +1,55 @@
+---
+layout: diary
+
+title:  "San Francisco Photos"
+
+date:   2024-05-15 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I went to San Francisco this past weekend to see Daniel Lanois perform at Grace Cathedral. It was a concert and 
+light spectable organized and hosted by [Reflections](https://ageofreflections.com/About){:target="_blank"}. 
+
+During my trip, I did some sightseeing and here are some photos I would like to share with you. 
+
+![SF](/assets/images/diary/20240515a.jpg)
+
+![SF](/assets/images/diary/20240515b.jpg)
+
+![SF](/assets/images/diary/20240515c.jpg)
+
+![SF](/assets/images/diary/20240515d.jpg)
+
+![SF](/assets/images/diary/20240515e.jpg)
+
+![SF](/assets/images/diary/20240515f.jpg)
+
+![SF](/assets/images/diary/20240515g.jpg)
+
+![SF](/assets/images/diary/20240515h.jpg)
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Clients..."
+
+date:   2024-06-26 7:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Clients should be very happy if they get the honor to work with a designer whose vision embodies this quote by Saul 
+Bass. 
+
+![Episode 57](/assets/images/diary/20240627.png)
+

@@ -1,0 +1,61 @@
+---
+layout: diary
+
+title:  "Theory, Craft, Practice. Pt. 1"
+
+date:   2024-02-09 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: false
+
+---
+I was asked a few days ago, “what exactly does theory, craft, and practice, mean in regards to the lens through 
+which the Chicago Graphic Design Club creates programming and community”. Here is an attempt at a brief answer.
+
+
+## Theory
+In school, I 
+learned about the theory — it was done so through lectures on the grid, typography, composition, scale, color theory,
+and so forth. This taught me to be aware of how design teachings come together to communicate or express an idea. 
+Assignments involved reading dense text that often felt uninviting and dry. Much of it was difficult to comprehend 
+because without a personal practice or application experience, the concepts and teachings meant nothing. It was only 
+through *doing*, that theory made sense. Some people, learn through practice. It is like wanting to learn to 
+meditate but only reading about meditating but never actually doing it. Your lived experience will overrule any 
+concept or theory that exists in a book. Theory is words, terminology, concepts, ideas, it is intellectual — and 
+intellect is not always trustworthy. Awful things have happened throughout history in the name of “intellect”. 
+Therefore, learn it but don't hold too dearly to it.
+
+If you focus too much on theory, you risk becoming what is referred to as a “armchair intellectual”. Somebody who 
+spends too much time in their head. Or perhaps a ”spiritual materialist”, which is someone that believes that 
+through the accumulation of books, teachings, courses, subscriptions, products, and even identity they will somehow get closer to some “absolute truth”. 
+
+Theory is great but theory without practice or craft is just paint in a bucket. 
+
+## Craft
+Craft, is the doing. It is the methods in which to create. It is the familiarity with design concepts and 
+understanding how to combine and utilize them. Craft is the recipe that lets you know, this is how you cook this 
+vegan chocolate cake. You will need these ingredients, these portions, and this is the sequence in which you are 
+expected to follow the steps. Craft considers theory but doesn't necessarily need to obey it. Theory might tell us 
+not to combine so-and-so ingredient with this other so-and-so ingredient, but maybe because this is a recipe that 
+has been in your family for decades, you understand that the theory can go piss off, because your lived experience 
+is the one to listen to and trust. And again, it is always a great idea to question the *theory*. Whose theory is it?
+What is their agenda? Does it align with my values? What are my values, etc. 
+
+
+## Practice
+The most difficult part is the doing. 

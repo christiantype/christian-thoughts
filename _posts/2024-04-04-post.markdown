@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "Email Drafts"
+
+date:   2024-04-04 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+You know that feeling when you are on a website and you see an email or a contact link and you click on it and then 
+all of a sudden your email client opens up on your computer... But it isn't the one you use, it's like Apple Mail. 
+And as it is opening, you regret clicking on the link and wish you had just highlighted the email and copied and 
+pasted it into your preferred email client... Well, that just happened to me and it sucks every time it happens.......
+
+
