@@ -6,39 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2024-02-03-post.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-02-03-post.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_typography.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/faculty.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/faculty.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/minima/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/minima/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-28.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-28.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/play/play-30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/play/play-30.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/10arguements.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/arewehuman.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/bluesteye.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/designasanattitude.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/designasart.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/designingdesign.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/designjustice.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/discourses.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/lostconnections.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/manandhissymbols.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/metapatterns.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/mirror.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/mismatch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/selfreliance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/theuininhabitableearth.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/uncletoms.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/wabisabi.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/zenandthe.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/zenmind.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/library/zenof.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/design.html" beforeDir="false" afterPath="$PROJECT_DIR$/design.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-11-26-post.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-11-26-post.markdown" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +404,7 @@
       <workItem from="1727541161478" duration="5424000" />
       <workItem from="1728653161961" duration="3007000" />
       <workItem from="1729306910377" duration="8560000" />
-      <workItem from="1732678307610" duration="1137000" />
+      <workItem from="1732678307610" duration="2040000" />
     </task>
     <servers />
   </component>
