@@ -388,12 +388,12 @@ hr {
 
 .diary-post, .diary-post a {
   display: inline;
-  font-size:ms(1);
+  font-size:ms(0);
   line-height: ms(3);
   text-transform: uppercase;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
-    font-size:ms(1);
+    font-size:ms(0);
     letter-spacing: -1px;
   }
 }
