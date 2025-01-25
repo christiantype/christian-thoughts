@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ecba156-255a-4be3-bae3-3a12d1c1ac30" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/_posts/2025-01-08-post.markdown" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/photography/DSCF8296.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/photography/DSCF9157.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/play/play-35.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/play/play-36.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/play/play-36.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2024-11-26-post.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-11-26-post.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_typography.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/faculty.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/faculty.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/bg3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/bg3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/bg4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/bg4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design.html" beforeDir="false" afterPath="$PROJECT_DIR$/design.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -405,6 +416,9 @@
       <workItem from="1728653161961" duration="3007000" />
       <workItem from="1729306910377" duration="8560000" />
       <workItem from="1732678307610" duration="2040000" />
+      <workItem from="1736445027852" duration="2568000" />
+      <workItem from="1737171048176" duration="7487000" />
+      <workItem from="1737552642387" duration="1581000" />
     </task>
     <servers />
   </component>

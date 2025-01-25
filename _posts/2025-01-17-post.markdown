@@ -1,0 +1,29 @@
+---
+layout: diary
+
+title:  "RIP David Lynch"
+
+date:   2025-01-17 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+David Lynch died yesterday. It sucks. He was a huge inspiration and a constant source of inspiration. He's an example 
+of true unapologetic creativity but his legacy will live on and hopefully inspire others to be fearlessly true to 
+themselves.

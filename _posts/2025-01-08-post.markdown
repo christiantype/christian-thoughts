@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Update"
+
+date:   2025-01-08 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I haven't posted anything here in a long time... But I am still here doing things... 
+A few projects are on the horizon, including the upcoming issue of Faculty magazine... Which I am anticipating to be 
+a big enhanced version of the first issue... More pages... More vibrancy... More moreness... 
+
+I am also taking a music class with Brian Eno and learning plenty of goodness there. 
+
+Also happy new year...
+
+Keep moving forward with passion and fury. 

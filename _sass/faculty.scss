@@ -53,7 +53,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url("/assets/images/bg4.jpg");
+  background-image: url("/assets/images/bg3.jpg");
   //animation: gradient 2s ease infinite;
   line-height: 1.5em;
   margin: 0 auto;
@@ -388,12 +388,12 @@ hr {
 
 .diary-post, .diary-post a {
   display: inline;
-  font-size:ms(1);
+  font-size:ms(0);
   line-height: ms(3);
   text-transform: uppercase;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
-    font-size:ms(1);
+    font-size:ms(0);
     letter-spacing: -1px;
   }
 }
