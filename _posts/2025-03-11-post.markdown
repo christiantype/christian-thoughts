@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "A Prompt"
+
+date:   2025-03-11 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+How do you describe something without stating the obvious?
+
+How do you state the obvious without a description?
+
+How can you demonstrate understanding without action?
+
+How do you speak loud quietly?
+
+

@@ -1,0 +1,37 @@
+---
+layout: diary
+
+title:  "I miss CDs"
+
+date:   2023-12-09 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231209.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231209.jpg" alt="CDs">
+
+Do you remember how exciting it was to collect CDs before streaming became the default listening experience? New 
+cars do not even have CD players anymore. What about cassettes? Do you miss those?
+
+What about those catalogs you would get in the mail where you could place an order for CDs that were too hard to 
+find in your local record store? Small moments like this are surely missed. The listening experience today via 
+mobile applications gives us the platform to explore new artists and music BUT there's nothing like putting a CD in 
+your stereo and having *ONLY* those songs on your stereo to listen to, until of course, you put in a new CD. 
+
+Good times...

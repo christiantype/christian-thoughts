@@ -1,0 +1,38 @@
+---
+layout: default
+title: "Christian Solorzano | Website"
+---
+
+
+
+{%- if site.posts.size > 0 -%}
+<!--
+<hr class="start-second full-width">
+<h2 class="start-second full-width">Latest</h2>
+
+
+<p class="start-second full-width">Password protected due to confidentiality.
+    <a href="/work">Access here</a>
+</p>
+-->
+
+
+
+
+<h1 class="full-width">Journal</h1>
+<span class="hover-title diary-post">
+    {% for post in site.categories.diary %}
+
+
+        <a href="{{ post.url | relative_url }}">
+            {{post.date | date: "%m %d %Y"}}
+            {{post.title | escape}}
+            <!-- <p class="black">{{ post.caption | escape }}</p> -->
+            {%- if site.show_excerpts -%} {{ post.excerpt }}
+            {%- endif -%}
+        </a>
+
+{%- endfor -%}
+{%- endif -%}
+</span>
+

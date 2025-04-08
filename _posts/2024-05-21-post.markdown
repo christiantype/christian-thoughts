@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "Early internet"
+
+date:   2024-05-21 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Do you remember the early days of the internet when personal websites had guest books? If you visited a website, you 
+can sign your name to let people know you were “there”. Also, websites has counters too — typically at the footer of 
+the pages — this was to show how many people visited your website. It was a neat way to bring forth some 
+personalization to a web experience. I miss those times. I also miss MySpace. Do you remember being able to 
+customize your profile with colors, typography, and even music. Someone would visit your profile and you could 
+control what they would listen to. I miss those times too. Instagram and Facebook — and most “new homes” on the web 
+all look the same now. Things have become standardized. The web is homogenous. It sucks... 
+
+Anyways — I added a counter to my website, as you can probably see. Text me and let me know what you think or email 
+me... solochris14@msn.com, I mean, solochris14@gmail.com
+
+
+
+
+
+
+
+

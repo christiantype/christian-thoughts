@@ -1,0 +1,28 @@
+---
+layout: diary
+
+title:  "Simple is better"
+
+date:   2024-08-19 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Sometimes keeping things simple and basic is much better than a complex and overproduced approach.
+

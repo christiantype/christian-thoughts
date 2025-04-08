@@ -1,0 +1,46 @@
+---
+layout: diary
+
+title:  "Photos from Mexico"
+
+date:   2024-02-25 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I spent about 10 days in Mexico this past month. I took some photos. These are some of the ones I have gotten around 
+to editing so far. More to come soon. I explored, Oaxaca, Puebla, and Michoacan. 
+
+![Mexico 2024](/assets/images/diary/20240225a.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225b.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225c.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225d.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225e.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225f.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225g.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225h.jpg)
+
+![Mexico 2024](/assets/images/diary/20240225i.jpg)

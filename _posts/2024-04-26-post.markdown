@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "Artificial Intelligence Critique"
+
+date:   2024-04-26 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Somebody by the name of Mike Poirier on March 25th, published the following statement on Facebook. I don't know who 
+Mike is but I agree with their sentiment around AI. 
+
+> Somewhere today, a builder is finishing work on a beautiful handcrafted home that has taken them a year of labor to complete. A baker is putting the final touches on an amazing cake, their finest work ever. An artist is placing the final stones in an intricate mosaic work. Just a year ago these creations would be fawned over and widely appreciated, inspiring others to dream and to create.
+
+> But somewhere else today, a lazy individual with no talent is typing keyword prompts into an artificial intelligence photo image generator. In just a few moments the computer will shit out a photo realistic image created solely by AI. Fake cabins, fake cakes, and fake art. They will then create a social media page and upload them. These fake images will be shared a million times and receive hundreds of likes and comments praising the "work" and "creativity". The person who uploaded them will receive a handsome payout from all the social media engagement you've cheerfully given them with your well intentioned likes and shares. They will then upload even more of these images, flooding our screens with things that don't exist but appear to.
+
+> AI "art" is garbage. It is soulless. It is uninspired. It took no effort to create. There is no love, no labor, no sweat or tears. It is destroying social media, destroying the livelihoods of artists, and crushing our collective creative spirits. Why bother to try and create anything real if the results will never be able to compete with AI? Why put in the effort?
+
+> Stop rewarding these AI "creators". Learn to recognize AI. Share real things. Real pictures. Real work. Real art. Call out your friends when they share this fake drivel. Peer pressure them into rethinking what they share. Ask WHO the artist is, who the builder or baker is. If no artist is credited it's probably because there IS no artist, just somebody profiting off of your naivete. We're past the novelty phase. This shit just isn't cute anymore.
+
+

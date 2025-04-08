@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "A talk on boredom"
+
+date:   2024-08-05 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I gave a talk at my Zen Center about boredom.
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/LY6mF5Gz3p8?si=qMNjQhllE1WHhONz" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+

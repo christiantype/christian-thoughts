@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "I have never been a fan of"
+
+date:   2025-02-06 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I have never been a fan of graphic design with faux-grunge / texture / gritty / grainy overlays. It's a design crutch, in my opinion. 
+Because you can essentially take anything, slap a texture on it and all of a sudden it is supposed to have some 
+character and edge? Nope.
+

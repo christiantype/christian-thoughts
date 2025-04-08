@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Reviewed"
+
+date:   2024-06-17 7:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+![Reviewed](/assets/images/diary/20240617.jpeg)
+
+This past weekend, the Chicago Graphic Design Club hosted its first ever portfolio critique session. It was an afternoon of community and growth. It was a sold-out event and a great success due to the great cohort of participating reviewers. We look forward to doing more of these in the near future, so stay tuned.
+
+I'd also love to give a HUGE thanks to my collaborative partner, Cheryl Bever — for all that she does. And to, David Sieren of One Design Company and Mira Kida. And last but not least, thanks to all the reviewers and reviewees that spent the afternoon with us. I'm incredibly proud of this community that we are building. Much love.

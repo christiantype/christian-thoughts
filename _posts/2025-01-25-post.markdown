@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Draw your target"
+
+date:   2025-01-25 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Live with open expectations.
+Shoot an arrow and wherever it lands, draw your target. 
+
+

@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Talk on doing nothing"
+
+date:   2023-03-19 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/013.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+
+On occasion, I give talks at my local Zen Buddhist center, here in Chicago. For this talk, I talked about the 
+importance of being *bored* and *making time to do nothing*.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5vNU9F1h7cg?si=ppag9qiZC9_ogliB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

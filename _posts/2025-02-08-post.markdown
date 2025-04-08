@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Bigger is Better"
+
+date:   2025-02-08 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The Chicago Graphic Design Club hosted an event at Someoddpilot‘s gallery, Public Works. It was an evening of 
+typographic excellence with wonderful presentations by Jackson Showalter-Cavanaugh, Alexis Gonzalez, Cris Hernandez, 
+and Kate... A perfect evening in great company... Yeah..................
+
+![DESIGN WORK](/assets/images/diary/20250208a.jpg)
+<figcaption>photo by Patrick Smith, a great buddy of mine</figcaption>>
+

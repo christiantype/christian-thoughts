@@ -1,0 +1,115 @@
+---
+layout: diary
+
+title:  "End of 2023 reflection"
+
+date:   2023-12-31 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231231.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231231.jpg" alt="Sinead">
+<figcaption>2023 lost the icon, Sinead O‘Connor. One of my greatest inspirations.</figcaption>
+
+## The latest
+It's been a while since I have written on behalf of myself. My newsletter, [Beginner’s Mind](https://beginnersmind.substack.com/){:target="_blank"} has taken a backseat for 
+about three months. This past Fall was busy teaching two classes (which was a first for me) — two is too much and I 
+have 
+also been working and designing the inaugural issue of *Faculty*, a publication by the Chicago Graphic Design Club — 
+which has been a great deal of fun but taking up the majority of my time. I can’t wait to share it with the world. I 
+am really proud of all the work and thoughts that will be featured and feel extremely grateful to be in the position 
+to be working on something that will represent Chicago’s graphic design culture. 
+
+This year, I hosted and produced a total of 25 episodes of [Underscore](https://podcasters.spotify.com/pod/show/chicagographicdesignclub){:target="_blank"}, where I spoke with a wide breadth of designers 
+and creatives. We spoke about education, creativity, craft, discipline, graphic design, childhood memories, love, 
+community — and so much more. What a freaking blast to learn from people I admire and look up to. 
+
+With the Chicago Graphic Design Club, we also hosted a series of events that consisted of studio tours, a panel 
+discussion, an art exhibition, and social events. Again — so damn fun. And I'm thankful for the great collaborators 
+that have stepped up to make things happen. 
+
+I released a new track on [Bandcamp](https://christian.bandcamp.com/){:target="_blank"} and I look forward to 
+publishing more soon... okay? For music, I've been experimenting with chord inversions and progressions to see what 
+sounds best to me. It's all very intuitive, which I enjoy.   
+
+## Reflection on teaching design
+As the year wraps, I want to share a few insights and bits of my reflection of 2023. This 
+year, I spent much of my time teaching which has become something I have learned to love, appreciate, and 
+a domain I would like to improve in. At DePaul University, which happens to be my alma mater, I taught two 
+classes, a graphic design 
+foundations class and a web design class. Teaching a design foundations class is more challenging that I expected 
+because when you are working in the ~industry~, design principles and theory become somewhat of second-nature. Composition, color theory, typography, symbolism, etc., sadly, aren‘t discussed much in industry. The 
+awful truth about our the present state of design is that decisions and choices are made based on what works well, 
+what sells, and what is trending — true creative choices that rely on basic design principles are seldom made. Tools 
+like AI and Canva are, in my opinion, killing creativity — the social media algorithm too. Terrible.  
+
+Design systems and pattern libraries have homogenized our visual culture, so the beauty of teaching a foundations 
+class provides the ability to revisit core teachings such as “what the hell is a square”, “what is a line”, “how do we 
+look 
+at a photograph” — very elementary things that almost feel silly to talk about but are rather crucial to our 
+growth and understanding of what makes design design. So, yea, that class was a joy to teach and it rekindled my 
+appreciation for the small details that make up (successful) graphic design.
+
+The other design class was a web design class — I walk students through the process of creating a website, 
+which includes: research, strategy, wireframing, visual design, prototyping, and presenting. Pretty basic stuff with 
+the exception of a strong focus on craft and storytelling. Design equals storytelling.
+
+## Studying the mind
+Outside of design, I taught a class alongside my Zen teacher, titled “Wellness in Times of Darkness” which focused on 
+wellness, mindfulness, and meditation. It was a series of four classes which drew from Zen Buddhist 
+teachings, neuroscience, and psychology, to orient students towards wellness, self-compassion, resilience, and 
+awareness. These topics fascinate me because they are at the core of what it means to be human. We all experience a 
+range of emotions and feelings. Anything that is unaccounted for and unexamined, can lead to all kinds of ails, 
+worries, anxieties, alienation, etc. I 
+mean,
+we 
+don't have to look very far to see how distraught society is. In a world that incentivizes and rewards  
+productivity, speed, competition, and 
+status, it is imperative that we make time to slow down and reflect, and teaching mindfulness keeps that top of mind 
+for me. 
+I also believe that mindfulness and wellness go hand in hand with creativity. Mindfulness is what creates those 
+magical moments of creativity and innovation. Great work, doesn't happen from a state of despair or anguish, 
+despite what folklore says.
+
+The Buddha is known for saying “I teach only suffering and the transformation of suffering.” — which sums of 
+creativity perfectly. Aren't we after all, just trying to make sense of this world by transforming our own 
+experiences into something that is beautiful and inspiring? 
+
+The world would be a better place if we could all just slow down and breathe... 
+
+## Martial arts
+I also picked up a new martial art — Tai-Chi which is complementing my Brazilian Jiu-Jitsu practice nicely. Martial 
+arts I have found to be a practice that is not only about discipline but also about humility and the notion of
+continuously having the mind of the beginner. When you train, there is absolutely no self involved. Your status, your 
+recognition, accolades, title — any form of identity is out the door. If you focus on any of those things, you become 
+a victim of your mind and disembodied from the present moment which leads to mistakes. 
+So for those reasons, martial 
+arts are a great way to come home to your body. Martial arts is moving meditation. 
+
+
+## Moving forward
+As always, being alive is a great privilege. Being of service, giving back, making a difference (big or small)—all 
+those things matter. Question authority, act with love, be thankful for every moment. Awful things are happening in 
+the world currently, so it is important that we become beacons of light to illuminate the darkness. Life is 
+fragile and precious. 
+Let's continue to be skillful with our actions, use our voices to bring positive change into the world, be less 
+divisive, more honest, more authentic, and fully present. 
+
+With love,
+Christian

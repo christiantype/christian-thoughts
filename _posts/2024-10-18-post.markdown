@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Solorzano.Design Website"
+
+date:   2024-10-18 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I am working on a new website... [here it is. (the link)](https://solorzano.design/){:target="_blank"}.
+
+
+![Website](/assets/images/diary/20241018.png)

@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Poet"
+
+date:   2024-02-03 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+
+If you want to be a poet.
+
+You must write the poetry.
+
+If you want to write poetry.
+
+You must be willing to live.
+

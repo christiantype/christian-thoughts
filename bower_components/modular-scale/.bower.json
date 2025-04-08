@@ -1,0 +1,28 @@
+{
+  "name": "modular-scale",
+  "version": "3.0.10",
+  "main": [
+    "stylesheets/_modularscale.scss"
+  ],
+  "ignore": [
+    "lib",
+    "test-compass",
+    "test-node-sass",
+    "eyeglass-exports.js",
+    "Gemfile",
+    "Gemfile.lock",
+    "modular-scale.gemspec",
+    "sache.json"
+  ],
+  "homepage": "https://github.com/Team-Sass/modular-scale",
+  "_release": "3.0.10",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.10",
+    "commit": "01e55f59a2895db07bb67402122be70c85f6ec6e"
+  },
+  "_source": "https://github.com/Team-Sass/modular-scale.git",
+  "_target": "^3.0.10",
+  "_originalSource": "modular-scale",
+  "_direct": true
+}

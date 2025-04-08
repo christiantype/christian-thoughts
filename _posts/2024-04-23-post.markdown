@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Another mixtape"
+
+date:   2024-04-23 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Another mix for Mu Radio. Sometimes music speaks louder than words... 
+<iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FChicagoGraphicDesignClub%2F04-19-2024-set-by-christian-solorzano%2F" frameborder="0" ></iframe>
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="408fbfad-71a6-4583-beeb-821a2fd4f1ea" name="christiansolorzano.com" url="http://tealc.asoshared.com">
+        <fileTransfer host="tealc.asoshared.com" port="21" password="dfe9dfc7dfd9df98df9ddf9bdf9edf9cdf8b" username="cs1@christiansolorzano.com">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

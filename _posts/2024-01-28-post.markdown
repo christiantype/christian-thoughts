@@ -1,0 +1,54 @@
+---
+layout: diary
+
+title:  "3 Practices"
+
+date:   2024-01-28 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+
+
+
+
+I spoke with the designers [Larry](https://www.instagram.com/larrytchogninou/){:target="_blank"} and [James](https://www.instagram.com/jameslangfordd/){:target="_blank"} of the design 
+practice, [Points of Sail](https://pointsofsail.net/){:target="_blank"}. Larry brought up the idea of the *3 Practices*, which is a way of operating as a 
+designer/creative — these 3 practices are combined to be well-rounded and versatile. I am always looking for new ways of 
+seeing the world and 
+evolving the way I do things,
+so his 
+insight was helpful. 
+
+This conversation will be released in the coming weeks through *Underscore*. 
+
+Here are the *3 Practices*
+
+### Solo
+The work you do alone. This includes solo projects. Experiments. Self-intiated projects. Ideas. Concepts. Explorations. 
+
+### Duo
+Or group. The projects that you do in collaboration with others. This allows you to learn from others and exchange 
+ideas.  
+
+### Consulting
+Sharing what you know with others. Giving back. Helping. Contributing to something that you believe in.
+
+I can probably explain this better but I'm tired. Goodnight.
+

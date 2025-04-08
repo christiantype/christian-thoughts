@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Inspiration"
+
+date:   2024-06-03 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+### The world needs more people like Tibor Kalman...
+
+Reading this is like a glass of cold water on a hot day... What do you think? Text me or DM me on Instagram... @xnslrzn
+
+![Tibor Kalman](/assets/images/diary/20240603.png)

@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "Michael Rother"
+
+date:   2025-03-31 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Music pioneer and co-founder of Neu! stopped by Chicago this past week and played a show at the Empty Bottle — 
+performing songs a vast array of songs from his catalog. He autographed one of my favorite albums of all time,
+Katzenmusik.
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/Y3RKtYH8ErE?si=joqGfSLtbjJ2ZvaV" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+
+

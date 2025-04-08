@@ -1,0 +1,66 @@
+---
+layout: diary
+
+title:  "Self-publishing"
+
+date:   2023-09-24 14:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/001.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/001.jpg">
+
+I have been sick of social media for a while now but I do enjoy sharing things online but over the past few years, 
+social media, and by that, I mean Instagram, which is the only platform that I really use, has become internally 
+problematic for me. Not only is it a ginormous time suck, it also preys on our insecurities and weaknesses, by 
+giving us too much “personalized content, that I think, biologically, our brain just cannot process. So, if you are 
+like me, you spend at least two hours a day, scrolling, finding new things, liking new posts, and so forth. And then 
+you share something and you get the hits of validation. Did someone like what I posted? How many people saw it? How 
+did I come across? 
+
+This is only my perspective and I speak from my personal experiences. As I get older, I see these platforms as less 
+and less relevant to my life, despite me on occassion, using them to my advantage to promote a new project or share 
+things with friends — but the compromise that I make for these positive aspects of social media, certainly don't 
+outweigh the benefits. 
+
+I miss the old days, when blogging on a website was a thing. I started off my introduction to design by coding 
+websites for artists and bands that I liked. I would add my email to them and every so often, somebody would email 
+me and we would bond over a mutual interest. In those days, I had the autonomy to control how I appeared on the 
+internet. I decided what the experience was and what people saw. Today, anything I share is paired beside other 
+things other people share. The algorithm dictates how I show up. You may see something I share right after seeing a 
+political post that angers you. Ultimately, because of tech giants, we are at the mercy of their control. Tomorrow, 
+your profile and your images might disappear. Do you own any of them? Do we own them? Our memories? Our evidence 
+of existence? Where is it? Do we understand how it works? I don't. 
+
+So why am I saying all of this? I say this because I'd like to introduce this new part of my website as my new form 
+of communicating with people. This is a consensual exchange in which you agree to visit this website; to walk all 
+the way over here, to see what I have to say, because maybe you care. I mentioned to a friend that I was thinking of 
+just posting things to my personal website as opposed to social media and he asked if I am concerned about getting 
+less traffic. I said no. I don't care about traffic. I don't care about views or followers or likes or any of that 
+stuff. I am not a brand or a product. But perhaps over the past decade that I have been using these social platforms,
+my brain will need some rewiring of taking ownership over my voice and where and how it exists.
+
+I also want to share that a part of this method of “self-publishing” — I am fully developing this website. There is 
+great power in craft and agency over building something fully from the ground up. I encourage you to find ways to do 
+the same. 
+So, if you are interested in what I have to say, thank you. I really mean it. I will 
+still be on Instagram but sparingly. You can message me there or by email.
+
+What I plan on posting here will be more streams of consciousness, where as if you would like to see more formal 
+writing, you can always find me at my [newsletter](https://beginnersmind.substack.com/). 

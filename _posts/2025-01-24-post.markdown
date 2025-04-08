@@ -1,0 +1,46 @@
+---
+layout: diary
+
+title:  "Penguin Cafe Orchestra"
+
+date:   2025-01-24 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I tend to be quite obsessive when it comes to things I like. My latest obsession has been the Penguin Cafe Orchestra. 
+A music group which was founded in the mid 1970s by Simon Jeffes. After Simon died in the 1990s, the Penguin Cafe 
+Orchestra became dormant only to later be revived by his son Arthur as the Penguin Cafe. This was in 2009. Their 
+music opens up the door to happiness and creates an atmosphere that brings forth enthusiasm and a passion for life. 
+
+Here are some of my favorite pieces of theirs.
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/YC-oUcbGjsM?si=nqFgfMNTrMMshK_a" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/AlyFY0imh6M?si=nrsvB_QUyqEzMjAs" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/puzGZnsJkDg?si=12CSU2_89v8ujrf6" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/Fm0cZFVdNdE?si=9Afo2vjKSV18OxZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+

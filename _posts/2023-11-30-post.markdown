@@ -1,0 +1,49 @@
+---
+layout: diary
+
+title:  "Music project"
+
+date:   2023-11-30 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/018.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/018.jpg" alt="farm animals">
+
+Since I was a kid, I have always been fascinated by sound. Not just music but sound. I remember in the 1990s, my 
+family had tape recorders in the house and I would record people's conversations and then play them back at various 
+speeds and I was completely fascinated by how the pitch of somebody's voice would be something that I could play 
+with. There isn't a day in my life that doesn't have some accompanying sonic backdrop. I tend to play the same songs 
+over and over and over again — they become my friends and greatest inspiration. 
+
+For the last four years, I have been creating music in my home studio and have released a few projects under various
+pseudonyms and something I wanted to do in 2023, which I failed to do (within reason), was to release more 
+under my name. But, as with any creative project, the small voice in the head will say things like “this isn't good 
+enough. nobody will listen to this.” and frankly, the thing is, now I don't care.
+
+Not caring is liberating and opens up the door for possibility. But, I am not saying that I don't wish my music to 
+be enjoyable for others, because I do — I want people to like it, but that shouldn't be the metric for the success. 
+The true metric of success (in my case), is personal satisfaction and creative growth — and most importantly practice. 
+
+<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/track=1734115568/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/" seamless><a href="https://christian.bandcamp.com/track/chasing-harold">Chasing Harold by Solorzano</a></iframe>
+
+So here is my first track, which I am releasing under my name, Solorzano. The track is an ode to one of my 
+inspirations, Harold Budd, who passed away in 2020. 
+
+Christian

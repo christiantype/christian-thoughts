@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "Ugh..."
+
+date:   2024-03-22 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Don't you just hate it when you are writing something and then all of a sudden spellcheck comes along to correct you 
+and tell you also that you need to rephrase what you just wrote... I am talking about Grammarly by the way. It is 
+like you are saying something simple like, “Hey, I'm going to the store to get some pizza ingredients” and then all 
+of a sudden everything is underlined in red. Okay, I gotta go.
+
+

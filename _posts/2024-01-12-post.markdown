@@ -1,0 +1,67 @@
+---
+layout: diary
+
+title:  "Why I drink tea"
+
+date:   2024-01-12 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+There is wisdom that comes from a freshly brewed teapot. Teachings of patience and presence are housed within the 
+corridors that keep this lively drink warm. Drinking tea is an invitation to be in this moment. Drinking tea is also 
+beautiful. It is a source of creative inspiration. The sight of seeing the leaves expand and fill the water with 
+their flavor and scent is a metaphor for many things if you look and listen closely. 
+
+___
+
+Poem by Thich Naht Hahn
+
+> Tea is an act complete in its simplicity.
+> 
+> When I drink tea, there is only me and the tea.
+> 
+> The rest of the world dissolves.
+> 
+> There are no worries about the future.
+> No dwelling on past mistakes.
+> 
+> Tea is simple: loose leaf tea, hot pure water, a cup.
+> 
+> I inhale the scent, tiny delicate pieces of the tea floating above the cup.
+> 
+> I drink the tea, the essence of the leaves becoming a part of me.
+> 
+> I am informed by the tea, changed.
+> 
+> This is the act of life, in one pure moment, 
+> 
+>and in this act the truth of the world suddenly becomes revealed: 
+>
+> all the complexity, pain, drama of life is a pretense, 
+>
+> invented in our minds for no good purpose.
+> 
+> There is only the tea, and me, converging.
+
+___
+
+<img src="/assets/images/diary/20240112.jpg" alt="Tea">
+
+Photo by Christian Solorzano, Late 2023

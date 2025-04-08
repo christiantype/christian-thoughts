@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Little Black Card"
+
+date:   2024-07-01 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+In 2019, I was traveling to Iowa often to work with a client and I found this card there... I have kept it in my 
+wallet ever since. 
+
+![Episode 57](/assets/images/diary/20240630.jpg)
+

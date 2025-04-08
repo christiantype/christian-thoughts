@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Artificial Intelligence ≠ Intelligence"
+
+date:   2025-04-08 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Writing a thought leadership piece on a topic with AI does not make you an expert.
+
+
+
+

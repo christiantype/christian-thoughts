@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "In progress"
+
+date:   2023-10-30 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/015.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/015.jpg">
+
+I am working on an idea for a holiday card. The inspiration comes from meditation and the way the hands are 
+suggested to be positioned when you meditate. Your thumbs lightly touching and hands fully rested as if you held a 
+delicate flower between your palms. Often people think that when you meditate, you should not think or that your 
+mind should be empty, however, whether that happens or not, is ultimately not up to you. 
+
+The illustration of the 
+hands come from the book Zen Training by Omori Sogen. Worth reading if you want a rigorous 
+breakdown of what Zen truly means.

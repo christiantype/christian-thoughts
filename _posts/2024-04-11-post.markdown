@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Yesterday‘s social hour"
+
+date:   2024-04-11 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Yesterday, the Chicago Graphic Design Club hosted its first social hour of the “warm weather season”. We met at Dark 
+Matter Star Longue. Looking forward to the next one.................................
+
+

@@ -1,0 +1,27 @@
+---
+layout: diary
+
+title:  "You know what I don‘t like"
+
+date:   2024-09-17 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Meetings that are very long, I do not like.

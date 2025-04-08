@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "PWP Video"
+
+date:   2024-08-15 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+In collaboration with Segura, this video is the result of a completely random and unplanned conversation between 
+Christian Solorzano of the Chicago Graphic Design Club and Carlos Segura.
+
+Carlos Segura shares his archived portfolios that he created before the internet and recaps the methods, reasons, thinking, and productions that he used to promote his work and approach to visual storytelling. Its an intimate and personal visit to key moments in Segura's career and a discovery that is entirely unexpected and candid.
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/CXqrlVkLPUA?si=G0HIHf_NvNv6FjP8" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+

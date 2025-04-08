@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "Happy Birthday Thich Nhat Hanh"
+
+date:   2023-10-11 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/009.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/009.jpg">
+
+Thich Nhat Hanh was a Zen Buddhist monk born on October 11 in 1926. I first came across his book, *Being Peace* 
+published in 1987, which was amongst one of my first introductions to the teachings of Zen, mindfulness, meditation, 
+and topics of 
+compassion and kindness. As designers, much of the work that we do is about creating things for people that will 
+**hopefully** make their lives easier to navigate. Unfortunately, much of design's goals are to make profit and 
+in today's digital landscape, success is measured by number of clicks, time on screen, and all these other metrics 
+that are questionable. 
+
+Yet, as designers, if we wish to create experiences that connect with people on a 
+profound level, we need to cultivate an ability to truly understand and listen deeply. We also need to become 
+familiar with our own human experience so that we can cultivate the compassion to direct towards others. I know all 
+this probably sounds very ummmm *new age* or whatever, but I think we can all agree that we all want to belong, be 
+heard and respect, and be well. 
+
+So on Thich Nhat Hanh's birthday, I encourage you to check out his writing and work. [Being Peace](https://www.
+amazon.com/Being-Peace-Thich-Nhat-Hanh/dp/188837540X) is a book I recommend. 

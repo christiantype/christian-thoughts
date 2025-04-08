@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Today‘s tea"
+
+date:   2024-08-21 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The tea of the day is: Downy Green Pearls. It is a Chinese green tea. 
+
+![tea](/assets/images/diary/20240821a.jpg)
+
+![tea](/assets/images/diary/20240821b.jpg)

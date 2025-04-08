@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "Personal website process"
+
+date:   2023-10-05 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/006.jpg"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The joy of building this website is relying on my own development and coding abilities. Everything you see here is 
+built from scratch with the help of a few tools. They include: [Modular Scale](https://www.modularscale.com/) and 
+[Jekyll](https://jekyllrb.com/).
+
+I think of this portfolio as a sandbox to play with typography and the grid. Despite the *look* of this site being 
+quite simple, the simple joys lie in the small details. There is great value in becoming familiar with the 
+materiality of the web, 
+for me, it helps me become more mindful of the way type and image sit on a grid and most importantly, help define 
+my set of values in regard to layout and composition. Many of these things, I believe, are stripped away from us 
+when we rely too 
+heavily on 
+templates and subject ourselves to the mercy of what they allow us to do. 

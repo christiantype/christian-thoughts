@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Françoise Hardy"
+
+date:   2024-06-12 7:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+French artist, actress, and icon, Françoise Hardy passes away at the age of 80. 
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/X-yT_lXDu6U?si=550IgI5sy6IWl5qg" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

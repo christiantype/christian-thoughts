@@ -1,0 +1,47 @@
+---
+layout: diary
+
+title:  "How to cook your life"
+
+date:   2024-06-29 7:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I have been reading [How To Cook Your Life](https://terebess.hu/zen/mesterek/cook.pdf
+){:target="_blank"}, which is a book about the Zen Master Dogen's instructions, to the cook, also known as the Tenzo.
+The role of the Tenzo is an important role, which is to nourish and plan the meals for the attendees and 
+participants in a Zen monastery or retreat. They are responsible for preparing the meals, crafting the appropriate 
+portions, and ensuring that everybody is fed. 
+
+It is also a very honorable role, despite it being quite lonesome. You are required to wake up early to prep 
+ingredients and spend the majority of your time in the kitchen. And just imagine, if somebody doesn' t like what you 
+create, which often times are portions that are *just enough* and not always the most luxurious food. It can range 
+from humble ingredients to very premium. So it is quite a duty. 
+
+This book includes commentary on Zen Master Dogen‘s instructions to the cook (tenzo) — and highlights how our lives 
+are very similar to that of the cook — we work with what we have in front of us. When we begin to discriminate and 
+say one ingredient is better than another, we create duality that leads to suffering. So the teaching in this book 
+is to dive deep into your work, regardless of what it entails. Do everything wholeheartedly. The good, the bad, the 
+ugly, the beautiful — it is all part of the same meal.   
+
+Here is a brief excerpt from the book.
+
+![Episode 57](/assets/images/diary/20240629.jpg)
+

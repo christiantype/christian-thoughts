@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Celebrating Community Posters"
+
+date:   2024-10-23 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Some posters recently designed for the Chicago Graphic Design Club team. They celebrate their contributions to the 
+club and our community. 
+
+![CGDC Team](/assets/images/diary/20241023a.jpg)
+![CGDC Team](/assets/images/diary/20241023c.jpg)
+![CGDC Team](/assets/images/diary/20241023b.jpg)
+![CGDC Team](/assets/images/diary/20241023d.jpg)

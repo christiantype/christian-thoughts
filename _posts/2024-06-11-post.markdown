@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "Easy"
+
+date:   2024-06-11 8:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+As both a designer and somebody that works with emerging technology, I often wonder if our obsession with making 
+things *easy* for users is always the best approach. I don't have an answer but is making convenience and ease of 
+use always best? 
+
+![Friends](/assets/images/diary/20240611.jpeg)
+
