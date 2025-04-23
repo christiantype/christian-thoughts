@@ -99,7 +99,7 @@ The site's default CSS has now moved to a new place within the gem itself, [`ass
 - Create a new instance of `main.scss` at site source.
   - Create a new file `main.scss` at `<your-site>/assets/`
   - Add the frontmatter dashes, and
-  - Add `@import "minima";`, to `<your-site>/assets/main.scss`
+  - Add `@use "minima";`, to `<your-site>/assets/main.scss`
   - Add your custom CSS.
 - Download the file from this repo
   - Create  a new file `main.scss` at `<your-site>/assets/`

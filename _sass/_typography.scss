@@ -1,99 +1,96 @@
-@import
-"faculty"
-;
+@charset "utf-8";
 
-$modularscale: (
-        base: 1em,
-        ratio: 1.125
-);
+// Import variables with a namespace
+@use "minima/variables" as vars;
+
+// Font definitions - using the namespace
+$base-font: vars.$base-font;
+$accent-font: vars.$accent-font;
+
+$modularscale: vars.$modularscale;
 
 a, a:visited {
   text-decoration: none;
-  color:$maincolor;
+  color: vars.$maincolor;
 }
-
 
 p {
   margin-top: .5em;
-  font-size:ms(0);
-  font-weight:400;
+  font-size: ms(0);
+  font-weight: 400;
   margin-bottom: 1.5em;
-  line-height:ms(4);
-  color:$maincolor;
+  line-height: ms(4);
+  color: vars.$maincolor;
   @media (max-width: 750px) {
-    font-size:ms(0);
+    font-size: ms(0);
     line-height: ms(3);
     margin-bottom: 1em;
   }
 }
 
-
-
 h1 {
-  font-size:ms(6);
+  font-size: ms(6);
   line-height: ms(1);
-  font-family: $base-font;
+  font-family: vars.$base-font;
   text-transform: uppercase;
   margin: 1em 0 1em 0;
-  color:$maincolor;
+  color: vars.$maincolor;
   font-weight: 400;
   @media (max-width: 750px) {
-    font-size:ms(2);
+    font-size: ms(2);
     line-height: ms(2);
     margin-bottom: .25em;
   }
 }
 
 h2 {
-  font-size:ms(4);
-  font-weight:400;
-  font-family: $base-font;
+  font-size: ms(4);
+  font-weight: 400;
+  font-family: vars.$base-font;
   font-variation-settings: "wdth" 150, "wght" 150;
   text-transform: uppercase;
   margin: 1em 0 1em 0;
-  color:$maincolor;
+  color: vars.$maincolor;
   margin-bottom: .25em;
   line-height: ms(2);
   margin-top: 2em;
   @media (max-width: 750px) {
-    font-size:ms(0);
+    font-size: ms(0);
   }
 }
 
-
 h3 {
-  font-size:ms(0);
-  font-weight:400;
-  line-height:ms(3);
+  font-size: ms(0);
+  font-weight: 400;
+  line-height: ms(3);
   text-transform: uppercase;
   margin: 1em 0 .5em 0;
-  color:$maincolor;
-  font-family: $base-font;
+  color: vars.$maincolor;
+  font-family: vars.$base-font;
   @media (max-width: 750px) {
-    font-size:ms(-1);
+    font-size: ms(-1);
   }
 }
 
 h4 {
-  font-family: $base-font;
-  font-weight:700;
+  font-family: vars.$base-font;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size:ms(-1);
+  font-size: ms(-1);
   margin-top: 2em;
   @media (max-width: 750px) {
-    font-size:ms(-1);
+    font-size: ms(-1);
   }
 }
 
 h5 {
-  font-weight:700;
-  font-family: $base-font;
+  font-weight: 700;
+  font-family: vars.$base-font;
 }
-
 
 #logo, #logo a, #logo a:visited {
   //vertical-align: text-bottom;
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-size: ms(0);
   letter-spacing: 0px;
 //  grid-column-start: 1;
@@ -105,20 +102,18 @@ h5 {
   @media only screen and (max-width: 600px) {
     grid-column-start: 1;
   }
-
 }
 
 nav {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-weight: 400;
-  margin:0;
+  margin: 0;
   text-align: justify;
   // grid-column: span 2;
   @media only screen and (max-width: 600px) {
     grid-column-start: 1;
   }
 }
-
 
 nav ul li {
   grid-column: span 2;
@@ -127,44 +122,37 @@ nav ul li {
   margin: 0;
   margin-right: 0em;
   text-align: right;
-
 }
 
-
-
 ul li {
-  margin-top:1em;
-  font-size:ms(0);
+  margin-top: 1em;
+  font-size: ms(0);
   line-height: ms(3);
   @media (max-width: 750px) {
     line-height: ms(4);
   }
-
 }
 
 ul {
   margin-left: 0em;
 }
 
-
 em {
-  font-weight:600;
-  font-family: $base-font;
+  font-weight: 600;
+  font-family: vars.$base-font;
   font-style: normal;
-  font-size:inherit;
+  font-size: inherit;
   text-transform: uppercase;
-  letter-spacing:3px;
-
-
+  letter-spacing: 3px;
 }
 
 figcaption {
   margin-top: 1em;
-  font-size:ms(-1);
-  color:$maincolor;
+  font-size: ms(-1);
+  color: vars.$maincolor;
   letter-spacing: 1px;
   line-height: ms(3);
-  font-weight:400;
+  font-weight: 400;
   @media (max-width: 750px) {
     line-height: ms(3);
   }
@@ -173,20 +161,17 @@ figcaption {
 .post-link {
   text-decoration: none;
   margin-bottom: .5em;
-
 }
 
 .post-link h1 {
-  color:$accent;
+  color: vars.$accent;
 }
 
-
-
 .post-link p {
-  font-size:ms(-1);
-  line-height:ms(3);
+  font-size: ms(-1);
+  line-height: ms(3);
   font-weight: 400;
-  font-family: $base-font;
+  font-family: vars.$base-font;
 }
 
 .post-link:hover {
@@ -196,8 +181,6 @@ figcaption {
   -ms-animation: color-change 5s infinite;
   animation: color-change 5s infinite;
 }
-
-
 
 a:hover {
   text-decoration: none;
@@ -209,61 +192,52 @@ a:hover {
 }
 
 body {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-weight: 400;
   letter-spacing: 0px;
-  font-size:ms(1);
-
-
+  font-size: ms(1);
 }
 
-
 header a {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   margin: .5em 0 0em 0;
-  font-size:ms(0);
-
+  font-size: ms(0);
 }
 
 footer a {
-  font-size:ms(-2);
+  font-size: ms(-2);
   font-weight: 700;
-  font-family: $base-font;
+  font-family: vars.$base-font;
 }
-
-
 
 .writing p {
   margin-bottom: 2em;
 }
 
 a, a:visited {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-weight: 400;
-  color:$maincolor;
-  text-decoration:none;
+  color: vars.$maincolor;
+  text-decoration: none;
 }
 
-
 a:hover {
-  color:$maincolor;
+  color: vars.$maincolor;
   text-decoration: underline;
 }
 
 .black {
-  color:$backgroundc;
+  color: vars.$backgroundc;
 }
 
-
-
 blockquote {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-weight: 400;
-  color:$maincolor;
+  color: vars.$maincolor;
   letter-spacing: 0px;
   line-height: ms(3);
-  font-size:ms(0);
-  border-left: 4px solid $maincolor;
+  font-size: ms(0);
+  border-left: 4px solid vars.$maincolor;
 }
 
 .half-navigation a {
@@ -271,21 +245,20 @@ blockquote {
 }
 
 .myname {
-  font-size:ms(2);
-  font-family: $accent-font;
+  font-size: ms(2);
+  font-family: vars.$accent-font;
   font-weight: 400;
   line-height: ms(1);
   @media (max-width: 750px) {
-    font-size:ms(1);
+    font-size: ms(1);
   }
 }
 
 .mylast {
-  font-size:ms(2);
-  font-family: $accent-font, sans-serif;
-  font-weight:400;
+  font-size: ms(2);
+  font-family: vars.$accent-font, sans-serif;
+  font-weight: 400;
   @media (max-width: 750px) {
-    font-size:ms(1);
+    font-size: ms(1);
+  }
 }
-}
-

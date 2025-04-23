@@ -1,0 +1,40 @@
+---
+layout: diary
+
+title:  "Low Cut Blouse"
+
+date:   2025-03-10 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+You stalk the house
+
+In a low cut blouse
+
+Oh Christ
+
+Another Stiffled 
+
+Friday Night
+
+Here is the new track by me, Christian....
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/4wj3EMSgKOecjWRVfuFP9e?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+

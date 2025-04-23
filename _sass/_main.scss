@@ -1,0 +1,27 @@
+// Import necessary modules and partials
+@use "sass:color";
+@use "sass:math";
+@use "minima";
+@use "variables" as vars;
+@use "mixins";
+@use "base";
+@use "layout";
+@use "typography";
+
+// Your custom styles below
+body {
+  font-family: vars.$base-font;
+  background-color: vars.$backgroundc;
+  color: vars.$maincolor;
+  line-height: math.div(vars.$base-line-height, 1);
+}
+
+// Example of replacing lighten() and darken()
+a {
+  color: color.adjust(vars.$maincolor, $lightness: 20%);
+}
+
+p {
+  margin-bottom: math.div(vars.$spacing-unit, 2);
+  @include mixins.relative-font-size(1.125);
+}

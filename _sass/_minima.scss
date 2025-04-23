@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+// Forward the components without exposing their variables
+@forward "minima/base";
+@forward "minima/layout";
+@forward "minima/syntax-highlighting";
+@forward "modularscale/modularscale";
+@forward "typography";
+@forward "variables";
+
+// Import color and math modules for modern Sass functions
+@use "sass:color";
+@use "sass:math";
+
+// Import variables with namespace
+@use "variables" as vars;
+
+// Define all variables that might be used by other files
+$base-font-size: 16px;
+$base-line-height: 1.5;
+$small-font-size: 0.875em;
+$base-font-weight: 400;
+$spacing-unit: vars.$spacing-unit;
+$background-color: vars.$backgroundc;
+$body-color: vars.$maincolor;
+$brand-color: vars.$accent;
+$grey-color: #828282;
+$grey-color-light: color.adjust($grey-color, $lightness: 40%);
+$grey-color-dark: color.adjust($grey-color, $lightness: -25%);
+$table-text-align: left;
+$content-width: 800px;
+$on-palm: 600px;
+$on-laptop: 800px;
+$base-font: vars.$base-font;
+$backgroundc: vars.$backgroundc;
+$maincolor: vars.$maincolor;
+$accent: vars.$accent;
+$accent1: vars.$accent1;
+
+// Mixins
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+@mixin relative-font-size($ratio) {
+  font-size: math.div($base-font-size, $ratio);
+}

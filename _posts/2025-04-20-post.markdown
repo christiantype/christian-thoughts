@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Testing 123456789"
+
+date:   2025-04-20 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I just switched from Webstorm to Visual Studio Code and am testing to see if everything works fine...
+
+
+
+

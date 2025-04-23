@@ -1,0 +1,18 @@
+/* Error: Undefined variable.
+ *     ,
+ * 111 |   padding: $spacing-unit 0;
+ *     |            ^^^^^^^^^^^^^
+ *     '
+ *   _sass/faculty.scss 111:12   @use
+ *   _sass/_typography.scss 2:1  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a     \2577 \a 111 \2502    padding: $spacing-unit 0;\a     \2502             ^^^^^^^^^^^^^\a     \2575 \a   _sass/faculty.scss 111:12   @use\a   _sass/_typography.scss 2:1  root stylesheet";
+}

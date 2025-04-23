@@ -1,3 +1,33 @@
+@use "sass:math";
+@use "sass:color";
+@use "variables" as vars;
+
+// Define variables from vars module
+$spacing-unit: vars.$spacing-unit;
+$grey-color: vars.$grey-color;
+$grey-color-light: color.adjust($grey-color, $lightness: 40%);
+$grey-color-dark: color.adjust($grey-color, $lightness: -25%);
+$background-color: vars.$backgroundc;
+$body-color: vars.$maincolor;
+$base-font-size: vars.$base-font-size;
+$base-line-height: vars.$base-line-height;
+$content-width: vars.$content-width;
+$on-palm: vars.$on-palm;
+$on-laptop: vars.$on-laptop;
+$base-font: vars.$base-font;
+
+@mixin relative-font-size($ratio) {
+  font-size: $base-font-size * $ratio;
+}
+
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+
+
 /**
  * Site header
  */
