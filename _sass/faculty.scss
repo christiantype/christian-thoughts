@@ -1,8 +1,4 @@
-
-
-
 $backgroundc: #000000;
-
 $maincolor: #ffffff;
 $accent: #0042ec;
 $accent1: #0042ec;
@@ -32,6 +28,7 @@ header {
 
 body {
   background-size: cover;
+  max-width: 80vw;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -40,7 +37,7 @@ body {
   // animation: gradient 15sease infinite;
   line-height: 1.5em;
   margin: 0 auto;
-  padding:1em;
+  padding:2em;
   //max-width: 60em;
   font-size:ms(0);
   min-height: 100vh;
