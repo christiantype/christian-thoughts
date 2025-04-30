@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "A Drunk Buddhist"
+
+date:   2025-04-26 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I met a drunk Buddhist at an open art studio today... 
+
+He was slurring his words 
+
+And bragging about enlightenment
+
+His art wasn't bad 
+
+Nor was his writing...
+
+Everything else though...
+ 
+
+
+
+
+
+
