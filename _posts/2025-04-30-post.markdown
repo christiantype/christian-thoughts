@@ -1,0 +1,57 @@
+---
+layout: diary
+
+title:  "The Mundane"
+
+date:   2025-04-30 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Awake
+
+Sit 
+
+Hydrate
+
+Walk 
+
+Sit
+
+Meet
+
+Talk
+
+Walk
+
+Sit 
+
+Fight
+
+Teach
+
+Sleep
+
+Repeat
+
+
+
+
+
+

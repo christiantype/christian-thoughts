@@ -1,0 +1,102 @@
+---
+layout: diary
+
+title:  "New From Sparks"
+
+date:   2025-05-01 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+A new song by Sparks... A lovely tune.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/6Z9Bc4heH2I?si=yhuOuBpmInRCFrir" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+My devotion to you
+
+Is ‘bout all that I do
+
+Got your name written on my shoe
+
+And I’m thinkin’ of gettin’ a tattoo
+
+My devotion to you
+
+Is ‘bout all that I do
+
+Days I do not sing this song
+
+You’ll still know my feeling’s strong
+
+
+Everywhere we walk, though in a crowd, there’s no one else
+
+Every Sunday morning I’m there praying for your health
+
+Single-minded may be boring, most folks would agree
+
+Though the word’s pretentious, I’d still call it destiny
+
+My devotion to you
+
+Is ‘bout all that I do
+
+Got your name written on my shoe
+
+And I’m thinkin’ of gettin’ a tattoo
+
+My devotion to you
+
+Is ‘bout all that I do
+
+Days I do not sing this song
+
+You’ll still know my feeling’s strong
+
+You may be devoted to your country, God, or flag
+
+Maybe you’ve a passion for a hobby or your Jag
+
+Maybe you love work although I’m puzzled why you would
+
+Maybe it’s your home team, someday, someday they’ll be good
+
+Through all the years
+
+Rent in arrears
+
+You never cared
+
+Can’t help but stare
+
+You’ve never changed
+
+Hair rearranged
+
+That, though, is all
+
+Time’s seemed to stall
+
+
+
+
+
+
+
