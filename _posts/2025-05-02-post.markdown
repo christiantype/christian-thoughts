@@ -1,0 +1,57 @@
+---
+layout: diary
+
+title:  "A Statement"
+
+date:   2025-05-02 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Design, what happened?
+
+You used to be dangerous.
+You used to scare the shit out of people.
+
+Then you forgot how to play.
+
+You chose to stick with the straight lines and rounded corners. 
+
+Polished and gleaming (your Swiss-clean typography, editing out the mess real life is).
+
+You alone can shift the foundations of this stilled world. 
+
+You can conjure new stories, new symbols, propose new aesthetics for the planetary drama we’re in.
+
+You hold Prometheus’
+
+holy fire in your hands.
+
+Now use it!
+
+** From Form magazine 283 <br> The Power of Design
+
+
+
+
+
+
+
+
+
