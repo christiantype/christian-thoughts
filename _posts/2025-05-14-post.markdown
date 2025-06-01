@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "Laziness"
+
+date:   2025-05-14 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Sometimes 
+
+Laziness 
+
+And 
+
+Boredom 
+
+Are virtues.
+
+And other times, they are deadly sins...
+
+
+
+
+
+
+

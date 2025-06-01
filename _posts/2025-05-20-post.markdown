@@ -1,0 +1,46 @@
+---
+layout: diary
+
+title:  "Longing"
+
+date:   2025-05-20 1:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Hold raindrops 
+
+In your hand
+
+Hold rainbows 
+
+In your heart
+
+Cradle storms
+
+Dance with winds
+
+Melt into the sun
+
+And long for more
+
+
+
+
+
