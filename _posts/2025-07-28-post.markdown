@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "New Photography"
+
+date:   2025-07-06 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Recent photos taken in and around Chicago...
+
+![Christian Solorzano Photography](/assets/images/photography/L1000259.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1000516.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1000533.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1001480.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1001519.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1001531.jpg)
+![Christian Solorzano Photography](/assets/images/photography/L1020092.jpg)
+
+
+

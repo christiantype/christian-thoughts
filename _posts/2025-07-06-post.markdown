@@ -1,0 +1,73 @@
+---
+layout: diary
+
+title:  "Go Do Better"
+
+date:   2025-07-06 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+We stand on the shoulders of giants
+
+The least we can do is...
+
+To go out and do better
+
+Everything
+
+Anything
+
+There is a responsibility to be just
+
+In all that we do
+
+And to be bold
+
+And unapologetic
+
+Regardless of how
+
+Stubborn
+
+Or 
+
+Confrontational
+
+Or 
+
+Difficult 
+
+We may seem 
+
+Because at the end
+
+It's not about you or I
+
+But about 
+
+Us
+
+Now Us
+
+And 
+
+Future
+
+Us

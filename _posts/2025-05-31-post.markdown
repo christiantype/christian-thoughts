@@ -1,0 +1,50 @@
+---
+layout: diary
+
+title:  "Every Single Week"
+
+date:   2025-05-31 10:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Time
+
+Moves 
+
+Too 
+
+Fast
+
+Right?!
+
+Do 
+
+Not 
+
+State
+
+The Obvious
+
+Captain
+
+Obvious
+
+
+
