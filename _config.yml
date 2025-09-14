@@ -21,8 +21,13 @@
 title: Christian Solorzano
 email: cs@christiansolorzano.com
 description: Christian is a designer based in Chicago, solving complex problems through empathy & creativity.
+<<<<<<< HEAD
 url: "https://christiantype.github.io"
 baseurl: "/christian-thoughts"
+=======
+url: "https://www.christiansolorzano.com"
+baseurl: ""
+>>>>>>> 4866d148cf02b78659738952ea5e702120c2f8f2
 instagram_username: xnslrzn
 
 
