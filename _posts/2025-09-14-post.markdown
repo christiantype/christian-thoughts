@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Happy Birthday to Me"
+
+date:   2025-09-14 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Today, I turn thirty-four years old.
+I was born on this day, in Dallas Texas.
+
+
