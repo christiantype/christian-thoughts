@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "Damn, I hit my elbow"
+
+date:   2025-09-12 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Damn, I hit my elbow at home and now I have a big bump that hurts when I put pressure on it. 
+
+Send help... 
+
+Also, my brother and I are both starting a graphic design studio...
+
+You've heard it here first...
+
+
+

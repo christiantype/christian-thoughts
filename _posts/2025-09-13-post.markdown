@@ -1,0 +1,45 @@
+---
+layout: diary
+
+title:  "New Photography AGAIN"
+
+date:   2025-09-13 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Recent photos taken in the month of September
+
+![Christian Solorzano Photography](/assets/images/photography/L1002396.jpg)
+Outside my home.
+
+![Christian Solorzano Photography](/assets/images/photography/L1002429.jpg)
+Taken during a seven day Sesshin.
+
+![Christian Solorzano Photography](/assets/images/photography/L1002618.jpg)
+Roshi June Ryushin Tanoue & Roshi Robert Joshin Althouse, Founders of Zen Life & Meditation Center
+
+![Christian Solorzano Photography](/assets/images/photography/L1002803.jpg)
+Unpacking priest robes
+
+![Christian Solorzano Photography](/assets/images/photography/L1002897.jpg)
+Mu — my best friend
+
+
+
