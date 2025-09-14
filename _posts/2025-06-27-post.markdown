@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Dinner with Legends"
+
+date:   2025-06-27 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Dinner on Michigan Avenue with Carlos Segura, Barry Deck, and Sun Segura. 
+
+
+![Christian Solorzano Photography](/assets/images/diary/20250627.jpg)
+Outside my home.
+
+
