@@ -1,7 +1,7 @@
 ---
 layout: diary
 
-title:  "California Avenue"
+title:  "A new episode with José Rosa"
 
 date:   2025-09-15 00:00:00 -0500
 
@@ -24,8 +24,9 @@ client: "Self"
 published: true
 
 ---
-Stuck in traffic on California Avenue just outside Cook Country Jail, I snapped this photograph of a police officer escorting a woman into the jail for, what I imagine, a visit? I love the composition and *feel* of this image — despite the circumstances.
 
-![Christian Solorzano Photography](/assets/images/diary/20250915.jpg)
+The latest episode of Underscore, where I speak with José, a multi-disciplinary artist/designer and DJ.
+
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/_q1opTA4WHQ?si=rH8A4Og4Ihkha3QQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 

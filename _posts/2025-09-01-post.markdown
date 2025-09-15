@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "A new episode with Ashley Bedore"
+
+date:   2025-09-01 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+
+The latest episode of Underscore, where I speak with Ashley, an illustrator and designer working at Chicago's Lincoln Park Zoo. We shot this in Lincoln Park too, while sitting on wet grass and occasionally getting hit with twigs from the tree above us. It was a fun conversation though. My friend Barry came and helped as well. 
+
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/IDZslpXPHpo?si=_I4GdPfBBu4N9gEi&amp;start=350" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>[2025-09-15-post.markdown](2025-09-15-post.markdown)[2025-09-15-post.markdown](2025-09-15-post.markdown)
+
+

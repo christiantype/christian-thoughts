@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "California Avenue"
+
+date:   2025-08-09 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Stuck in traffic on California Avenue just outside Cook Country Jail, I snapped this photograph of a police officer escorting a woman into the jail for, what I imagine, a visit? I love the composition and *feel* of this image — despite the circumstances.
+
+![Christian Solorzano Photography](/assets/images/diary/20250915.jpg)
+
+
