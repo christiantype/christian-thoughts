@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "Shot at 17:13:10"
+
+date:   2022-07-12 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Shot at home... in the late afternoon...
+
+![Christian Solorzano Photography](/assets/images/photography/DSCF8633.JPG)
+
+![Christian Solorzano Photography](/assets/images/photography/DSCF8634.JPG)
+
+
+
