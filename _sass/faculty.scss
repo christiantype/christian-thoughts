@@ -371,11 +371,12 @@ hr {
   display: inline;
   font-size:ms(0);
   line-height: ms(5);
+  font-weight:400;
   text-transform: uppercase;
   letter-spacing: 1px;
   @media only screen and (max-width: 600px) {
     //grid-column: span 6;
-    font-size:ms(0);
+    font-size:ms(-1);
     letter-spacing: 1px;
   }
 }
