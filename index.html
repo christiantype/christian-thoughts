@@ -19,14 +19,14 @@ title: "Christian Solorzano | Website"
 
 
 
-<h1 class="full-width">Journal</h1>
+<h3 class="full-width">Journal</h3>
 <span class="hover-title diary-post gradient-group">
     {% for post in site.categories.diary %}
 
 
         <a href="{{ post.url | relative_url }}">
             {{post.date | date: "%m %d %Y"}}
-            {{post.title | escape}}
+            {{post.title | escape}} _
             <!-- <p class="black">{{ post.caption | escape }}</p> -->
             {%- if site.show_excerpts -%} {{ post.excerpt }}
             {%- endif -%}
