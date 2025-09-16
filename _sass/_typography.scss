@@ -14,8 +14,13 @@ a, a:visited {
 
 
 p {
+  background: linear-gradient($maincolor, $accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: .5em;
   font-size:ms(0);
+  letter-spacing: 1px;
   font-weight:400;
   margin-bottom: 1.5em;
   line-height:ms(4);
@@ -27,6 +32,12 @@ p {
   }
 }
 
+.gradient-group {
+  background: linear-gradient($maincolor, $accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 
 h1 {
