@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Are you Happy?"
+
+date:   2025-09-11 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I love the musical genius that is Gilbert O‘ Sullivan —
+and this brilliant performance.
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/JNh3tXXp14o?si=l8QXJEtrv5iQY5-G" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
