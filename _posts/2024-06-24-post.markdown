@@ -24,7 +24,6 @@ client: "Self"
 published: true
 
 ---
-![Episode 57](/assets/images/diary/20240617.png)
 
 The latest conversation of Underscore is a conversation with myself and Denny Liu of the design studio, Studio Aperitif.
 
