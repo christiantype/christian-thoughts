@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "It's all superficial..."
+
+date:   2025-09-18 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+
+I've been reflecting on our profession of design and concluding that what we do, is all alarmingly subjective. 
+Thoughts on aesthetics and taste are all arbitrary—and what I may find as perfect, you may make you yawn your face off.
+This comes to mind after sharing work I found inspiring to a group of friends, and them all having a different 
+opinion than mine — all which were valid and as true as mine. 
+
+Taste—preferences—aesthetics—all that stuff means nothing.
+
+What does matter is craft and attention-to-detail.
+Everything after that—all subjective...
+
+
