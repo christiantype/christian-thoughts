@@ -1,0 +1,27 @@
+---
+layout: diary
+
+title:  "Friend is at my house"
+
+date:   2025-09-19 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+My friend Sean is sitting next to me and I am showing him how I update my website...
