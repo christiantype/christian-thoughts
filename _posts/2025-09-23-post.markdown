@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Photography Project Proposal"
+
+date:   2025-09-23 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I'd like to work on a photography book that consists of a series of photographs of various people.
+
+Think large hardcover book — and pags full of faces...
+
+If you'd like to be photographed — send me a DM on Instagram (@xnslrzn) or email me at solochris14@gmail.com
+
+It can be fun! And I'd like to include MANY MANY people. 
+
+Message me if interested and we can discuss next steps...
+
+Christian
+
+
