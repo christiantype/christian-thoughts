@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Speaking in Bolivia"
+
+date:   2025-09-24 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I'll be speaking at Universidad Catolica Boliviana “San Pablo” this upcoming Saturday, September 27th. 
+
+The title of my talk is “Diseño con ❤️”
+
+And the description
+
+“Esta charla explora cómo diseñar con humildad, propósito e intención, adoptando una mente de principiante llena de 
+curiosidad y apertura. Examinaremos la importancia de la presencia de la mente y el corazón como elementos cruciales 
+para generar un impacto significativo en nuestro trabajo creativo. En este momento de nuestra historia, es esencial experimentar con nuevas formas de pensar que nos permitan desarrollar soluciones más auténticas, manteniendo siempre esa curiosidad fundamental del que está dispuesto a aprender.”
+
+I will try to record and share the video or transcript later.
+
+Christian
