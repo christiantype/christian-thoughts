@@ -1,0 +1,29 @@
+---
+layout: diary
+
+title:  "Decks"
+
+date:   2025-09-25 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Working on a Powerpoint slide that consists of only text and tables is the purest form of typography (I think).
+
+And it sucks...
