@@ -26,5 +26,4 @@ published: true
 ---
 Students of DePaul University‘s Design Program toured Carlos Segura‘s studio today. 
 
-![Christian Solorzano Photography](/assets/images/photography/20250926.jpg)
-Outside my home.
+![Christian Solorzano Photography](/assets/images/diary/20250926.jpg)
