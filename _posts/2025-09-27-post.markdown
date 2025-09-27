@@ -1,0 +1,28 @@
+---
+layout: diary
+
+title:  "Style is Born"
+
+date:   2025-09-27 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I heard somebody say today that style is born out of your limitations or rather, technical acumen. Which, I agree 
+with. Which reinforces that copying somebody else‘s style is ___________. 
