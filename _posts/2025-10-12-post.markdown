@@ -24,11 +24,10 @@ client: "Self"
 published: true
 
 ---
-Every so often, I discover a magical angelic voice that I cannot stop listening to. Lately it has been this singer, 
+Every so often, I discover a magical voice that I cannot stop listening to. Lately it has been this singer, 
 Julie Anne Webster, who publishes music under the name Little Happy. They have a special voice and their song “Train 
 Song” is worth listening to a million times.  
 
-Great voice! 
 
 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2IFH1kqSwZ616zvGAZvbMT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
