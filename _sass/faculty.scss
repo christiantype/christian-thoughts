@@ -29,13 +29,12 @@ header {
 body {
   background-size: cover;
   max-width: 80vw;
-  max-height: 100vh;
   background-color: $backgroundc;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  // background-image: url("/assets/images/bg3.jpg");
-  background-blend-mode: screen;
+  background-image: url("/assets/images/bg3.jpg");
+  //background-blend-mode: screen;
   /* animation: gradient 15sease infinite; */
   line-height: 1.5em;
   margin: 0 auto;
