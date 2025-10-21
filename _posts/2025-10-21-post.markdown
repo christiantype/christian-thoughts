@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Design Hard(er)"
+
+date:   2025-10-21 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Tonight, I talk with Erik Carter, who recently published a book titled, Design Harder... 
+
+You can join that talk via the Chicago Graphic Design Club website, which includes information on how to register...
+
+
+
+![Christian Solorzano Photography](/assets/images/diary/20251021.png)
+I like this poster I made for it... 
+
