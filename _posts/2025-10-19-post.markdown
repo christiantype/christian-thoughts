@@ -1,0 +1,37 @@
+---
+layout: diary
+
+title:  "Hula as Resistance"
+
+date:   2025-10-19 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The hula school, Halau i Ka Pono, had an event this weekend, in Oak Park, at the Madison Street Theater — titled 
+Hula as Resistance. and I photographed the evening. Here are some photographs I took — the ones I liked most — which 
+I call, body paintings... 
+
+![Christian Solorzano Photography](/assets/images/diary/20251019a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251019b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251019c.jpg)
+
+
