@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Huh?"
+
+date:   2025-10-22 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+A concept for a publication cover from months ago.
+
+![Christian Solorzano Photography](/assets/images/diary/20251022.jpg)
+
