@@ -1,0 +1,50 @@
+---
+layout: diary
+
+title:  "Who put the M in Chicago?"
+
+date:   2025-09-28 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I saw Morrissey at the Aragon Ballroom in Chicago. It was an excellent show. He is the greatest singer of our 
+generation — an unapologetic voice — a real original. In an increasingly standardized cultural arena — Morrissey 
+represents individuality and authentic vitality.
+
+Notable tunes were Lost, All The Lazy Dykes, and Life is a Pigsty.
+
+Super.
+
+Here are some photos...
+
+![Christian Solorzano Photography](/assets/images/diary/20250928a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928c.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928d.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928e.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928f.jpg)
+
+
+
