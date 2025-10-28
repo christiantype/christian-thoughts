@@ -1,0 +1,42 @@
+---
+layout: diary
+
+title:  "while Mies is on mine..."
+
+date:   2025-10-28 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Graceland Cemetery, graveyard rubbings — an event hosted by the Chicago Graphic Design Club and organized by Cheryl 
+Bever — took place on October 25th, 2025. Exploring the typography and glyphs of the time... 
+
+![Christian Solorzano Photography](/assets/images/diary/20251028a.png)
+
+![Christian Solorzano Photography](/assets/images/diary/20251028b.png)
+
+![Christian Solorzano Photography](/assets/images/diary/20251028c.png)
+
+![Christian Solorzano Photography](/assets/images/diary/20251028d.png)
+
+![Christian Solorzano Photography](/assets/images/diary/20251028e.png)
+
+![Christian Solorzano Photography](/assets/images/diary/20251028f.png)
+
+
