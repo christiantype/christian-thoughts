@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "Recent Photographs"
+
+date:   2025-11-07 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+A series of photos I've taken recently. 
+
+![Christian Solorzano Photography](/assets/images/diary/20251107a.jpg)
+Graceland Cemetery...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107b.jpg)
+A thing in the park
+
+![Christian Solorzano Photography](/assets/images/diary/20251107c.jpg)
+Mhm...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107d.jpg)
+Yep...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107e.jpg)
+Home still life...
+
+
