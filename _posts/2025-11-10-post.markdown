@@ -1,0 +1,59 @@
+---
+layout: diary
+
+title:  "A Short Story"
+
+date:   2025-11-10 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+When I was younger, early into my teens — I was exploring the internet and dabbling in my first interactions with 
+digital and graphic design. During that time, I made a fan page called GodIsInTheTv.com and it was a site dedicated 
+to Marilyn Manson — like a fan site. 
+
+One day, somebody emailed me, thinking that I was an official Marilyn Manson website and they inquired about where 
+they could grab a VHS copy of God Is In The TV, a compilation of music videos and live performances. 
+
+I said, I don't know and also, I am not affiliated with Marilyn Manson, but this person and I became friends (I wish 
+I still remembered his name because he was somebody that I had a lot in common) — then, in my little Christian 
+bubble, meeting somebody with an alternative taste in culture was rare, so when you met someone that you clicked 
+with, you wanted to hold onto them.
+
+This person introduced me to his friend, and together we talked about music — Aphex Twin, Morrissey, The Smiths, 
+Marilyn Manson, Nine Inch Nails — and on one occasion, we talked about Björk and then Imogen Heap.
+
+Fast forward, I still think of fragments of those conversations — young angsty angry and tense teenagers, coming 
+together digitally to bond over music and common interests. 
+
+With Imogen Heap’s recent reissue and twentieth anniversary of her album, Speak for Yourself, I am reminded of both, 
+her brilliance and how perfect that album was _and_ is — and I think about those two early internet friends, both 
+whose names I cannot recall.
+
+Wherever you are, I miss you both.
+
+Christian
+
+![Christian Solorzano Photography](/assets/images/diary/20251110a.png)
+
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/hntPyPyfa6g?si=dtSLY7KpeWIHihhQ" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
