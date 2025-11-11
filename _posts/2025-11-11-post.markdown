@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "Tuesday Morning & Afternoon"
+
+date:   2025-11-11 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Hung out with friends Sean and Barry today — talked about typography, capitalism, monographs, graphic design AND more.
+
+
+![Christian Solorzano Photography](/assets/images/diary/20251111a.jpg)
+![Christian Solorzano Photography](/assets/images/diary/20251111b.jpg)
+
