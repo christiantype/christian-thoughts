@@ -1,0 +1,37 @@
+---
+layout: diary
+
+title:  "Arvo Pärt"
+
+date:   2025-11-16 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+There exists a piece of music called ‘Spiegel im Spiegel’, which means Mirror in th Mirror in German. 
+One of the most hauntingly beautiful sonic minutes to experience.
+It was composed by Arvo Pärt (b.1935), an Estonian composer in 1978.
+
+It pulls you in all directions — suspending you and gently letting you fall and just right before crashing below, 
+you're suspended once more — airy, nostalgic, timeless — and on occasion, a forlorn BOOM! 
+
+You can listen to it here:
+<iframe width="50%" height="315" src="https://www.youtube.com/embed/n37bNmVggtU?si=G_mdK1V2NmL1NUa4" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
