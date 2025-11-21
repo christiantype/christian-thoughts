@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "Two Albums"
+
+date:   2025-11-20 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I'd like to share two pieces of music which have been on repeat lately, as the days get shorter in Chicago and trees 
+turn bare. Both composed by prolific musicians, John Cage (1912–1992) and Pat Methany (B. 1954) with Lyle Mays (1953–2020).
+
+Both sonic backdrops that carry a gentle presence, existing out of time. Worlds of their own. Desolate cover art. 
+Sweet and poignant.
+
+<iframe width="90%" height="315" src="https://www.youtube.com/embed/kTWmzvEmmZE?si=WLI8FfdRcvHAXTJG" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="90%" height="315" src="https://www.youtube.com/embed/PSmXAG2mYY4?si=Kc46COl_0DiJFwZi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Enjoy...
