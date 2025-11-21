@@ -437,24 +437,26 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 }
 #spin:after {
   content:"";
-  animation: spin 5s linear infinite;
+  animation: spin 6s linear infinite;
 }
 @keyframes spin {
   0% { content:"a graphic designer";}
-  10% { content:"a design educator";}
-  20% { content:"a community leader";}
-  30% { content:"a zen student";}
-  40% { content:"a martial arts practioner";}
-  50% { content:"a music collector";}
-  60% { content:"a writer";}
-  70% { content:"an occasional artist";}
-  80% { content:"a brother";}
-  90% { content:"a tea drinker";}
+  6% { content:"a design educator";}
+  13% { content:"a community leader";}
+  19% { content:"a zen student";}
+  25% { content:"a martial arts practioner";}
+  31% { content:"a music collector";}
+  37% { content:"a writer";}
+  43% { content:"an occasional artist";}
+  50% { content:"a brother";}
+  56% { content:"a tea drinker";}
+  62% { content:"a contrarian";}
+  68% { content:"a producer of ideas";}
+  75% { content:"a curator";}
+  81% { content:"an instigator";}
+  87% { content:"a synthesist";}
   100% { content:"a graphic designer";}
-
 }
-
-
 
 .nagy-line {
   width:1200px;
