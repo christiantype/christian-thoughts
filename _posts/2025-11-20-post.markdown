@@ -1,7 +1,7 @@
 ---
 layout: diary
 
-title:  "Two Albums"
+title:  "Sonic Landscapes"
 
 date:   2025-11-20 00:00:00 -0500
 
@@ -35,4 +35,4 @@ video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; e
 
 <iframe width="90%" height="315" src="https://www.youtube.com/embed/PSmXAG2mYY4?si=Kc46COl_0DiJFwZi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Enjoy...
+Bask in joy...
