@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Congratulations Christian"
+
+date:   2025-11-15 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Congratulations to my Brazilian Jiu-Jitsu professor, Christian Uflacker, for being inducted into the Illinois Martial 
+Arts Hall of Fame. I received my Black Belt from him in November 2024 and have been training with him since 2015. 
+
+![Christian Solorzano Photography](/assets/images/diary/20251115a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251115b.jpg)
+
