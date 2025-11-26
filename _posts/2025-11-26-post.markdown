@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Friendsgiving"
+
+date:   2025-11-26 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I hosted a small Friendsgiving dinner with The Chicago Graphic Design Club Team + special guests. A beautiful 
+evening full of joy, positivity, & gratitude.
+
+![Christian Solorzano Photography](/assets/images/diary/20251126a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251126b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251126c.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251126d.jpg)
+
+
+
