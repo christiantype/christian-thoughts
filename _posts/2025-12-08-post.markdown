@@ -1,0 +1,49 @@
+---
+layout: diary
+
+title:  "Recent Photography"
+
+date:   2025-12-08 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Pressed between the pages of my mind
+
+![Christian Solorzano Photography](/assets/images/diary/20251208a.jpg)
+Some People Are Very Kind
+
+![Christian Solorzano Photography](/assets/images/diary/20251208b.jpg)
+Morning After
+
+![Christian Solorzano Photography](/assets/images/diary/20251208c.jpg)
+A Roaring Lion
+
+![Christian Solorzano Photography](/assets/images/diary/20251208d.jpg)
+Ding
+
+![Christian Solorzano Photography](/assets/images/diary/20251208e.jpg)
+After Sunrise, It's a Shame
+
+![Christian Solorzano Photography](/assets/images/diary/20251208f.jpg)
+Threaded Nowhere
+
+
+
+
