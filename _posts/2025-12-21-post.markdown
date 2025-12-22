@@ -1,0 +1,76 @@
+---
+layout: diary
+
+title:  "Dial it Up"
+
+date:   2025-12-21 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Dial
+
+It 
+
+All 
+
+Up
+
+Grasping no boundaries
+
+&&&
+
+Plunge 
+
+Into
+
+Oblivion
+
+Then come back for a breath
+
+And sink deeper 
+
+&&&
+
+Deeper
+
+&&&
+
+Then launch upward
+
+A jet stream
+
+Leaving trails
+
+Of 
+
+This
+
+And that
+
+&&& 
+
+Nevermind
+
+And then 
+
+Land 
+
+Nowhere
+
