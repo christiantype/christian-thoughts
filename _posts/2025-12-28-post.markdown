@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Happy? Holidays"
+
+date:   2025-12-28 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+With rolled up sleeves
+
+Wishing you
+
+Happy
+
+Holidays
+
+![Christian Solorzano Photography](/assets/images/diary/20251218.jpg)
