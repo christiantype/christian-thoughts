@@ -27,11 +27,12 @@ published: true
 These songs all sound the same.
 
 Pieces by Claire Voyant (2002)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/40W4xYVtx7c?si=0QkTnCM5OTQmwM5u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/40W4xYVtx7c?si=0QkTnCM5OTQmwM5u" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <hr>
 Cry Osaka Cry by Arovane (2004)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pE77NgQ9zEc?si=Rt9bwWC4gs4OOR-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/pE77NgQ9zEc?si=Rt9bwWC4gs4OOR-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <hr>
 So Heavy I Feel Through the Earth by Grimes (2020)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eLo1pQ45XYs?si=uBk7BIhp3KQjgS29" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/eLo1pQ45XYs?si=uBk7BIhp3KQjgS29" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
