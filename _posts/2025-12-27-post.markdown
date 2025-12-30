@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "Behind-The-Scenes"
+
+date:   2025-12-27 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Recently recorded an episode of Underscore with Oscar Solis at the Chicago Art Department. The photos below were 
+shot by Patrick Smith.
+
+Oscar is a Mexican + American graphic designer and researcher based in Pilsen. His design research explores new modes of community engagement and participatory models of design. His graphic practice focuses on art book publishing, queer diagrammatic forms, and technological mediation. He is a PhD Design Researcher at The SPARK Center at DePaul's Jarvis College of Computing and Digital Media, Chicago Art Department CORE studio resident, and programing council member of Co-Prosperity.
+
+This episode will be released in early January 2026.
+
+![Christian Solorzano Photography](/assets/images/diary/20251217a.JPG)
+
+![Christian Solorzano Photography](/assets/images/diary/20251217b.JPG)
+
+![Christian Solorzano Photography](/assets/images/diary/20251217c.JPG)
