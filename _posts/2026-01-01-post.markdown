@@ -1,0 +1,55 @@
+---
+layout: diary
+
+title:  "New Year"
+
+date:   2026-01-01 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Magnetic Turtles
+
+Stellar Swans
+
+Rectangular Envelope 
+
+Your Electric Self
+
+Foreign Native
+
+Classical Elasticity 
+
+Evening Language
+
+Gentle Example
+
+A Timeless Elephant
+
+Randomly Surrendering
+
+Rectifying May Flowers
+
+Yes
+
+— CC <br>
+12/31/2025
+
+
+
