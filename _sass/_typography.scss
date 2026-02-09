@@ -41,11 +41,11 @@ p {
 
 
 h1 {
-  font-size:ms(6);
+  font-size:ms(4);
   line-height: ms(1);
   font-family: $base-font;
   text-transform: uppercase;
-  margin: 1em 0 1em 0;
+  margin: 1em 0 .5em 0;
   color:$maincolor;
   font-weight: 400;
   @media (max-width: 750px) {
