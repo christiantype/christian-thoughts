@@ -26,11 +26,10 @@ title: "Christian Solorzano | Website"
 
         <a href="{{ post.url | relative_url }}">
             {{post.date | date: "%m %d %Y"}}
-            {{post.title | escape}} _
-            <!-- <p class="black">{{ post.caption | escape }}</p> -->
-            {%- if site.show_excerpts -%} {{ post.excerpt }}
+            {{post.title | escape}}
+            {%- if site.show_excerpts -%}{{ post.excerpt }}
             {%- endif -%}
-        </a>
+        </a> _
 
 {%- endfor -%}
 {%- endif -%}
