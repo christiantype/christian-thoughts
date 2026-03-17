@@ -16,6 +16,76 @@
 
     {%- include footer.html -%}
 
+    <canvas id="trail"></canvas>
+    <div id="cur"></div>
+
+    <script>
+      // ── Cursor dot ──
+      const cur = document.getElementById('cur');
+      document.addEventListener('mousemove', e => {
+        cur.style.left = e.clientX + 'px';
+        cur.style.top  = e.clientY + 'px';
+      });
+
+      // ── Trail canvas ──
+      const tc   = document.getElementById('trail');
+      const tctx = tc.getContext('2d');
+
+      function resizeTrail() {
+        tc.width  = window.innerWidth;
+        tc.height = window.innerHeight;
+      }
+      resizeTrail();
+      window.addEventListener('resize', resizeTrail);
+
+      const trail  = [];
+      const MAX    = 180;
+      let trailAlpha = 0;
+      let idleTimer  = null;
+
+      document.addEventListener('mousemove', e => {
+        trail.push({ x: e.clientX, y: e.clientY });
+        if (trail.length > MAX) trail.shift();
+
+        trailAlpha = 1;
+        clearTimeout(idleTimer);
+
+        idleTimer = setTimeout(() => {
+          (function fade() {
+            trailAlpha -= 0.018;
+            if (trailAlpha > 0) {
+              requestAnimationFrame(fade);
+            } else {
+              trailAlpha = 0;
+              trail.length = 0;
+            }
+          })();
+        }, 900);
+      });
+
+      (function drawTrail() {
+        tctx.clearRect(0, 0, tc.width, tc.height);
+
+        if (trail.length > 1 && trailAlpha > 0) {
+          for (let i = 1; i < trail.length; i++) {
+            const progress = i / trail.length;
+
+            tctx.beginPath();
+            tctx.moveTo(trail[i - 1].x, trail[i - 1].y);
+            tctx.lineTo(trail[i].x,     trail[i].y);
+
+            tctx.strokeStyle = `rgba(240, 236, 227, ${progress * 0.5 * trailAlpha})`;
+            tctx.lineWidth   = progress * 1.1;
+            tctx.lineCap     = 'round';
+            tctx.lineJoin    = 'round';
+            tctx.stroke();
+          }
+        }
+
+        requestAnimationFrame(drawTrail);
+      })();
+    </script>
+
   </body>
 
 </html>
