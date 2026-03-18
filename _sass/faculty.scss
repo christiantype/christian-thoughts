@@ -1,6 +1,6 @@
-$backgroundc: #000000;
-$maincolor: #f6f6f6;
-$accent: #fff4f4;
+$backgroundc: #ffffff;
+$maincolor: #0d0c0a;
+$accent: #4e19fd;
 $accent1: #e76bfa;
 $lightcolor: #5e71af;
 $midcolor: #988374;
@@ -57,7 +57,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url("/assets/images/bg3.jpg");
+  //background-image: url("/assets/images/bg3.jpg");
   //background-blend-mode: screen;
   /* animation: gradient 15sease infinite; */
   line-height: 1.5em;
@@ -394,7 +394,7 @@ hr {
 
 .diary-post, .diary-post a {
   display: inline;
-  font-size:ms(0);
+  font-size:ms(-1);
   line-height: ms(5);
   font-weight:400;
   text-transform: uppercase;
@@ -463,6 +463,8 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   content:"";
   animation: spin 6s linear infinite;
 }
+
+
 @keyframes spin {
   0% { content:"a graphic designer";}
   6% { content:"a design educator";}
