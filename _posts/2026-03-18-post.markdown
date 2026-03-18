@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Recent Photographs"
+
+date:   2026-03-18 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+![Christian Solorzano Photography](/assets/images/diary/20260318a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260318b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260318c.jpg)
