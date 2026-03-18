@@ -1,0 +1,44 @@
+---
+layout: diary
+
+title:  "On Passion"
+
+date:   2026-01-23 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+The passion unfurls — a relentlessly fearless hand — seeing abundance in what seems desolate and gray. A passion so strong that it violently revolts like a crashing wave, pushing back against the tyranny that serves fear, and doubt as ordinary conditions. This passion creates new conditions — it is dialed up, resonating and causing vibrations that sow clarity.
+
+A passion to be alive and rejoice in life — the passion that despite it all, is determined to capture and transform delusion into wisdom. A testament of vulnerability to look at life itself in the eyes — to hold an honest mirror doubting doubt and small-mindedness.
+
+With this passion, each black cloud lifts, the fearless hand waves goodbye to all that was and isn't real. This passion is potent against turmoil — it is not shy or timid — it is unapologetically sound and is here right now. In every room. You can hear it breathing and you can touch it but first you must listen to its faint crackles and hold its ember. Firewood becomes ashes, it does not become wood again. Don't think that wood is first and ashes after.
+
+Because the greatest offer is presence of mind and a devotion to something else — be it a mango, a speck of dust, a glass of water, or the divine. The thread of truth runs through it all. Hierarchy flattened. No exception. Unconditional boundless merit springing from every direction with no discrimination — no duality — no nothing — no something.
+
+Moving past questions and into a place of light curiosity and wonder — now, there is nothing to be solved. With this passion for every rising breath, the world becomes a teacher — a place where there is nothing to be solved. Everything holds an answer and a question. And here, in this tower of song, nothing can touch you.
+
+You already know, there is more than enough to go around. Serenity dwells in the ordinary and engaged diligence is what only is able to cultivate goodness.
+
+An image of motion.
+
+Christian,
+At Night
+
+![Christian Solorzano Photography](/assets/images/diary/20260123a.jpg)
