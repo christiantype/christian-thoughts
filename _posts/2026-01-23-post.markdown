@@ -24,6 +24,8 @@ client: "Self"
 published: true
 
 ---
+![Christian Solorzano Photography](/assets/images/diary/20260123a.jpg)
+
 The passion unfurls — a relentlessly fearless hand — seeing abundance in what seems desolate and gray. A passion so strong that it violently revolts like a crashing wave, pushing back against the tyranny that serves fear, and doubt as ordinary conditions. This passion creates new conditions — it is dialed up, resonating and causing vibrations that sow clarity.
 
 A passion to be alive and rejoice in life — the passion that despite it all, is determined to capture and transform delusion into wisdom. A testament of vulnerability to look at life itself in the eyes — to hold an honest mirror doubting doubt and small-mindedness.
@@ -41,4 +43,4 @@ An image of motion.
 Christian,
 At Night
 
-![Christian Solorzano Photography](/assets/images/diary/20260123a.jpg)
+

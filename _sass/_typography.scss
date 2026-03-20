@@ -9,12 +9,12 @@ $modularscale: (
 
 a, a:visited {
   text-decoration: none;
-  color:$maincolor;
+  color: var(--main);
 }
 
 
 p {
-  background: linear-gradient($maincolor, $accent);
+  background: linear-gradient(var(--main), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -24,7 +24,7 @@ p {
   font-weight:400;
   margin-bottom: 1.5em;
   line-height:ms(4);
-  color:$maincolor;
+  color: var(--main);
   @media (max-width: 750px) {
     font-size:ms(-1);
     line-height: ms(3);
@@ -33,7 +33,7 @@ p {
 }
 
 .gradient-group {
-  background: linear-gradient($maincolor, $accent);
+  background: linear-gradient(var(--main), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -46,7 +46,7 @@ h1 {
   font-family: $base-font;
   text-transform: uppercase;
   margin: 1em 0 .5em 0;
-  color:$maincolor;
+  color: var(--main);
   font-weight: 400;
   @media (max-width: 750px) {
     font-size:ms(1);
@@ -62,7 +62,7 @@ h2 {
   font-variation-settings: "wdth" 150, "wght" 150;
   text-transform: uppercase;
   margin: 1em 0 1em 0;
-  color:$maincolor;
+  color: var(--main);
   margin-bottom: .25em;
   line-height: ms(2);
   margin-top: 2em;
@@ -78,7 +78,7 @@ h3 {
   line-height:ms(3);
   text-transform: uppercase;
   margin: 1em 0 .5em 0;
-  color:$maincolor;
+  color: var(--main);
   font-family: $base-font;
   @media (max-width: 750px) {
     font-size:ms(-1);
@@ -172,7 +172,7 @@ em {
 figcaption {
   margin-top: 1em;
   font-size:ms(-2);
-  color:$maincolor;
+  color: var(--main);
   letter-spacing: 1px;
   line-height: ms(3);
   font-weight:400;
@@ -250,18 +250,18 @@ footer a {
 a, a:visited {
   font-family: $base-font;
   font-weight: 400;
-  color:$maincolor;
+  color: var(--main);
   text-decoration:none;
 }
 
 
 a:hover {
-  color:$maincolor;
+  color: var(--main);
   text-decoration: underline;
 }
 
 .black {
-  color:$backgroundc;
+  color: $backgroundc;
 }
 
 
@@ -269,11 +269,11 @@ a:hover {
 blockquote {
   font-family: $base-font;
   font-weight: 400;
-  color:$maincolor;
+  color: var(--main);
   letter-spacing: 0px;
   line-height: ms(3);
   font-size:ms(0);
-  border-left: 4px solid $maincolor;
+  border-left: 4px solid var(--main);
 }
 
 .half-navigation a {

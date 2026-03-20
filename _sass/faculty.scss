@@ -1,9 +1,20 @@
 $backgroundc: #ffffff;
-$maincolor: #0d0c0a;
+$maincolor: #d1941c;
 $accent: #4e19fd;
 $accent1: #e76bfa;
 $lightcolor: #5e71af;
 $midcolor: #988374;
+
+:root {
+  --main:       #{$maincolor};
+  --accent:     #{$accent};
+  --accent1:    #{$accent1};
+  --light:      #{$lightcolor};
+  --mid:        #{$midcolor};
+  --grad-start: #{mix($backgroundc, $lightcolor, 88%)};
+  --grad-mid:   #{$backgroundc};
+  --grad-end:   #{mix($backgroundc, $accent1, 92%)};
+}
 
 
 
@@ -11,14 +22,14 @@ $midcolor: #988374;
 .page-content {
   padding: 2em 2em 2em 2em;
   margin:0 auto;
-  background-color: $backgroundc;
-  color:$maincolor;
+  background: transparent;
+  color: var(--main);
   line-height: 1.75em;
 
 }
 
 header {
-  border-bottom: .5px solid $maincolor;
+  border-bottom: .5px solid var(--main);
   padding-bottom: 0em;
   font-size:ms(0);
   line-height:ms(5);
@@ -26,7 +37,20 @@ header {
   text-transform: uppercase;
 }
 
-html, body {
+html {
+  cursor: none;
+  min-height: 100%;
+  background: linear-gradient(to top right,
+    var(--grad-start) 0%,
+    var(--grad-mid)   50%,
+    var(--grad-end)   100%
+  );
+  background-size: 300% 300%;
+  background-attachment: fixed;
+  animation: gradientDrift 30s ease infinite;
+}
+
+body {
   cursor: none;
 }
 
@@ -35,7 +59,7 @@ html, body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: $maincolor;
+  background: var(--main);
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -51,12 +75,9 @@ html, body {
 }
 
 body {
-  background-size: cover;
   max-width: 80vw;
-  background-color: $backgroundc;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: transparent;
+  color: var(--main);
   //background-image: url("/assets/images/bg3.jpg");
   //background-blend-mode: screen;
   /* animation: gradient 15sease infinite; */
@@ -69,63 +90,16 @@ body {
 
 
   @media only screen and (max-width: 600px) {
-    background-attachment: scroll; /* Changed from fixed to scroll for mobile */
-    max-width: 100vw; /* Use full width on mobile */
-    background-size: contain; /* Changed from cover to contain to prevent zooming in too much */
-    background-position: center top; /* Position from the top to show more of the image */
-    min-height: 100vh;
-    height: auto;
+    max-width: 100vw;
     padding: 1em;
-
   }
 }
 
 ::selection {
-  background: $maincolor;
-  color: $accent1;
+  background: var(--main);
+  color: var(--accent1);
 }
 
-/* Create a series of empty pseudo-elements... */
-html:before,html:after,body:before,body:after{
-  content:"";
-  position:fixed;
-  display:block;
-  z-index:1000;
-}
-
-/* ...and position them! */
-html:before{
-  height:5px;
-  left:0;
-  right:0;
-  top:0;
-  background: $maincolor;
-  filter: blur(5px);
-}
-html:after{
-  width:5px;
-  top:0;
-  right:0;
-  bottom:0;
-  background: $maincolor;
-  filter: blur(5px);
-}
-body:before{
-  height:5px;
-  right:0;
-  bottom:0;
-  left:0;
-  background: $maincolor;
-  filter: blur(5px);
-}
-body:after{
-  width:5px;
-  top:0;
-  bottom:0;
-  left:0;
-  background: $maincolor;
-  filter: blur(5px);
-}
 
 footer {
   //border-top: 1px solid $grey-color-light;
@@ -140,7 +114,7 @@ footer ul li, footer li {
 }
 
 .svg-icon {
-  fill:$maincolor;
+  fill: var(--main);
 }
 
 .portfolio-thumbnail {
@@ -245,17 +219,17 @@ footer ul li, footer li {
   margin-top: 2em;
   margin-bottom: .5em;
   box-shadow: none;
-  border:1px solid $maincolor;
+  border:1px solid var(--main);
 
 }
 
 img {
-  //border:1px solid $maincolor;
+  //border:1px solid var(--main);
   mix-blend-mode: normal;
 }
 
 .no-border{
-  border:0px solid $maincolor;
+  border:0px solid var(--main);
 }
 
 .post-link img {
@@ -287,13 +261,13 @@ hr {
   margin-bottom:1em;
   border: 0;
   height: .5px;
-  background: $maincolor;
+  background: var(--main);
 }
 
 #square {
   height: 20px;
   width:20px;
-  background-color: $accent;
+  background-color: var(--accent);
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -304,7 +278,7 @@ hr {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid $maincolor;
+  border-bottom: 20px solid var(--main);
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -313,7 +287,7 @@ hr {
 #circle {
   height: 20px;
   width:20px;
-  background-color: $maincolor;
+  background-color: var(--main);
   float:right;
   border-radius: 20px;
   margin-bottom: .25em;
@@ -338,50 +312,50 @@ hr {
 
 #footer-bar-1 {
   height:20px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 
 #footer-bar-2 {
   height:18px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 
 #footer-bar-3 {
   height:16px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 #footer-bar-4 {
   height:14px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 
 #footer-bar-5 {
   height:12px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 #footer-bar-6 {
   height:10px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 #footer-bar-7 {
   height:8px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 #footer-bar-8 {
   height:6px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 #footer-bar-9 {
   height:4px;
-  background-color: $maincolor;
+  background-color: var(--main);
   margin-bottom: .25em;
 }
 
@@ -457,7 +431,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 }
 
 #spin {
-  color:$maincolor;
+  color:var(--main);
 }
 #spin:after {
   content:"";
@@ -592,4 +566,10 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   right:490px;
   bottom: 20px;
   width:300px;
+}
+
+@keyframes gradientDrift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
 }
