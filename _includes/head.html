@@ -4,25 +4,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
 
-  <!-- Colors set BEFORE css loads — prevents any flash -->
-  <script src="/assets/js/palettes.js"></script>
-  <script>
-    (function () {
-      var P = window.PALETTES;
-      var h = new Date().getHours();
-      var p = P[h >= 6 && h < 20 ? 'sunnyPartly' : 'nightClear'];
-      var r = document.documentElement;
-      r.style.setProperty('--main',       p.main);
-      r.style.setProperty('--accent',     p.accent);
-      r.style.setProperty('--accent1',    p.accent1);
-      r.style.setProperty('--light',      p.light);
-      r.style.setProperty('--mid',        p.mid);
-      r.style.setProperty('--grad-start', p.grad[0]);
-      r.style.setProperty('--grad-mid',   p.grad[1]);
-      r.style.setProperty('--grad-end',   p.grad[2]);
-    })();
-  </script>
-
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}

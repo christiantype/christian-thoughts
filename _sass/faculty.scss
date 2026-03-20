@@ -1,35 +1,24 @@
 $backgroundc: #ffffff;
-$maincolor: #d1941c;
-$accent: #4e19fd;
-$accent1: #e76bfa;
-$lightcolor: #5e71af;
+$maincolor: #1b1304;
+$maincolor2: #0927e8;
+$accent: #f0f8b7;
+$accent1: #f8c9c9;
+$accent2: #f8c9c9;
+$lightcolor: #374570;
 $midcolor: #988374;
-
-:root {
-  --main:       #{$maincolor};
-  --accent:     #{$accent};
-  --accent1:    #{$accent1};
-  --light:      #{$lightcolor};
-  --mid:        #{$midcolor};
-  --grad-start: #{mix($backgroundc, $lightcolor, 88%)};
-  --grad-mid:   #{$backgroundc};
-  --grad-end:   #{mix($backgroundc, $accent1, 92%)};
-}
-
-
 
 
 .page-content {
   padding: 2em 2em 2em 2em;
   margin:0 auto;
   background: transparent;
-  color: var(--main);
+  color: $maincolor;
   line-height: 1.75em;
 
 }
 
 header {
-  border-bottom: .5px solid var(--main);
+  border-bottom: .5px solid $maincolor;
   padding-bottom: 0em;
   font-size:ms(0);
   line-height:ms(5);
@@ -37,17 +26,19 @@ header {
   text-transform: uppercase;
 }
 
+@property --accent-cycle {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #{$accent};
+}
+
 html {
   cursor: none;
   min-height: 100%;
-  background: linear-gradient(to top right,
-    var(--grad-start) 0%,
-    var(--grad-mid)   50%,
-    var(--grad-end)   100%
-  );
-  background-size: 300% 300%;
+  --accent-cycle: #{$accent};
+  background: linear-gradient(to top right, var(--accent-cycle), $backgroundc);
   background-attachment: fixed;
-  animation: gradientDrift 30s ease infinite;
+  animation: accentCycle 8s ease-in-out infinite;
 }
 
 body {
@@ -59,7 +50,7 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--main);
+  background: $maincolor;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -77,7 +68,7 @@ body {
 body {
   max-width: 80vw;
   background: transparent;
-  color: var(--main);
+  color: $maincolor;
   //background-image: url("/assets/images/bg3.jpg");
   //background-blend-mode: screen;
   /* animation: gradient 15sease infinite; */
@@ -96,8 +87,8 @@ body {
 }
 
 ::selection {
-  background: var(--main);
-  color: var(--accent1);
+  background: $maincolor;
+  color: $accent1;
 }
 
 
@@ -114,7 +105,7 @@ footer ul li, footer li {
 }
 
 .svg-icon {
-  fill: var(--main);
+  fill: $maincolor;
 }
 
 .portfolio-thumbnail {
@@ -219,17 +210,17 @@ footer ul li, footer li {
   margin-top: 2em;
   margin-bottom: .5em;
   box-shadow: none;
-  border:1px solid var(--main);
+  border:1px solid $maincolor;
 
 }
 
 img {
-  //border:1px solid var(--main);
+  //border:1px solid $maincolor;
   mix-blend-mode: normal;
 }
 
 .no-border{
-  border:0px solid var(--main);
+  border:0px solid $maincolor;
 }
 
 .post-link img {
@@ -261,13 +252,13 @@ hr {
   margin-bottom:1em;
   border: 0;
   height: .5px;
-  background: var(--main);
+  background: $maincolor;
 }
 
 #square {
   height: 20px;
   width:20px;
-  background-color: var(--accent);
+  background-color: $accent;
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -278,7 +269,7 @@ hr {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid var(--main);
+  border-bottom: 20px solid $maincolor;
   float:right;
   margin-bottom: .25em;
   margin-left: 1em;
@@ -287,7 +278,7 @@ hr {
 #circle {
   height: 20px;
   width:20px;
-  background-color: var(--main);
+  background-color: $maincolor;
   float:right;
   border-radius: 20px;
   margin-bottom: .25em;
@@ -312,50 +303,50 @@ hr {
 
 #footer-bar-1 {
   height:20px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 
 #footer-bar-2 {
   height:18px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 
 #footer-bar-3 {
   height:16px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 #footer-bar-4 {
   height:14px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 
 #footer-bar-5 {
   height:12px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 #footer-bar-6 {
   height:10px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 #footer-bar-7 {
   height:8px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 #footer-bar-8 {
   height:6px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 #footer-bar-9 {
   height:4px;
-  background-color: var(--main);
+  background-color: $maincolor;
   margin-bottom: .25em;
 }
 
@@ -431,7 +422,7 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 }
 
 #spin {
-  color:var(--main);
+  color:$maincolor;
 }
 #spin:after {
   content:"";
@@ -568,8 +559,9 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   width:300px;
 }
 
-@keyframes gradientDrift {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
+@keyframes accentCycle {
+  0%   { --accent-cycle: #{$accent}; }
+  33%  { --accent-cycle: #{$accent1}; }
+  66%  { --accent-cycle: #{$accent2}; }
+  100% { --accent-cycle: #{$accent}; }
 }
