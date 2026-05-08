@@ -24,7 +24,7 @@ client: "Self"
 published: true
 
 ---
-I have been playing with my new Leica M11 and its 35mm, 3.5f lens — it is hard to use because of the lack of manual focus. The rangefinder also makes it another level of complicated. But it is fun to be forced to think when composing and assessing an environment. And as you know, I like difficulty for some strange reason... Or better yet, not strange reason.
+I have been playing with my new Leica M11 and its 35mm, f/3.5 lens — it is hard to use because of the lack of manual focus. The rangefinder also makes it another level of complicated. But it is fun to be forced to think when composing and assessing an environment. And as you know, I like difficulty for some strange reason... Or better yet, not strange reason.
 
 ![Christian Solorzano Photography](/assets/images/diary/20260508b.jpg)
 
