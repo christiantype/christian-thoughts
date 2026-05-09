@@ -24,7 +24,11 @@ client: "Self"
 published: true
 
 ---
-Learning focus zone and what the hell a meter actually is — I do not like numbers or measurements.
+Learning focus zone and what the hell a meter actually is 
+
+I do not like numbers or measurements
+
+But sometimes you gotta learn things you don't wanna learn about
 
 ![Christian Solorzano Photography](/assets/images/diary/20260509a.jpg)
 
