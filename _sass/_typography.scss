@@ -20,10 +20,7 @@ a:hover {
 }
 
 p {
-  background: linear-gradient($maincolor, $maincolor2);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: $maincolor;
   margin-top: .5em;
   font-size: ms(-1);
   letter-spacing: 1px;
@@ -38,10 +35,7 @@ p {
 }
 
 .gradient-group {
-  background: linear-gradient($maincolor, $maincolor2);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: $maincolor;
 }
 
 h1 {

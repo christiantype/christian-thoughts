@@ -11,7 +11,7 @@
     {%- include header.html -%}
 
     <main aria-label="Content" class="container">
-        {{ content }}
+        {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
     </main>
 
     {%- include footer.html -%}

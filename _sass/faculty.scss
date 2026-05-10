@@ -1,24 +1,14 @@
-$backgroundc: #ffffff;
-$maincolor: #1b1304;
-$maincolor2: #0927e8;
-$accent: #f0f8b7;
-$accent1: #f8c9c9;
-$accent2: #f8c9c9;
-
-
-@property --accent-cycle {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: #{$accent};
-}
+$backgroundc: #000000;
+$maincolor: #ffffff;
+$maincolor2: #ffffff;
+$accent: #ffffff;
+$accent1: #ffffff;
+$accent2: #ffffff;
 
 html {
   cursor: none;
   min-height: 100%;
-  --accent-cycle: #{$accent};
-  background: linear-gradient(to top right, var(--accent-cycle), $backgroundc);
-  background-attachment: fixed;
-  animation: accentCycle 8s ease-in-out infinite;
+  background: $backgroundc;
 }
 
 body {
@@ -77,7 +67,7 @@ header {
 
 ::selection {
   background: $maincolor;
-  color: $accent1;
+  color: $backgroundc;
 }
 
 footer {
@@ -177,11 +167,11 @@ footer ul li, footer li {
   margin-top: 2em;
   margin-bottom: .5em;
   box-shadow: none;
-  border: 1px solid $maincolor;
 }
 
 img {
   mix-blend-mode: normal;
+  border: 1px solid $maincolor;
 }
 
 .post-link img {
@@ -367,9 +357,3 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   mix-blend-mode: darken;
 }
 
-@keyframes accentCycle {
-  0%   { --accent-cycle: #{$accent}; }
-  33%  { --accent-cycle: #{$accent1}; }
-  66%  { --accent-cycle: #{$accent2}; }
-  100% { --accent-cycle: #{$accent}; }
-}

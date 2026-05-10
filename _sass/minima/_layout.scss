@@ -219,10 +219,6 @@
 .post-content {
   margin-bottom: $spacing-unit;
 
-  img {
-    border: 5px solid white;
-  }
-
   h3 {
     @include relative-font-size(1.625);
 
