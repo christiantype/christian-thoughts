@@ -361,8 +361,9 @@ body:not(.mobile) .hover-title:hover + .hover-image {
 body.about::before {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -5vw;
   background: url('/assets/images/diary/20260511a.jpg') center / cover no-repeat;
+  filter: blur(60px);
   z-index: -1;
   pointer-events: none;
 }
