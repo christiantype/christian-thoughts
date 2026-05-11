@@ -376,22 +376,27 @@ body.about h2 {
   margin-bottom: 0.5em;
 }
 
-body.about p,
+body.about main p {
+  display: block;
+  width: fit-content;
+  background-color: #fff;
+  color: $maincolor;
+  padding: 0.1em 0.3em;
+  margin-bottom: 0.4em;
+}
+
+body.about main .bio p,
+body.about header p,
 body.about .myname,
 body.about .mylast {
   display: inline;
+  width: auto;
   background-color: #fff;
   color: $maincolor;
   padding: 0.1em 0.3em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   line-height: 2.2;
-}
-
-body.about main p::after {
-  content: '';
-  display: block;
-  margin-bottom: 0.4em;
 }
 
 body.about a,
