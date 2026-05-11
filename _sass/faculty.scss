@@ -388,6 +388,12 @@ body.about .mylast {
   line-height: 2.2;
 }
 
+body.about main p::after {
+  content: '';
+  display: block;
+  margin-bottom: 0.4em;
+}
+
 body.about a,
 body.about a:visited,
 body.about a:hover {
