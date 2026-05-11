@@ -358,3 +358,25 @@ body:not(.mobile) .hover-title:hover + .hover-image {
   mix-blend-mode: darken;
 }
 
+body.about {
+  background: url('/assets/images/me.jpg') center / cover no-repeat fixed;
+}
+
+body.about main h2,
+body.about main p,
+body.about main hr {
+  display: inline;
+  background-color: #fff;
+  color: $maincolor;
+  padding: 0.1em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 2.2;
+}
+
+body.about main a,
+body.about main a:visited,
+body.about main a:hover {
+  color: $maincolor;
+}
+
