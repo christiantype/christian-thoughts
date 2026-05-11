@@ -367,7 +367,15 @@ body.about::before {
   pointer-events: none;
 }
 
-body.about h2,
+body.about h2 {
+  display: block;
+  width: fit-content;
+  background-color: #fff;
+  color: $maincolor;
+  padding: 0.1em 0.3em;
+  margin-bottom: 0.5em;
+}
+
 body.about p,
 body.about .myname,
 body.about .mylast {
