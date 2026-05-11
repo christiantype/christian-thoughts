@@ -2,10 +2,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+
   {%- seo -%}
+  {%- feed_meta -%}
 
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  {%- feed_meta -%}
+
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
@@ -13,11 +16,37 @@
   <!-- TYPOGRAPHY -->
   <link rel="stylesheet" href="https://use.typekit.net/red7ojk.css">
 
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
+  <!-- Business / location metadata (not handled by jekyll-seo-tag) -->
+  <meta property="og:type" content="business.business">
+  <meta property="business:contact_data:locality" content="Chicago">
+  <meta property="business:contact_data:region" content="IL">
+  <meta property="business:contact_data:country_name" content="United States">
+
+  <!-- Person schema for knowledge graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Christian Solorzano",
+    "url": "{{ site.url }}",
+    "image": "{{ site.url }}/assets/images/me.jpg",
+    "jobTitle": "Designer, Educator, Photographer",
+    "description": {{ site.description | jsonify }},
+    "worksFor": [
+      { "@type": "Organization", "name": "OP/AL", "alternateName": "Original Practice Applied Learning" },
+      { "@type": "Organization", "name": "Chicago Graphic Design Club" },
+      { "@type": "EducationalOrganization", "name": "DePaul University" }
+    ],
+    "knowsAbout": ["Graphic Design", "Design Education", "Photography", "Meditation"],
+    "sameAs": [
+      "https://www.instagram.com/{{ site.instagram_username }}"
+    ]
+  }
+  </script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50379826-1"></script>
@@ -25,33 +54,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-50379826-1');
   </script>
-
-  <meta charset="utf-8">
-  <title>Christian Solorzano | Designer </title>
-  <meta name="description" content="Christian Solorzano is the founder of OP/AL, (Original Practice Applied Learning), a design practice in Oak Park, and the Chicago Graphic Design Club, a community of thousands of designers united by generosity, curiosity, and the belief that design grows stronger and moves forward together. He produces Faculty, a publication on Chicago design, and hosts Underscore, a podcast with over one hundred episodes featuring conversations with designers throughout Chicago. Solorzano teaches at DePaul University, is a practicing photographer, and a trained meditation instructor whose contemplative practice shapes everything he makes. He believes design is never decoration; it is inquiry, consciousness, and transformation.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Christian Solorzano">
-
-  <meta property="og:type" content="business.business">
-  <meta property="og:title" content="Christian Solorzano | Designer ">
-  <meta property="og:url" content="http://christiansolorzano.com/">
-  <meta property="og:image" content="http://christiansolorzano.com/assets/images/og-image.jpg">
-  <meta property="business:contact_data:street_address" content="">
-  <meta property="business:contact_data:locality" content="Chicago">
-  <meta property="business:contact_data:region" content="IL">
-  <meta property="business:contact_data:postal_code" content="">
-  <meta property="business:contact_data:country_name" content="United States">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Christian Solorzano | Designer">
-  <meta name="twitter:description"
-        content="Christian Solorzano is the founder of OP/AL, (Original Practice Applied Learning), a design practice in Oak Park, and the Chicago Graphic Design Club, a community of thousands of designers united by generosity, curiosity, and the belief that design grows stronger and moves forward together. He produces Faculty, a publication on Chicago design, and hosts Underscore, a podcast with over one hundred episodes featuring conversations with designers throughout Chicago. Solorzano teaches at DePaul University, is a practicing photographer, and a trained meditation instructor whose contemplative practice shapes everything he makes. He believes design is never decoration; it is inquiry, consciousness, and transformation.">
-  <meta name="twitter:image" content="http://christiansolorzano.com/assets/images/og-image.jpg">
-
-
-
-
 </head>
