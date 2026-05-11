@@ -13,7 +13,7 @@ image: "assets/images/diary/004.jpg"
 
 tags: [project]
 
-description: "Christian Solorzano is a product designer, community leader, educator, and podcast host."
+description: "Christian Solorzano is the founder of OP/AL, (Original Practice Applied Learning), a design practice in Oak Park, and the Chicago Graphic Design Club, a community of thousands of designers united by generosity, curiosity, and the belief that design grows stronger and moves forward together. He produces Faculty, a publication on Chicago design, and hosts Underscore, a podcast with over one hundred episodes featuring conversations with designers throughout Chicago. Solorzano teaches at DePaul University, is a practicing photographer, and a trained meditation instructor whose contemplative practice shapes everything he makes. He believes design is never decoration; it is inquiry, consciousness, and transformation."
 
 about: "NA"
 
