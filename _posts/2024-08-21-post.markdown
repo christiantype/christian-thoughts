@@ -27,7 +27,5 @@ published: true
 The tea of the day is: Downy Green Pearls. It is a Chinese green tea. 
 
 ![tea](/assets/images/diary/20240821a.jpg)
-<span class="exif">X-T3 · XF50mmF2 R WR · f/2 · 1/250s · ISO 400</span>
 
 ![tea](/assets/images/diary/20240821b.jpg)
-<span class="exif">X-T3 · XF50mmF2 R WR · f/2 · 1/60s · ISO 1250</span>
