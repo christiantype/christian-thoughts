@@ -25,6 +25,7 @@ published: true
 
 ---
 ![Faculty Release Party](/assets/images/diary/20240312.jpg)
+<span class="exif">iPhone 14 Pro · iPhone 14 Pro back triple camera 6.86mm f/1.78 · f/1.8 · 1/30s · ISO 800</span>
 
 The Chicago Graphic Design Club recently launched its first publication, [Faculty](https://chicagographicdesign.
 shop/products/faculty-issue-1){:target="_blank"}. This is a big milestone not just for the Chicago Graphic Design 

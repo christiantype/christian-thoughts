@@ -27,13 +27,17 @@ published: true
 I cannot tell if it is cold or warm... weather is freaky...
 
 ![Christian Solorzano Photography](/assets/images/diary/20260511a.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/6.8 · 1/500s · ISO 400</span>
 <br>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260511b.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/5.6 · 1/1000s · ISO 400</span>
 <br>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260511c.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/4.8 · 1/1000s · ISO 400</span>
 <br>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260511d.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/4 · 1/1500s · ISO 400</span>
 <br>

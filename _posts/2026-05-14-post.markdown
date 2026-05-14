@@ -1,0 +1,53 @@
+---
+layout: diary
+
+title:  "Still Life at the Christian Cafe"
+
+date:   2026-05-14 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+i am going to be posting daily photography exercises — for this one here, i am studying light caressing the quotidian across my desk... i was changing my ink and this moment is what transpired. and also — it is finally nice in Chicago. hell yea....
+
+
+![Christian Solorzano Photography](/assets/images/diary/20260514a.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/2.5 · 1/1000s · ISO 400</span>
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514b.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/2.8 · 1/1000s · ISO 400</span>
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514c.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/2.5 · 1/1000s · ISO 400</span>
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514d.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/2.5 · 1/1000s · ISO 400</span>
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514e.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/2.5 · 1/1000s · ISO 400</span>
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514f.jpg)
+<span class="exif">Leica M11 · Summarit-M 35mm · f/4 · 1/1000s · ISO 400</span>
+<br>
+

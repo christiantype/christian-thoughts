@@ -180,6 +180,17 @@ img {
   margin-bottom: 1em;
 }
 
+.exif {
+  display: block;
+  margin-top: .5em;
+  margin-bottom: 1em;
+  font-size: ms(-2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: .55;
+  font-style: normal;
+}
+
 
 .no-shadow {
   box-shadow: none;

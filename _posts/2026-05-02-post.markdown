@@ -27,47 +27,70 @@ published: true
 (in a series of photos...)
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502b.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.4 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502c.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.8 · 1/180s · ISO 6400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502d.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/4.8 · 1/500s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502e.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/5.6 · 1/1000s · ISO 800</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502f.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/2.8 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502g.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/2.8 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502h.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/1.4 · 1/4000s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502i.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/1.4 · 1/125s · ISO 3200</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502j.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/4 · 1/125s · ISO 1600</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502k.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/6.8 · 8s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502l.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.4 · 1/125s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502m.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/1.7 · 1/500s · ISO 4000</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502n.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.4 · 1/125s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502o.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.8 · 1/3000s · ISO 800</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502p.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/2.2 · 1/250s · ISO 1600</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502q.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/2.2 · 1/250s · ISO 3200</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502r.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/1.7 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502s.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/1.7 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502t.jpg)
+<span class="exif">Leica Q2 · SUMMILUX 1:1.7/28 ASPH. · f/2.2 · 1/250s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502u.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.4 · 1/90s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502v.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/2.4 · 1/1000s · ISO 400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502w.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/3.4 · 1/180s · ISO 6400</span>
 
 ![Christian Solorzano Photography](/assets/images/diary/20260502x.jpg)
+<span class="exif">Leica M11 · R-Adapter M · f/4.8 · 1/125s · ISO 400</span>
