@@ -64,24 +64,6 @@
     <div id="cur"></div>
 
     <script>
-      // Scroll-fade-in for masonry tiles and post images.
-      (() => {
-        const targets = document.querySelectorAll('.site-photo img, .site-design-item img, .site-post-body img');
-        if (!targets.length || !('IntersectionObserver' in window)) {
-          targets.forEach(t => t.classList.add('is-visible'));
-          return;
-        }
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-        targets.forEach(t => io.observe(t));
-      })();
-
       // Lightbox: click any photo or design image to enlarge. Metadata (if any)
       // is read from the source img's data-meta attribute and shown below.
       (() => {
