@@ -16,7 +16,7 @@ layout: default
     <div class="site-design-feed">
       {%- for img in design_items -%}
         <figure class="site-design-item span-{% cycle 'design-spans': 3, 2, 4, 3, 2, 2, 3, 4, 2, 3 %} {% cycle 'design-aligns': 'align-center', 'align-top', 'align-bottom', 'align-center', 'align-bottom', 'align-top', 'align-center' %}">
-          <img src="{{ img.path | relative_url }}" alt="">
+          <img src="{{ img.path | relative_url }}" alt="" loading="lazy" decoding="async">
         </figure>
       {%- endfor -%}
     </div>
