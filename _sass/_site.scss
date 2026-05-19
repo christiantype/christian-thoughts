@@ -133,13 +133,12 @@
     margin-bottom: 2em;
     background: $backgroundc;
 
-    @media (max-width: 600px) { height: 75vh; }
-
     img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      object-position: center;
       object-fit: cover;
       opacity: 0;
       border: 0;
@@ -214,7 +213,11 @@
   .site-photo,
   .site-design-item {
     margin: 0;
-    align-self: start;
+    align-self: start;     // default — overridden by .align-* classes below
+
+    &.align-top    { align-self: start; }
+    &.align-center { align-self: center; }
+    &.align-bottom { align-self: end; }
 
     img {
       width: 100%;
@@ -226,6 +229,7 @@
 
     @media (max-width: 600px) {
       grid-column: 1 / -1 !important;
+      align-self: start !important;
     }
   }
   // Span widths (mobile collapses to 1 col via .site-photo media query above).
@@ -331,4 +335,30 @@
 
   // Remove the global img border from faculty.scss inside .site
   img { border: 0; }
+
+  // ── Scroll-fade-in for masonry photos, design tiles, post images ──────
+  // Images start invisible + slightly translated, then ease in when they
+  // enter the viewport (class toggled by the IntersectionObserver in JS).
+  .site-photo img,
+  .site-design-item img,
+  .site-post-body img {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+  .site-photo img.is-visible,
+  .site-design-item img.is-visible,
+  .site-post-body img.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-photo img,
+    .site-design-item img,
+    .site-post-body img {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 }
