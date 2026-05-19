@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<main class="container">
+
+  <div class="site-intro site-bio">
+    <p>Designing is not a profession but an attitude. — László Moholy-Nagy</p>
+  </div>
+
+  {%- assign design_items = site.static_files
+        | where_exp: "f", "f.path contains '/assets/images/design/'"
+        | sort: "path" -%}
+
+  {%- if design_items.size > 0 -%}
+    <div class="site-design-feed">
+      {%- for img in design_items -%}
+        <figure class="site-design-item span-{% cycle 'design-spans': 3, 2, 4, 3, 2, 2, 3, 4, 2, 3 %}">
+          <img src="{{ img.path | relative_url }}" alt="">
+        </figure>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+</main>

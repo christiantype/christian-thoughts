@@ -7,26 +7,24 @@
   {%- seo -%}
   {%- feed_meta -%}
 
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-
-  {%- if jekyll.environment == 'production' and site.google_analytics -%}
-    {%- include google-analytics.html -%}
+  {%- comment -%} OG image fallback (jekyll-seo-tag doesn't pick up site.image automatically). {%- endcomment -%}
+  {%- assign og_image = page.image | default: site.image -%}
+  {%- if og_image -%}
+    <meta property="og:image" content="{{ og_image | absolute_url }}">
+    <meta name="twitter:image" content="{{ og_image | absolute_url }}">
   {%- endif -%}
 
-  <!-- TYPOGRAPHY -->
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+
+  {%- comment -%} Typography: Indivisible via Typekit. {%- endcomment -%}
   <link rel="stylesheet" href="https://use.typekit.net/red7ojk.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="{{ '/assets/images/me.jpg' | relative_url }}">
 
-  <!-- Business / location metadata (not handled by jekyll-seo-tag) -->
-  <meta property="og:type" content="business.business">
-  <meta property="business:contact_data:locality" content="Chicago">
-  <meta property="business:contact_data:region" content="IL">
-  <meta property="business:contact_data:country_name" content="United States">
-
-  <!-- Person schema for knowledge graph -->
+  {%- comment -%}
+    Person schema — surfaces Christian in Google's knowledge graph.
+    jekyll-seo-tag emits the WebSite schema; this complements it.
+  {%- endcomment -%}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,14 +44,5 @@
       "https://www.instagram.com/{{ site.instagram_username }}"
     ]
   }
-  </script>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50379826-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-50379826-1');
   </script>
 </head>

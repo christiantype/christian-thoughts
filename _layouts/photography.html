@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+{%- assign photos = site.static_files
+      | where_exp: "f", "f.path contains '/assets/images/photography/'"
+      | sort: "path" -%}
+
+<main class="container">
+
+  <div class="site-intro site-bio">
+    <p>Photography is instrument for developing an eye. Compositon, light, restraint, and the decisive commitment to time.</p>
+  </div>
+
+  {%- if photos.size > 0 -%}
+    <div class="site-photo-feed">
+      {%- for img in photos -%}
+        {%- assign fname = img.path | split: '/' | last -%}
+        {%- assign meta  = site.data.photo_exif[fname] -%}
+        <figure class="site-photo span-{% cycle 'photo-spans': 3, 2, 4, 3, 2, 2, 3, 4, 2, 3 %}">
+          <img src="{{ img.path | relative_url }}" alt=""{% if meta %} data-meta="{{ meta | escape }}"{% endif %}>
+        </figure>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+</main>

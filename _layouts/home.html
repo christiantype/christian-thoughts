@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+<main class="container">
+
+  {%- assign home_images = site.static_files
+        | where_exp: "f", "f.path contains '/assets/images/home-images/'"
+        | sort: "path" -%}
+  {%- assign hero_n = home_images.size -%}
+
+  {%- if hero_n > 0 -%}
+    {%- assign per = 5 -%}
+    {%- assign hero_total = hero_n | times: per -%}
+    {%- assign hero_on = 100 | divided_by: hero_n -%}
+    {%- assign hero_out = hero_on | minus: 3 -%}
+    {%- assign hero_clear = hero_on | plus: 2 -%}
+    <style>
+      @keyframes site-home-fade {
+        0%                    { opacity: 0; }
+        2%                    { opacity: 1; }
+        {{ hero_out }}%       { opacity: 1; }
+        {{ hero_clear }}%     { opacity: 0; }
+        100%                  { opacity: 0; }
+      }
+      {%- if hero_n == 1 -%}
+      .site-hero-stack img { opacity: 1; animation: none; }
+      {%- endif -%}
+    </style>
+
+    <div class="full-width site-hero-stack">
+      {%- for img in home_images -%}
+      {%- assign delay = forloop.index0 | times: per -%}
+      <img src="{{ img.path | relative_url }}" alt=""
+           style="animation: site-home-fade {{ hero_total }}s infinite; animation-delay: {{ delay }}s;">
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="full-width site-hero-stack" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="full-width">
+    <span class="site-label">journal</span>
+    <hr class="site-rule">
+  </div>
+
+  <span class="hover-title diary-post gradient-group">
+    {%- for post in site.categories.diary -%}
+      <a href="{{ post.url | relative_url }}">
+        {{ post.date | date: "%m %d %Y" }}
+        {{ post.title | escape }}
+      </a> _
+    {%- endfor -%}
+  </span>
+
+</main>

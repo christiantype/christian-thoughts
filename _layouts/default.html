@@ -1,91 +1,147 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   {%- include head.html -%}
 
-  <body class="{{ page.layout }}">
+  <body class="site {{ page.body_class }}">
 
+    {%- comment -%} Rotator timing: scales with word count. {%- endcomment -%}
+    {%- assign words      = "designer,photographer,educator,community leader,zen student,martial arts practitioner,music collector,writer,occasional artist,brother,tea drinker,contrarian,producer of ideas,curator,instigator,synthesist,community builder" | split: "," -%}
+    {%- assign per        = 4 -%}
+    {%- assign total      = words.size | times: per -%}
+    {%- assign on_pct     = 100 | divided_by: words.size -%}
+    {%- assign out_pct    = on_pct | minus: 2 -%}
+    {%- assign clear_pct  = on_pct | plus: 1 -%}
+    <style>
+      @keyframes site-rotate-fade {
+        0%                { opacity: 0; }
+        2%                { opacity: 1; }
+        {{ out_pct }}%    { opacity: 1; }
+        {{ clear_pct }}%  { opacity: 0; }
+        100%              { opacity: 0; }
+      }
+    </style>
 
+    <header class="site-header">
+      <div class="site-header-top">
+        <span class="site-mark">
+          <a href="/" class="site-mark-name">Christian Solorzano</a>,
+          <span class="site-rotator" aria-hidden="true">
+            <span class="rotator-anchor">martial arts practitioner</span>
+            {%- for w in words -%}
+              <span class="rotator-word" style="animation: site-rotate-fade {{ total }}s infinite; animation-delay: {{ forloop.index0 | times: per }}s;">{{ w }}</span>
+            {%- endfor -%}
+          </span>
+        </span>
+        <nav class="site-nav">
+          <a href="/about/"       class="{% if page.url == '/about/' %}active{% endif %}">about</a>
+          <a href="/photography/" class="{% if page.url == '/photography/' %}active{% endif %}">photography</a>
+          <a href="/design/"      class="{% if page.url == '/design/' %}active{% endif %}">design</a>
+        </nav>
+      </div>
+    </header>
 
+    {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
 
-    {%- include header.html -%}
+    <footer class="container">
+      <div class="full-width">
+        <hr>
+        <div class="site-footer-row">
+          <figcaption>Each moment is all being, each moment is the entire world — Dōgen</figcaption>
+          <img class="site-counter"
+               src="https://hitwebcounter.com/counter/counter.php?page=13366751&style=0038&nbdigits=5&type=ip&initCount=0"
+               alt="Visit counter" />
+        </div>
+        {%- include social.html -%}
+      </div>
+    </footer>
 
-    <main aria-label="Content" class="container">
-        {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
-    </main>
-
-    {%- include footer.html -%}
+    <dialog id="lightbox" class="site-lightbox" aria-label="Image preview">
+      <img alt="">
+      <figcaption class="site-lightbox-meta"></figcaption>
+    </dialog>
 
     <canvas id="trail"></canvas>
     <div id="cur"></div>
 
     <script>
-      // ── Cursor dot ──
-      const cur = document.getElementById('cur');
-      document.addEventListener('mousemove', e => {
-        cur.style.left = e.clientX + 'px';
-        cur.style.top  = e.clientY + 'px';
-      });
+      // Lightbox: click any photo or design image to enlarge. Metadata (if any)
+      // is read from the source img's data-meta attribute and shown below.
+      (() => {
+        const dialog = document.getElementById('lightbox');
+        if (!dialog) return;
+        const dialogImg  = dialog.querySelector('img');
+        const dialogMeta = dialog.querySelector('.site-lightbox-meta');
 
-      // ── Trail canvas ──
-      const tc   = document.getElementById('trail');
-      const tctx = tc.getContext('2d');
+        document.querySelectorAll('.site-photo img, .site-design-item img').forEach(img => {
+          img.addEventListener('click', () => {
+            dialogImg.src        = img.currentSrc || img.src;
+            dialogImg.alt        = img.alt || '';
+            dialogMeta.textContent = img.dataset.meta || '';
+            dialogMeta.hidden    = !img.dataset.meta;
+            dialog.showModal();
+          });
+        });
 
-      function resizeTrail() {
-        tc.width  = window.innerWidth;
-        tc.height = window.innerHeight;
-      }
-      resizeTrail();
-      window.addEventListener('resize', resizeTrail);
+        // Close on any click (backdrop or image).
+        dialog.addEventListener('click', () => dialog.close());
+      })();
+    </script>
 
-      const trail  = [];
-      const MAX    = 180;
-      let trailAlpha = 0;
-      let idleTimer  = null;
+    <script>
+      // Custom cursor + fading trail.
+      (() => {
+        const cur     = document.getElementById('cur');
+        const canvas  = document.getElementById('trail');
+        const ctx     = canvas.getContext('2d');
+        const trail   = [];
+        const MAX     = 180;
+        let alpha     = 0;
+        let idleTimer = null;
 
-      document.addEventListener('mousemove', e => {
-        trail.push({ x: e.clientX, y: e.clientY });
-        if (trail.length > MAX) trail.shift();
-
-        trailAlpha = 1;
-        clearTimeout(idleTimer);
-
-        idleTimer = setTimeout(() => {
-          (function fade() {
-            trailAlpha -= 0.018;
-            if (trailAlpha > 0) {
-              requestAnimationFrame(fade);
-            } else {
-              trailAlpha = 0;
-              trail.length = 0;
-            }
-          })();
-        }, 900);
-      });
-
-      (function drawTrail() {
-        tctx.clearRect(0, 0, tc.width, tc.height);
-
-        if (trail.length > 1 && trailAlpha > 0) {
-          for (let i = 1; i < trail.length; i++) {
-            const progress = i / trail.length;
-
-            tctx.beginPath();
-            tctx.moveTo(trail[i - 1].x, trail[i - 1].y);
-            tctx.lineTo(trail[i].x,     trail[i].y);
-
-            tctx.strokeStyle = `rgba(0, 0, 0, ${progress * 0.5 * trailAlpha})`;
-            tctx.lineWidth   = progress * 1.1;
-            tctx.lineCap     = 'round';
-            tctx.lineJoin    = 'round';
-            tctx.stroke();
-          }
+        function resize() {
+          canvas.width  = window.innerWidth;
+          canvas.height = window.innerHeight;
         }
+        resize();
+        window.addEventListener('resize', resize);
 
-        requestAnimationFrame(drawTrail);
+        document.addEventListener('mousemove', e => {
+          cur.style.left = `${e.clientX}px`;
+          cur.style.top  = `${e.clientY}px`;
+
+          trail.push({ x: e.clientX, y: e.clientY });
+          if (trail.length > MAX) trail.shift();
+          alpha = 1;
+
+          clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => {
+            (function fade() {
+              alpha -= 0.018;
+              if (alpha > 0) requestAnimationFrame(fade);
+              else { alpha = 0; trail.length = 0; }
+            })();
+          }, 900);
+        });
+
+        (function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (trail.length > 1 && alpha > 0) {
+            for (let i = 1; i < trail.length; i++) {
+              const progress = i / trail.length;
+              ctx.beginPath();
+              ctx.moveTo(trail[i - 1].x, trail[i - 1].y);
+              ctx.lineTo(trail[i].x,     trail[i].y);
+              ctx.strokeStyle = `rgba(58,123,255,${progress * 0.5 * alpha})`;
+              ctx.lineWidth   = progress * 1.1;
+              ctx.lineCap     = 'round';
+              ctx.lineJoin    = 'round';
+              ctx.stroke();
+            }
+          }
+          requestAnimationFrame(draw);
+        })();
       })();
     </script>
 
   </body>
-
 </html>

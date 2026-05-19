@@ -1,9 +1,10 @@
-$backgroundc: #ffffff;
-$maincolor: #000000;
-$maincolor2: #000000;
-$accent: #000000;
-$accent1: #000000;
-$accent2: #000000;
+$backgroundc: #000000;
+$maincolor: #ffffff;
+$maincolor2: #ffffff;
+$accent: #ffffff;
+$accent1: #ffffff;
+$accent2: #ffffff;
+$cursor: #3a7bff;
 
 html {
   cursor: none;
@@ -34,7 +35,7 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: $maincolor;
+  background: $cursor;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -370,7 +371,7 @@ body.about::before {
 body.about h2 {
   display: block;
   width: fit-content;
-  background-color: #fff;
+  background-color: $backgroundc;
   color: $maincolor;
   padding: 0.1em 0.3em;
   margin-bottom: 0.5em;
@@ -379,7 +380,7 @@ body.about h2 {
 body.about main p {
   display: block;
   width: fit-content;
-  background-color: #fff;
+  background-color: $backgroundc;
   color: $maincolor;
   padding: 0.1em 0.3em;
   margin-bottom: 0.4em;
@@ -391,7 +392,7 @@ body.about .myname,
 body.about .mylast {
   display: inline;
   width: auto;
-  background-color: #fff;
+  background-color: $backgroundc;
   color: $maincolor;
   padding: 0.1em 0.3em;
   box-decoration-break: clone;
@@ -406,6 +407,6 @@ body.about a:hover {
 }
 
 body.about hr {
-  background-color: #fff;
+  background-color: $backgroundc;
 }
 
