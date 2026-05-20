@@ -31,6 +31,7 @@
     top: 1em;
     z-index: 10;
     margin-bottom: 1.5em;
+    line-height: 1.2;     // override faculty's tall header line-height
   }
   .site-header,
   .site-header a,
@@ -53,10 +54,21 @@
     }
   }
 
+  // .site-mark is a span; the global `.site span { font-size: ms(-1) }` rule
+  // would compound on its children (making the name + cycle words a step
+  // smaller than the nav links). Reset it so its children all land at the same
+  // ms(-1) size as the nav links.
+  .site-mark { font-size: 1em; }
   .site-mark a, .site-mark a:visited { text-decoration: none; }
   .site-mark-name {
     letter-spacing: 2px;
     line-height: 1.2;
+  }
+
+  // Comma between name and cycling word — hidden on mobile where the rotator
+  // drops to its own line.
+  .site-mark-sep {
+    @media (max-width: 600px) { display: none; }
   }
 
   .site-rotator {
@@ -66,6 +78,11 @@
     margin-left: .35em;
     letter-spacing: 2px;
     opacity: .65;
+
+    @media (max-width: 600px) {
+      display: block;
+      margin-left: 0;
+    }
   }
   .rotator-anchor {
     // Reserves baseline/width for the absolute cycling words. Made
