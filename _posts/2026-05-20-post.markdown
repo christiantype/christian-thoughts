@@ -1,7 +1,7 @@
 ---
 layout: diary
 
-title:  "Chicago Traffic"
+title:  "Designing Is Not a Profession but an Attitude"
 
 date:   2026-05-20 00:00:00 -0500
 
@@ -13,7 +13,7 @@ image: "NA"
 
 tags: [project]
 
-description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+description: "László Moholy-Nagy on design as an attitude rather than a profession — from Vision in Motion (Chicago, 1947)."
 
 about: "NA"
 
@@ -24,17 +24,64 @@ client: "Self"
 published: true
 
 ---
-Taken over the weekend.
+It is how we see the world. How we respond to it. The collection of small acts that accumulate into larger impact — from how we communicate, to how we listen, to how we show up.
+Design is a way of seeing. A way of connecting. A way of being a participant in this world. It surrounds every moment of every day whether we name it or not.
+
+Design teaches us to have a broader palette. A wider range of ways to respond appropriately to what is in front of us. This is very much like Zen Buddhism. 
+
+People often ask — what is Zen? And the answer is simple: 
+
+Zen is an appropriate response.
+
+These appropriate responses shift. Sometimes a logo needs to be bigger. Sometimes smaller. Sometimes hierarchy matters enormously. Sometimes it dissolves entirely. The ability to distinguish these differences — to feel when something is right — is what empowers a designer to understand what creativity is.
+
+My mentor Rick Valicenti calls it discerning decision making. I've been sitting with that phrase for years.
+
+My issue with design — sometimes — is that it strictly aims to solve problems by referencing other solutions. But responding appropriately to what is at hand is not the same as looking sideways at what someone else already made. 
+
+One is alive. The other is borrowed.
+
+Design is service to others. But that service should not come at our own expense. We should not feel the pressure to be tethered to capitalism or business as usual — which is something I say often and mean every time.
+
+Design is not only for consumerism. Design can be anti-consumerism.
+
+And yet — will we ever truly escape the grip of our own complicity? When we look at corporations, at giant tech, do we not all benefit from their offerings? If we are active participants in this digital arena of madness — and we are, all of us — then the question becomes how do we want to show up for each other? 
+
+How do we hold space in our hearts for a wider array of feelings, conversations, and ways of seeing so that we don't default to binary modes of thinking?
+
+Good and bad. Black and white. This is right, this is wrong.
+
+That doesn't serve anyone. 
+
+The exciting things happen in the gray. And we can only experience the gray if we are willing to look inward — and if we are willing to encourage others to do the same. If we design for the user within.
+
+I look forward to the days when we can all acknowledge the ridiculousness of the status quo together and decide not to participate in it.
+
+The status quo is not human. The status quo is sickness. And as designers — people trained to see differently, to respond appropriately, to push toward what has not yet existed — we ought to try our hardest not to be a part of it.
+
+We exist now in a time of relentless technology. I am embracing it. I am learning to experiment and explore with artificial intelligence, as I believe designers should. It is simply a new technology. I do not believe it will replace the human hand. And if there are aspects of the human hand that become replaceable — then perhaps that hand ought to evolve into something once more that AI cannot reach.
+
+To insist that design must function only one way is not a design attitude. It is the opposite of one.
+
+Design is pushing.
+Design is embracing the new.
+Design is service.
+Design is resistance.
+Design is finding ways to do things that did not exist before you found them.
+
+So with that — let's keep charging forward. Trust that doing good — whatever that means to you — is enough. That it matters. That it adds up.
 
 
-![Christian Solorzano Photography](/assets/images/diary/20260520a.jpg)
-<br>
+Design is not a profession but an attitude — these words belong to László Moholy-Nagy, written in 1947. When we stop seeing design as a profession and start seeing it as a way — we become less transactional, less exploitative, more human. The full read is here:
 
-![Christian Solorzano Photography](/assets/images/diary/20260520b.jpg)
-<br>
-
-![Christian Solorzano Photography](/assets/images/diary/20260520c.jpg)
-<br>
-
-![Christian Solorzano Photography](/assets/images/diary/20260520d.jpg)
-<br>
+> **DESIGNING IS NOT A PROFESSION BUT AN ATTITUDE**
+>
+> László Moholy-Nagy
+>
+> Design has many connotations. It is the organization of materials and processes in the most productive, economic way, in a harmonious balance of all elements necessary for a certain function. It is not a matter of façade, of mere external appearance; rather it is the essence of products and institutions, penetrating and comprehensive. Designing is a complex and intricate task. It is integration of technological, social and economic requirements, biological necessities, and the psychophysical effects of materials, shape, color, volume, and space: thinking in relationships.
+>
+> The designer must see the periphery as well as the core, the immediate and the ultimate, at least in the biological sense. He must anchor his special job in the complex whole. The designer must be trained not only in the use of materials and various skills, but also in appreciation of organic functions and planning. He must know that design is indivisible, that the internal and external characteristics of a dish, a chair, a table, a machine, painting, sculpture are not to be separated. The idea of design and the profession of the designer has to be transformed from the notion of a specialist function into a generally valid attitude of resourcefulness and inventiveness which allows projects to be seen not in isolation but in relationship with the need of the individual and the community. One cannot simply lift out any subject matter from the complexity of life and try to handle it as an independent unit.
+>
+> There is design in organization of emotional experiences, in family life, in labor relations, in city planning, in working together as civilized human beings. Ultimately all problems of design merge into one great problem: 'design for life'. In a healthy society this design for life will encourage every profession and vocation to play its part since the degree of relatedness in all their work gives to any civilization its quality. This implies that it is desirable that everyone should solve his special task with the wide scope of a true "designer" with the new urge to integrated relationships. It further implies that there is no hierarchy of the arts, painting photography, music, poetry, sculpture, architecture, nor of any other fields such as industrial design. They are equally valid departures toward the fusion of function and content in 'design.'
+>
+> — László Moholy-Nagy, *Vision in Motion*, Chicago 1947, p. 42.
