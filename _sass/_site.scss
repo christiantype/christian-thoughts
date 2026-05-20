@@ -200,7 +200,8 @@
     padding: 0;
 
     li {
-      letter-spacing: 1.5px;
+      text-transform: none;   // read in normal case like body copy
+      letter-spacing: .5px;
       line-height: 1.5;
       margin: 0 0 1.5em;
     }
