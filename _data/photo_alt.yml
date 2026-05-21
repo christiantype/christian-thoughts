@@ -1,6 +1,7 @@
 # Alt text for photography gallery images — keyed by filename.
 # Used by _layouts/photography.html for accessibility + image SEO.
 
+"01.jpg": 'Christian Solorzano — black-and-white photograph looking up at silhouetted streetlights and tangled overhead wires against an overcast sky'
 "DSCF0332.jpg": 'Christian Solorzano — black-and-white night street photograph of a brick liquor store and Warsaw Deli lit by marquee bulbs as a car streaks past'
 "DSCF0335.jpg": 'Christian Solorzano — photograph of a calico cat resting on a discarded leather armchair beside a fire-damaged, plywood-boarded building'
 "DSCF0433.jpg": 'Christian Solorzano — photograph of an orange koi gliding among lily pads in a still pond'
