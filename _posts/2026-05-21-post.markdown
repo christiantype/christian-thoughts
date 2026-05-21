@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "More Than Design"
+
+date:   2026-05-21 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "More than design — a black-and-white still life by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+whatttttt
+
+![Christian Solorzano — black-and-white still life of a zine reading more-than.design beside a ceramic incense bowl with rising smoke](/assets/images/diary/20260521a.jpg)
+<br>
+
+![Christian Solorzano — black-and-white photograph of the OP/AL studio glass door etched with the Original Practice / Applied Learning mark and the URL more-than.design](/assets/images/diary/20260521b.jpg)
+<br>
