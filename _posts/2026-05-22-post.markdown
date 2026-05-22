@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "more more than design..."
+
+date:   2026-05-22 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "more more than design — black-and-white work and studio notes by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Yep....
+
+![Christian Solorzano — black-and-white photograph of a gallery wall with three posters, including a "Humanity First" typographic print and a dark "more than design" poster](/assets/images/diary/20260522a.jpg)
+<br>
+
+![Christian Solorzano — black-and-white desk still life with an open sketchbook, two fountain pens, and OP/AL business cards reading more-than.design](/assets/images/diary/20260522b.jpg)
+<br>
