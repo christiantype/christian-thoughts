@@ -176,8 +176,11 @@
 
         const face = bird.querySelector('.hb-face');
         const size = bird.offsetWidth || 56;
-        let x = window.innerWidth * 0.5;
-        let y = window.innerHeight * 0.28;
+
+        // Start somewhere random each load instead of always at the top.
+        const pad0 = 32;
+        let x = pad0 + Math.random() * Math.max(0, window.innerWidth  - size - pad0 * 2);
+        let y = pad0 + Math.random() * Math.max(0, window.innerHeight - size - pad0 * 2);
 
         const place = () => { bird.style.transform = `translate(${x}px, ${y}px)`; };
         place();
