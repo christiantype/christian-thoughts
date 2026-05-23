@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "Brian"
+
+date:   2026-05-23 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "A portrait of Brian Morris at OP/AL, by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+My friend Brian Morris, at OP/AL.
+
+![Christian Solorzano — portrait of his friend Brian Morris at OP/AL, wearing a navy cap with a cat patch and a striped shirt, standing by a window](/assets/images/diary/20260523a.jpg)
+<br>

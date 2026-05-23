@@ -364,3 +364,55 @@
   // Remove the global img border from faculty.scss inside .site
   img { border: 0; }
 }
+
+// ── Hummingbird (OP/AL) ───────────────────────────────────────────────────
+// Decorative bird that flits around the viewport. Position is driven by JS
+// (transform: translate with a transition); facing, bob, and wing-flap are
+// layered on nested elements so the transforms never collide.
+#hummingbird {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 54px;
+  height: 54px;
+  z-index: 60;                 // above content, below the cursor/trail
+  pointer-events: none;
+  color: #fff;                 // solid fill — opacity is applied to the whole
+  opacity: .6;                 // bird below so overlapping shapes don't stack
+  transition: transform 3s cubic-bezier(.45, 0, .55, 1);
+  will-change: transform;
+
+  @media (max-width: 600px) { width: 42px; height: 42px; }
+
+  .hb-face {
+    width: 100%;
+    height: 100%;
+    transition: transform .4s ease;   // smooth turn when changing direction
+  }
+  svg.hb {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    animation: hb-glide 2.6s ease-in-out infinite;   // gentle up/down bob
+  }
+  svg ellipse, svg path, svg circle, svg polygon { fill: currentColor; }
+  .hb-eye { fill: #111; }
+
+  .wing {
+    transform-box: view-box;
+    transform-origin: 53px 50px;
+    animation: hb-flap .14s ease-in-out infinite;     // blur-fast wingbeat
+  }
+}
+@keyframes hb-flap {
+  0%, 100% { transform: rotate(-16deg); }
+  50%      { transform: rotate(22deg); }
+}
+@keyframes hb-glide {
+  0%, 100% { transform: translateY(-6%); }
+  50%      { transform: translateY(6%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hummingbird { display: none; }
+}
