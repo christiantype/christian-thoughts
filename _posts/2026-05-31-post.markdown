@@ -1,0 +1,42 @@
+---
+layout: diary
+
+title:  "Last Days of May"
+
+date:   2026-05-31 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Captured moments — a quiet sequence of photographs from the last days of May by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+captured moments
+
+![Christian Solorzano — photograph of an interior with a vase of yellow tulips on a dining table, ceramic bowls, and a figure with a tattooed arm blurred in motion at the table beneath a framed photograph](/assets/images/diary/20260531a.jpg)
+<br>
+
+![Christian Solorzano — overhead photograph of an empty white bowl with traces of yogurt and berry on a dark grey couch, cut by a shaft of sunlight](/assets/images/diary/20260531b.jpg)
+<br>
+
+![Christian Solorzano — photograph of a quilted textile artwork spelling OP/AL in fabric and stitched lines on a grey floor, framed by shoes](/assets/images/diary/20260531c.jpg)
+<br>
+
+![Christian Solorzano — photograph of a NEWCITY "Time Travels" issue with a starburst cover on a dark wooden table](/assets/images/diary/20260531d.jpg)
+<br>
+
+![Christian Solorzano — black-and-white photograph of a sunlit, crowded beach stretching to the horizon, viewed from low on the sand](/assets/images/diary/20260531e.jpg)
+<br>
