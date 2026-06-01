@@ -194,6 +194,15 @@
     letter-spacing: .5px;
     margin-bottom: 1.4em;
   }
+  // Squiggly red links inside the bio, matching the post body's treatment.
+  .site-bio a,
+  .site-bio a:visited {
+    font-size: 1em;
+    text-decoration: underline wavy;
+    text-decoration-color: $accent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .25em;
+  }
   .site-list {
     list-style: none;
     margin: 0;
