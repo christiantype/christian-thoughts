@@ -1,0 +1,53 @@
+---
+layout: diary
+
+title:  "New City Design 50"
+
+date:   2026-06-01 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Christian Solorzano featured in the NEWCITY Design 50 — fifty Chicago changemakers making meaningful impact across their disciplines."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I'm honored to be featured in this year's New City Design 50 — an issue that celebrates fifty changemakers in Chicago building meaningful impact through their disciplines, their skills, and their communities.
+
+Over the last six years I've been building — tirelessly, sometimes blindly yet always honestly — a community in Chicago through the [Chicago Graphic Design Club](https://chicagographicdesign.club/). That community led to [Underscore](https://chicagographicdesign.club/underscore/), our podcast, which now spans over a hundred episodes across discipline, practice, and thought. It led to [Faculty](https://chicagographicdesign.club/faculty/), our publication, printed in close collaboration with some of Chicago's most important voices in design. Together we're building something special. Something that celebrates our collective individuality, our voice, and functions as a time capsule that asks more questions than it provides answers.
+
+Over these six years I've made countless friends. I've built meaningful relationships. And I've learned that the way to move things forward is through curiosity, obsession, drive, and authenticity.
+
+I don't have a grand plan. Only a deep trust in the intuition that seems to be working.
+
+Most recently I'm excited to share news of [OP/AL](https://more-than.design) — a design lab, not a studio — in Oak Park. A space introducing itself as being more than design. Because if there's anything these six years have taught me it's that design never ends. You don't do it and then it stops. There's always an echo. There's always a ripple. There's always a consequence to everything we make and every choice we take.
+
+To all my collaborators, friends, and community over the last six years — you know who you are.
+
+Thank you.
+
+Thrilled for what is to come.
+
+![Christian Solorzano — photograph of the NEWCITY Design 50 issue open to a bold yellow type spread listing the design disciplines covered in the 2026 list](/assets/images/diary/20260601a.jpg)
+<br>
+
+![Christian Solorzano — photograph of the NEWCITY "Time Travels" June 2026 cover, a purple starburst with stacked white type](/assets/images/diary/20260601b.jpg)
+<br>
+
+![Christian Solorzano — photograph of a NEWCITY Design 50 magazine spread featuring portraits of designers, including Christian Solorzano](/assets/images/diary/20260601c.jpg)
+<br>
+
+![Christian Solorzano — photograph of a NEWCITY Design 50 inside spread with editorial text and highlighted names of featured Chicago designers](/assets/images/diary/20260601d.jpg)
+<br>

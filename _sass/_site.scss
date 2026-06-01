@@ -330,6 +330,15 @@
       display: block;
       margin: 1.5em 0;
     }
+
+    // Inline links: squiggly underline in the accent red.
+    a,
+    a:visited {
+      text-decoration: underline wavy;
+      text-decoration-color: $accent;
+      text-decoration-thickness: 1px;
+      text-underline-offset: .25em;
+    }
   }
 
   // ── Footer ────────────────────────────────────────────────────────────
