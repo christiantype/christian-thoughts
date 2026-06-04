@@ -1,0 +1,30 @@
+---
+layout: diary
+
+title:  "stuff"
+
+date:   2026-06-04 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Custom tool for an album concept — a generative composition by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+custom tool for album concept for friend for fun
+
+![Christian Solorzano — generative composition of crisscrossing colored line strokes on a black background, made with a custom tool for a friend's album concept](/assets/images/diary/20260604a.png)
+<br>
