@@ -3,7 +3,7 @@ layout: diary
 
 title:  "my brother"
 
-date:   2026-06-04 12:00:00 -0500
+date:   2026-06-05 12:00:00 -0500
 
 categories: diary
 
@@ -26,7 +26,7 @@ published: true
 ---
 my brother was born in 2002 — i was 11 years old. he was born about a week before my birthday — he was my birthday gift. a baby brother. fast forward, we are now collaborators and building something great together.
 
-inspired by his love for Elvis Presley and jumpsuits, he designed and produced this fabric poster for OP/AL.
+Inspired by his love for Elvis Presley and jumpsuits, he designed and produced this fabric poster for OP/AL.
 
 You can learn more about him through [his Substack](https://substack.com/@theverticaleye).
 
