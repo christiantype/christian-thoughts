@@ -24,7 +24,11 @@ client: "Self"
 published: true
 
 ---
-my brother was born in 2002 — i was 11 years old. he was born about a week before my birthday — he was my birthday gift. a baby brother. fast forward, we are now collaborators and building something great together.
+my brother was born in 2002 — i was 11 years old. he was born about a week before my birthday — he was my birthday gift. 
+
+A baby brother. 
+
+Fast forward, we are now collaborators and building something great together.
 
 Inspired by his love for Elvis Presley and jumpsuits, he designed and produced this fabric poster for OP/AL.
 
