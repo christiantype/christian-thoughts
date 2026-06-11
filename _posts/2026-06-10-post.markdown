@@ -24,93 +24,363 @@ client: "Self"
 published: true
 
 ---
-The Beatles — A Hard Day's Night (1964)<br>
-Elvis Presley — Elvis for Everyone (1965)<br>
-Vince Guaraldi Trio — A Charlie Brown Christmas (1965)<br>
-Françoise Hardy — In English (1966)<br>
-The Supremes — I Hear a Symphony (1966)<br>
-Nico — Chelsea Girl (1967)<br>
-Frank Sinatra — Cycles (1968)<br>
-Nancy Sinatra & Lee Hazlewood — Nancy & Lee (1968)<br>
-Neil Young — After the Gold Rush (1970)<br>
-Perry Como — It's Impossible (1970)<br>
-Marvin Gaye — What's Going On (1971)<br>
-Desmond Dekker — Double Dekker (1973)<br>
-David Bowie — Station to Station (1976)<br>
-Lou Reed — Coney Island Baby (1976)<br>
-Peter Tosh — Legalize It (1976)<br>
-Billitis — Original Soundtrack (1977)<br>
-Brian Eno — Before and After Science (1977)<br>
-Michael Rother — Katzenmusik (1979)<br>
-Harold Budd & Brian Eno — The Plateaux of Mirror (1980)<br>
-Glenn Gould — The Goldberg Variations (1981)<br>
-Klaus Nomi — Klaus Nomi (1981)<br>
-Penguin Cafe Orchestra — Penguin Cafe Orchestra (1981)<br>
-The Cure — Pornography (1982)<br>
-Brian Eno — Apollo: Atmospheres and Soundtracks (1983)<br>
-Mercyful Fate — Melissa (1983)<br>
-Suzanne Vega — Suzanne Vega (1985)<br>
-Duncan Dhu — Canciones (1986)<br>
-Peter Gabriel — So (1986)<br>
-The Smiths — The Queen Is Dead (1986)<br>
-Luis Eduardo Aute — Alevosia (1987)<br>
-Suzanne Vega — Solitude Standing (1987)<br>
-Morrissey — Viva Hate (1988)<br>
-Tracy Chapman — Tracy Chapman (1988)<br>
-Angelo Badalamenti — Soundtrack from Twin Peaks (1990)<br>
-Pretenders — Packed! (1990)<br>
-Uncle Tupelo — March 16–20, 1992 (1992)<br>
-Boy George & Culture Club — At Worst... The Best Of (1993)<br>
-Smoking Popes — Born to Quit (1994)<br>
-The Cranberries — No Need to Argue (1994)<br>
-Angus — Original Soundtrack (1995)<br>
-Emmylou Harris — Wrecking Ball (1995)<br>
-King Crimson — THRAK (1995)<br>
-Passengers — Original Soundtracks 1 (1995)<br>
-Shakira — Pies Descalzos (1995)<br>
-Vangelis — Voices (1995)<br>
-Marilyn Manson — Antichrist Superstar (1996)<br>
-Orbital — In Sides (1996)<br>
-DMX — It's Dark and Hell Is Hot (1998)<br>
-Joan Sebastian — 15 Grandes Éxitos (1998)<br>
-Massive Attack — Mezzanine (1998)<br>
-Placebo — Without You I'm Nothing (1998)<br>
-Simon Jeffes — Piano Music (1998)<br>
-Dido — No Angel (1999)<br>
-Eminem — The Marshall Mathers LP (2000)<br>
-Afroman — The Good Times (2001)<br>
-Alice Cooper — The Definitive Alice Cooper (2001)<br>
-D12 — Devil's Night (2001)<br>
-Leonard Cohen — Ten New Songs (2001)<br>
-Stina Nordenstam — This Is Stina Nordenstam (2001)<br>
-Tim Hecker — Haunt Me, Haunt Me Do It Again (2001)<br>
-Pony Club — Home Truths (2002)<br>
-Matti Bye — The Phantom Carriage (2003)<br>
-Misfits — Project 1950 (2003)<br>
-The Dresden Dolls — The Dresden Dolls (2003)<br>
-William Basinski — Melancholia (2003)<br>
-Go! Team — Thunder, Lightning, Strike (2004)<br>
-Tegan and Sara — So Jealous (2004)<br>
-Imogen Heap — Speak for Yourself (2005)<br>
-Cradle of Filth — Thornography (2006)<br>
-Daniel Lanois — Here Is What Is (2007)<br>
-Paul McCartney — Memory Almost Full (2007)<br>
-Stars of the Lid — And Their Refinement of the Decline (2007)<br>
-The Pierces — Light of the Moon (2007)<br>
-Antony and the Johnsons — The Crying Light (2009)<br>
-Blackdub — Blackdub (2010)<br>
-David Lynch — Good Day Today (2011)<br>
-Nina Kraviz — Ghetto Kraviz EP (2011)<br>
-Lana Del Rey — Born to Die (2012)<br>
-Kanye West — Yeezus (2013)<br>
-Augustus Pablo — Born to Dub You (2014)<br>
-Otto A. Totland — Pinô (2014)<br>
-Gloria Ann Taylor — Love Is a Hurtin' Thing (2015)<br>
-Sophie Zelmani — Bright Eyes (2015)<br>
-Roedelius & Arnold Kasar — Einfluss (2017)<br>
-Domenique Dumont — People on Sunday (2020)<br>
-Extraordinary Attorney Woo — Original Soundtrack (2022)<br>
-Taylor Swift — Midnights (2022)<br>
-Alexandra Stréliski — Néo-Romance (2023)<br>
-Underworld — Strawberry Hotel (2024)<br>
-Lexi Jones — Version II (2026)
+1964<br>
+A Hard Day's Night<br>
+The Beatles
+
+1965<br>
+Elvis for Everyone<br>
+Elvis Presley
+
+1965<br>
+A Charlie Brown Christmas<br>
+Vince Guaraldi Trio
+
+1966<br>
+In English<br>
+Françoise Hardy
+
+1966<br>
+I Hear a Symphony<br>
+The Supremes
+
+1967<br>
+Chelsea Girl<br>
+Nico
+
+1968<br>
+Cycles<br>
+Frank Sinatra
+
+1968<br>
+Nancy & Lee<br>
+Nancy Sinatra & Lee Hazlewood
+
+1970<br>
+After the Gold Rush<br>
+Neil Young
+
+1970<br>
+It's Impossible<br>
+Perry Como
+
+1971<br>
+What's Going On<br>
+Marvin Gaye
+
+1973<br>
+Double Dekker<br>
+Desmond Dekker
+
+1976<br>
+Station to Station<br>
+David Bowie
+
+1976<br>
+Coney Island Baby<br>
+Lou Reed
+
+1976<br>
+Legalize It<br>
+Peter Tosh
+
+1977<br>
+Original Soundtrack<br>
+Billitis
+
+1977<br>
+Before and After Science<br>
+Brian Eno
+
+1979<br>
+Katzenmusik<br>
+Michael Rother
+
+1980<br>
+The Plateaux of Mirror<br>
+Harold Budd & Brian Eno
+
+1981<br>
+The Goldberg Variations<br>
+Glenn Gould
+
+1981<br>
+Klaus Nomi<br>
+Klaus Nomi
+
+1981<br>
+Penguin Cafe Orchestra<br>
+Penguin Cafe Orchestra
+
+1982<br>
+Pornography<br>
+The Cure
+
+1983<br>
+Apollo: Atmospheres and Soundtracks<br>
+Brian Eno
+
+1983<br>
+Melissa<br>
+Mercyful Fate
+
+1985<br>
+Suzanne Vega<br>
+Suzanne Vega
+
+1986<br>
+Canciones<br>
+Duncan Dhu
+
+1986<br>
+So<br>
+Peter Gabriel
+
+1986<br>
+The Queen Is Dead<br>
+The Smiths
+
+1987<br>
+Alevosia<br>
+Luis Eduardo Aute
+
+1987<br>
+Solitude Standing<br>
+Suzanne Vega
+
+1988<br>
+Viva Hate<br>
+Morrissey
+
+1988<br>
+Tracy Chapman<br>
+Tracy Chapman
+
+1990<br>
+Soundtrack from Twin Peaks<br>
+Angelo Badalamenti
+
+1990<br>
+Packed!<br>
+Pretenders
+
+1992<br>
+March 16–20, 1992<br>
+Uncle Tupelo
+
+1993<br>
+At Worst... The Best Of<br>
+Boy George & Culture Club
+
+1994<br>
+Born to Quit<br>
+Smoking Popes
+
+1994<br>
+No Need to Argue<br>
+The Cranberries
+
+1995<br>
+Original Soundtrack<br>
+Angus
+
+1995<br>
+Wrecking Ball<br>
+Emmylou Harris
+
+1995<br>
+THRAK<br>
+King Crimson
+
+1995<br>
+Original Soundtracks 1<br>
+Passengers
+
+1995<br>
+Pies Descalzos<br>
+Shakira
+
+1995<br>
+Voices<br>
+Vangelis
+
+1996<br>
+Antichrist Superstar<br>
+Marilyn Manson
+
+1996<br>
+In Sides<br>
+Orbital
+
+1998<br>
+It's Dark and Hell Is Hot<br>
+DMX
+
+1998<br>
+15 Grandes Éxitos<br>
+Joan Sebastian
+
+1998<br>
+Mezzanine<br>
+Massive Attack
+
+1998<br>
+Without You I'm Nothing<br>
+Placebo
+
+1998<br>
+Piano Music<br>
+Simon Jeffes
+
+1999<br>
+No Angel<br>
+Dido
+
+2000<br>
+The Marshall Mathers LP<br>
+Eminem
+
+2001<br>
+The Good Times<br>
+Afroman
+
+2001<br>
+The Definitive Alice Cooper<br>
+Alice Cooper
+
+2001<br>
+Devil's Night<br>
+D12
+
+2001<br>
+Ten New Songs<br>
+Leonard Cohen
+
+2001<br>
+This Is Stina Nordenstam<br>
+Stina Nordenstam
+
+2001<br>
+Haunt Me, Haunt Me Do It Again<br>
+Tim Hecker
+
+2002<br>
+Home Truths<br>
+Pony Club
+
+2003<br>
+The Phantom Carriage<br>
+Matti Bye
+
+2003<br>
+Project 1950<br>
+Misfits
+
+2003<br>
+The Dresden Dolls<br>
+The Dresden Dolls
+
+2003<br>
+Melancholia<br>
+William Basinski
+
+2004<br>
+Thunder, Lightning, Strike<br>
+Go! Team
+
+2004<br>
+So Jealous<br>
+Tegan and Sara
+
+2005<br>
+Speak for Yourself<br>
+Imogen Heap
+
+2006<br>
+Thornography<br>
+Cradle of Filth
+
+2007<br>
+Here Is What Is<br>
+Daniel Lanois
+
+2007<br>
+Memory Almost Full<br>
+Paul McCartney
+
+2007<br>
+And Their Refinement of the Decline<br>
+Stars of the Lid
+
+2007<br>
+Light of the Moon<br>
+The Pierces
+
+2009<br>
+The Crying Light<br>
+Antony and the Johnsons
+
+2010<br>
+Blackdub<br>
+Blackdub
+
+2011<br>
+Good Day Today<br>
+David Lynch
+
+2011<br>
+Ghetto Kraviz EP<br>
+Nina Kraviz
+
+2012<br>
+Born to Die<br>
+Lana Del Rey
+
+2013<br>
+Yeezus<br>
+Kanye West
+
+2014<br>
+Born to Dub You<br>
+Augustus Pablo
+
+2014<br>
+Pinô<br>
+Otto A. Totland
+
+2015<br>
+Love Is a Hurtin' Thing<br>
+Gloria Ann Taylor
+
+2015<br>
+Bright Eyes<br>
+Sophie Zelmani
+
+2017<br>
+Einfluss<br>
+Roedelius & Arnold Kasar
+
+2020<br>
+People on Sunday<br>
+Domenique Dumont
+
+2022<br>
+Original Soundtrack<br>
+Extraordinary Attorney Woo
+
+2022<br>
+Midnights<br>
+Taylor Swift
+
+2023<br>
+Néo-Romance<br>
+Alexandra Stréliski
+
+2024<br>
+Strawberry Hotel<br>
+Underworld
+
+2026<br>
+Version II<br>
+Lexi Jones
+
