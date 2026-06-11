@@ -6,6 +6,7 @@
 - { year: 1965, title: "A Charlie Brown Christmas", artist: "Vince Guaraldi Trio", apple_url: "https://music.apple.com/us/album/a-charlie-brown-christmas-original-1965-tv/1440948781" }
 - { year: 1966, title: "In English", artist: "Françoise Hardy", apple_url: "https://music.apple.com/us/album/in-english-remastered/1250184069" }
 - { year: 1966, title: "I Hear a Symphony", artist: "The Supremes", apple_url: "https://music.apple.com/us/album/i-hear-a-symphony-expanded-edition/1443225830" }
+- { year: 1967, title: "Bee Gees' 1st", artist: "Bee Gees", apple_url: "https://music.apple.com/us/album/bee-gees-1st/1444082992" }
 - { year: 1967, title: "Chelsea Girl", artist: "Nico", apple_url: "https://music.apple.com/us/album/chelsea-girl/1469551646" }
 - { year: 1967, title: "The Velvet Underground & Nico", artist: "The Velvet Underground & Nico", apple_url: "https://music.apple.com/us/album/the-velvet-underground-nico-45th-anniversary-edition/1440851613" }
 - { year: 1968, title: "Cycles", artist: "Frank Sinatra", apple_url: "https://music.apple.com/us/album/cycles/1443470324" }
@@ -25,6 +26,7 @@
 - { year: 1980, title: "The Plateaux of Mirror", artist: "Harold Budd & Brian Eno", apple_url: "https://music.apple.com/us/album/ambient-2-the-plateaux-of-mirror/724653175" }
 - { year: 1981, title: "The Goldberg Variations", artist: "Glenn Gould", apple_url: "https://music.apple.com/us/album/goldberg-variations/1534138492" }
 - { year: 1981, title: "Klaus Nomi", artist: "Klaus Nomi", apple_url: "https://music.apple.com/us/album/klaus-nomi/1675089416" }
+- { year: 1981, title: "As Falls Wichita, So Falls Wichita Falls", artist: "Pat Metheny & Lyle Mays", apple_url: "https://music.apple.com/us/album/as-falls-wichita-so-falls-wichita-falls/1523943902" }
 - { year: 1981, title: "Penguin Cafe Orchestra", artist: "Penguin Cafe Orchestra", apple_url: "https://music.apple.com/us/album/penguin-caf%C3%A9-orchestra/714892902" }
 - { year: 1982, title: "Pornography", artist: "The Cure", apple_url: "https://music.apple.com/us/album/pornography/286646425" }
 - { year: 1983, title: "Apollo: Atmospheres and Soundtracks", artist: "Brian Eno", apple_url: "https://music.apple.com/us/album/apollo-atmospheres-and-soundtracks/714861155" }
@@ -72,6 +74,7 @@
 - { year: 2003, title: "Melancholia", artist: "William Basinski", apple_url: "https://music.apple.com/us/album/melancholia/1683870626" }
 - { year: 2004, title: "Thunder, Lightning, Strike", artist: "Go! Team", apple_url: "https://music.apple.com/us/album/thunder-lightning-strike/296389825" }
 - { year: 2004, title: "So Jealous", artist: "Tegan and Sara", apple_url: "https://music.apple.com/us/album/so-jealous-20th-anniversary-edition/1780100267" }
+- { year: 2005, title: "Portrait", artist: "Arvo Pärt", apple_url: "https://music.apple.com/us/album/part-arvo-part-a-portrait-kimberley/536373946" }
 - { year: 2005, title: "Speak for Yourself", artist: "Imogen Heap", apple_url: "https://music.apple.com/us/album/speak-for-yourself-deluxe-version/1785655348" }
 - { year: 2006, title: "Thornography", artist: "Cradle of Filth" }
 - { year: 2007, title: "Here Is What Is", artist: "Daniel Lanois", apple_url: "https://music.apple.com/us/album/here-is-what-is/1844714723" }
