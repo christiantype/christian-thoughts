@@ -7,6 +7,7 @@
 - { year: 1966, title: "In English", artist: "Françoise Hardy", apple_url: "https://music.apple.com/us/album/in-english-remastered/1250184069" }
 - { year: 1966, title: "I Hear a Symphony", artist: "The Supremes", apple_url: "https://music.apple.com/us/album/i-hear-a-symphony-expanded-edition/1443225830" }
 - { year: 1967, title: "Chelsea Girl", artist: "Nico", apple_url: "https://music.apple.com/us/album/chelsea-girl/1469551646" }
+- { year: 1967, title: "The Velvet Underground & Nico", artist: "The Velvet Underground & Nico", apple_url: "https://music.apple.com/us/album/the-velvet-underground-nico-45th-anniversary-edition/1440851613" }
 - { year: 1968, title: "Cycles", artist: "Frank Sinatra", apple_url: "https://music.apple.com/us/album/cycles/1443470324" }
 - { year: 1968, title: "Nancy & Lee", artist: "Nancy Sinatra & Lee Hazlewood", apple_url: "https://music.apple.com/us/album/nancy-lee/1616561102" }
 - { year: 1969, title: "Back in Memphis", artist: "Elvis Presley", apple_url: "https://music.apple.com/us/album/back-in-memphis/1454697625" }
@@ -63,6 +64,7 @@
 - { year: 2001, title: "Ten New Songs", artist: "Leonard Cohen", apple_url: "https://music.apple.com/us/album/ten-new-songs/511074815" }
 - { year: 2001, title: "This Is Stina Nordenstam", artist: "Stina Nordenstam", apple_url: "https://music.apple.com/us/album/this-is-stina-nordenstam/1458137632" }
 - { year: 2001, title: "Haunt Me, Haunt Me Do It Again", artist: "Tim Hecker", apple_url: "https://music.apple.com/us/album/haunt-me/549704864" }
+- { year: 2002, title: "Heathen", artist: "David Bowie", apple_url: "https://music.apple.com/us/album/heathen/1677228660" }
 - { year: 2002, title: "Home Truths", artist: "Pony Club" }
 - { year: 2003, title: "The Phantom Carriage", artist: "Matti Bye", apple_url: "https://music.apple.com/us/album/the-phantom-carriage-music-for-the-silent-film-k%C3%B6rkarlen/378170011" }
 - { year: 2003, title: "Project 1950", artist: "Misfits", apple_url: "https://music.apple.com/us/album/project-1950-expanded-edition/1588152203" }
