@@ -24,11 +24,394 @@ client: "Self"
 published: true
 
 ---
-{% for a in site.data.favorite_albums %}{%- assign q = a.artist | append: " " | append: a.title | url_encode -%}
-{%- if a.apple_url -%}{%- assign apple = a.apple_url -%}{%- else -%}{%- assign apple = "https://music.apple.com/search?term=" | append: q -%}{%- endif -%}
-{{ a.year }}<br>
-{{ a.title }}<br>
-{{ a.artist }}<br>
-<span class="album-links"><a class="album-link" href="{{ apple }}" target="_blank" rel="noopener" aria-label="Listen to {{ a.title }} on Apple Music">{% include icon-apple-music.html %}</a><a class="album-link" href="https://open.spotify.com/search/{{ q }}" target="_blank" rel="noopener" aria-label="Listen to {{ a.title }} on Spotify">{% include icon-spotify.html %}</a></span>
+1960<br>
+Elvis Is Back!<br>
+Elvis Presley
 
-{% endfor %}
+1964<br>
+A Hard Day's Night<br>
+The Beatles
+
+1965<br>
+A Charlie Brown Christmas<br>
+Vince Guaraldi Trio
+
+1966<br>
+In English<br>
+Françoise Hardy
+
+1966<br>
+I Hear a Symphony<br>
+The Supremes
+
+1967<br>
+Bee Gees' 1st<br>
+Bee Gees
+
+1967<br>
+Chelsea Girl<br>
+Nico
+
+1967<br>
+The Velvet Underground & Nico<br>
+The Velvet Underground & Nico
+
+1968<br>
+Cycles<br>
+Frank Sinatra
+
+1968<br>
+Nancy & Lee<br>
+Nancy Sinatra & Lee Hazlewood
+
+1969<br>
+Back in Memphis<br>
+Elvis Presley
+
+1970<br>
+After the Gold Rush<br>
+Neil Young
+
+1970<br>
+It's Impossible<br>
+Perry Como
+
+1971<br>
+What's Going On<br>
+Marvin Gaye
+
+1973<br>
+Double Dekker<br>
+Desmond Dekker
+
+1974<br>
+Rhapsody in White<br>
+Love Unlimited Orchestra
+
+1976<br>
+Station to Station<br>
+David Bowie
+
+1976<br>
+Coney Island Baby<br>
+Lou Reed
+
+1976<br>
+Legalize It<br>
+Peter Tosh
+
+1977<br>
+Original Soundtrack<br>
+Billitis
+
+1977<br>
+Before and After Science<br>
+Brian Eno
+
+1979<br>
+Katzenmusik<br>
+Michael Rother
+
+1980<br>
+The Plateaux of Mirror<br>
+Harold Budd & Brian Eno
+
+1981<br>
+The Goldberg Variations<br>
+Glenn Gould
+
+1981<br>
+Klaus Nomi<br>
+Klaus Nomi
+
+1981<br>
+As Falls Wichita, So Falls Wichita Falls<br>
+Pat Metheny & Lyle Mays
+
+1981<br>
+Penguin Cafe Orchestra<br>
+Penguin Cafe Orchestra
+
+1982<br>
+Pornography<br>
+The Cure
+
+1983<br>
+Apollo: Atmospheres and Soundtracks<br>
+Brian Eno
+
+1983<br>
+Melissa<br>
+Mercyful Fate
+
+1985<br>
+Suzanne Vega<br>
+Suzanne Vega
+
+1986<br>
+Canciones<br>
+Duncan Dhu
+
+1986<br>
+So<br>
+Peter Gabriel
+
+1986<br>
+The Queen Is Dead<br>
+The Smiths
+
+1987<br>
+Alevosia<br>
+Luis Eduardo Aute
+
+1987<br>
+Solitude Standing<br>
+Suzanne Vega
+
+1988<br>
+Viva Hate<br>
+Morrissey
+
+1988<br>
+Tracy Chapman<br>
+Tracy Chapman
+
+1990<br>
+Soundtrack from Twin Peaks<br>
+Angelo Badalamenti
+
+1990<br>
+Packed!<br>
+Pretenders
+
+1991<br>
+Orbital<br>
+Orbital
+
+1992<br>
+March 16–20, 1992<br>
+Uncle Tupelo
+
+1993<br>
+At Worst... The Best Of<br>
+Boy George & Culture Club
+
+1994<br>
+Born to Quit<br>
+Smoking Popes
+
+1994<br>
+No Need to Argue<br>
+The Cranberries
+
+1995<br>
+Original Soundtrack<br>
+Angus
+
+1995<br>
+Wrecking Ball<br>
+Emmylou Harris
+
+1995<br>
+THRAK<br>
+King Crimson
+
+1995<br>
+Original Soundtracks 1<br>
+Passengers
+
+1995<br>
+Pies Descalzos<br>
+Shakira
+
+1995<br>
+Voices<br>
+Vangelis
+
+1996<br>
+Antichrist Superstar<br>
+Marilyn Manson
+
+1998<br>
+It's Dark and Hell Is Hot<br>
+DMX
+
+1998<br>
+15 Grandes Éxitos<br>
+Joan Sebastian
+
+1998<br>
+Mezzanine<br>
+Massive Attack
+
+1998<br>
+Without You I'm Nothing<br>
+Placebo
+
+1998<br>
+Piano Music<br>
+Simon Jeffes
+
+1999<br>
+No Angel<br>
+Dido
+
+2000<br>
+The Marshall Mathers LP<br>
+Eminem
+
+2001<br>
+The Good Times<br>
+Afroman
+
+2001<br>
+The Definitive Alice Cooper<br>
+Alice Cooper
+
+2001<br>
+Devil's Night<br>
+D12
+
+2001<br>
+Ten New Songs<br>
+Leonard Cohen
+
+2001<br>
+This Is Stina Nordenstam<br>
+Stina Nordenstam
+
+2001<br>
+Haunt Me, Haunt Me Do It Again<br>
+Tim Hecker
+
+2002<br>
+Heathen<br>
+David Bowie
+
+2002<br>
+Home Truths<br>
+Pony Club
+
+2003<br>
+The Phantom Carriage<br>
+Matti Bye
+
+2003<br>
+Project 1950<br>
+Misfits
+
+2003<br>
+The Dresden Dolls<br>
+The Dresden Dolls
+
+2003<br>
+Melancholia<br>
+William Basinski
+
+2004<br>
+Thunder, Lightning, Strike<br>
+Go! Team
+
+2004<br>
+So Jealous<br>
+Tegan and Sara
+
+2005<br>
+Portrait<br>
+Arvo Pärt
+
+2005<br>
+Speak for Yourself<br>
+Imogen Heap
+
+2006<br>
+Thornography<br>
+Cradle of Filth
+
+2007<br>
+Here Is What Is<br>
+Daniel Lanois
+
+2007<br>
+Memory Almost Full<br>
+Paul McCartney
+
+2007<br>
+And Their Refinement of the Decline<br>
+Stars of the Lid
+
+2007<br>
+Light of the Moon<br>
+The Pierces
+
+2009<br>
+The Crying Light<br>
+Antony and the Johnsons
+
+2010<br>
+Blackdub<br>
+Blackdub
+
+2011<br>
+Good Day Today<br>
+David Lynch
+
+2011<br>
+Ghetto Kraviz EP<br>
+Nina Kraviz
+
+2012<br>
+Born to Die<br>
+Lana Del Rey
+
+2013<br>
+Yeezus<br>
+Kanye West
+
+2014<br>
+Born to Dub You<br>
+Augustus Pablo
+
+2014<br>
+Pinô<br>
+Otto A. Totland
+
+2015<br>
+Love Is a Hurtin' Thing<br>
+Gloria Ann Taylor
+
+2015<br>
+Bright Eyes<br>
+Sophie Zelmani
+
+2017<br>
+Einfluss<br>
+Roedelius & Arnold Kasar
+
+2019<br>
+The Undivided Five<br>
+A Winged Victory for the Sullen
+
+2020<br>
+People on Sunday<br>
+Domenique Dumont
+
+2022<br>
+Original Soundtrack<br>
+Extraordinary Attorney Woo
+
+2022<br>
+Midnights<br>
+Taylor Swift
+
+2023<br>
+Néo-Romance<br>
+Alexandra Stréliski
+
+2024<br>
+Strawberry Hotel<br>
+Underworld
+
+2026<br>
+Version II<br>
+Lexi Jones
