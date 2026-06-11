@@ -363,7 +363,7 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      opacity: .75;
+      opacity: .8;
       transition: opacity .15s ease;
     }
     .album-link:hover { opacity: 1; }
@@ -371,6 +371,8 @@
       width: 1.05em;
       height: 1.05em;
       display: block;
+      flex-shrink: 0;       // don't let flex squeeze the icon
+      overflow: visible;    // avoid sub-pixel edge clipping on the circle
     }
   }
 
