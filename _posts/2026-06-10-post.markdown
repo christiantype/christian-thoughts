@@ -24,13 +24,13 @@ client: "Self"
 published: true
 
 ---
+1960<br>
+Elvis Is Back!<br>
+Elvis Presley
+
 1964<br>
 A Hard Day's Night<br>
 The Beatles
-
-1965<br>
-Elvis for Everyone<br>
-Elvis Presley
 
 1965<br>
 A Charlie Brown Christmas<br>
@@ -71,6 +71,10 @@ Marvin Gaye
 1973<br>
 Double Dekker<br>
 Desmond Dekker
+
+1974<br>
+Rhapsody in White<br>
+Love Unlimited Orchestra
 
 1976<br>
 Station to Station<br>
