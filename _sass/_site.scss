@@ -350,6 +350,28 @@
       text-decoration-thickness: 1px;
       text-underline-offset: .25em;
     }
+
+    // Album streaming links (favorite-albums post): small brand-mark icons,
+    // no squiggle underline, subtle until hover.
+    .album-links {
+      display: inline-flex;
+      gap: .4em;
+      margin-top: .15em;
+    }
+    .album-link,
+    .album-link:visited {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      opacity: .75;
+      transition: opacity .15s ease;
+    }
+    .album-link:hover { opacity: 1; }
+    .album-icon {
+      width: 1.05em;
+      height: 1.05em;
+      display: block;
+    }
   }
 
   // ── Footer ────────────────────────────────────────────────────────────
