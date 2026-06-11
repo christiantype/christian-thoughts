@@ -41,6 +41,7 @@
 - { year: 1988, title: "Tracy Chapman", artist: "Tracy Chapman", apple_url: "https://music.apple.com/us/album/tracy-chapman/79565550" }
 - { year: 1990, title: "Soundtrack from Twin Peaks", artist: "Angelo Badalamenti", apple_url: "https://music.apple.com/us/album/twin-peaks-soundtrack-from/374382340" }
 - { year: 1990, title: "Packed!", artist: "Pretenders", apple_url: "https://music.apple.com/us/album/packed/118129281" }
+- { year: 1991, title: "Orbital", artist: "Orbital", apple_url: "https://music.apple.com/us/album/orbital/1313447481" }
 - { year: 1992, title: "March 16–20, 1992", artist: "Uncle Tupelo", apple_url: "https://music.apple.com/us/album/march-16-20-1992/287520820" }
 - { year: 1993, title: "At Worst... The Best Of", artist: "Boy George & Culture Club", apple_url: "https://music.apple.com/us/album/at-worst-the-best-of-boy-george-and-culture-club/724456729" }
 - { year: 1994, title: "Born to Quit", artist: "Smoking Popes", apple_url: "https://music.apple.com/us/album/born-to-quit/723580588" }
@@ -52,7 +53,6 @@
 - { year: 1995, title: "Pies Descalzos", artist: "Shakira", apple_url: "https://music.apple.com/us/album/pies-descalzos/193662156" }
 - { year: 1995, title: "Voices", artist: "Vangelis", apple_url: "https://music.apple.com/us/album/voices/357801349" }
 - { year: 1996, title: "Antichrist Superstar", artist: "Marilyn Manson" }
-- { year: 1996, title: "In Sides", artist: "Orbital", apple_url: "https://music.apple.com/us/album/in-sides/1313444931" }
 - { year: 1998, title: "It's Dark and Hell Is Hot", artist: "DMX", apple_url: "https://music.apple.com/us/album/its-dark-and-hell-is-hot/1434901425" }
 - { year: 1998, title: "15 Grandes Éxitos", artist: "Joan Sebastian", apple_url: "https://music.apple.com/us/album/15-grandes-%C3%A9xitos/1495526816" }
 - { year: 1998, title: "Mezzanine", artist: "Massive Attack", apple_url: "https://music.apple.com/us/album/mezzanine-deluxe/1428684976" }
