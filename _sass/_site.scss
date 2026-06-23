@@ -340,6 +340,28 @@
       margin: 1.5em 0;
     }
 
+    // Opt-in grid layout for posts with many images (e.g. AI Slop).
+    // Wrap images in <div class="post-grid"> in the markdown.
+    .post-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 1.5em 0;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0;
+        border: 1px solid rgba(255, 255, 255, .2);
+        border-radius: 8px;
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
     // Inline links: squiggly underline in the accent red.
     // font-size: 1em so links don't compound to a smaller step than the body.
     a,

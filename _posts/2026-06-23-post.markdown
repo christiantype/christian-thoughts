@@ -1,0 +1,59 @@
+---
+layout: diary
+
+title:  "AI Slop"
+
+date:   2026-06-23 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "AI Slop — a one-word reaction by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+gag.
+
+<div class="post-grid">
+<img src="/assets/images/diary/20260623a.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623b.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623c.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623d.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623e.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623f.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623g.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623h.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623i.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623j.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623k.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623l.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623m.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623n.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623o.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623p.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623q.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623r.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623s.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623t.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623u.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623v.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623w.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623x.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623y.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623z.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623aa.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623ab.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+<img src="/assets/images/diary/20260623ac.PNG" alt="Christian Solorzano — screenshot of an AI-generated Instagram ad (AI slop)">
+</div>
