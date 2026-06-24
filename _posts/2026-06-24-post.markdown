@@ -24,9 +24,9 @@ client: "Self"
 published: true
 
 ---
-Creating Creation**
+Creating Creation
 
-A conversation between Christian Solorzano and Barry Deck
+A conversation between Christian Solorzano and Barry Deck.
 
 Oak Park, Illinois
 
