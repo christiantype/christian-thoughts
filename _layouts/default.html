@@ -86,6 +86,22 @@
     </div>
 
     <script>
+      // Open external links in a new tab. Internal links (same host) stay
+      // in the current tab so navigation feels native.
+      (() => {
+        const host = location.hostname;
+        document.querySelectorAll('a[href^="http"]').forEach(a => {
+          try {
+            if (new URL(a.href).hostname !== host) {
+              a.target = '_blank';
+              a.rel = a.rel ? `${a.rel} noopener` : 'noopener noreferrer';
+            }
+          } catch (_) {}
+        });
+      })();
+    </script>
+
+    <script>
       // Lightbox: click any photo or design image to enlarge. Metadata (if any)
       // is read from the source img's data-meta attribute and shown below.
       (() => {
