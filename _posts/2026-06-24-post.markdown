@@ -1,0 +1,179 @@
+---
+layout: diary
+
+title:  "Creating Creation"
+
+date:   2026-06-24 00:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Creating Creation — a conversation between Christian Solorzano and Barry Deck at the Zen Life & Meditation Center in Oak Park, Illinois."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Creating Creation**
+
+A conversation between Christian Solorzano and Barry Deck
+
+Oak Park, Illinois
+
+This talk was given by Barry Deck and Christian Solorzano at the Zen Life & Meditation Center in Oak Park, Illinois. It was intentionally unscripted — a live conversation between two designers thinking out loud about creativity, practice, and what it means to make things.
+
+[Christian Solorzano](https://christiansolorzano.com/) is a designer, educator, photographer, and community builder. He is a trained meditation instructor, Brazilian Jiu-Jitsu black belt, producer of [Faculty](https://more-than.design/projects/faculty.html) — an annual journal — host of the [Underscore](https://more-than.design/projects/underscore.html) podcast, and founder of the [Chicago Graphic Design Club](https://more-than.design/projects/cgdc.html) and OP/AL. His work spans identity, culture, and communication. He teaches graphic design at DePaul University.
+
+[Barry Deck](https://barrydeck.com/) is a designer, artist, typeface designer, creative director, developer, yogi, dog lover, walkability enthusiast, meditator, joker, and foodie. He has touched brands as gigantic as Coca-Cola and the Super Bowl and as tiny as they come. He has lectured and taught internationally. His work is in the permanent collections of MoMA and the Cooper Hewitt National Design Museum.
+
+---
+
+**Moderator:** Our first speaker is Christian Solorzano. He is a certified mindfulness and meditation teacher, product designer, educator, and community builder. He teaches graphic design at DePaul, founded the Chicago Graphic Design Club in 2020, and hosts the Underscore podcast. He founded OP/AL — Original Practice and Applied Learning — received his jukai in 2020, and served as Shuso for our last session. Our next speaker is Barry Deck — designer, artist, typeface designer, and meditator. His work spans large-scale projects for Coca-Cola and the Super Bowl to, as he puts it, as small as they come. He has collaborated with the Museum of Modern Art and the Cooper Hewitt National Design Museum. They'll be speaking today on creativity.
+
+---
+
+<span class="cs">Christian Solorzano:</span> Thank you all for coming today, on Father's Day. I was asked a few weeks ago to give this talk and decided it would be nice to invite Barry to speak with me. We have known each other for a handful of years, and a lot of the work I grew up being enamored with came from the period Barry was a part of — the nineties. His work is work I grew up looking up to, so to sit next to him for this talk is a real honor.
+
+As of January, I rented a space here in Oak Park that has been functioning as what I am calling a design laboratory. Barry and I spend most days there together, having conversations about design and creativity. For this talk, we did not do much planning beyond getting together last Friday to come up with a few bullet points. I purposely did not want to over-prepare, because what we are going to talk about is something we think about all the time.
+
+<span class="bd">Barry Deck:</span> Happy to be one of the mad scientists in the laboratory. I was living in Florida and went to a design event in Chicago a couple of summers ago — on Navy Pier. There were tables with design organizations, and I went looking for the AIGA. I ended up talking to Christian, who explained that this was the Chicago Graphic Design Club. That was a wonderful thing to hear about, and somehow I ended up sitting here, which is also wonderful.
+
+<span class="cs">Christian Solorzano:</span> We knew we wanted to talk about creativity because it is something both Barry and I practice all the time. We think of everything humans do — everything we spend our days doing — as creativity. From the moment we wake up: the clothes we choose to wear, how we make our food, the thoughts we have. In Zen, we are creating realities every single minute. Some of what we create does good and some does harm, but everything around us is a byproduct of creativity. We take it seriously because we view it as a vocation and a responsibility — to ourselves and to one another.
+
+Inescapable.
+
+<span class="bd">Barry Deck:</span> Inescapable.
+
+<span class="cs">Christian Solorzano:</span> When the topic of creativity comes up, some people say they are not creative. We want to break the misconception that creativity is only about aesthetics or beauty. From the time we were born, we look up at the sky with wonder, we take things apart and put them back together. We are trying to find our place in the world. That is really what creativity is — finding our place, finding our context, and figuring out how we can show up for one another.
+
+There are two things we would love for people to walk away with today. One is to feel validated in your own inner sense of creativity. The other is to understand that you are all capable of making — and that there is no duality in it, no good or bad. It is just the act.
+
+<span class="bd">Barry Deck:</span> Capable of making, and are making, all the time — every moment, by default.
+
+<span class="cs">Christian Solorzano:</span> When we sit in meditation and experience stillness, ideas come to the foreground. I practice photography, and I have noticed that my best photographs tend to come from a place where I am not getting in my own way — where there is an ease I allow to happen. Some people call it a flow state. Meditation is a great vehicle for beginning to experience those moments of cool ease.
+
+Another word I have heard here at the Zen center is cool boredom — allowing yourself to be bored in a way that feels, somehow, cool. I remember believing, a long time ago, that if you were ever bored it meant you were a boring person. As I started to meditate and learn about Zen, I realized that boredom is a virtue — and honestly, it has become something of a luxury. To be able to wake up in the morning and just sit there with yourself, bored, is a real privilege. Even now, I know that sometimes I have to find time for boredom. I have to schedule it into my calendar.
+
+<span class="bd">Barry Deck:</span> "If you feel boredom, you are probably boring." Who taught you that? That is preposterous. There is just this sense, from the moment we are born and as we grow up, that to be occupied is a good thing. In a corporate setting, saying you are really busy seems like a badge of honor. The hustle culture of late capitalism is not something we needed to create — but it has been created. We can create our own disregard of it anytime we wish.
+
+<span class="cs">Christian Solorzano:</span> There is a lot of unlearning involved in meditation. When we talk about emptying the mind, that really is a practice of allowing yourself to become a blank canvas. Within that blank canvas, we like to think, is where beauty and joy and all the wonderful sensations lie. But it also means coming face to face with sensations and realities that are not always pleasant.
+
+We were talking on Friday about a spectrum — love on one side, fear on the other. We do not want to pitch creativity as being only happiness and joy, but it also does not always have to come from suffering. There is this idea that great work comes out of suffering, and we can think of many artists who suffered greatly and created remarkable things. But what we are really talking about is not dwelling in either polarity — learning to be elastic enough to navigate between the two.
+
+<span class="bd">Barry Deck:</span> The energy on the fear side tends to be really turbulent. And then all the way on the other side, all the way toward love, things can come off as a little saccharine. I remember even as a kid, my mom loves music that is basically all the way over on that end — and I would walk into the room and think: what is this? It is so one-dimensional. It has no emotional depth.
+
+In the middle is where we are really expressing the human condition.
+
+<span class="cs">Christian Solorzano:</span> I think of artists as scavengers or explorers — unafraid of going to either end. In Zen, we are not looking to become enlightened beings who transcend the world and reach some faraway state. We are looking to be awakened so that we can be of service — to be in the rubble, and in the suffering of other people.
+
+Creativity is about giving yourself permission to experience all of those emotions. If you do a quick search for "creativity" or "design," the imagery is almost always people in an office with smiles on their faces — everything polished and clean. But life is messy and should not be romanticized. Behind a lot of beauty, there tends to be a lot of rawness. The work that lasts is able to hold a wide range of feelings.
+
+So — where do you all think ideas come from?
+
+<span class="aud">Audience:</span> Other people's artwork, other people's writing — those spark ideas for me. It is like appropriation, but not exactly stealing.
+
+<span class="aud">Audience:</span> It depends on the type of idea. Sometimes a very random one just appears — I am in the car by myself and something comes. But a lot of my ideas stem from necessity. From friction. When something is not working quite as well as I would like, I start to mull over what could be different. What could make this more — I hate the word efficient — more ergonomic, maybe.
+
+<span class="aud">Audience:</span> A lot of what I do requires some kind of inventiveness in relation to limitation. I have three things in the refrigerator — what am I going to make for dinner? Yesterday I was out planting some native shrubs I had propagated from cuttings the year before. We had found a big roll of fencing in the woods, and I knew it was not quite tall enough to keep deer from bending over and eating the plants. But I realized there was enough of it to make a double-tier cage. I did not wish I had five-foot fencing. I just took my wire cutters and put it together. Somebody said, "oh, that is a good idea." But it was just responding to what was necessary in the moment, with what was available.
+
+<span class="cs">Christian Solorzano:</span> That is the concept of skillful means in Buddhism — responding to things appropriately. You have these ingredients, and you respond accordingly, rather than getting frustrated because you do not have what you wish you had.
+
+OP/AL stands for Original Practice — and then there is a forward slash — Applied Learning. The reason behind that name is a question I keep coming back to: how do we incorporate our true nature, our Buddha nature — who we were before our parents were born, before we had a name — while also making sure we are not dwelling too much in that domain? Because it is easy to fall into the trappings of spiritual materialism, where we believe all we are is our Buddha nature and lose sight of the fact that we are also a person who needs to throw out the trash, pay their parking tickets, show up to a meeting on time.
+
+When I started practicing Zen, I think a lot of us on the path believe, at first, that we are too spiritual now — and we start to behave in a way that makes our friends say, "hey, what is going on? You have changed." The question I always come back to is: how do I hold those two parts of myself and work within them simultaneously?
+
+<span class="bd">Barry Deck:</span> What you are describing — even though you are framing it as thoughts about your own spirituality — really sounds like self-judgment. And self-judgment will give you some fodder for creativity, but it will also slow it down, because it makes you hesitant.
+
+I try to turn my self-criticism on and off. I want to open up so the signal comes out, and then I want to turn on the filter and decide what to keep. When you get the chatter out of your head — and self-judgment is mostly chatter — that is when the quiet voice can actually tell you things.
+
+<span class="cs">Christian Solorzano:</span> I find self-judgment useful sometimes. There is a sense of accountability in it. I used to tell people never to compare themselves to others, but as my practice has matured, I have learned there is value in comparison — not in the way we usually think of it, but as a way to flatten hierarchy and recognize the agency we have to accomplish things we admire in other people.
+
+Does anyone have an example of self-judgment working in their favor?
+
+<span class="aud">Audience:</span> When I was younger I would bring too much of myself into spaces, and finally I had to look at that and say: that is a judgment, and you need to stop, because you are not being the person you want to be. If you enter spaces and people are repulsed by you, something needs to change. Getting to a place where you are just your original self — not being defined as a person who is "not drinking" or "in recovery," but simply showing up as you are — that has been the great struggle, and the great practice, for me.
+
+<span class="bd">Barry Deck:</span> It is also possible to say to yourself: I was this, I learned this from it, and now I want to be that. To move past the framing of recovery and say instead — I am a person who stopped drinking, and I have that lesson to offer.
+
+<span class="aud">Audience:</span> I tend to prefer the term self-reflection over self-judgment, because judgment can feel so pejorative that there is a fear to even approach it. What our Zen practice asks of us is to be patient with what arises — to look at it, accept it, even when it is challenging or uncomfortable — without the component of good self, bad self, evolving self, stagnating self. Just: are we willing to look?
+
+<span class="bd">Barry Deck:</span> That makes me think about something you said at the very beginning — becoming a blank canvas. I am a little older than Christian, and you get to a point where you are not really going to be a blank canvas, as blank as you try to be. And sometimes it is okay to have a little tint.
+
+Maybe this is the right moment to talk about craft. Because there is not just what we make, but how we make it — and that includes habit, taste, and things about what you do that simply come out of what you are. I am 6'4", and the photographs I take tend to have a certain point of view because of that. In graduate school, I was taken to task for photographs that seemed to belittle people — a perspective problem rooted in my height. I had to learn to position the camera lower, to adapt a physical habit to something that was not innate.
+
+And I have been drawing on a computer since 1987. Almost forty years of making vector drawings with Bézier forms. There is no way the habit of my eye and my hand is not going to be involved in everything I make. It is deeply ingrained in the configuration of my neurons.
+
+<span class="aud">Audience:</span> Is it not also an accumulation of experience? The first time I went to England, the first time I encountered certain masterpieces, Beethoven's late quartets — it just goes right into you and changes you. You look at things differently, and that starts to inform your practice. Getting burned on a project that did not work out — you build successive experiences. You come to know exactly what you are getting into when certain conditions present themselves.
+
+<span class="cs">Christian Solorzano:</span> A big part of what influences my output is the people I surround myself with. And I think the things that had the most impact on you as a teenager stay with you forever. If I dissect my work with real honesty, I can trace everything back to some small moment between the ages of thirteen and eighteen. You cannot escape it. You learn to work with it, to give it new voices.
+
+I see this with my students all the time — their taste is shaped by the things they are growing up with. Over time, you learn to reappropriate those mannerisms that keep showing up in your work.
+
+Even just working beside Barry, I notice the way he treats his fonts beginning to appear in my work subconsciously. We all have choices about what kind of information we put into our minds. The good information is what sustains you — like a good meal that makes you feel well. Every time Barry and I shut our laptops and part ways, there is a creative nourishment that stays with me. It sets a new standard for how I want my creativity to feel. So when it does not feel that way — when I find myself around people who are negative, always playing devil's advocate, always saying no — I recognize that is not the reality I want to exist in. It starts to guide you.
+
+You find yourself sitting here with Barry Deck at a Buddhist center thinking: how did I get here? And I think it is just from accumulated small actions, beginning maybe when I was six years old — getting a screwdriver, opening up a radio, being amazed by all the little chips inside in different colors with different fonts printed on them. If I placed one of those old stereos next to the work I am doing today, I suspect there would be a direct correlation.
+
+<span class="bd">Barry Deck:</span> You started talking about judgment again, and I think it gets a bad reputation. A lot of people say turn off your judgment — especially in spiritual circles. But judgment is inescapable, and the trick is knowing how it serves you and knowing when to turn it off.
+
+To turn it off, you have to lower your energy. You have to calm down. You have to get bored. I get ideas when I am walking around, or in the shower, or — honestly — on the toilet. When I am totally distracted, little gems just appear. Something whispers in my ear. But being able to turn judgment back on, sort through what you found, and decide what to keep — that is equally important.
+
+There is a whole realm of judgment that is really about editing: what you decide to take in, what you decide to incorporate into your understanding of the world you want to inhabit. You could also call it discernment.
+
+<span class="aud">Audience:</span> I used to work as a production designer on film sets. A lot of times when we would go into a space, we would work with broad strokes first — finding the shape of the space, understanding where the camera would be, where forms would land — before working on any details. The room might get rearranged six or seven times before things settled.
+
+On one project, we had a poker table in the middle of a room with money laid out as a base layer. Some of it was convincing fake money, some of it was terrible. The idea was to build mass and then place the better money on top. The client came in and immediately started judging it. But they were not seeing what the camera would see. They were seeing it with full knowledge of the object itself, not what it would become on film.
+
+The entire process is mistakes until it is not. The first stroke on a white canvas is a corruption of that perfect surface. That is the process. You put things in and take them away until you have rendered what you are trying to render. You cannot walk into the middle of that. There is a time for the judging mind and a time to just keep going.
+
+<span class="cs">Christian Solorzano:</span> Should we talk about making things nobody asked for?
+
+<span class="bd">Barry Deck:</span> And then we can talk about asking for things nobody made — which is actually the same thing.
+
+<span class="cs">Christian Solorzano:</span> As a graphic designer, you are usually being asked to make certain things. There are a lot of business metrics involved where the integrity of creativity gets sacrificed because someone is making a demand that violates your understanding of what something should be. Making things on the side — making things nobody asked for — is a way to combat that.
+
+I have been working at a company for almost nine years and am desperately trying to leave that world behind. Which is why, for the last six years, I have been extremely stubborn and just making things for the sake of making them. There is a sense of stubbornness that comes with having an idea — allowing yourself to filter out everything on the outside and simply committing.
+
+<span class="bd">Barry Deck:</span> There is something to be said for the innovation that comes from working within constraints. And a lot of times clients have so many constraints that everything you could do is technically impossible — the brief becomes a complete oxymoron. On a project like that, you have to set it aside and work anyway. And then you are making something nobody asked for. Because sometimes — all the time, really — people do not know what to ask for. So you make everything and let the judging happen later.
+
+<span class="aud">Audience:</span> You just reminded me of my corporate life. I worked at a design company on large projects with teams across many disciplines. My role was essentially: we cannot do that. It was a love-hate relationship. When designers would listen and make adjustments without compromising too much, the work was genuinely fun. When a designer insisted — "they hired me to do this, they told me not to listen to you" — those projects were torture.
+
+<span class="cs">Christian Solorzano:</span> I like to approach things from a sense of partnership. The most rewarding work I have done with other people has been where there is a unified sense of being in it together, a shared vision. But some places do not allow for that. I find myself in situations where the instructions are fixed and there is no room for conversation — and sometimes those demands are being filtered through a series of people who do not even agree with what they are asking me to do.
+
+I am also a big fan of flattening hierarchy and titles. Even hearing all those titles in the introduction made me uncomfortable. Titles create hierarchy, hierarchy creates power dynamics, and power dynamics create expectations I do not want at all.
+
+<span class="bd">Barry Deck:</span> If you hire creative people and then put them in a box like it is a factory, you are treating them as a content provider. But when the collaborating parties are not genuinely tuned into each other, you end up with collaboration by default — and that is not the good kind.
+
+<span class="aud">Audience:</span> I have seen that in film a lot. A director who tells an actor trained in improvisation to read the script exactly — and you just wonder: why are you here? What do you actually want from me?
+
+<span class="cs">Christian Solorzano:</span> I met a design couple who run an organization focused on ceramics. When they meet with clients, the first five minutes is always meditation. After those five minutes, they get to work. They say that having just that silence disarms everyone — there is no longer a strong sense of self in the room. I am in meetings all the time where one ends at noon and the next begins at noon, and there is just no way to be fully present going back to back like that. A small buffer to slow down can make for better collaboration. Or sometimes it makes clear that you are not going to work together, and both parties can agree to walk away. There is a virtue in that clarity too.
+
+<span class="aud">Audience:</span> The biggest things ever made — the pyramids — were made by thousands of people. The ego of the auteur, who treats everyone around them as an extension of themselves rather than someone to genuinely listen to, tends to make the project feel small.
+
+<span class="cs">Christian Solorzano:</span> I do find value in doing things that are entirely mine, because it gets that necessity out of the way. When I work with other people, I do not feel the need to make it mine — because I already have mine elsewhere. I used to get combative at work sometimes, and I do not anymore, because in the evenings I have my own things that require me. It is about choosing what you are willing to argue for. I become a better collaborator because I can be completely selfish with my personal projects.
+
+<span class="bd">Barry Deck:</span> That is a sharp observation — and actually very good advice. People who lead large teams come in different ways. Some lead through fear, others by recognizing who everyone is and bringing them into the process so their strengths can contribute. One end of that spectrum works considerably better. If you are telling people what to do and not letting them think for themselves, you are missing out on a great deal of good energy and good effect.
+
+<span class="cs">Christian Solorzano:</span> With leadership there is also a necessity of being comfortable with letting people fail. Failure is important. It is, honestly, the only way anyone ever learns anything.
+
+With my students, I encourage failure all the time. I set up expectations that might lead them to fall short, because I know that is where the real learning happens. Most recently, I had a class where six groups each gave a final presentation. I told them they could present in any format they chose — if they could get away with presenting without speaking at all, they were welcome to try.
+
+One group created a presentation narrated entirely by an AI. They stood at the front of the room while a fifteen-minute video played behind them, a single AI voice reading through their entire project. It did not quite land. It was a little awkward to stand there while the video played, and afterwards they knew it. I asked them: if you did this again, what would you do differently? They said they had learned so much from doing it.
+
+I told them: next time, maybe you have one AI voice speaking as a child, one as a conductor, one as someone in a wheelchair — and in between each voice, you step forward and introduce what is coming. But the only way to arrive at that solution was by looking a little silly in front of everyone on the last day of class.
+
+They got an A. They took a risk. Being a leader — especially in education — means understanding that sometimes you have to let people get a little silly. That is where the learning lives.
+
+---
+
+OP/AL — Original Practice / Applied Learning
+
+Oak Park, Illinois

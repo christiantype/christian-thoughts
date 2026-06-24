@@ -369,6 +369,11 @@
       text-underline-offset: .25em;
     }
 
+    // Speaker labels (Creating Creation transcript): two colors + neutral aud.
+    .cs  { color: $accent;   font-weight: 700; }   // Christian — red accent
+    .bd  { color: #4ed7c5;   font-weight: 700; }   // Barry — soft teal
+    .aud { color: #8a8a8a;   font-weight: 700; }   // Audience — neutral grey
+
   }
 
   // ── Footer ────────────────────────────────────────────────────────────
