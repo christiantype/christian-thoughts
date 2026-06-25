@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Rain"
+
+date:   2026-06-24 12:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Rain — two photographs from a stormy afternoon by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I love it — until I don't.
+
+![Christian Solorzano — photograph looking up into dark tree canopies against a heavy overcast sky just before a storm](/assets/images/diary/20260624a.jpg)
+<br>
+
+![Christian Solorzano — photograph of trees in heavy rain with a faint streetlamp glow through the downpour](/assets/images/diary/20260624b.jpg)
+<br>
