@@ -87,12 +87,17 @@
 
     <script>
       // Open external links in a new tab. Internal links (same host) stay
-      // in the current tab so navigation feels native.
+      // in the current tab so navigation feels native — unless the body has
+      // the .post-all-new-tab class, in which case every link opens in a new
+      // tab (used on pages where you want zero in-page navigation, like
+      // transcript posts).
       (() => {
         const host = location.hostname;
+        const allNewTab = document.body.classList.contains('post-all-new-tab');
         document.querySelectorAll('a[href^="http"]').forEach(a => {
           try {
-            if (new URL(a.href).hostname !== host) {
+            const external = new URL(a.href).hostname !== host;
+            if (allNewTab || external) {
               a.target = '_blank';
               a.rel = a.rel ? `${a.rel} noopener` : 'noopener noreferrer';
             }

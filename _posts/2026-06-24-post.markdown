@@ -23,9 +23,9 @@ client: "Self"
 
 published: true
 
----
-Creating Creation
+body_class: "post-all-new-tab"
 
+---
 A conversation between Christian Solorzano and Barry Deck.
 
 Oak Park, Illinois
@@ -38,7 +38,7 @@ This talk was given by Barry Deck and Christian Solorzano at the Zen Life & Medi
 
 ---
 
-**Moderator:** Our first speaker is Christian Solorzano. He is a certified mindfulness and meditation teacher, product designer, educator, and community builder. He teaches graphic design at DePaul, founded the Chicago Graphic Design Club in 2020, and hosts the Underscore podcast. He founded OP/AL — Original Practice and Applied Learning — received his jukai in 2020, and served as Shuso for our last session. Our next speaker is Barry Deck — designer, artist, typeface designer, and meditator. His work spans large-scale projects for Coca-Cola and the Super Bowl to, as he puts it, as small as they come. He has collaborated with the Museum of Modern Art and the Cooper Hewitt National Design Museum. They'll be speaking today on creativity.
+**Moderator:** Our first speaker is Christian Solorzano. He is a certified mindfulness and meditation teacher, product designer, educator, and community builder. He teaches graphic design at DePaul, founded the Chicago Graphic Design Club in 2020, and hosts the Underscore podcast. He founded OP/AL — Original Practice and Applied Learning — received his jukai in 2020, and served as [Shuso](https://en.wikipedia.org/wiki/Shuso) for our last [Ango](https://en.wikipedia.org/wiki/Ango_%28Buddhism%29). Our next speaker is Barry Deck — designer, artist, typeface designer, and meditator. His work spans large-scale projects for Coca-Cola and the Super Bowl to, as he puts it, as small as they come. He has collaborated with the Museum of Modern Art and the Cooper Hewitt National Design Museum. They'll be speaking today on creativity.
 
 ---
 
@@ -88,7 +88,7 @@ So — where do you all think ideas come from?
 
 <span class="cs">Christian Solorzano:</span> That is the concept of skillful means in Buddhism — responding to things appropriately. You have these ingredients, and you respond accordingly, rather than getting frustrated because you do not have what you wish you had.
 
-OP/AL stands for Original Practice — and then there is a forward slash — Applied Learning. The reason behind that name is a question I keep coming back to: how do we incorporate our true nature, our Buddha nature — who we were before our parents were born, before we had a name — while also making sure we are not dwelling too much in that domain? Because it is easy to fall into the trappings of spiritual materialism, where we believe all we are is our Buddha nature and lose sight of the fact that we are also a person who needs to throw out the trash, pay their parking tickets, show up to a meeting on time.
+OP/AL stands for Original Practice — and then there is a forward slash — Applied Learning. The reason behind that name is a question I keep coming back to: how do we incorporate our true nature, our [Buddha nature](https://en.wikipedia.org/wiki/Buddha-nature) — who we were before our parents were born, before we had a name — while also making sure we are not dwelling too much in that domain? Because it is easy to fall into the trappings of spiritual materialism, where we believe all we are is our Buddha nature and lose sight of the fact that we are also a person who needs to throw out the trash, pay their parking tickets, show up to a meeting on time.
 
 When I started practicing Zen, I think a lot of us on the path believe, at first, that we are too spiritual now — and we start to behave in a way that makes our friends say, "hey, what is going on? You have changed." The question I always come back to is: how do I hold those two parts of myself and work within them simultaneously?
 
