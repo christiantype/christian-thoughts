@@ -23,8 +23,6 @@ client: "Self"
 
 published: true
 
-body_class: "post-all-new-tab"
-
 ---
 A conversation between Christian Solorzano and Barry Deck.
 
