@@ -35,3 +35,8 @@ Concept type for album.
   <source src="/assets/videos/diary/20260710b.mp4" type="video/mp4">
 </video>
 <br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260710c.jpg" width="100%">
+  <source src="/assets/videos/diary/20260710c.mp4" type="video/mp4">
+</video>
+<br>
