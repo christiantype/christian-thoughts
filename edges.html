@@ -1,0 +1,355 @@
+---
+permalink: /edges/
+title: "Edge Dispersion"
+description: "An interactive edge-detection dispersion study — the edge is the origin of the dispersion. By Christian Solorzano."
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edge Dispersion — Christian Solorzano</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<style>
+  :root { --ink:#0a0a0a; --paper:#f4f2ec; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--ink); color:var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  #stage { position:fixed; inset:0; }
+  canvas { display:block; }
+
+  /* Controls */
+  #ui { position:fixed; left:16px; top:16px; z-index:10; display:flex; flex-direction:column; gap:10px;
+    padding:14px 16px; width:260px; background:rgba(10,10,10,.55); backdrop-filter:blur(8px);
+    border:1px solid rgba(244,242,236,.14); border-radius:12px; font-size:12px; letter-spacing:.02em; }
+  #ui.collapsed > *:not(#uihead) { display:none; }
+  #uihead { display:flex; align-items:center; justify-content:space-between; cursor:pointer;
+    text-transform:uppercase; letter-spacing:.14em; font-size:11px; opacity:.85; }
+  #ui label { display:flex; flex-direction:column; gap:5px; opacity:.9; }
+  #ui .row { display:flex; gap:8px; }
+  #ui input[type=text] { width:100%; padding:8px 9px; background:#000; color:var(--paper);
+    border:1px solid rgba(244,242,236,.22); border-radius:7px; font-size:13px; }
+  #ui input[type=range] { width:100%; accent-color:#f4f2ec; }
+  #ui select, #ui button { padding:7px 9px; background:#111; color:var(--paper);
+    border:1px solid rgba(244,242,236,.22); border-radius:7px; font-size:12px; cursor:pointer; }
+  #ui button:hover, #ui select:hover { background:#1c1c1c; }
+  #ui .val { opacity:.6; font-variant-numeric:tabular-nums; }
+  #hint { position:fixed; right:16px; bottom:14px; z-index:10; font-size:11px; opacity:.5; }
+  #file { display:none; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<div id="ui">
+  <div id="uihead"><span>Edge Dispersion</span><span id="toggle">–</span></div>
+
+  <label>Source
+    <select id="source">
+      <option value="text">Typography</option>
+      <option value="image">Image…</option>
+      <option value="webcam">Webcam</option>
+    </select>
+  </label>
+
+  <label id="textwrap">Text
+    <input id="text" type="text" value="DISPERSION" spellcheck="false">
+  </label>
+
+  <label>Edge threshold <span class="val" id="threshVal"></span>
+    <input id="thresh" type="range" min="20" max="240" value="90">
+  </label>
+
+  <label>Dispersion <span class="val" id="dispVal"></span>
+    <input id="disp" type="range" min="0" max="100" value="45">
+  </label>
+
+  <label>Emission <span class="val" id="emitVal"></span>
+    <input id="emit" type="range" min="1" max="100" value="40">
+  </label>
+
+  <label>Edge glow <span class="val" id="glowVal"></span>
+    <input id="glow" type="range" min="0" max="100" value="35">
+  </label>
+
+  <div class="row">
+    <button id="reset">Reset</button>
+    <button id="save">Save PNG</button>
+  </div>
+  <input id="file" type="file" accept="image/*">
+</div>
+
+<div id="hint">move / hold the cursor to push the dispersion · click to burst</div>
+
+<script>
+const sketch = (p) => {
+  // ---- state ----
+  let srcBuf;                 // offscreen render of the source (text / image / webcam)
+  let edges = [];            // detected edge points: {x, y, dir, mag}
+  let particles = [];
+  const MAX_PARTICLES = 9000;
+  let cam = null;
+  let sourceKind = 'text';
+  let imgEl = null;          // uploaded p5.Image
+  let needsEdges = true;     // recompute edge map on next frame
+  let frame = 0;
+
+  // control refs
+  const el = (id) => document.getElementById(id);
+  const ctrl = {
+    thresh: el('thresh'), disp: el('disp'), emit: el('emit'), glow: el('glow'),
+    text: el('text'), source: el('source'),
+  };
+
+  // The source buffer works at a capped resolution for fast Sobel + crisp look.
+  function bufDims() {
+    const w = Math.min(p.width, 1100);
+    const h = Math.round(w * (p.height / p.width));
+    return { w: Math.max(320, w), h: Math.max(240, h) };
+  }
+
+  function makeSrcBuf() {
+    const { w, h } = bufDims();
+    srcBuf = p.createGraphics(w, h);
+    srcBuf.pixelDensity(1);
+  }
+
+  function renderSource() {
+    const g = srcBuf, W = g.width, H = g.height;
+    g.push();
+    g.background(0);
+    g.noStroke();
+
+    if (sourceKind === 'text') {
+      g.fill(255);
+      g.textAlign(p.CENTER, p.CENTER);
+      g.textStyle(p.BOLD);
+      const str = (ctrl.text.value || ' ').toUpperCase();
+      // fit text to ~86% of width
+      let size = 220;
+      g.textSize(size);
+      const target = W * 0.86;
+      const tw = g.textWidth(str) || 1;
+      size = size * (target / tw);
+      size = p.constrain(size, 24, H * 0.72);
+      g.textSize(size);
+      g.text(str, W / 2, H / 2);
+    } else if (sourceKind === 'image' && imgEl) {
+      drawCover(g, imgEl, W, H);
+    } else if (sourceKind === 'webcam' && cam) {
+      g.push();
+      g.translate(W, 0); g.scale(-1, 1);          // mirror
+      drawCover(g, cam, W, H);
+      g.pop();
+    } else {
+      g.fill(255); g.textAlign(p.CENTER, p.CENTER); g.textSize(28);
+      g.text(sourceKind === 'image' ? 'choose an image…' : 'starting camera…', W / 2, H / 2);
+    }
+    g.pop();
+  }
+
+  function drawCover(g, src, W, H) {
+    const sw = src.width, sh = src.height;
+    if (!sw || !sh) return;
+    const scale = Math.max(W / sw, H / sh);
+    const dw = sw * scale, dh = sh * scale;
+    g.image(src, (W - dw) / 2, (H - dh) / 2, dw, dh);
+  }
+
+  // Sobel edge detection → list of edge points with gradient direction.
+  function computeEdges() {
+    renderSource();
+    const g = srcBuf, W = g.width, H = g.height;
+    g.loadPixels();
+    const px = g.pixels;
+    const lum = new Float32Array(W * H);
+    for (let i = 0, j = 0; i < px.length; i += 4, j++) {
+      lum[j] = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+    }
+    const thresh = +ctrl.thresh.value;
+    const pts = [];
+    const step = 1;
+    for (let y = 1; y < H - 1; y += step) {
+      for (let x = 1; x < W - 1; x += step) {
+        const i = y * W + x;
+        const tl = lum[i - W - 1], t = lum[i - W], tr = lum[i - W + 1];
+        const l = lum[i - 1],                       r = lum[i + 1];
+        const bl = lum[i + W - 1], b = lum[i + W], br = lum[i + W + 1];
+        const gx = (tr + 2 * r + br) - (tl + 2 * l + bl);
+        const gy = (bl + 2 * b + br) - (tl + 2 * t + tr);
+        const mag = Math.hypot(gx, gy);
+        if (mag > thresh) {
+          pts.push({ x, y, dir: Math.atan2(gy, gx), mag });
+        }
+      }
+    }
+    edges = pts;
+    needsEdges = false;
+  }
+
+  class Particle {
+    constructor(e, sx, sy) {
+      // spawn AT the edge — the edge is the origin of the dispersion
+      this.x = sx; this.y = sy;
+      const spread = p.map(+ctrl.disp.value, 0, 100, 0.15, 1.6);
+      const speed = p.map(+ctrl.disp.value, 0, 100, 0.3, 3.4) * p.random(0.4, 1.3);
+      const a = e.dir + p.random(-spread, spread);   // disperse across the edge
+      this.vx = Math.cos(a) * speed;
+      this.vy = Math.sin(a) * speed;
+      this.life = 1;
+      this.decay = p.random(0.004, 0.016);
+      this.size = p.random(0.7, 2.3);
+    }
+    update() {
+      // cursor pushes the field
+      const dx = this.x - mx, dy = this.y - my;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 140 * 140) {
+        const f = (1 - Math.sqrt(d2) / 140) * 0.9;
+        const inv = 1 / (Math.sqrt(d2) + 0.001);
+        this.vx += dx * inv * f;
+        this.vy += dy * inv * f;
+      }
+      this.vy += 0.008;              // faint drift
+      this.vx *= 0.985; this.vy *= 0.985;
+      this.x += this.vx; this.y += this.vy;
+      this.life -= this.decay;
+    }
+    draw(sx, sy) {
+      const a = this.life * 255;
+      p.stroke(244, 242, 236, a);
+      p.strokeWeight(this.size);
+      p.point(this.x * sx, this.y * sy);
+    }
+    dead() { return this.life <= 0; }
+  }
+
+  let mx = -9999, my = -9999;
+
+  function emit() {
+    if (!edges.length) return;
+    const n = +ctrl.emit.value * 3;
+    const { w: W, h: H } = { w: srcBuf.width, h: srcBuf.height };
+    for (let k = 0; k < n && particles.length < MAX_PARTICLES; k++) {
+      const e = edges[(Math.random() * edges.length) | 0];
+      particles.push(new Particle(e, e.x, e.y));
+    }
+  }
+
+  // ---- p5 lifecycle ----
+  p.setup = () => {
+    const c = p.createCanvas(window.innerWidth, window.innerHeight);
+    c.parent('stage');
+    p.pixelDensity(1);
+    makeSrcBuf();
+    computeEdges();
+    syncLabels();
+  };
+
+  p.windowResized = () => {
+    p.resizeCanvas(window.innerWidth, window.innerHeight);
+    makeSrcBuf();
+    needsEdges = true;
+  };
+
+  p.draw = () => {
+    frame++;
+    // translucent fade → dispersion trails
+    p.noStroke();
+    p.fill(10, 10, 10, 34);
+    p.rect(0, 0, p.width, p.height);
+
+    // webcam is live: refresh edges periodically
+    if (sourceKind === 'webcam' && cam && cam.loadedmetadata && frame % 3 === 0) needsEdges = true;
+    if (needsEdges) computeEdges();
+
+    const sx = p.width / srcBuf.width, sy = p.height / srcBuf.height;
+
+    // faint edge origins so the letterforms/shape read
+    const glow = +ctrl.glow.value / 100;
+    if (glow > 0 && edges.length) {
+      p.stroke(244, 242, 236, 26 + glow * 90);
+      p.strokeWeight(1);
+      const skip = edges.length > 6000 ? 3 : 1;
+      for (let i = 0; i < edges.length; i += skip) {
+        const e = edges[i];
+        p.point(e.x * sx, e.y * sy);
+      }
+    }
+
+    emit();
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const pt = particles[i];
+      pt.update();
+      pt.draw(sx, sy);
+      if (pt.dead()) particles.splice(i, 1);
+    }
+
+    // map cursor into source space for the force field
+    mx = p.mouseX / sx; my = p.mouseY / sy;
+  };
+
+  p.mousePressed = () => {
+    if (p.mouseY < 40 && p.mouseX < 300) return;   // don't burst over the panel
+    // burst: heavy emission near cursor
+    if (!edges.length) return;
+    for (let k = 0; k < 400 && particles.length < MAX_PARTICLES; k++) {
+      const e = edges[(Math.random() * edges.length) | 0];
+      const pt = new Particle(e, e.x, e.y);
+      const boost = p.random(2, 6);
+      pt.vx *= boost; pt.vy *= boost;
+      particles.push(pt);
+    }
+  };
+
+  // ---- UI wiring ----
+  function syncLabels() {
+    el('threshVal').textContent = ctrl.thresh.value;
+    el('dispVal').textContent = ctrl.disp.value;
+    el('emitVal').textContent = ctrl.emit.value;
+    el('glowVal').textContent = ctrl.glow.value;
+  }
+
+  ctrl.thresh.addEventListener('input', () => { needsEdges = true; syncLabels(); });
+  [ctrl.disp, ctrl.emit, ctrl.glow].forEach(c => c.addEventListener('input', syncLabels));
+  ctrl.text.addEventListener('input', () => { if (sourceKind === 'text') needsEdges = true; });
+
+  ctrl.source.addEventListener('change', () => {
+    sourceKind = ctrl.source.value;
+    el('textwrap').style.display = sourceKind === 'text' ? 'flex' : 'none';
+    if (sourceKind === 'image') { el('file').click(); }
+    if (sourceKind === 'webcam') startCam();
+    else stopCam();
+    needsEdges = true;
+  });
+
+  el('file').addEventListener('change', (ev) => {
+    const f = ev.target.files[0];
+    if (!f) return;
+    const url = URL.createObjectURL(f);
+    p.loadImage(url, (loaded) => { imgEl = loaded; needsEdges = true; URL.revokeObjectURL(url); });
+  });
+
+  function startCam() {
+    if (cam) return;
+    cam = p.createCapture(p.VIDEO, () => {});
+    cam.size(480, 360);
+    cam.hide();
+  }
+  function stopCam() { if (cam) { cam.remove(); cam = null; } }
+
+  el('reset').addEventListener('click', () => { particles = []; p.background(10); });
+  el('save').addEventListener('click', () => p.saveCanvas('edge-dispersion', 'png'));
+
+  el('uihead').addEventListener('click', () => {
+    const ui = el('ui'); ui.classList.toggle('collapsed');
+    el('toggle').textContent = ui.classList.contains('collapsed') ? '+' : '–';
+  });
+
+  syncLabels();
+};
+
+new p5(sketch);
+</script>
+</body>
+</html>
