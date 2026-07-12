@@ -52,6 +52,13 @@ description: "An interactive edge-detection dispersion study — the edge is the
     </select>
   </label>
 
+  <label>Canvas
+    <select id="canvasMode">
+      <option value="ink">Ink (dark)</option>
+      <option value="paper">Paper (white)</option>
+    </select>
+  </label>
+
   <label id="textwrap">Text
     <input id="text" type="text" value="DISPERSION" spellcheck="false">
   </label>
@@ -65,11 +72,11 @@ description: "An interactive edge-detection dispersion study — the edge is the
   </label>
 
   <label>Emission <span class="val" id="emitVal"></span>
-    <input id="emit" type="range" min="1" max="100" value="40">
+    <input id="emit" type="range" min="1" max="100" value="70">
   </label>
 
   <label>Edge glow <span class="val" id="glowVal"></span>
-    <input id="glow" type="range" min="0" max="100" value="35">
+    <input id="glow" type="range" min="0" max="100" value="55">
   </label>
 
   <div class="row">
@@ -98,8 +105,15 @@ const sketch = (p) => {
   const el = (id) => document.getElementById(id);
   const ctrl = {
     thresh: el('thresh'), disp: el('disp'), emit: el('emit'), glow: el('glow'),
-    text: el('text'), source: el('source'),
+    text: el('text'), source: el('source'), canvasMode: el('canvasMode'),
   };
+
+  // palette flips between dark "ink" and white "paper" canvases
+  const PAL = {
+    ink:   { bg: [10, 10, 10],   mark: [244, 242, 236] },
+    paper: { bg: [244, 242, 236], mark: [10, 10, 10] },
+  };
+  let pal = PAL.ink;
 
   // The source buffer works at a capped resolution for fast Sobel + crisp look.
   function bufDims() {
@@ -217,7 +231,7 @@ const sketch = (p) => {
     }
     draw(sx, sy) {
       const a = this.life * 255;
-      p.stroke(244, 242, 236, a);
+      p.stroke(pal.mark[0], pal.mark[1], pal.mark[2], a);
       p.strokeWeight(this.size);
       p.point(this.x * sx, this.y * sy);
     }
@@ -256,7 +270,7 @@ const sketch = (p) => {
     frame++;
     // translucent fade → dispersion trails
     p.noStroke();
-    p.fill(10, 10, 10, 34);
+    p.fill(pal.bg[0], pal.bg[1], pal.bg[2], 34);
     p.rect(0, 0, p.width, p.height);
 
     // webcam is live: refresh edges periodically
@@ -268,7 +282,7 @@ const sketch = (p) => {
     // faint edge origins so the letterforms/shape read
     const glow = +ctrl.glow.value / 100;
     if (glow > 0 && edges.length) {
-      p.stroke(244, 242, 236, 26 + glow * 90);
+      p.stroke(pal.mark[0], pal.mark[1], pal.mark[2], 26 + glow * 90);
       p.strokeWeight(1);
       const skip = edges.length > 6000 ? 3 : 1;
       for (let i = 0; i < edges.length; i += skip) {
@@ -338,7 +352,16 @@ const sketch = (p) => {
   }
   function stopCam() { if (cam) { cam.remove(); cam = null; } }
 
-  el('reset').addEventListener('click', () => { particles = []; p.background(10); });
+  ctrl.canvasMode.addEventListener('change', () => {
+    pal = PAL[ctrl.canvasMode.value] || PAL.ink;
+    particles = [];
+    p.background(pal.bg[0], pal.bg[1], pal.bg[2]);
+  });
+
+  el('reset').addEventListener('click', () => {
+    particles = [];
+    p.background(pal.bg[0], pal.bg[1], pal.bg[2]);
+  });
   el('save').addEventListener('click', () => p.saveCanvas('edge-dispersion', 'png'));
 
   el('uihead').addEventListener('click', () => {
