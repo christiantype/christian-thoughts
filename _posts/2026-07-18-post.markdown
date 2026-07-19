@@ -1,0 +1,57 @@
+---
+layout: diary
+
+title:  "Photos from Today"
+
+date:   2026-07-18 12:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Photos from Today — a photo–graphic day by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+A photo–graphic day.
+
+![Christian Solorzano — photograph looking up at a utility pole with yellow insulated cable covers twisting against a white sky, fire escapes below](/assets/images/diary/20260718a.jpg)
+<br>
+
+![Christian Solorzano — photograph looking up at a crane hoisting a yellow and orange equipment crate above a brick building with fire escapes](/assets/images/diary/20260718b.jpg)
+<br>
+
+![Christian Solorzano — black and white photograph of a man in silhouette walking beneath the elevated tracks, city street receding behind him](/assets/images/diary/20260718c.jpg)
+<br>
+
+![Christian Solorzano — black and white photograph of a man with an umbrella kicking his leg out in the rain beneath the elevated tracks](/assets/images/diary/20260718d.jpg)
+<br>
+
+![Christian Solorzano — black and white photograph of a delivery cyclist crossing a bridge with the Chicago skyline beyond](/assets/images/diary/20260718e.jpg)
+<br>
+
+![Christian Solorzano — photograph looking down from a bridge onto tour boat passengers wearing clear plastic rain ponchos](/assets/images/diary/20260718f.jpg)
+<br>
+
+![Christian Solorzano — photograph of dark water and reflected light meeting a scratched metal edge](/assets/images/diary/20260718g.jpg)
+<br>
+
+![Christian Solorzano — photograph of waves breaking against the rocky lakefront at dusk with the city skyline in haze](/assets/images/diary/20260718h.jpg)
+<br>
+
+![Christian Solorzano — photograph of a person in a yellow shirt standing at the lakefront edge beside a small fire, red life ring station on the shore](/assets/images/diary/20260718i.jpg)
+<br>
+
+![Christian Solorzano — photograph of a group sitting together on the lakefront rocks at dusk after swimming](/assets/images/diary/20260718j.jpg)
+<br>
