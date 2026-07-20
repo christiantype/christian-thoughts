@@ -5,8 +5,8 @@
   <body class="site {{ page.body_class }}">
 
     {%- comment -%} Rotator timing: scales with word count. {%- endcomment -%}
-    {%- comment -%} Opens with what he does, then drifts into how he works. {%- endcomment -%}
-    {%- assign words      = "designer,photographer,paying attention,beginning again,a student of Zen,still looking,asking questions,building things with people,getting it wrong,trying again" | split: "," -%}
+    {%- comment -%} Attitudes, not titles — per the Moholy-Nagy line on /design/. {%- endcomment -%}
+    {%- assign words      = "attentive,curious,restless,devoted,generous,patient,stubborn,awake,contrarian,unfinished" | split: "," -%}
     {%- assign per        = 4 -%}
     {%- assign total      = words.size | times: per -%}
     {%- assign on_pct     = 100 | divided_by: words.size -%}
@@ -27,7 +27,7 @@
         <span class="site-mark">
           <a href="/" class="site-mark-name">Christian Solorzano</a><span class="site-mark-sep">,</span>
           <span class="site-rotator" aria-hidden="true">
-            <span class="rotator-anchor">building things with people</span>
+            <span class="rotator-anchor">contrarian</span>
             {%- for w in words -%}
               <span class="rotator-word" style="animation: site-rotate-fade {{ total }}s infinite; animation-delay: {{ forloop.index0 | times: per }}s;">{{ w }}</span>
             {%- endfor -%}
