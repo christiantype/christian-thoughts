@@ -221,6 +221,63 @@
     margin-bottom: .15em;
   }
 
+  // ── Photography category tabs ─────────────────────────────────────────
+  // Same visual language as .site-nav: letter-spaced lowercase, active state
+  // is a line-through rather than a fill. Counts sit alongside, dimmed.
+  .site-photo-tabs {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin-top: 2.5em;
+    letter-spacing: 2px;
+
+    button {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+      font-size: ms(-1);
+      letter-spacing: inherit;
+      text-transform: lowercase;
+      opacity: .6;
+      transition: opacity .15s ease;
+
+      &:hover { opacity: 1; }
+
+      span {
+        opacity: .45;
+        margin-left: .35em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      &.active {
+        opacity: 1;
+        text-decoration: line-through;
+        text-decoration-thickness: .15em;
+        text-decoration-color: currentColor;
+      }
+    }
+
+    @media (max-width: 600px) {
+      gap: 1em;
+      margin-top: 2em;
+    }
+  }
+
+  .site-photo-empty {
+    grid-column: 1 / -1;
+    margin-top: 2em;
+    opacity: .55;
+    letter-spacing: .5px;
+
+    &[hidden] { display: none; }
+  }
+
   // ── Photography & design feeds ────────────────────────────────────────
   // Masonry-like: a nested 6-col grid where each item snaps to 2/3/4 cols.
   // `grid-auto-flow: dense` lets later items fill earlier gaps. No cropping —
@@ -260,6 +317,9 @@
       align-self: start !important;
     }
   }
+  // Filtered-out figures — explicit so nothing in the theme re-shows them.
+  .site-photo[hidden] { display: none !important; }
+
   // Span widths (mobile collapses to 1 col via .site-photo media query above).
   .span-2 { grid-column: span 2; }
   .span-3 { grid-column: span 3; }
