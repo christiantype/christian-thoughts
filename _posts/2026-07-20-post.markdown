@@ -1,0 +1,38 @@
+---
+layout: diary
+
+title:  "I interviewed Jarrett Fuller"
+
+date:   2026-07-20 12:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Underscore episode 111 — Christian Solorzano speaks with Jarrett Fuller about listening, writing, and what comes after graphic design."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Christian Solorzano, founder of the Chicago Graphic Design Club and host of Underscore, recently spoke with Jarrett Fuller — a designer, writer, educator, and host of the long-running podcast *Scratching the Surface*, based in Raleigh, North Carolina.
+
+The conversation traces how talking shaped the way Fuller works: an upbringing in a talkative family, and a journalist grandfather who taught him how to ask a question properly. Across nearly three hundred episodes and ten years of making his own show, what he has learned most about is listening.
+
+They talk about his shifting relationship to graphic design as his practice has moved toward writing, teaching, and podcasting — and about the tension between design as a commercial discipline and design as a cultural practice. They get into what AI is doing to aesthetic homogenization, and into Fuller's photography, which he describes as a search for the friction between the natural world and the built environment.
+
+His book, *Graphic Designers After Graphic Design*, arrives September 29th. It celebrates designers around the world who are expanding what the field is allowed to be.
+
+Episode 111. Fifty-four minutes. Original music by Eighties Slang.
+
+[Listen to the episode](https://chicagographicdesign.club/?underscore_episode=jarrett-fuller)
+<br>
