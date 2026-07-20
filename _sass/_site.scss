@@ -706,10 +706,17 @@
     display: block;
   }
 
+  // Same 1.2 line-height as the masthead, applied to the list items and links
+  // too — otherwise they inherit faculty's taller body line-height.
+  .site-social,
+  .site-social li,
+  .site-social a,
+  .site-social a:visited {
+    line-height: 1.2;
+  }
   .site-social {
     list-style: none;
     margin: 0;
-    line-height: 1.2;
     padding: 0;
     display: flex;
     justify-content: center;
