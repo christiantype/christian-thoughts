@@ -530,7 +530,8 @@
     margin-bottom: 0;
     line-height: 1.2;
     font-size: ms(-1);
-    text-transform: none;   // reads as written, like the About body
+    text-transform: none;            // reads as written, like the About body
+    color: rgba($maincolor, .55);    // subdued grey — sits back from the links
   }
 
   // Counter sits last, under the social links.
