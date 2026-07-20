@@ -3,10 +3,6 @@
 // grid from faculty.scss. Single font size (ms(-1)) across the entire site —
 // hierarchy comes from letter-spacing, color, and opacity, not size.
 
-// The photography viewer is a white page on an otherwise black site; keep the
-// root white too so overscroll never flashes black behind it.
-html:has(body.site-viewer-page) { background: #fff; }
-
 // ── Font-size normalize ────────────────────────────────────────────────────
 .site,
 .site p,
@@ -28,8 +24,8 @@ html:has(body.site-viewer-page) { background: #fff; }
 
   // ── Header ────────────────────────────────────────────────────────────
   .site-header {
-    background: $maincolor;
-    color: $backgroundc;
+    background: $backgroundc;
+    color: $maincolor;
     padding: 1.25em 1.5em;
     position: sticky;
     top: 1em;
@@ -41,52 +37,49 @@ html:has(body.site-viewer-page) { background: #fff; }
   .site-header a,
   .site-header a:visited,
   .site-header .site-mark-name {
-    color: $backgroundc;
+    color: $maincolor;
   }
   .site-header .rotator-word { color: $accent; }
 
+  // Centered, stacked masthead across the whole site:
+  //   name / cycling adjective / links underneath.
   .site-header-top {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 2em;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: .35em;
-    }
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    // No extra gap — the three lines (name / adjective / links) stack on the
+    // header's own 1.2 line-height so they read as one evenly-spaced block.
+    gap: 0;
   }
 
   // .site-mark is a span; the global `.site span { font-size: ms(-1) }` rule
   // would compound on its children (making the name + cycle words a step
   // smaller than the nav links). Reset it so its children all land at the same
   // ms(-1) size as the nav links.
-  .site-mark { font-size: 1em; }
+  // Name and adjective stack on their own lines, centered.
+  .site-mark {
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
   .site-mark a, .site-mark a:visited { text-decoration: none; }
   .site-mark-name {
     letter-spacing: 2px;
     line-height: 1.2;
   }
 
-  // Comma between name and cycling word — hidden on mobile where the rotator
-  // drops to its own line.
-  .site-mark-sep {
-    @media (max-width: 600px) { display: none; }
-  }
+  // The adjective now always sits on its own line, so the comma is redundant.
+  .site-mark-sep { display: none; }
 
   .site-rotator {
     position: relative;
-    display: inline-block;
-    vertical-align: baseline;
-    margin-left: .35em;
+    display: block;
+    margin-left: 0;
     letter-spacing: 2px;
     opacity: .65;
-
-    @media (max-width: 600px) {
-      display: block;
-      margin-left: 0;
-    }
   }
   .rotator-anchor {
     // Reserves baseline/width for the absolute cycling words. Made
@@ -98,9 +91,12 @@ html:has(body.site-viewer-page) { background: #fff; }
     pointer-events: none;
     font-size: 1em;
   }
+  // Stretched edge to edge (not pinned left) so each word centers inside the
+  // width the anchor reserves.
   .rotator-word {
     position: absolute;
-    inset: 0 auto auto 0;
+    inset: 0 0 auto 0;
+    text-align: center;
     opacity: 0;
     white-space: nowrap;
     font-size: 1em;
@@ -109,14 +105,11 @@ html:has(body.site-viewer-page) { background: #fff; }
   .site-nav {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5em;
     letter-spacing: 2px;
 
-    @media (max-width: 600px) {
-      flex-direction: row;
-      gap: 1em;
-      width: 100%;
-    }
+    @media (max-width: 600px) { gap: 1em; }
   }
   .site-nav a { font-size: ms(-1); }
   .site-nav a.active {
@@ -125,24 +118,6 @@ html:has(body.site-viewer-page) { background: #fff; }
     text-decoration-color: currentColor;
   }
 
-  // ── Home only: header floats over the hero, hero starts at viewport top:0 ──
-  &.site-home .site-header {
-    position: absolute;
-    top: 2em;
-    left: 2em;
-    right: 2em;
-    margin: 0;
-
-    @media (max-width: 600px) {
-      top: 1em;
-      left: 1em;
-      right: 1em;
-    }
-  }
-  &.site-home .site-hero-stack {
-    margin-top: -2em;
-    @media (max-width: 600px) { margin-top: -1em; }
-  }
 
   // ── Hero: full-bleed CSS fade carousel ────────────────────────────────
   .site-hero-stack {
@@ -191,6 +166,24 @@ html:has(body.site-viewer-page) { background: #fff; }
     @media (max-width: 600px) { grid-column: 1 / -1; }
   }
 
+  // ── About: centered column ────────────────────────────────────────────
+  // Sits in the middle of the 6-col grid and centers its type, matching the
+  // centered masthead.
+  &.site-about .site-intro {
+    grid-column: 2 / span 4;
+    text-align: center;
+
+    @media (max-width: 600px) { grid-column: 1 / -1; }
+  }
+  &.site-about .site-list li,
+  &.site-about .site-bio p { text-align: center; }
+
+  // Narrower measure for the bio so the lines stay comfortable to read.
+  &.site-about .site-bio {
+    max-width: 46ch;
+    margin: 0 auto;
+  }
+
   // ── About: bio + lists ────────────────────────────────────────────────
   .site-bio p {
     text-transform: none;
@@ -236,22 +229,8 @@ html:has(body.site-viewer-page) { background: #fff; }
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background: #fff;
-    color: #111;
 
-    .site-mark-sep,
-    .site-rotator,
-    .site-nav       { display: none; }
-
-    // Name centered so it sits on the same axis as the metadata line.
-    .site-header-top {
-      justify-content: center;
-      gap: 0;
-
-      @media (max-width: 600px) { align-items: center; }
-    }
-    .site-mark { text-align: center; }
-
+    // Header is the same centered masthead as every other page.
     footer.container { display: none; }
     #hummingbird     { display: none; }
     #trail, #cur     { position: fixed; }   // keep them out of the flex flow
@@ -263,6 +242,7 @@ html:has(body.site-viewer-page) { background: #fff; }
     flex: 1 1 auto;
     min-height: 0;              // lets the stage shrink instead of overflowing
     display: flex;
+    flex-direction: column;
     padding: 0 0 .5em;
   }
 
@@ -308,7 +288,7 @@ html:has(body.site-viewer-page) { background: #fff; }
   .viewer-meta {
     flex: 0 0 auto;
     margin: 0;
-    color: #111;
+    color: $maincolor;
     line-height: 1.4;
     text-align: center;
     font-size: ms(-2);
@@ -324,12 +304,93 @@ html:has(body.site-viewer-page) { background: #fff; }
     }
   }
 
+  // ── Viewer: grid mode ─────────────────────────────────────────────────
+  // Uniform thumbnails on the 6-col grid (span 2 = 3 across). Slide mode is
+  // locked to the viewport; grid mode scrolls.
+  &.site-viewer-page.mode-grid {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .viewer-grid {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: .5em;
+    align-content: start;
+    overflow-y: auto;
+
+    &[hidden] { display: none; }
+
+    @media (max-width: 900px) { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 600px) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .viewer-thumb {
+    grid-column: span 2;
+    margin: 0;
+    cursor: zoom-in;
+
+    @media (max-width: 900px) { grid-column: span 2; }
+    @media (max-width: 600px) { grid-column: span 1; }
+
+    img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      border: 0;
+    }
+  }
+
+  // slide / grid toggle — icons: one frame vs. four squares.
+  .viewer-modes {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin: 0 0 .9em;   // sits above the image / grid, so grid mode can scroll
+
+    button {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: .25em;
+      color: $maincolor;
+      cursor: pointer;
+      opacity: .3;
+      transition: opacity .15s ease;
+      line-height: 0;
+
+      &:hover, &:focus-visible { opacity: .7; }
+      &.active { opacity: 1; }
+
+      // Light outline icons — active reads through opacity alone, so neither
+      // state turns into a heavy filled block.
+      svg {
+        width: 1.35em;
+        height: 1.35em;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.25;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    }
+  }
+
+  .viewer-stage[hidden] { display: none; }
+
   .viewer-nav {
     appearance: none;
     background: none;
     border: 0;
     padding: .5em;
-    color: #111;
+    color: $maincolor;
     cursor: pointer;
     opacity: .3;
     flex: 0 0 auto;
@@ -522,7 +583,7 @@ html:has(body.site-viewer-page) { background: #fff; }
       opacity: .65;
     }
     .site-lightbox-meta[hidden] { display: none; }
-    &::backdrop { background: rgba(0, 0, 0, .92); }
+    &::backdrop { background: rgba(255, 255, 255, .96); }
   }
 
   // Kill the browser focus ring on clickable masonry images
@@ -603,32 +664,43 @@ html:has(body.site-viewer-page) { background: #fff; }
   }
 
   // ── Footer ────────────────────────────────────────────────────────────
+  // Centered stack, matching the masthead: quote / links / counter.
+  footer.container { text-align: center; }
+
   .site-footer-row {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;   // counter top-aligned with the Dōgen quote
-    gap: 2em;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     margin-bottom: 0;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      gap: 1em;
-    }
+    order: 1;
   }
-  // figcaption inside the footer row: kill its inherited bottom space
-  .site-footer-row figcaption { margin-bottom: 0; }
-  // social list right under the row: pull it tight
-  .site-social { margin-top: .25em; }
+  // Quote sits on the same 1.2 line-height as the header lines, so quote /
+  // links / counter read as one evenly-spaced stack.
+  .site-footer-row figcaption {
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
+
+  // Counter sits last, under the social links.
   .site-counter {
     flex-shrink: 0;
+    order: 3;
+    // Quote + links sit tight; a clear double space sets the counter apart.
+    margin: 2.4em auto 0;
+    display: block;
   }
+
   .site-social {
     list-style: none;
     margin: 0;
+    line-height: 1.2;
     padding: 0;
     display: flex;
+    justify-content: center;
     gap: 1.5em;
     letter-spacing: 2px;
+    order: 2;
   }
 
   // Remove the global img border from faculty.scss inside .site

@@ -1,0 +1,42 @@
+# Display order — newest first by EXIF capture date (file date if none).
+# Regenerate with bin/generate-photo-order.py after adding images.
+
+- "L1003605.jpg"   # 2026:07:12 14:39:07
+- "play-001.png"   # 2026:05:09 19:27:33  (file date)
+- "play-41.gif"   # 2025:09:15 17:07:30  (file date)
+- "play-40.gif"   # 2025:09:15 14:46:47  (file date)
+- "play-35.jpg"   # 2025:09:13 22:13:06  (file date)
+- "play-36.gif"   # 2025:09:13 22:13:06  (file date)
+- "play-37.jpg"   # 2025:09:13 22:13:06  (file date)
+- "play-38.jpg"   # 2025:09:13 22:13:06  (file date)
+- "play-39.jpg"   # 2025:09:13 22:13:06  (file date)
+- "play-33.gif"   # 2024:05:15 22:33:42  (file date)
+- "play-28.jpg"   # 2024:03:15 14:41:19
+- "play-30.jpg"   # 2024:03:15 14:40:45
+- "play-32.jpg"   # 2024:03:15 14:40:36
+- "play-34.jpg"   # 2024:03:15 14:40:36
+- "play-29.jpg"   # 2024:01:31 14:08:24  (file date)
+- "play-25.jpg"   # 2024:01:31 13:59:59
+- "play-27.jpg"   # 2023:12:20 08:20:04
+- "play-26.jpg"   # 2023:12:20 08:17:37  (file date)
+- "play-24.jpg"   # 2023:12:09 23:20:28  (file date)
+- "play-3.jpg"   # 2023:12:09 23:17:50
+- "play-23.jpg"   # 2023:12:09 23:15:41  (file date)
+- "play-21a.gif"   # 2023:12:09 23:02:12  (file date)
+- "play-22.jpg"   # 2023:12:09 22:49:25  (file date)
+- "play-8.png"   # 2023:10:19 22:01:42  (file date)
+- "play-6.png"   # 2023:10:19 22:00:33  (file date)
+- "play-2.png"   # 2023:10:19 21:58:49  (file date)
+- "play-1.png"   # 2023:10:19 21:57:00  (file date)
+- "play-9.jpg"   # 2023:10:19 21:55:19
+- "play-5.jpg"   # 2023:10:14 21:32:05  (file date)
+- "play-17.jpg"   # 2023:10:14 21:13:21  (file date)
+- "play-16.jpg"   # 2023:10:14 21:13:19  (file date)
+- "play-15.jpg"   # 2023:10:14 21:13:14  (file date)
+- "play-14.jpg"   # 2023:10:14 21:13:12  (file date)
+- "play-13.jpg"   # 2023:10:14 21:13:07  (file date)
+- "play-12.jpg"   # 2023:10:14 21:13:05  (file date)
+- "play-5.png"   # 2023:10:14 21:12:46  (file date)
+- "play-4.jpg"   # 2023:10:14 21:12:43  (file date)
+- "play-11.jpg"   # 2020:12:30 20:50:57
+- "play-10.jpg"   # 2020:12:30 20:48:00

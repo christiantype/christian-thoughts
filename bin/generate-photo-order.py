@@ -12,6 +12,7 @@ rather than hiding photographs.
 """
 import os
 import sys
+import time
 
 try:
     from PIL import Image
@@ -19,8 +20,13 @@ except ImportError:
     sys.exit("Pillow is required:  python3 -m pip install Pillow")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PHOTO_DIR = os.path.join(ROOT, "assets", "images", "photography")
-OUT = os.path.join(ROOT, "_data", "photo_order.yml")
+# (image folder, output data file) — both galleries order newest-first.
+SETS = [
+    (os.path.join(ROOT, "assets", "images", "photography"),
+     os.path.join(ROOT, "_data", "photo_order.yml")),
+    (os.path.join(ROOT, "assets", "images", "design"),
+     os.path.join(ROOT, "_data", "design_order.yml")),
+]
 
 DATE_TIME_ORIGINAL = 36867
 DATE_TIME = 306
@@ -36,23 +42,39 @@ def capture_date(path):
         return None
 
 
-def main():
-    files = sorted(f for f in os.listdir(PHOTO_DIR) if not f.startswith("."))
+def write_set(photo_dir, out):
+    if not os.path.isdir(photo_dir):
+        print(f"skipping {photo_dir} — not found")
+        return
+    files = sorted(f for f in os.listdir(photo_dir) if not f.startswith("."))
     if not files:
-        sys.exit(f"No photographs found in {PHOTO_DIR} — refusing to write an empty order file.")
+        sys.exit(f"No images found in {photo_dir} — refusing to write an empty order file.")
 
-    dated = [(f, capture_date(os.path.join(PHOTO_DIR, f))) for f in files]
-    with_date = sorted([r for r in dated if r[1]], key=lambda r: r[1], reverse=True)
-    without = [r for r in dated if not r[1]]
+    # Fall back to file mtime so images without EXIF (exported artwork, GIFs)
+    # still order sensibly instead of all piling up at the end.
+    dated = []
+    for f in files:
+        path = os.path.join(photo_dir, f)
+        stamp = capture_date(path)
+        if not stamp:
+            stamp = time.strftime("%Y:%m:%d %H:%M:%S", time.localtime(os.path.getmtime(path)))
+            stamp += "  (file date)"
+        dated.append((f, stamp))
 
-    with open(OUT, "w") as fh:
-        fh.write("# Photography display order — newest first by EXIF capture date.\n")
-        fh.write("# Regenerate with bin/generate-photo-order.py after adding photos.\n")
-        fh.write("# Files without a capture date sort to the end.\n\n")
-        for name, stamp in with_date + without:
-            fh.write(f'- "{name}"   # {stamp or "no date"}\n')
+    dated.sort(key=lambda r: r[1].replace("  (file date)", ""), reverse=True)
 
-    print(f"wrote {len(dated)} entries to {OUT} ({len(without)} without a capture date)")
+    with open(out, "w") as fh:
+        fh.write("# Display order — newest first by EXIF capture date (file date if none).\n")
+        fh.write("# Regenerate with bin/generate-photo-order.py after adding images.\n\n")
+        for name, stamp in dated:
+            fh.write(f'- "{name}"   # {stamp}\n')
+
+    print(f"wrote {len(dated)} entries to {out}")
+
+
+def main():
+    for photo_dir, out in SETS:
+        write_set(photo_dir, out)
 
 
 if __name__ == "__main__":
