@@ -4,43 +4,10 @@
 
   <body class="site {{ page.body_class }}">
 
-    {%- comment -%} Rotator timing: scales with word count. {%- endcomment -%}
-    {%- comment -%} Attitudes, not titles — per the Moholy-Nagy line on /design/. {%- endcomment -%}
-    {%- assign words      = "designer,photographer,image maker,contrarian,curious,experimentor,collaborator" | split: "," -%}
-    {%- assign per        = 4 -%}
-    {%- comment -%} Hidden anchor reserves the rotator's width — use the longest word. {%- endcomment -%}
-    {%- assign longest = "" -%}
-    {%- for w in words -%}
-      {%- if w.size > longest.size -%}{%- assign longest = w -%}{%- endif -%}
-    {%- endfor -%}
-    {%- assign total      = words.size | times: per -%}
-    {%- assign on_pct     = 100 | divided_by: words.size -%}
-    {%- assign out_pct    = on_pct | minus: 2 -%}
-    {%- assign clear_pct  = on_pct | plus: 1 -%}
-    <style>
-      @keyframes site-rotate-fade {
-        0%                { opacity: 0; }
-        2%                { opacity: 1; }
-        {{ out_pct }}%    { opacity: 1; }
-        {{ clear_pct }}%  { opacity: 0; }
-        100%              { opacity: 0; }
-      }
-    </style>
-
     <header class="site-header">
       <div class="site-header-top">
         <span class="site-mark">
-          <a href="/" class="site-mark-name">Christian Solorzano</a><span class="site-mark-sep">,</span>
-          {%- if words.size > 1 -%}
-          <span class="site-rotator" aria-hidden="true" data-per="{{ per }}">
-            <span class="rotator-anchor">{{ longest }}</span>
-            {%- for w in words -%}
-              <span class="rotator-word" style="animation: site-rotate-fade {{ total }}s infinite; animation-delay: {{ forloop.index0 | times: per }}s;">{{ w }}</span>
-            {%- endfor -%}
-          </span>
-          {%- else -%}
-          <span class="site-rotator site-rotator-static" aria-hidden="true">{{ words | first }}</span>
-          {%- endif -%}
+          <a href="/" class="site-mark-name">Christian Solorzano</a>
         </span>
         <nav class="site-nav">
           <a href="/about/"       class="{% if page.url == '/about/' %}active{% endif %}">about</a>
@@ -97,24 +64,6 @@
         </svg>
       </div>
     </div>
-
-    <script>
-      // Rotator: start the cycle on a random word each load, so the masthead
-      // isn't always "attentive". Only the phase shifts — the CSS animation,
-      // its order, and its timing are untouched.
-      (() => {
-        const rot = document.querySelector('.site-rotator');
-        if (!rot) return;
-        const words = rot.querySelectorAll('.rotator-word');
-        const n = words.length;
-        const per = parseFloat(rot.dataset.per);
-        if (!n || !per) return;
-        const start = Math.floor(Math.random() * n);
-        words.forEach((w, i) => {
-          w.style.animationDelay = (((i - start + n) % n) * per) + 's';
-        });
-      })();
-    </script>
 
     <script>
       // Open external links in a new tab. Internal links (same host) stay
