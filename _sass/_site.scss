@@ -119,6 +119,20 @@
   }
 
 
+  // ── Home: hero starts at the very top of the viewport ─────────────────
+  // The masthead stays sticky (same as every other page) and floats over the
+  // photograph, so the hero is pulled up past the header and the body's own
+  // top padding. --site-hero-pull is measured from the rendered header.
+  &.site-home {
+    --site-hero-pull: 8.75em;
+
+    .site-header { margin-bottom: 0; }
+
+    .site-hero-stack {
+      margin-top: calc(-1 * var(--site-hero-pull));
+    }
+  }
+
   // ── Hero: full-bleed CSS fade carousel ────────────────────────────────
   .site-hero-stack {
     position: relative;
