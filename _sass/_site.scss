@@ -181,6 +181,20 @@
     @media (max-width: 600px) { grid-column: 1 / -1; }
   }
 
+  // ── Home: journal ─────────────────────────────────────────────────────
+  // Label and entries are centred; the entry list keeps the full grid width.
+  &.site-home {
+    .site-label { text-align: center; }
+
+    // Full width, but the run-on list of entries reads centred.
+    .diary-post {
+      display: block;
+      grid-column: 1 / -1;
+      text-align: center;
+      line-height: 1.8;
+    }
+  }
+
   // ── About: centered column ────────────────────────────────────────────
   // Sits in the middle of the 6-col grid and centers its type, matching the
   // centered masthead.
@@ -695,10 +709,12 @@
     order: 1;
   }
   // Quote sits on the same 1.2 line-height as the header lines, so quote /
-  // links / counter read as one evenly-spaced stack.
+  // links / counter read as one evenly-spaced stack. _typography.scss sets
+  // figcaption to ms(-2); the footer reads at body size like everything else.
   .site-footer-row figcaption {
     margin-bottom: 0;
     line-height: 1.2;
+    font-size: ms(-1);
   }
 
   // Counter sits last, under the social links.
@@ -718,6 +734,7 @@
   .site-social a,
   .site-social a:visited {
     line-height: 1.2;
+    font-size: ms(-1);
   }
   .site-social li { margin: 0; }
   .site-social {
