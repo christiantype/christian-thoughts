@@ -8,6 +8,15 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DIR="$ROOT/assets/images/photography"
 OUT="$ROOT/_data/photo_exif.yml"
 
+# Without exiftool every lookup returns empty and this script happily
+# overwrites $OUT with nothing — silently destroying the whole file. Bail out
+# instead.
+if ! command -v exiftool >/dev/null 2>&1; then
+  echo "error: exiftool not found — install it (brew install exiftool) before running." >&2
+  echo "       Refusing to run, so $OUT is not overwritten with empty data." >&2
+  exit 1
+fi
+
 format_exif() {
   local path="$1"
   local meta
