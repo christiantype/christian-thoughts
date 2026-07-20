@@ -3,6 +3,10 @@
 // grid from faculty.scss. Single font size (ms(-1)) across the entire site —
 // hierarchy comes from letter-spacing, color, and opacity, not size.
 
+// The photography viewer is a white page on an otherwise black site; keep the
+// root white too so overscroll never flashes black behind it.
+html:has(body.site-viewer-page) { background: #fff; }
+
 // ── Font-size normalize ────────────────────────────────────────────────────
 .site,
 .site p,
@@ -219,6 +223,126 @@
     display: block;
     opacity: .55;
     margin-bottom: .15em;
+  }
+
+  // ── Photography: full-screen viewer ───────────────────────────────────
+  // /photography/ is one photograph at a time on white, locked to the viewport.
+  // The site's own body margins and sticky header position are left alone —
+  // only the nav links and rotator are stripped so it reads as just the name.
+  &.site-viewer-page {
+    box-sizing: border-box;     // body carries 2em padding; keep it inside 100dvh
+    height: 100vh;
+    height: 100dvh;             // avoids mobile browser-chrome overflow
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #111;
+
+    .site-mark-sep,
+    .site-rotator,
+    .site-nav       { display: none; }
+
+    footer.container { display: none; }
+    #hummingbird     { display: none; }
+    #trail, #cur     { position: fixed; }   // keep them out of the flex flow
+  }
+
+  // Fills the space under the header; horizontal margins come from the body,
+  // same as every other page.
+  .site-viewer {
+    flex: 1 1 auto;
+    min-height: 0;              // lets the stage shrink instead of overflowing
+    display: flex;
+    padding: 0 0 .5em;
+  }
+
+  .viewer-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+
+    @media (max-width: 600px) { gap: .25em; }
+  }
+
+  // Image centered, metadata directly beneath it.
+  .viewer-frame {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .75em;
+
+    img {
+      flex: 0 1 auto;
+      min-height: 0;
+      max-width: 100%;
+      // Reserve room for the caption — a plain max-height:100% lets a tall
+      // frame claim the whole column and push the metadata out of view.
+      max-height: calc(100% - 3em);
+      width: auto;
+      height: auto;
+      object-fit: contain;      // never crop the composition
+      display: block;
+      cursor: default;
+    }
+  }
+
+  // figcaption defaults to $maincolor (white) — invisible on this white page.
+  .viewer-meta {
+    flex: 0 0 auto;
+    margin: 0;
+    color: #111;
+    line-height: 1.4;
+    text-align: center;
+    font-size: ms(-2);
+    letter-spacing: 1px;
+    opacity: .5;
+    font-variant-numeric: tabular-nums;
+
+    .viewer-count { margin-right: 1em; }
+
+    @media (max-width: 600px) {
+      font-size: ms(-3);
+      letter-spacing: .5px;
+    }
+  }
+
+  .viewer-nav {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: .5em;
+    color: #111;
+    cursor: pointer;
+    opacity: .3;
+    flex: 0 0 auto;
+    transition: opacity .15s ease;
+
+    &:hover, &:focus-visible { opacity: 1; }
+
+    svg {
+      width: 1.75em;
+      height: 1.75em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      padding: .15em;
+      svg { width: 1.25em; height: 1.25em; }
+    }
   }
 
   // ── Photography category tabs ─────────────────────────────────────────
