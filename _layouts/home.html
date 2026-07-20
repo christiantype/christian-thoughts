@@ -5,7 +5,7 @@ layout: default
 <main class="container">
 
   {%- assign home_images = site.static_files
-        | where_exp: "f", "f.path contains '/assets/images/home-images/'"
+        | where_exp: "f", "f.path contains '/assets/images/home/'"
         | sort: "path" -%}
   {%- assign hero_n = home_images.size -%}
 
