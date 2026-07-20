@@ -26,6 +26,7 @@
   .site-header {
     background: $backgroundc;
     color: $maincolor;
+    border-bottom: 0;     // drop faculty.scss's thin rule under the masthead
     padding: 1.25em 1.5em;
     position: sticky;
     top: 1em;
