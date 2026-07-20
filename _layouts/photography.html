@@ -47,7 +47,7 @@ layout: default
         {%- assign meta  = site.data.photo_exif[fname] -%}
         {%- assign alt   = site.data.photo_alt[fname] | default: "Photograph by Christian Solorzano" -%}
         {%- assign cat   = site.data.photo_categories[fname] | default: "city" -%}
-        <figure class="site-photo span-{% cycle 'photo-spans': 3, 2, 4, 3, 2, 2, 3, 4, 2, 3 %} {% cycle 'photo-aligns': 'align-top', 'align-bottom', 'align-center', 'align-top', 'align-center', 'align-bottom', 'align-top' %}" data-category="{{ cat }}">
+        <figure class="site-photo" data-category="{{ cat }}">
           <img src="{{ img.path | relative_url }}" alt="{{ alt | escape }}" loading="lazy" decoding="async"{% if meta %} data-meta="{{ meta | escape }}"{% endif %}>
         </figure>
       {%- endfor -%}
