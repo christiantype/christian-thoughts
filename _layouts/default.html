@@ -25,7 +25,7 @@
           Centered stack: quote, then the links, then the counter last.
         {%- endcomment -%}
         <div class="site-footer-row">
-          <figcaption>Each moment is all being, each moment is the entire world<br>Dōgen</figcaption>
+          <figcaption>Each moment is all being, each moment is the entire world.<br>Dōgen</figcaption>
         </div>
         {%- include social.html -%}
         <img class="site-counter"
@@ -33,11 +33,6 @@
              alt="Visit counter" />
       </div>
     </footer>
-
-    <dialog id="lightbox" class="site-lightbox" aria-label="Image preview">
-      <img alt="">
-      <figcaption class="site-lightbox-meta"></figcaption>
-    </dialog>
 
     <canvas id="trail"></canvas>
     <div id="cur"></div>
@@ -77,30 +72,6 @@
             }
           } catch (_) {}
         });
-      })();
-    </script>
-
-    <script>
-      // Lightbox: click any photo or design image to enlarge. Metadata (if any)
-      // is read from the source img's data-meta attribute and shown below.
-      (() => {
-        const dialog = document.getElementById('lightbox');
-        if (!dialog) return;
-        const dialogImg  = dialog.querySelector('img');
-        const dialogMeta = dialog.querySelector('.site-lightbox-meta');
-
-        document.querySelectorAll('.site-photo img, .site-design-item img').forEach(img => {
-          img.addEventListener('click', () => {
-            dialogImg.src        = img.currentSrc || img.src;
-            dialogImg.alt        = img.alt || '';
-            dialogMeta.textContent = img.dataset.meta || '';
-            dialogMeta.hidden    = !img.dataset.meta;
-            dialog.showModal();
-          });
-        });
-
-        // Close on any click (backdrop or image).
-        dialog.addEventListener('click', () => dialog.close());
       })();
     </script>
 
