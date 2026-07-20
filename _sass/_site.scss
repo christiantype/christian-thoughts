@@ -245,8 +245,12 @@
     display: flex;
     flex-direction: column;
 
-    // Header is the same centered masthead as every other page.
-    footer.container { display: none; }
+    // Header and footer are the same as every other page; the viewer just
+    // takes whatever height is left between them.
+    footer.container {
+      flex: 0 0 auto;
+      margin-top: .5em;
+    }
     #hummingbird     { display: none; }
     #trail, #cur     { position: fixed; }   // keep them out of the flex flow
   }
@@ -706,14 +710,16 @@
     display: block;
   }
 
-  // Same 1.2 line-height as the masthead, applied to the list items and links
-  // too — otherwise they inherit faculty's taller body line-height.
+  // Match the masthead exactly: 1.2 line-height and no inherited list spacing.
+  // _typography.scss gives every `ul li` a 1em top margin and a tall ms(3)
+  // line-height — both have to go or the quote/links gap doubles.
   .site-social,
   .site-social li,
   .site-social a,
   .site-social a:visited {
     line-height: 1.2;
   }
+  .site-social li { margin: 0; }
   .site-social {
     list-style: none;
     margin: 0;
