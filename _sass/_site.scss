@@ -222,25 +222,6 @@ pre {
     }
   }
 
-  // ── About: portrait ───────────────────────────────────────────────────
-  // Leads the page, centred above the bio. Constrained so the 4:5 portrait
-  // reads at a comfortable size rather than filling the column.
-  &.site-about .about-portrait {
-    grid-column: 2 / span 4;
-    margin: 0 auto 2.5em;
-    text-align: center;
-
-    img {
-      display: block;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 600px) { grid-column: 1 / -1; }
-  }
-
   // ── About: centered column ────────────────────────────────────────────
   // Sits in the middle of the 6-col grid and centers its type, matching the
   // centered masthead.
