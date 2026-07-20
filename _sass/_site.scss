@@ -243,6 +243,15 @@ html:has(body.site-viewer-page) { background: #fff; }
     .site-rotator,
     .site-nav       { display: none; }
 
+    // Name centered so it sits on the same axis as the metadata line.
+    .site-header-top {
+      justify-content: center;
+      gap: 0;
+
+      @media (max-width: 600px) { align-items: center; }
+    }
+    .site-mark { text-align: center; }
+
     footer.container { display: none; }
     #hummingbird     { display: none; }
     #trail, #cur     { position: fixed; }   // keep them out of the flex flow
