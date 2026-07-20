@@ -3,6 +3,40 @@
 // grid from faculty.scss. Single font size (ms(-1)) across the entire site —
 // hierarchy comes from letter-spacing, color, and opacity, not size.
 
+// ── No horizontal overflow, anywhere ───────────────────────────────────────
+// `1fr` columns refuse to shrink below their content's min-width, so one wide
+// child (a 560px YouTube embed) stretches the whole grid past the viewport.
+// minmax(0, 1fr) lets them shrink; min-width:0 does the same for grid children.
+.container {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.container > * {
+  min-width: 0;
+}
+
+// Embedded media (YouTube iframes in older posts carry hard-coded widths like
+// 560px) must never push the page wider than the viewport on small screens.
+// Deliberately NOT using overflow-x:hidden on html/body — that silently breaks
+// the sticky header. Constrain the offenders instead.
+img,
+video,
+iframe,
+embed,
+object,
+canvas,
+svg,
+table,
+pre {
+  max-width: 100%;
+}
+
+// Post embeds keep their 16:9 shape as they scale down.
+.site-post-body iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
 // ── Font-size normalize ────────────────────────────────────────────────────
 .site,
 .site p,
