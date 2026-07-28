@@ -34,25 +34,28 @@ Things I have been making.
 ![Christian Solorzano — glitched spectral portrait smeared in deep reds, a face emerging from digital distortion](/assets/images/diary/20260728b.jpg)
 <br>
 
-![Christian Solorzano — high-contrast halftone-dithered image of utility poles and wires against a bright sky](/assets/images/diary/20260728c.jpg)
-<br>
-
 <video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728b.jpg" width="100%">
   <source src="/assets/videos/diary/20260728b.mp4" type="video/mp4">
 </video>
 <br>
+
+![Christian Solorzano — high-contrast halftone-dithered image of utility poles and wires against a bright sky](/assets/images/diary/20260728c.jpg)
+<br>
+
 
 <video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728c.jpg" width="100%">
   <source src="/assets/videos/diary/20260728c.mp4" type="video/mp4">
 </video>
 <br>
 
-<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728d.jpg" width="100%">
-  <source src="/assets/videos/diary/20260728d.mp4" type="video/mp4">
-</video>
-<br>
 
 <video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728e.jpg" width="100%">
   <source src="/assets/videos/diary/20260728e.mp4" type="video/mp4">
+</video>
+<br>
+
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728d.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728d.mp4" type="video/mp4">
 </video>
 <br>
