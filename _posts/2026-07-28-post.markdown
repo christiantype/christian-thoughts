@@ -39,3 +39,18 @@ Things I have been making.
 
 ![Christian Solorzano — pale glitch-smeared still life of flowers and photographs dissolving into digital static](/assets/images/diary/20260728d.jpg)
 <br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728b.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728b.mp4" type="video/mp4">
+</video>
+<br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728c.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728c.mp4" type="video/mp4">
+</video>
+<br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728d.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728d.mp4" type="video/mp4">
+</video>
+<br>
