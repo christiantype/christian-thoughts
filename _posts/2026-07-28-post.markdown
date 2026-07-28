@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Experiments"
+
+date:   2026-07-28 12:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "Experiments — things I have been making, by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Things I have been making.
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728a.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728a.mp4" type="video/mp4">
+</video>
+<br>
+
+![Christian Solorzano — glitched spectral portrait smeared in deep reds, a face emerging from digital distortion](/assets/images/diary/20260728b.jpg)
+<br>
