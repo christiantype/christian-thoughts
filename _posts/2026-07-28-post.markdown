@@ -26,7 +26,7 @@ published: true
 ---
 Things I have been making.
 
-<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728f.jpg" width="100%">
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728f.jpg" style="display:block; width:55%; max-width:420px; height:auto; margin:3em auto;">
   <source src="/assets/videos/diary/20260728f.mp4" type="video/mp4">
 </video>
 <br>
