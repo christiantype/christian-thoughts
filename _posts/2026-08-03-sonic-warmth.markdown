@@ -1,7 +1,7 @@
 ---
 layout: diary
 
-title:  "Easy Listening"
+title:  "Sonic Warmth"
 
 date:   2026-08-03 08:00:00 -0500
 
@@ -13,7 +13,7 @@ image: "NA"
 
 tags: [project]
 
-description: "Easy listening — a track to sit with, shared by Christian Solorzano."
+description: "Sonic Warmth — a track to sit with, by way of Getting Warmer w/ Jen Monroe (NTS)."
 
 about: "NA"
 
