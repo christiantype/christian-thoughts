@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "I interviewed Dana Arnett"
+
+date:   2026-08-03 06:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "A conversation with Dana Arnett, Co-Founder and Chairman of VSA Partners, spanning four decades of Chicago design history."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I sat down with Dana Arnett, Co-Founder and Chairman of VSA Partners, for a conversation that spans four decades of Chicago design history. We talked about the portfolio rejection that redirected everything, the three mentors — Robert Vogele, Rick Valicenti, and April Greiman — who shaped his creative courage at Northern Illinois University, and how he built VSA from a storefront on South Dearborn in Printers Row into one of the most recognized design firms in the world. We got into the client relationships that put VSA on the map, including the Chicago Board of Trade and Harley-Davidson, what it actually means to lead without getting in the way, and the questions Dana still asks every time he picks up a pencil. The conversation closes with an honest look at where the design industry is headed — and why empathy, optimism, and intent still matter.
+
+<iframe src="https://www.youtube.com/embed/r4U4Z8P7Xi0" title="I interviewed Dana Arnett" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br>
+
+[Watch the conversation](https://youtu.be/r4U4Z8P7Xi0)
+<br>
