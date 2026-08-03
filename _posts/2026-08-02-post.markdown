@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "Meditation for Designers"
+
+date:   2026-08-02 12:00:00 -0500
+
+categories: diary
+
+type: "diary"
+
+image: "NA"
+
+tags: [project]
+
+description: "OPEN — a weekly practice-based gathering of meditation and conversation for designers, by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I believe meditation is a catalyst for compassion, empathy, creativity, and joy — a tool to foster collaboration and understanding. Learning to appreciate your life, and your own company, is a way to build equanimity.
+
+OPEN is a practice-based gathering. We sit in silence for twenty minutes, then talk — each week around a theme like process, groundedness, craft, creativity, or technology. A timer holds the silence; a prompt closes it.
+
+No experience needed.
+
+Fridays, 6–7am CST. Virtual, on Zoom.
+
+[Request an invite](https://more-than.design/projects/open.html)
+<br>
