@@ -24,7 +24,7 @@ client: "Self"
 published: true
 
 ---
-Easy listening.
+A recent discovery, by way of Getting Warmer w/ Jen Monroe (NTS).
 
 <iframe src="https://www.youtube.com/embed/Z1jhNKquSzc" title="Easy Listening" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <br>
