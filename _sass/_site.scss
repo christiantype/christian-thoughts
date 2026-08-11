@@ -365,12 +365,81 @@ pre {
   }
 
   // ── Viewer: grid mode ─────────────────────────────────────────────────
-  // Uniform thumbnails on the 6-col grid (span 2 = 3 across). Slide mode is
-  // locked to the viewport; grid mode scrolls.
+  // Uniform thumbnails on the 6-col grid (span 2 = 3 across). Grid mode is the
+  // "home" state — header, footer, and normal page chrome all show, and it
+  // scrolls. Slide mode (below) goes fullscreen and hides the chrome.
   &.site-viewer-page.mode-grid {
     height: auto;
     min-height: 100vh;
     overflow: visible;
+  }
+
+  // ── Viewer: slide mode = fullscreen, immersive ────────────────────────
+  // The photograph is the hero. Site chrome hides and the viewer fills the
+  // whole viewport, edge to edge. The floating toggle (or Esc) returns to
+  // grid, where the header and the rest of the site live.
+  &.site-viewer-page.mode-slide {
+    padding: 0;                              // body's 2em → edge to edge
+
+    .site-header,
+    footer.container { display: none; }
+
+    .site-viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: $backgroundc;
+      padding: 0;
+    }
+
+    .viewer-stage {
+      height: 100%;
+      padding: 0 clamp(3em, 7vw, 6em);       // room for the edge arrows
+      gap: 0;
+      @media (max-width: 600px) { padding: 0 2.25em; }
+    }
+
+    .viewer-frame {
+      height: 100%;
+      gap: 0;
+      img {
+        max-width: 100%;
+        max-height: calc(100dvh - 4em);      // leave the bottom margin for caption
+      }
+    }
+
+    // Caption floats in the bottom margin, clear of the image.
+    .viewer-meta {
+      position: fixed;
+      left: 0; right: 0;
+      bottom: 1.2em;
+      z-index: 61;
+    }
+
+    // Toggle floats top-right so the way back to the grid is always in reach.
+    // A faint paper chip keeps it findable over any photograph.
+    .viewer-modes {
+      position: fixed;
+      top: 1em; right: 1.1em;
+      margin: 0;
+      z-index: 62;
+      gap: .5em;
+      padding: .3em .5em;
+      background: rgba($backgroundc, .7);
+      backdrop-filter: blur(6px);
+      border-radius: 999px;
+    }
+
+    // Arrows pin to the screen edges.
+    .viewer-prev,
+    .viewer-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 61;
+    }
+    .viewer-prev { left: .3em; }
+    .viewer-next { right: .3em; }
   }
 
   .viewer-grid {

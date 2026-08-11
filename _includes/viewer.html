@@ -145,6 +145,7 @@
       else if (e.key === 'ArrowRight') show(i + 1);
       else if (e.key === 'Home') show(0);
       else if (e.key === 'End') show(all.length - 1);
+      else if (e.key === 'Escape') setMode('grid');   // exit fullscreen → grid
     });
 
     let x0 = null;
@@ -156,12 +157,16 @@
       x0 = null;
     }, {passive: true});
 
-    // Restore: URL wins, then last-used mode for this page.
+    // Restore: URL wins, then last-used mode for this page. Grid is the
+    // default landing — the header and site are visible; clicking a photo
+    // (or the slide toggle) enters the fullscreen slideshow.
     const params = new URLSearchParams(window.location.search);
     const start  = parseInt(params.get('i'), 10);
     show(start && start >= 1 && start <= all.length ? start - 1 : 0);
     let saved = null;
     try { saved = localStorage.getItem('viewerMode:' + location.pathname); } catch (e) {}
-    setMode(params.get('v') === 'grid' ? 'grid' : (params.has('v') ? 'slide' : (saved || 'slide')));
+    if (params.get('v') === 'grid') setMode('grid');
+    else if (params.get('v') === 'slide' || params.has('i')) setMode('slide');
+    else setMode(saved || 'grid');
   })();
 </script>
