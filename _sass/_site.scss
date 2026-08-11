@@ -404,17 +404,12 @@ pre {
       gap: 0;
       img {
         max-width: 100%;
-        max-height: calc(100dvh - 4em);      // leave the bottom margin for caption
+        max-height: calc(100dvh - 2em);      // a touch of breathing room at the edges
       }
     }
 
-    // Caption floats in the bottom margin, clear of the image.
-    .viewer-meta {
-      position: fixed;
-      left: 0; right: 0;
-      bottom: 1.2em;
-      z-index: 61;
-    }
+    // No caption in the fullscreen slideshow — the photograph stands alone.
+    .viewer-meta { display: none; }
 
     // Toggle floats top-right so the way back to the grid is always in reach.
     // A faint paper chip keeps it findable over any photograph.
