@@ -1,6 +1,9 @@
 # Display order — newest first by EXIF capture date (file date if none).
 # Regenerate with bin/generate-photo-order.py after adding images.
 
+- "L1004964.jpg"   # 2026:08:22 12:40:08
+- "L1004945.jpg"   # 2026:08:22 12:35:21
+- "L1004934.jpg"   # 2026:08:22 12:32:48
 - "L1004796.jpg"   # 2026:08:10 21:03:22
 - "L1004666.jpg"   # 2026:08:08 11:38:31
 - "L1000125.jpg"   # 2026:08:07 13:55:35
