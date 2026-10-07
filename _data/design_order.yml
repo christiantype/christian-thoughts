@@ -1,6 +1,15 @@
 # Display order — newest first by EXIF capture date (file date if none).
 # Regenerate with bin/generate-photo-order.py after adding images.
 
+- "barnyard-bubbly-mark.webp"   # moved from OP/AL, 2026-10-07 — the mark drawing itself
+- "id-01.webp"   # moved from OP/AL, 2026-10-07
+- "id-02.webp"   # moved from OP/AL, 2026-10-07
+- "id-03.webp"   # moved from OP/AL, 2026-10-07
+- "id-04.webp"   # moved from OP/AL, 2026-10-07
+- "id-05.webp"   # moved from OP/AL, 2026-10-07
+- "id-06.webp"   # moved from OP/AL, 2026-10-07
+- "id-07.webp"   # moved from OP/AL, 2026-10-07
+- "id-08.webp"   # moved from OP/AL, 2026-10-07
 - "values-trust-believe.webp"   # 2026:09:15 08:33:00  (file date)
 - "L1003605.jpg"   # 2026:07:12 14:39:07
 - "play-001.png"   # 2026:05:09 19:27:33  (file date)
