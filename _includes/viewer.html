@@ -37,6 +37,12 @@
 
     <figure class="viewer-frame">
       <img id="viewer-img" alt="">
+      <!-- An SVG that draws itself has to be in the document to do it. As the
+           src of an <img> it is decoded once, animates once, and every later
+           visit shows the finished mark — worse, the preloader decodes it a
+           slide early, so it is always over before you arrive. Inlined here
+           and rebuilt on each visit, it draws every time. -->
+      <div id="viewer-svg" class="viewer-svg" hidden aria-hidden="true"></div>
       <figcaption class="viewer-meta">
         <span class="viewer-count"></span>
         <span class="viewer-exif"></span>
@@ -62,6 +68,7 @@
     if (!all.length) return;
 
     const img     = document.getElementById('viewer-img');
+    const svgBox  = document.getElementById('viewer-svg');
     const countEl = root.querySelector('.viewer-count');
     const exifEl  = root.querySelector('.viewer-exif');
     const stage   = root.querySelector('.viewer-stage');
@@ -72,9 +79,12 @@
     let i = 0, mode = 'slide', gridBuilt = false;
     const cache = new Map();
 
+    const isSVG = f => /\.svg$/i.test(f);
+    const svgText = new Map();
+
     function preload(n) {
       const item = all[(n + all.length) % all.length];
-      if (!item || cache.has(item.f)) return;
+      if (!item || isSVG(item.f) || cache.has(item.f)) return;
       const pre = new Image();
       pre.src = BASE + item.f;
       cache.set(item.f, pre);
@@ -83,12 +93,59 @@
     function show(n) {
       i = (n + all.length) % all.length;
       const item = all[i];
-      img.src = BASE + item.f;
-      img.alt = item.a || '';
-      countEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + all.length;
+      if (isSVG(item.f)) {
+        drawSVG(item);
+      } else {
+        svgBox.hidden = true; svgBox.textContent = '';
+        img.hidden = false;
+        img.src = BASE + item.f;
+        img.alt = item.a || '';
+      }
+      countEl.textContent = (i + 1) + ' / ' + all.length;
       exifEl.textContent  = item.m || '';
       preload(i + 1); preload(i - 1);
       syncURL();
+    }
+
+    /* Put the markup in fresh: new nodes start their animations from the
+       beginning, which is the whole point of a mark that draws. The file is
+       fetched once and kept, so only the first time waits. */
+    function svgInto(holder, item, onFail) {
+      const put = txt => {
+        holder.innerHTML = txt;
+        const el = holder.querySelector('svg');
+        if (el) { el.setAttribute('role', 'img'); el.setAttribute('aria-label', item.a || ''); }
+      };
+      if (svgText.has(item.f)) { put(svgText.get(item.f)); return; }
+      holder.textContent = '';
+      fetch(BASE + item.f).then(r => r.text()).then(txt => {
+        svgText.set(item.f, txt); put(txt);
+      }).catch(() => { if (onFail) onFail(); });
+    }
+
+    /* An animation inside display:none does not run, and a thumbnail far down
+       a long grid is drawn and finished before anyone scrolls to it. Redraw it
+       as it arrives, every time it arrives. */
+    const seen = 'IntersectionObserver' in window ? new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const item = e.target._item;
+        if (item) svgInto(e.target, item);
+      });
+    }, { rootMargin: '0px 0px -12% 0px' }) : null;
+
+    function drawWhenSeen(holder, item) {
+      holder._item = item;
+      if (seen) seen.observe(holder);
+    }
+
+    function drawSVG(item) {
+      img.hidden = true; img.removeAttribute('src');
+      svgBox.hidden = false;
+      svgInto(svgBox, item, () => {               // no network: show it flat
+        svgBox.hidden = true; img.hidden = false;
+        img.src = BASE + item.f; img.alt = item.a || '';
+      });
     }
 
     // Grid is built once, on first switch — no cost while in slide mode.
@@ -98,12 +155,24 @@
       all.forEach((item, n) => {
         const fig = document.createElement('figure');
         fig.className = 'viewer-thumb';
-        const el = document.createElement('img');
-        el.src = BASE + item.f;
-        el.alt = item.a || '';
-        el.loading = 'lazy';
-        el.decoding = 'async';
-        fig.appendChild(el);
+        if (isSVG(item.f)) {
+          /* A mark that draws itself belongs in the document, and it should
+             draw when you come to it — not once, offscreen, before the page
+             has even been scrolled. The markup goes in fresh every time the
+             thumbnail enters the view, which is what restarts the drawing. */
+          const holder = document.createElement('div');
+          holder.className = 'viewer-thumb__svg';
+          fig.appendChild(holder);
+          svgInto(holder, item);
+          drawWhenSeen(holder, item);
+        } else {
+          const el = document.createElement('img');
+          el.src = BASE + item.f;
+          el.alt = item.a || '';
+          el.loading = 'lazy';
+          el.decoding = 'async';
+          fig.appendChild(el);
+        }
         // clicking a thumbnail opens it in slide mode
         fig.addEventListener('click', () => { show(n); setMode('slide'); });
         frag.appendChild(fig);
@@ -117,6 +186,9 @@
       if (mode === 'grid') buildGrid();
       stage.hidden = mode !== 'slide';
       grid.hidden  = mode !== 'grid';
+      // the stage was display:none a moment ago, where no animation runs, so
+      // a mark on the current slide has to be laid down again now
+      if (mode === 'slide' && isSVG(all[i].f)) drawSVG(all[i]);
       body.classList.toggle('mode-grid', mode === 'grid');
       body.classList.toggle('mode-slide', mode === 'slide');
       modes.forEach(b => {
