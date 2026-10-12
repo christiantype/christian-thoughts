@@ -343,18 +343,12 @@ pre {
       cursor: default;
     }
 
-    // A mark that draws itself is in the document rather than behind an
-    // <img>, so it takes the same room by the same rules.
-    .viewer-svg {
-      flex: 0 1 auto;
-      min-height: 0;
-      max-width: 100%;
-      max-height: calc(100% - 3em);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      &[hidden] { display: none; }
-      svg { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
+    // A piece set on a ground is contained on it, with the ground showing
+    // round the edges, so you can see where the artwork itself stops.
+    img.on-ground {
+      object-fit: contain;
+      padding: clamp(1em, 4%, 3em);
+      box-sizing: border-box;
     }
   }
 
@@ -416,8 +410,7 @@ pre {
     .viewer-frame {
       height: 100%;
       gap: 0;
-      img,
-      .viewer-svg {
+      img {
         max-width: 100%;
         max-height: calc(100dvh - 2em);      // a touch of breathing room at the edges
       }
@@ -474,14 +467,6 @@ pre {
     @media (max-width: 900px) { grid-column: span 2; }
     @media (max-width: 600px) { grid-column: span 1; }
 
-    // a mark that draws itself sits in the grid at the same square as a photo
-    .viewer-thumb__svg {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      display: block;
-      svg { width: 100%; height: 100%; display: block; }
-    }
-
     img {
       width: 100%;
       height: 100%;
@@ -489,6 +474,13 @@ pre {
       object-fit: cover;
       display: block;
       border: 0;
+    }
+
+    // on a ground, the whole piece shows rather than a crop of it
+    img.on-ground {
+      object-fit: contain;
+      padding: 8%;
+      box-sizing: border-box;
     }
   }
 

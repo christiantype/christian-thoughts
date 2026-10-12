@@ -1,0 +1,6 @@
+# A ground to sit an image on, keyed by filename. Use it when a piece runs
+# light right to its own edge: on the page's white there is nothing to show
+# where the artwork stops, so it is set on a colour that gives it an edge.
+# The image is contained rather than cropped, with the ground showing around it.
+
+"id-cover.webp": "#000000"

@@ -32,7 +32,8 @@ layout: default
 [
 {%- for fname in ordered_names -%}
   {%- assign alt = site.data.design_alt[fname] | default: "Design work by Christian Solorzano" -%}
-{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":""}{%- unless forloop.last -%},{%- endunless -%}
+  {%- assign ground = site.data.design_ground[fname] -%}
+{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":"","g":{{ ground | default: "" | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 </script>
