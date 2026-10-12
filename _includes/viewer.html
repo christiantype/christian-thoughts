@@ -38,7 +38,6 @@
     <figure class="viewer-frame">
       <img id="viewer-img" alt="">
       <figcaption class="viewer-meta">
-        <span class="viewer-count"></span>
         <span class="viewer-exif"></span>
       </figcaption>
     </figure>
@@ -62,7 +61,6 @@
     if (!all.length) return;
 
     const img     = document.getElementById('viewer-img');
-    const countEl = root.querySelector('.viewer-count');
     const exifEl  = root.querySelector('.viewer-exif');
     const stage   = root.querySelector('.viewer-stage');
     const grid    = root.querySelector('.viewer-grid');
@@ -86,7 +84,6 @@
       img.src = BASE + item.f;
       img.alt = item.a || '';
       setGround(img, item);
-      countEl.textContent = (i + 1) + ' / ' + all.length;
       exifEl.textContent  = item.m || '';
       preload(i + 1); preload(i - 1);
       syncURL();

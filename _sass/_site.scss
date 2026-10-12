@@ -364,8 +364,6 @@ pre {
     opacity: .5;
     font-variant-numeric: tabular-nums;
 
-    .viewer-count { margin-right: 1em; }
-
     @media (max-width: 600px) {
       font-size: ms(-3);
       letter-spacing: .5px;
@@ -412,12 +410,14 @@ pre {
       gap: 0;
       img {
         max-width: 100%;
-        max-height: calc(100dvh - 2em);      // a touch of breathing room at the edges
+        max-height: calc(100dvh - 5em);      // room for the caption, plus breathing room
       }
     }
 
-    // No caption in the fullscreen slideshow — the photograph stands alone.
-    .viewer-meta { display: none; }
+    // The frame and its caption share the height: the photograph takes what
+    // is left after the line beneath it, rather than the full viewport with
+    // the caption pushed off the bottom edge.
+    .viewer-meta { padding-top: .75em; }
 
     // Toggle floats top-right so the way back to the grid is always in reach.
     // A faint paper chip keeps it findable over any photograph.
