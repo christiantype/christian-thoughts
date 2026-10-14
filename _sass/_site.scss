@@ -37,6 +37,13 @@ pre {
   aspect-ratio: 16 / 9;
 }
 
+// …but an audio player is not 16:9. The Mixcloud widget is a fixed 120px bar,
+// and the shared rule was stretching it to 318px and leaving the rest empty.
+.site-post-body iframe.audio-embed {
+  aspect-ratio: auto;
+  height: 120px;
+}
+
 // ── Font-size normalize ────────────────────────────────────────────────────
 .site,
 .site p,
@@ -179,7 +186,10 @@ pre {
     margin-bottom: 2em;
     background: $backgroundc;
 
-    img {
+    // the video sits in the same stack as the photographs and is sized the same
+    // way, so it fills the hero to exactly the height they do
+    img,
+    video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -733,3 +743,61 @@ pre {
 @media (prefers-reduced-motion: reduce) {
   #hummingbird { display: none; }
 }
+
+  // ── Video with a sound toggle, after the more-than.design samples ──────
+  // Autoplay has to be muted to be allowed at all, so the clip starts silent
+  // and the speaker turns it on. The slash on the icon is the muted state.
+  .video-spot { margin: 2em 0; }
+  .video-spot__frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    line-height: 0;
+  }
+  .video-spot__media {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  // iOS paints its own start button whenever autoplay is refused (Low Power
+  // Mode does it). Suppress the control; the speaker is the only affordance.
+  .video-spot__media::-webkit-media-controls-start-playback-button,
+  .video-spot__media::-webkit-media-controls,
+  .site-hero-video::-webkit-media-controls-start-playback-button,
+  .site-hero-video::-webkit-media-controls {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+  .video-spot__sound {
+    position: absolute;
+    right: clamp(.6em, 1.5vw, 1em);
+    bottom: clamp(.6em, 1.5vw, 1em);
+    z-index: 2;
+    width: 2.6em;
+    height: 2.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    font-size: 1em;
+    line-height: 0;
+    color: #fff;
+    background: rgba(20, 22, 30, .55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .video-spot__sound svg { width: 1.3em; height: 1.3em; display: block; }
+  .video-spot__sound .spk-wave  { opacity: 0; transition: opacity .2s ease; }
+  .video-spot__sound .spk-slash { opacity: 1; transition: opacity .2s ease; }
+  .video-spot__sound:hover { background: rgba(20, 22, 30, .82); }
+  .video-spot__sound.is-on { background: rgba(126, 156, 247, .5); }
+  .video-spot__sound.is-on .spk-wave  { opacity: 1; }
+  .video-spot__sound.is-on .spk-slash { opacity: 0; }

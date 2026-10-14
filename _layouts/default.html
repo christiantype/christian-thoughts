@@ -190,5 +190,60 @@
       })();
     </script>
 
+    <script>
+      /* Video sound toggle, after the more-than.design samples. Autoplay is only
+         allowed when muted, so a clip starts silent and the speaker turns it on.
+         One at a time: turning one on silences the others. */
+      /* iOS refuses autoplay in Low Power Mode and shows its own start button.
+         Ask every muted clip to play on load and again on the first gesture. */
+      (function () {
+        var vids = document.querySelectorAll('.site-hero-video, .video-spot__media');
+        if (!vids.length) return;
+        var nudge = function () {
+          vids.forEach(function (v) {
+            if (!v.paused || !v.muted) return;
+            v.playsInline = true;
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          });
+        };
+        nudge();
+        ['touchstart', 'pointerdown', 'scroll'].forEach(function (ev) {
+          document.addEventListener(ev, nudge, { once: true, passive: true });
+        });
+      })();
+
+      (function () {
+        var buttons = document.querySelectorAll('.video-spot__sound');
+        if (!buttons.length) return;
+        buttons.forEach(function (btn) {
+          var frame = btn.closest('.video-spot__frame');
+          var video = frame && frame.querySelector('.video-spot__media');
+          if (!video) return;
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (video.muted) {
+              buttons.forEach(function (b) {
+                if (b === btn) return;
+                var f = b.closest('.video-spot__frame');
+                var v = f && f.querySelector('.video-spot__media');
+                if (v) v.muted = true;
+                b.classList.remove('is-on');
+                b.setAttribute('aria-pressed', 'false');
+              });
+              video.muted = false;
+              video.volume = 1;
+              var p = video.play();
+              if (p && p.catch) p.catch(function () {});
+            } else {
+              video.muted = true;
+            }
+            btn.classList.toggle('is-on', !video.muted);
+            btn.setAttribute('aria-pressed', String(!video.muted));
+          });
+        });
+      })();
+    </script>
+
   </body>
 </html>
