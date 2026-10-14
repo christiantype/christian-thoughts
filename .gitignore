@@ -6,3 +6,6 @@
 /_assets/bower/*
 /.jekyll-cache/jekyll*
 /.idea/workspace.xml*
+
+# Claude Code session data — tooling, not site content, and this repo is public
+.claude/
