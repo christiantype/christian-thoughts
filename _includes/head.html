@@ -7,11 +7,29 @@
   {%- seo -%}
   {%- feed_meta -%}
 
-  {%- comment -%} OG image fallback (jekyll-seo-tag doesn't pick up site.image automatically). {%- endcomment -%}
+  {%- comment -%}
+    og:image itself is left to jekyll-seo-tag. Every page has a page.image —
+    its own, or the default handed to it by the `defaults` block in
+    _config.yml — so emitting one here as well gave each page two of each tag.
+    What seo-tag does not emit is the size and the alt text, below.
+  {%- endcomment -%}
   {%- assign og_image = page.image | default: site.image -%}
-  {%- if og_image -%}
-    <meta property="og:image" content="{{ og_image | absolute_url }}">
-    <meta name="twitter:image" content="{{ og_image | absolute_url }}">
+
+  {%- comment -%}
+    Dimensions are declared only for the cards in /assets/images/og/, which are
+    all cut to 1200x630. A diary post brings a photograph of its own at whatever
+    size it was exported, and stating the wrong size is worse than stating none
+    — the preview reserves a box the image never fills.
+  {%- endcomment -%}
+  {%- if og_image contains '/assets/images/og/' -%}
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+  {%- endif -%}
+
+  {%- assign og_alt = page.image_alt | default: site.image_alt -%}
+  {%- if og_alt -%}
+    <meta property="og:image:alt" content="{{ og_alt | escape }}">
+    <meta name="twitter:image:alt" content="{{ og_alt | escape }}">
   {%- endif -%}
 
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
@@ -53,8 +71,21 @@
       { "@type": "EducationalOrganization", "name": "DePaul University" }
     ],
     "knowsAbout": ["Graphic Design", "Design Education", "Photography", "Meditation"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oak Park",
+      "addressRegion": "IL",
+      "addressCountry": "US"
+    },
+    {%- comment -%}
+      sameAs is how a search engine works out that the Christian Solorzano here,
+      the one on Instagram, and the one credited on those two sites are one
+      person. Every profile that is unambiguously his belongs in this list.
+    {%- endcomment -%}
     "sameAs": [
-      "https://www.instagram.com/{{ site.instagram_username }}"
+      "https://www.instagram.com/{{ site.instagram_username }}",
+      "https://more-than.design",
+      "https://chicagographicdesign.club"
     ]
   }
   </script>

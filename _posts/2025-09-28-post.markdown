@@ -9,7 +9,6 @@ categories: diary
 
 type: "diary"
 
-image: "NA"
 
 tags: [project]
 

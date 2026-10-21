@@ -20,13 +20,15 @@
 
 title: Christian Solorzano
 email: cs@christiansolorzano.com
-description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+description: "Christian Solorzano is a communication designer, educator, and photographer in Oak Park, Illinois — founder of OP/AL and the Chicago Graphic Design Club."
 long_bio: "Christian Solorzano is the founder of OP/AL, (Original Practice Applied Learning), a design practice in Oak Park, and the Chicago Graphic Design Club, a community of thousands of designers united by generosity, curiosity, and the belief that design grows stronger and moves forward together. He produces Faculty, a publication on Chicago design, and hosts Underscore, a podcast with over one hundred episodes featuring conversations with designers throughout Chicago. Solorzano teaches at DePaul University, is a practicing photographer, and a trained meditation instructor whose contemplative practice shapes everything he makes. He believes design is never decoration; it is inquiry, consciousness, and transformation."
-url: "https://www.christiansolorzano.com"
+url: "https://christiansolorzano.com"
 baseurl: ""
-image: /assets/images/bg4.jpg
+image: /assets/images/og/default.jpg
+image_alt: "I Trust You & I Believe You — a poster by Christian Solorzano, set on black"
 instagram_username: xnslrzn
 google_analytics: G-MXQ9Q15GFS
+
 
 social:
   name: Christian Solorzano
@@ -60,3 +62,13 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# Every page carries the default link-preview card unless it names its own.
+# This is what makes jekyll-seo-tag emit og:image and the large Twitter card
+# site-wide; it only ever looks at page.image, never at site.image.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og/default.jpg
+      image_alt: "I Trust You & I Believe You — a poster by Christian Solorzano, set on black"
