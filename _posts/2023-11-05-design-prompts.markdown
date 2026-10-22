@@ -1,0 +1,43 @@
+---
+layout: diary
+
+title:  "Design prompts"
+
+date:   2023-11-05 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/11/05/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/016.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/016.jpg">
+
+In my *Intro to Visual Design* class, I am having my students explore a range of design concepts such as light, 
+shadow, color, harmony, symmetry, etc. The first weeks of our class was 
+focused on abstraction and each exercise was intended to have them grasp an understanding of how successful design 
+is a combination of various elements and principles coming together to depict an idea. They did this by designing 
+compositions through analog and digital illustrations, photography, typography, and images provided to them.
+
+Recently, I had them begin to 
+interpret open-ended prompts such as “joy, chaos, silence, disruption, tension, structure, sound, emptiness, 
+identity, war, peace, space, health, hospitality,  transportation, technology, nature, energy.” 
+
+I may share some of their work in the coming weeks. We‘ll see. 

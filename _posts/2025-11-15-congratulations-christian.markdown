@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "Congratulations Christian"
+
+date:   2025-11-15 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/11/15/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Congratulations to my Brazilian Jiu-Jitsu professor, Christian Uflacker, for being inducted into the Illinois Martial 
+Arts Hall of Fame. I received my Black Belt from him in November 2024 and have been training with him since 2015. 
+
+![Christian Solorzano Photography](/assets/images/diary/20251115a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20251115b.jpg)
+

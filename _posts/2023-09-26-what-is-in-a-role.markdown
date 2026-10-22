@@ -1,0 +1,36 @@
+---
+layout: diary
+
+title:  "What is in a role?"
+
+date:   2023-09-26 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/09/26/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/003.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I am thinking about what roles mean. Often, we get carried away with ways to define ourselves. Today, there are 
+more and more ways to self-identify. But at the end of 
+the 
+day, identity is much more complex than roles, accolades, awards, recognition, titles, etc. Who we are goes beyond 
+language and words. Language is limiting — it is a safety net at best. I think we should take our roles serious but 
+not so serious to the point of rigidity and clout.

@@ -1,0 +1,31 @@
+---
+layout: diary
+
+title:  "Style is Born"
+
+date:   2025-09-27 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/09/27/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I heard somebody say today that style is born out of your limitations or rather, technical acumen. Which, I agree 
+with. Which reinforces that copying somebody else‘s style is ___________. 

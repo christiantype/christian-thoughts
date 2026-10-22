@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Another mixtape"
+
+date:   2024-04-23 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/04/23/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Another mix for Mu Radio. Sometimes music speaks louder than words... 
+<iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FChicagoGraphicDesignClub%2F04-19-2024-set-by-christian-solorzano%2F" frameborder="0" ></iframe>
+
+

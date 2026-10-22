@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Easy"
+
+date:   2024-06-11 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/06/11/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+As both a designer and somebody that works with emerging technology, I often wonder if our obsession with making 
+things *easy* for users is always the best approach. I don't have an answer but is making convenience and ease of 
+use always best? 
+
+![Friends](/assets/images/diary/20240611.jpeg)
+

@@ -1,0 +1,43 @@
+---
+layout: diary
+
+title:  "A good looking sentence"
+
+date:   2023-12-13 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/12/13/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231213.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231213.jpg" alt="Lights">
+
+When writing, 
+
+a sentence should not only communicate well 
+
+*but* 
+
+it should also look good. 
+
+What does that mean? 
+
+That's up to you.

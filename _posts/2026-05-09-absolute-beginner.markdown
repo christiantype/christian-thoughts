@@ -1,0 +1,52 @@
+---
+layout: diary
+
+title:  "Absolute Beginner"
+
+date:   2026-05-09 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/05/09/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Learning focus zone and what the hell a meter actually is 
+
+I do not like numbers or measurements
+
+But sometimes you gotta learn things you don't wanna learn about
+
+![Christian Solorzano Photography](/assets/images/diary/20260509a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509c.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509d.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509e.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509f.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509g.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509h.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260509i.jpg)

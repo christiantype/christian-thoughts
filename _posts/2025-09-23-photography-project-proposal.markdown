@@ -1,0 +1,45 @@
+---
+layout: diary
+
+title:  "Photography Project Proposal"
+
+date:   2025-09-23 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/09/23/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I'd like to work on a photography book that consists of a series of photographs of various people.
+
+Think large hardcover book — and pages full of faces...
+
+If you'd like to be photographed — send me a DM on Instagram (@xnslrzn) or email me at solochris14@gmail.com or if 
+you read this on Instagram, give the story a little tiny pink heart.
+
+It can be fun! And I'd like to include MANY MANY people. 
+
+Message me if interested and we can discuss next steps...
+
+And why do I want to do this? Just because... 
+
+Christian
+
+

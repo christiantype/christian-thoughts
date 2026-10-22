@@ -1,0 +1,76 @@
+---
+layout: diary
+
+title:  "Go Do Better"
+
+date:   2025-07-06 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/07/06/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+We stand on the shoulders of giants
+
+The least we can do is...
+
+To go out and do better
+
+Everything
+
+Anything
+
+There is a responsibility to be just
+
+In all that we do
+
+And to be bold
+
+And unapologetic
+
+Regardless of how
+
+Stubborn
+
+Or 
+
+Confrontational
+
+Or 
+
+Difficult 
+
+We may seem 
+
+Because at the end
+
+It's not about you or I
+
+But about 
+
+Us
+
+Now Us
+
+And 
+
+Future
+
+Us

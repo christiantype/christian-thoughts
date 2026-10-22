@@ -1,0 +1,47 @@
+---
+layout: diary
+
+title:  "Recent Photographs"
+
+date:   2025-11-07 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/11/07/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+A series of photos I've taken recently. 
+
+![Christian Solorzano Photography](/assets/images/diary/20251107a.jpg)
+Graceland Cemetery...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107b.jpg)
+A thing in the park
+
+![Christian Solorzano Photography](/assets/images/diary/20251107c.jpg)
+Mhm...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107d.jpg)
+Yep...
+
+![Christian Solorzano Photography](/assets/images/diary/20251107e.jpg)
+Home still life...
+
+

@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Tuesday Morning & Afternoon"
+
+date:   2025-11-11 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/11/11/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Hung out with friends Sean and Barry today — talked about typography, capitalism, monographs, graphic design AND more.
+
+
+![Christian Solorzano Photography](/assets/images/diary/20251111a.jpg)
+![Christian Solorzano Photography](/assets/images/diary/20251111b.jpg)
+

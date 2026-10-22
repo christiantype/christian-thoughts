@@ -1,0 +1,32 @@
+---
+layout: diary
+
+title:  "RIP David Lynch"
+
+date:   2025-01-17 1:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/01/17/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+David Lynch died yesterday. It sucks. He was a huge inspiration and a constant source of inspiration. He's an example 
+of true unapologetic creativity but his legacy will live on and hopefully inspire others to be fearlessly true to 
+themselves.

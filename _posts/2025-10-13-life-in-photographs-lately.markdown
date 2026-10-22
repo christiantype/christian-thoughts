@@ -1,0 +1,54 @@
+---
+layout: diary
+
+title:  "Life in Photographs Lately"
+
+date:   2025-10-13 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/10/13/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Photos taken around Chicago lately... all shot with my best friend, my camera.
+
+![Christian Solorzano Photography](/assets/images/diary/20251013b.jpg)
+Inscribing the present with the past
+
+![Christian Solorzano Photography](/assets/images/diary/20251013c.jpg)
+That damn parking lot...
+
+![Christian Solorzano Photography](/assets/images/diary/20251013d.jpg)
+Still (moving) life
+
+![Christian Solorzano Photography](/assets/images/diary/20251013e.jpg)
+Jesus Christ!
+
+![Christian Solorzano Photography](/assets/images/diary/20251013f.jpg)
+Spudnik no.1
+
+![Christian Solorzano Photography](/assets/images/diary/20251013h.jpg)
+Spudnik no.2
+
+![Christian Solorzano Photography](/assets/images/diary/20251013g.jpg)
+Spudnik no.3
+
+![Christian Solorzano Photography](/assets/images/diary/20251013i.jpg)
+Genshin meeting Ben Connelly

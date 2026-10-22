@@ -1,0 +1,37 @@
+---
+layout: diary
+
+title:  "In praise of the imperfect"
+
+date:   2023-10-27 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/10/27/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/014.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/014.jpg">
+
+There is great beauty to appreciate in the forgotten, abandoned, and overlooked. When I walk throughout Downtown 
+Chicago, between the skyscrapers and modern architecture, there are pockets of magic in which the perfect scene 
+presents itself to me. I love Chicago for this reason. There is beauty outside the conventional notions of *beauty*. 
+And that is a fact. I am reminded of the philosophy or (way of seeing), called Wabi-Sabi which sees the beauty in 
+imperfection, decay, and impermanence. It is about respecting all stages of change and honoring it for what it is.  

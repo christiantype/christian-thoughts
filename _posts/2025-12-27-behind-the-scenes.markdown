@@ -1,0 +1,41 @@
+---
+layout: diary
+
+title:  "Behind-The-Scenes"
+
+date:   2025-12-27 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/12/27/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Recently recorded an episode of Underscore with Oscar Solis at the Chicago Art Department. The photos below were 
+shot by Patrick Smith.
+
+Oscar is a Mexican + American graphic designer and researcher based in Pilsen. His design research explores new modes of community engagement and participatory models of design. His graphic practice focuses on art book publishing, queer diagrammatic forms, and technological mediation. He is a PhD Design Researcher at The SPARK Center at DePaul's Jarvis College of Computing and Digital Media, Chicago Art Department CORE studio resident, and programing council member of Co-Prosperity.
+
+This episode will be released in early January 2026.
+
+![Christian Solorzano Photography](/assets/images/diary/20251217a.JPG)
+
+![Christian Solorzano Photography](/assets/images/diary/20251217b.JPG)
+
+![Christian Solorzano Photography](/assets/images/diary/20251217c.JPG)

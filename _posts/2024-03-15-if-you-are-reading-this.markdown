@@ -1,0 +1,53 @@
+---
+layout: diary
+
+title:  "If you are reading this"
+
+date:   2024-03-15 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/03/15/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+If you are reading this... 
+
+Hello.
+
+It is Friday and it is almost 4 PM. I am drinking Kukicha Green Tea. 
+
+It is the second steep. Sometimes the second steep is rich. 
+
+Other times it is bland. Either way, both are enjoyable.
+
+
+Have a nice Friday... 
+
+Wherever you are. 
+
+Whoever you are.
+
+Whatever you are.
+
+It is now 4 PM.
+
+
+
+

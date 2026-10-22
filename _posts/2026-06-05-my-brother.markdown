@@ -1,0 +1,47 @@
+---
+layout: diary
+
+title:  "my brother"
+
+date:   2026-06-05 12:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/06/05/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "My brother — his OP/AL fabric poster, made by hand. By Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+my brother was born in 2002 — i was 11 years old. he was born about a week before my birthday — he was my birthday gift. 
+
+A baby brother. 
+
+Fast forward, we are now collaborators and building something great together.
+
+Inspired by his love for Elvis Presley and jumpsuits, he designed and produced this fabric poster for OP/AL.
+
+You can learn more about him through [his Substack](https://substack.com/@theverticaleye).
+
+![Christian Solorzano — photograph of his brother at a desk measuring and cutting felt with scissors and a ruler, with a sewing machine and the OP/AL textile in progress on a green cutting mat](/assets/images/diary/20260604b.jpg)
+<br>
+
+![Christian Solorzano — photograph of the OP/AL fabric poster mid-layout on a round white table, with black "OP/AL" type and colored felt pieces being arranged below](/assets/images/diary/20260604c.jpg)
+<br>
+
+![Christian Solorzano — photograph of the finished OP/AL fabric poster on grey carpet, a hand-stitched composition of colorful felt shapes with embroidered lines, shoes framing the edge of the frame](/assets/images/diary/20260604d.jpg)
+<br>

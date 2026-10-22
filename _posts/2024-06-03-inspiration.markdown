@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "Inspiration"
+
+date:   2024-06-03 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/06/03/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+### The world needs more people like Tibor Kalman...
+
+Reading this is like a glass of cold water on a hot day... What do you think? Text me or DM me on Instagram... @xnslrzn
+
+![Tibor Kalman](/assets/images/diary/20240603.png)

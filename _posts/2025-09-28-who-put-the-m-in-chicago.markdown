@@ -1,0 +1,53 @@
+---
+layout: diary
+
+title:  "Who put the M in Chicago?"
+
+date:   2025-09-28 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/09/28/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+I saw Morrissey at the Aragon Ballroom in Chicago. It was an excellent show. He is the greatest singer of our 
+generation — an unapologetic voice — a real original. In an increasingly standardized cultural arena — Morrissey 
+represents individuality and authentic vitality.
+
+Notable tunes were Lost, All The Lazy Dykes, and Life is a Pigsty.
+
+Super.
+
+Here are some photos...
+
+![Christian Solorzano Photography](/assets/images/diary/20250928a.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928c.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928d.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928e.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20250928f.jpg)
+
+
+

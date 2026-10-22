@@ -1,0 +1,74 @@
+---
+layout: diary
+
+title:  "Experiments"
+
+date:   2026-07-28 12:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/07/28/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Experiments — things I have been making, by Christian Solorzano."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Things I have been making.
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728f.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728f.mp4" type="video/mp4">
+</video>
+<br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728a.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728a.mp4" type="video/mp4">
+</video>
+<br>
+
+![Christian Solorzano — glitched spectral portrait smeared in deep reds, a face emerging from digital distortion](/assets/images/diary/20260728b.jpg)
+<br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728b.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728b.mp4" type="video/mp4">
+</video>
+<br>
+
+![Christian Solorzano — high-contrast halftone-dithered image of utility poles and wires against a bright sky](/assets/images/diary/20260728c.jpg)
+<br>
+
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728c.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728c.mp4" type="video/mp4">
+</video>
+<br>
+
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728e.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728e.mp4" type="video/mp4">
+</video>
+<br>
+
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728d.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728d.mp4" type="video/mp4">
+</video>
+<br>
+
+<video autoplay loop muted playsinline preload="auto" poster="/assets/videos/diary/20260728g.jpg" width="100%">
+  <source src="/assets/videos/diary/20260728g.mp4" type="video/mp4">
+</video>
+<br>

@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Damn, I hit my elbow"
+
+date:   2025-09-12 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/09/12/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Damn, I hit my elbow at home and now I have a big bump that hurts when I put pressure on it. 
+
+Send help... 
+
+Also, my brother and I are both starting a graphic design studio...
+
+You've heard it here first...
+
+
+

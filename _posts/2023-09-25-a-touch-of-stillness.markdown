@@ -1,0 +1,37 @@
+---
+layout: diary
+
+title:  "A touch of stillness"
+
+date:   2023-09-25 14:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/09/25/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/002b.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+### These are two stills that caught my attention from the film, a Touch of Zen (1971).
+As somebody that it is interested in Zen Buddhism, it is fascinating to see how concepts such as enlightenment are 
+depicted in film.
+
+<img src="/assets/images/diary/002a.jpg">
+
+<img src="/assets/images/diary/002b.jpg">

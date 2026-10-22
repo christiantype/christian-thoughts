@@ -1,0 +1,50 @@
+---
+layout: diary
+
+title:  "Still Life at the Christian Cafe"
+
+date:   2026-05-14 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/05/14/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+i am going to be posting daily photography exercises — for this one here, i am studying light caressing the quotidian across my desk... i was changing my ink and this moment is what transpired. and also — it is finally nice in Chicago. hell yea....
+
+
+![Christian Solorzano Photography](/assets/images/diary/20260514a.jpg)
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514b.jpg)
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514c.jpg)
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514d.jpg)
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514e.jpg)
+<br>
+
+![Christian Solorzano Photography](/assets/images/diary/20260514f.jpg)
+<br>
+

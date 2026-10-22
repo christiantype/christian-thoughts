@@ -1,0 +1,60 @@
+---
+layout: diary
+
+title:  "A Short Story"
+
+date:   2025-11-10 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/11/10/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+When I was younger, early into my teens — I was exploring the internet and dabbling in my first interactions with 
+digital and graphic design. During that time, I made a fan page called GodIsInTheTv.com and it was a site dedicated 
+to Marilyn Manson — like a fan site. 
+
+One day, somebody emailed me, thinking that it was an official Marilyn Manson website and they inquired about where 
+they could grab a VHS copy of God Is In The TV, a compilation of music videos and live performances. 
+
+I said, I don't know and also, I am not affiliated with Marilyn Manson, but this person and I became friends (I wish 
+I still remembered his name because he was somebody that I had a lot in common with) — then, in my little Christian 
+bubble, meeting somebody with an alternative taste in culture was rare, so when you met someone that you clicked 
+with, you wanted to hold onto them.
+
+This person introduced me to his friend, and together we talked about music — Aphex Twin, Morrissey, The Smiths, 
+Marilyn Manson, Nine Inch Nails — and on one occasion, we talked about Björk and then Imogen Heap.
+
+Fast forward, I still think of fragments of those conversations — young angsty angry and tense teenagers, coming 
+together digitally to bond over music and common interests. 
+
+With Imogen Heap’s recent reissue and twentieth anniversary of her album, Speak for Yourself, I am reminded of both, 
+her brilliance and how perfect that album was _and_ is — and I think about those two early internet friends, both 
+whose names I cannot recall.
+
+Wherever you are, I miss you both.
+
+Christian
+
+![Christian Solorzano Photography](/assets/images/diary/20251110a.png)
+
+
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6kt3fnRZ0DBK1rkGyZBgV7?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+

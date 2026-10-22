@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "Faculty meets Juan"
+
+date:   2024-06-04 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/06/04/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Type designer [Juan Villanueva](https://www.juankafka.com/){:target="_blank"} visits Chicago and meets with several 
+members of the Chicago Graphic Design Club. Here he is holding Faculty — which you can still purchase through the 
+CGDC website... 
+
+![Juan Holds Faculty](/assets/images/diary/20240604.png)

@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "Morning dog routine"
+
+date:   2023-12-19 8:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2023/12/19/post.html
+
+categories: diary
+
+type: "diary"
+
+image: "assets/images/diary/20231219.jpg"
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+<img src="/assets/images/diary/20231219.jpg" alt="Dog">
+
+Walk dog. Vacuum dog hairs. Mop floors. Then focus can begin. 

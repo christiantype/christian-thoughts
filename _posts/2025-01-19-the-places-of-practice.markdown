@@ -1,0 +1,33 @@
+---
+layout: diary
+
+title:  "The Places of Practice"
+
+date:   2025-01-19 1:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/01/19/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Here is a talk I gave this morning at the Zen Life & Meditation Center of Chicago.
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/S-UriZt3O5s?si=xSXIAf9eSOVzjn_t" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "A (new Little Happy) Singing Voice"
+
+date:   2025-10-12 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/10/12/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Every so often, I discover a magical voice that I cannot stop listening to. Lately it has been this singer, 
+Julie Anne Webster, who publishes music under the name Little Happy. They have a special voice and their song “Train 
+Song” is worth listening to a million times.  
+
+
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2IFH1kqSwZ616zvGAZvbMT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+Their instagram is great too: [suedehead2416](https://www.instagram.com/suedehead2416/)
+
+

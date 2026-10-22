@@ -1,0 +1,35 @@
+---
+layout: diary
+
+title:  "Invasive Tech"
+
+date:   2026-02-10 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/02/10/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Once again, technology attempts to intervene and suggest that I need its assistance in writing a simple email.
+
+Invasive. Tech.
+
+![Christian Solorzano Photography](/assets/images/diary/20260210.png)
+

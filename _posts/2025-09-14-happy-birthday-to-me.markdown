@@ -1,0 +1,54 @@
+---
+layout: diary
+
+title:  "Happy Birthday to Me"
+
+date:   2025-09-14 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/09/14/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Today, I turn thirty-four years old.
+
+I was born on this day, in Dallas Texas.
+
+Being alive for this long, I arrive at a few key lessons learned along the way.
+
+They are:
+
+1. Be stubborn with your purpose
+2. Take calculated risks
+3. Embrace boredom
+4. Don't pick sides (be in the middle)
+5. Learn to sit with two opposing truths
+6. Find mentor(s)
+7. Try not to use divisive language 
+8. Embrace solitude
+9. Give back
+10. Be a bit reckless occasionally
+11. Listen more than you talk
+12. Teach
+13. Don't strive to always make sense
+14. Move around (whatever that means)
+15. Speak up 
+
+

@@ -1,0 +1,41 @@
+---
+layout: diary
+
+title:  "These Songs Sound The Same"
+
+date:   2025-12-29 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2025/12/29/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+These songs all sound the same.
+
+Pieces by Claire Voyant (2002)
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/40W4xYVtx7c?si=0QkTnCM5OTQmwM5u" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<hr>
+Cry Osaka Cry by Arovane (2004)
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/pE77NgQ9zEc?si=Rt9bwWC4gs4OOR-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<hr>
+So Heavy I Feel Through the Earth by Grimes (2020)
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/eLo1pQ45XYs?si=uBk7BIhp3KQjgS29" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+

@@ -1,0 +1,76 @@
+---
+layout: diary
+
+title:  "Life Lately"
+
+date:   2026-05-02 00:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2026/05/02/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+(in a series of photos...)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502b.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502c.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502d.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502e.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502f.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502g.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502h.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502i.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502j.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502k.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502l.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502m.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502n.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502o.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502p.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502q.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502r.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502s.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502t.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502u.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502v.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502w.jpg)
+
+![Christian Solorzano Photography](/assets/images/diary/20260502x.jpg)

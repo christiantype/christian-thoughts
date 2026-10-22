@@ -1,0 +1,46 @@
+---
+layout: diary
+
+title:  "Old Work"
+
+date:   2024-11-26 1:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/11/26/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Here is some old design work of mine from many many years ago...
+
+![DESIGN WORK](/assets/images/diary/20241126a.jpg)
+![DESIGN WORK](/assets/images/diary/20241126b.jpg)
+![DESIGN WORK](/assets/images/diary/20241126c.jpg)
+![DESIGN WORK](/assets/images/diary/20241126d.jpg)
+![DESIGN WORK](/assets/images/diary/20241126e.jpg)
+![DESIGN WORK](/assets/images/diary/20241126f.jpg)
+![DESIGN WORK](/assets/images/diary/20241126g.png)
+![DESIGN WORK](/assets/images/diary/20241126h.jpg)
+![DESIGN WORK](/assets/images/diary/20241126i.jpg)
+![DESIGN WORK](/assets/images/diary/20241126j.jpg)
+![DESIGN WORK](/assets/images/diary/20241126k.jpg)
+![DESIGN WORK](/assets/images/diary/20241126l.jpg)
+![DESIGN WORK](/assets/images/diary/20241126m.jpg)
+![DESIGN WORK](/assets/images/diary/20241126n.jpg)
+![DESIGN WORK](/assets/images/diary/20241126o.jpg)

@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "Remember Flickr?"
+
+date:   2024-10-11 1:00:00 -0500
+
+# was /diary/<date>/post.html until the slugs were made readable
+redirect_from:
+  - /diary/2024/10/11/post.html
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "Founder of OP/AL & the Chicago Graphic Design Club. Producer of Faculty, host of Underscore podcast. DePaul lecturer, photographer, meditation teacher."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+Almost twenty years ago, when I got my first camera. A small Sony point-and-shoot, I would publish photographs on 
+Flickr. I still continue to do so (when I remember). Recently, I went on a photoshoot with my friend Nick Haas. I 
+uploaded some of the photographs I took throughout downtown Chicago on my Flickr account, which you can access below... 
+
+Enjoy. 
+
+
+<a data-flickr-embed="true" data-header="true" data-footer="true" href="https://www.flickr.com/photos/97466829@N06" 
+title=""><img src="https://live.staticflickr.com/65535/54054758424_166c0f27c7_z.jpg" width="100%" height="600" 
+alt=""/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
