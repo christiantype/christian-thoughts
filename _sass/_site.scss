@@ -175,21 +175,43 @@ pre {
     }
   }
 
+  @keyframes site-hero-nudge {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(5px); }
+  }
+
+  // A cue that insists is worse than no cue. Honour the setting.
+  @media (prefers-reduced-motion: reduce) {
+    .site-hero-scroll { animation: none; }
+  }
+
   // ── Hero: full-bleed CSS fade carousel ────────────────────────────────
   .site-hero-stack {
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    height: 100vh;
+    // The hero is pulled up under the sticky masthead, so its top sits a little
+    // ABOVE the viewport top and a flat 100vh stopped short of the fold — a
+    // white sliver under the photograph. The 2em covers that overshoot (18px
+    // on desktop, 32px on a phone) at the cost of a few pixels of frame below
+    // the fold, which is the cheaper of the two.
+    height: calc(100vh + 2.5em);
+    // dvh tracks the browser chrome as it collapses, which is what makes the
+    // hero actually fill a phone screen instead of running behind the toolbar.
+    // The vh line above stays as the fallback.
+    height: calc(100dvh + 2.5em);
     min-height: 480px;
     overflow: hidden;
     margin-bottom: 2em;
-    background: $backgroundc;
 
-    // the drawn bloom sits in the same stack as the photographs and is sized
-    // the same way, so it fills the hero to exactly the height they do
-    img,
-    canvas {
+    // Black, not the page white. Two frames cross-fading at half opacity each
+    // still composite as 0.5*in + 0.25*out + 0.25*backdrop, so a quarter of
+    // the backdrop surfaces in the middle of every transition — against white
+    // that was the flash between frames.
+    background: #000;
+    isolation: isolate;          // contain plus-lighter to this stack
+
+    img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -199,6 +221,45 @@ pre {
       opacity: 0;
       border: 0;
       display: block;
+
+      // With the frames adding rather than painting over one another, and the
+      // opacities summing to 1 through the cross-fade, the result is exactly
+      // the two frames mixed and none of the backdrop. Where plus-lighter is
+      // unsupported this falls back to ordinary compositing, which now bleeds
+      // black for an instant instead of white.
+      mix-blend-mode: plus-lighter;
+    }
+
+    // ── Scroll cue ──────────────────────────────────────────────────────
+    // It sits inside the hero, so it leaves with the hero as soon as the
+    // reader takes the hint — no scroll listener to hide it.
+    .site-hero-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(1.25rem, 4.5vh, 2.75rem);
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      color: #fff;
+      opacity: .72;
+      transition: opacity .3s ease;
+      // The centring translate has to be restated in the keyframes, so both
+      // live in the same transform rather than fighting over the property.
+      transform: translateX(-50%);
+      animation: site-hero-nudge 2.6s ease-in-out infinite;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        // The frames run from a bright flare to near-black, so a white mark
+        // needs its own shadow to hold an edge against the pale ones.
+        filter: drop-shadow(0 1px 5px rgba(0, 0, 0, .5));
+      }
+
+      &:hover,
+      &:focus-visible { opacity: 1; }
     }
   }
 

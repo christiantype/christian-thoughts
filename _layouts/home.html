@@ -9,47 +9,65 @@ layout: default
         | sort: "path" -%}
   {%- assign hero_n = home_images.size -%}
 
-  {%- comment -%}
-    The drawn bloom takes the first slot in the carousel — it is counted as one
-    more frame than there are photographs, so the timing maths below is
-    unchanged, it just divides by one more.
-  {%- endcomment -%}
-  {%- assign hero_n = hero_n | plus: 1 -%}
-
   {%- if hero_n > 0 -%}
     {%- assign per = 5 -%}
     {%- assign hero_total = hero_n | times: per -%}
-    {%- assign hero_on = 100 | divided_by: hero_n -%}
-    {%- assign hero_out = hero_on | minus: 3 -%}
-    {%- assign hero_clear = hero_on | plus: 2 -%}
+
+    {%- comment -%}
+      One frame's share of the cycle, and the cross-fade at its end. The maths
+      is float — Liquid's integer divide turned 100/12 into 8, and the drift
+      against the delays, which are counted in seconds, accumulated across the
+      cycle.
+
+      Each frame rises over `fade`, holds flat for the rest of its slot, then
+      falls over `fade` — and the next frame's delay is exactly one slot, so it
+      rises through the same window the one before it falls through. The two
+      opacities sum to 1 at every instant, which is what makes it a cross-fade
+      rather than a fade to the background and back.
+    {%- endcomment -%}
+    {%- assign slot = 100.0 | divided_by: hero_n -%}
+    {%- assign fade = slot | times: 0.3 -%}
+    {%- assign slot_r = slot | round: 4 -%}
+    {%- assign fade_r = fade | round: 4 -%}
+    {%- assign out_end = slot | plus: fade | round: 4 -%}
     <style>
       @keyframes site-home-fade {
-        0%                    { opacity: 0; }
-        2%                    { opacity: 1; }
-        {{ hero_out }}%       { opacity: 1; }
-        {{ hero_clear }}%     { opacity: 0; }
-        100%                  { opacity: 0; }
+        0%                { opacity: 0; }
+        {{ fade_r }}%     { opacity: 1; }
+        {{ slot_r }}%     { opacity: 1; }
+        {{ out_end }}%    { opacity: 0; }
+        100%              { opacity: 0; }
       }
       {%- if hero_n == 1 -%}
-      .site-hero-stack img, .site-hero-stack canvas { opacity: 1; animation: none; }
+      .site-hero-stack img { opacity: 1; animation: none; }
       {%- endif -%}
     </style>
 
     <div class="full-width site-hero-stack">
-      <canvas class="site-hero-canvas" aria-hidden="true"
-              style="animation: site-home-fade {{ hero_total }}s infinite; animation-delay: 0s;"></canvas>
       {%- for img in home_images -%}
-      {%- assign delay = forloop.index | times: per -%}
+      {%- assign delay = forloop.index0 | times: per -%}
       <img src="{{ img.path | relative_url }}" alt=""
-           style="animation: site-home-fade {{ hero_total }}s infinite; animation-delay: {{ delay }}s;">
+           style="animation: site-home-fade {{ hero_total }}s linear infinite; animation-delay: {{ delay }}s;">
       {%- endfor -%}
+
+      <a class="site-hero-scroll" href="#journal" aria-label="Scroll to the journal">
+        {%- comment -%}
+          A bare chevron — a rotated '>' — with no stem. stroke-width 1 against
+          a 24-unit box renders at roughly a pixel, which is the stem weight of
+          the 400 the rest of the page is set in.
+        {%- endcomment -%}
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 9.5L12 16.5L20 9.5" fill="none" stroke="currentColor"
+                stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   {%- else -%}
     <div class="full-width site-hero-stack" aria-hidden="true"></div>
   {%- endif -%}
 
   <div class="full-width">
-    <span class="site-label">journal</span>
+    <span class="site-label" id="journal">journal</span>
   </div>
 
   <span class="hover-title diary-post gradient-group">
@@ -62,5 +80,3 @@ layout: default
   </span>
 
 </main>
-
-<script src="{{ '/assets/js/hero-bloom.js' | relative_url }}" defer></script>
