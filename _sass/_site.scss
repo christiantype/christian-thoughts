@@ -186,10 +186,10 @@ pre {
     margin-bottom: 2em;
     background: $backgroundc;
 
-    // the video sits in the same stack as the photographs and is sized the same
-    // way, so it fills the hero to exactly the height they do
+    // the drawn bloom sits in the same stack as the photographs and is sized
+    // the same way, so it fills the hero to exactly the height they do
     img,
-    video {
+    canvas {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -766,9 +766,7 @@ pre {
   // iOS paints its own start button whenever autoplay is refused (Low Power
   // Mode does it). Suppress the control; the speaker is the only affordance.
   .video-spot__media::-webkit-media-controls-start-playback-button,
-  .video-spot__media::-webkit-media-controls,
-  .site-hero-video::-webkit-media-controls-start-playback-button,
-  .site-hero-video::-webkit-media-controls {
+  .video-spot__media::-webkit-media-controls {
     display: none !important;
     -webkit-appearance: none;
   }

@@ -197,7 +197,7 @@
       /* iOS refuses autoplay in Low Power Mode and shows its own start button.
          Ask every muted clip to play on load and again on the first gesture. */
       (function () {
-        var vids = document.querySelectorAll('.site-hero-video, .video-spot__media');
+        var vids = document.querySelectorAll('.video-spot__media');
         if (!vids.length) return;
         var nudge = function () {
           vids.forEach(function (v) {

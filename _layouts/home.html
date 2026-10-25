@@ -10,9 +10,9 @@ layout: default
   {%- assign hero_n = home_images.size -%}
 
   {%- comment -%}
-    The Mu Radio animation takes the first slot in the carousel. It is counted
-    as one more frame than there are photographs, so the timing maths below is
-    unchanged — it just divides by one more.
+    The drawn bloom takes the first slot in the carousel — it is counted as one
+    more frame than there are photographs, so the timing maths below is
+    unchanged, it just divides by one more.
   {%- endcomment -%}
   {%- assign hero_n = hero_n | plus: 1 -%}
 
@@ -31,17 +31,13 @@ layout: default
         100%                  { opacity: 0; }
       }
       {%- if hero_n == 1 -%}
-      .site-hero-stack img, .site-hero-stack video { opacity: 1; animation: none; }
+      .site-hero-stack img, .site-hero-stack canvas { opacity: 1; animation: none; }
       {%- endif -%}
     </style>
 
     <div class="full-width site-hero-stack">
-      <video class="site-hero-video" autoplay muted loop playsinline preload="metadata"
-             aria-hidden="true" tabindex="-1"
-             style="animation: site-home-fade {{ hero_total }}s infinite; animation-delay: 0s;">
-        <source src="{{ '/assets/video/mu-42-hero-720.mp4' | relative_url }}" type="video/mp4" media="(max-width: 900px)">
-        <source src="{{ '/assets/video/mu-42-hero.mp4' | relative_url }}" type="video/mp4">
-      </video>
+      <canvas class="site-hero-canvas" aria-hidden="true"
+              style="animation: site-home-fade {{ hero_total }}s infinite; animation-delay: 0s;"></canvas>
       {%- for img in home_images -%}
       {%- assign delay = forloop.index | times: per -%}
       <img src="{{ img.path | relative_url }}" alt=""
@@ -66,3 +62,5 @@ layout: default
   </span>
 
 </main>
+
+<script src="{{ '/assets/js/hero-bloom.js' | relative_url }}" defer></script>
