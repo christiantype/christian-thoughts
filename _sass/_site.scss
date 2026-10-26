@@ -765,8 +765,17 @@ pre {
   height: 54px;
   z-index: 60;                 // above content, below the cursor/trail
   pointer-events: none;
-  color: #fff;                 // solid fill — opacity is applied to the whole
-  opacity: .6;                 // bird below so overlapping shapes don't stack
+  // Opacity sits on the whole bird, never on the individual shapes — the
+  // patches overlap by design, and per-shape alpha would stack into seams
+  // exactly where the drawing is trying not to have any.
+  opacity: .95;
+
+  // `difference` subtracts the bird from whatever is behind it, so it inverts
+  // against its own backdrop and can never disappear into it — dark over the
+  // pale frames, bright over the dark ones, and its true colours only where
+  // the page is black. `multiply` would have done the opposite and buried it
+  // in the shadows.
+  mix-blend-mode: difference;
   transition: transform 3s cubic-bezier(.45, 0, .55, 1);
   will-change: transform;
 
@@ -784,8 +793,17 @@ pre {
     overflow: visible;
     animation: hb-glide 2.6s ease-in-out infinite;   // gentle up/down bob
   }
-  svg ellipse, svg path, svg circle, svg polygon { fill: currentColor; }
-  .hb-eye { fill: #111; }
+  // ── Plumage ─────────────────────────────────────────────────────────
+  // Blue crown over a teal back, with the gorget as the single red accent.
+  // Painted back to front: tail, silhouette, then every patch inside it.
+  .hb-tail   { fill: #2b313d; }
+  .hb-base   { fill: #1f7a6a; }   // iridescent teal-green back
+  .hb-belly  { fill: #e9e7df; }   // pale breast
+  .hb-gorget { fill: #c42a3c; }   // the red
+  .hb-crown  { fill: #2a5fb8; }   // the blue
+  .hb-bill   { fill: #17181c; }
+  .hb-wing   { fill: #2b313d; }
+  .hb-eye    { fill: #0d0e11; }
 
   .wing {
     transform-box: view-box;

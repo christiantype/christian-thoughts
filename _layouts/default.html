@@ -40,20 +40,88 @@
     {%- comment -%} Hummingbird (from OP/AL) — flits around the screen. {%- endcomment -%}
     <div id="hummingbird" aria-hidden="true">
       <div class="hb-face">
+        {%- comment -%}
+          Drawn as curves rather than primitives. The silhouette is one flowing
+          line from bill to tail; the detail that survives at 54px is not fine
+          linework but the GAPS — between the tail feathers, between the
+          primaries — which is what separates a bird from a blade.
+          The wing still roots at 53,50, which is the transform-origin the
+          flap animation pivots on.
+        {%- endcomment -%}
+        {%- comment -%}
+          A ruby-throated hummingbird — the one that actually nests here.
+
+          Built so gaps cannot happen: `hb-base` is one closed silhouette of
+          the whole head and body, and every colour patch after it sits
+          strictly INSIDE that outline rather than butting against it. The
+          bill and the wing overlap deep into the body for the same reason.
+          The tail and the wing are each a single path with a scalloped edge
+          — the feathers are notches in one shape, never separate pieces with
+          daylight between them.
+
+          The wing still roots at 53,50, the transform-origin the flap pivots on.
+        {%- endcomment -%}
+        {%- comment -%}
+          A hummingbird in profile — blue crown, red gorget, iridescent teal
+          back, dark wing and forked tail.
+
+          Gaps are structurally impossible here: `hb-base` is one closed
+          silhouette of the whole head and body, and every colour patch after
+          it sits strictly INSIDE that outline instead of butting against it.
+          The bill and the wing root overlap deep into the body for the same
+          reason. The tail and the wing are each a single path whose notch is
+          cut into the outline, never two pieces with daylight between them.
+
+          Head and body are one form — a hummingbird has no visible neck, and
+          drawing them as separate blobs is what made the old mark read as
+          clip art. The wing still roots at 53,50, the transform-origin the
+          flap pivots on.
+        {%- endcomment -%}
         <svg viewBox="0 0 100 100" class="hb">
           <g class="hb-body-group">
-            <polygon points="2,39 41,44 41,48"/>
-            <ellipse cx="53" cy="61" rx="18" ry="10.5" transform="rotate(-20 53 61)"/>
-            <circle cx="41" cy="46" r="7.5"/>
-            <polygon points="53,62 87,88 80,91 49,67"/>
-            <circle class="hb-eye" cx="42" cy="44" r="1.6"/>
+            <path class="hb-tail" d="M60,60.5 C67,63.5 75,68.5 82,74
+                     L85,77 L79.8,76.8 L82,80.4 L76.2,78.8
+                     C69.2,74 62.2,68.8 58.5,65 Z"/>
+
+            {%- comment -%} The silhouette. Everything below is painted inside this. {%- endcomment -%}
+            <path class="hb-base" d="M34,46
+                     C33.6,41 37.2,37.4 42.4,37.8
+                     C48.4,38.3 55.6,42.6 61,48.4
+                     C66.4,54.2 69.4,60 68.8,64
+                     C68.2,68.2 63.4,69.4 57.6,67
+                     C51,64.3 44.4,58.4 40.2,52.4
+                     C36.8,49.5 34.2,48 34,46 Z"/>
+
+            <path class="hb-belly" d="M40.6,55.4 C44.2,58.6 48.4,61.6 52.8,64
+                     C55.6,65.4 58.6,66.4 61,67 C57.4,68.2 52.6,67 47.6,63.8
+                     C44,61.4 41.6,58 40.6,55.4 Z"/>
+
+            <path class="hb-gorget" d="M36.4,46.4 C39.2,47.2 42.2,48.4 44.6,50.2
+                     C45.4,52 44.4,53.6 42.2,53.8 C39.8,53.6 37.8,51.9 36.6,49.6
+                     C36,48.4 36,47.2 36.4,46.4 Z"/>
+
+            <path class="hb-crown" d="M35,44.5 C35,40.2 38.4,37.8 42.6,38.2
+                     C46,38.6 49.4,40.4 52.2,42.6 C46,41.4 39.6,42 35,44.5 Z"/>
+
+            {%- comment -%} Needle-fine, and its base buried in the head. {%- endcomment -%}
+            <path class="hb-bill" d="M1.6,37.9 C12,39.3 24,41.3 33,43.1
+                     C35,43.5 36.6,44 37.8,44.6 L37.4,47.1
+                     C36.2,46.7 34.6,46.3 32.6,45.9 C23.6,44.1 11.6,41.2 1.4,38.8 Z"/>
+
+            <circle class="hb-eye" cx="41.6" cy="43.2" r="1.85"/>
           </g>
+
           <g class="wing">
-            <path d="M53,50 Q70,27 92,16 Q72,35 53,50 Z"/>
-            <path d="M53,50 Q74,32 97,28 Q75,41 53,50 Z"/>
-            <path d="M53,50 Q76,43 96,43 Q75,49 53,50 Z"/>
-            <path d="M53,50 Q75,51 93,56 Q73,56 53,50 Z"/>
-            <path d="M53,50 Q72,58 86,67 Q68,60 53,50 Z"/>
+            {%- comment -%}
+              One scythe. The notch sits near the tip only — cut back to the
+              shoulder it stopped reading as a wing and became two blades.
+            {%- endcomment -%}
+            <path class="hb-wing" d="M50.5,48.5
+                     C58,41 70,30.5 88.5,19
+                     C86,25.5 83,30.5 79.5,34.5
+                     C83,32.6 86.4,31 89.6,29.4
+                     C83,38 71,47 61,52
+                     C56,53.5 51.5,52.5 50.5,48.5 Z"/>
           </g>
         </svg>
       </div>
