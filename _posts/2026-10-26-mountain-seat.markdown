@@ -16,7 +16,7 @@ description: "Photographs from the Mountain Seat Ceremony at the Zen Life & Medi
 
 image: /assets/images/diary/L1006787.jpg
 
-image_alt: "A hand raising a curved wooden nyoi during the Mountain Seat Ceremony at the Zen Life & Meditation Center."
+image_alt: "Raising a curved wooden nyoi during the Mountain Seat Ceremony at the Zen Life & Meditation Center."
 
 about: "NA"
 
@@ -47,7 +47,7 @@ Congratulations, Rev. June Keijo Ryushin Eagle Mountain Tanoue, Roshi.
 </figure>
 
 <figure>
-  <img src="/assets/images/diary/L1006787.jpg" alt="A curved wooden nyoi held up at arm's length against a white wall, framed portraits and flowers beyond.">
+  <img src="/assets/images/diary/L1006787.jpg" alt="Seen in profile in an ochre kesa, holding a curved wooden nyoi upright at arm's length, with a second person behind and framed portraits and flowers on the altar beyond.">
   <figcaption>Leica M11 · Summicron-M 1:2/50 · f/2 · 1/180s · ISO 400</figcaption>
 </figure>
 
