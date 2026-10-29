@@ -555,6 +555,33 @@ pre {
     }
   }
 
+  // Masonry — photography only. A square tile crops every frame to the same
+  // shape, which throws away the decision the photograph was made with: an
+  // upright frame is upright on purpose. Here the column runs on 1px rows and
+  // the script gives each tile as many as it is tall, so the frames keep their
+  // proportions and still read left to right, newest first.
+  //
+  // The design grid keeps its squares. A poster sits on a ground and the
+  // ground is part of the piece, so those tiles are meant to match.
+  .viewer-grid--masonry {
+    grid-auto-rows: 1px;
+    row-gap: 0;           // the gap moves onto the tile, so a row span can be
+                          // counted in whole pixels without the gap skewing it
+
+    .viewer-thumb {
+      margin-bottom: .5em;
+
+      img {
+        height: auto;
+        // --ar is set per tile from _data/photo_dims.yml; the square is the
+        // fallback for a photograph with no entry, which is what the grid was
+        // before this existed.
+        aspect-ratio: var(--ar, 1 / 1);
+        object-fit: contain;
+      }
+    }
+  }
+
   // slide / grid toggle — icons: one frame vs. four squares.
   .viewer-modes {
     flex: 0 0 auto;

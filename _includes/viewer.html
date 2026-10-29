@@ -47,7 +47,12 @@
     </button>
   </div>
 
-  <div class="viewer-grid" hidden></div>
+  {%- comment -%}
+    Photography lays its grid out as masonry, so a frame keeps the shape it was
+    made in rather than being cropped square. Design does not: a poster sits on
+    a ground and the ground is part of the piece, so those tiles stay equal.
+  {%- endcomment -%}
+  <div class="viewer-grid{% if include.masonry %} viewer-grid--masonry{% endif %}" hidden></div>
 
 </main>
 
@@ -111,6 +116,15 @@
         el.alt = item.a || '';
         el.loading = 'lazy';
         el.decoding = 'async';
+        // The shape the frame was made in, from _data/photo_dims.yml. The CSS
+        // reads --ar; a photograph without one keeps the square the whole grid
+        // used to be, so a missing entry degrades to the old behaviour rather
+        // than collapsing the tile to nothing.
+        if (item.d && item.d[0] && item.d[1]) {
+          fig.style.setProperty('--ar', item.d[0] + ' / ' + item.d[1]);
+          el.width  = item.d[0];
+          el.height = item.d[1];
+        }
         setGround(el, item);
         fig.appendChild(el);
         // clicking a thumbnail opens it in slide mode
@@ -121,11 +135,47 @@
       gridBuilt = true;
     }
 
+    /* Masonry without a library. The grid runs on 1px rows with no row gap,
+       and each tile claims as many of them as it is tall — so a column packs
+       tight while the order still reads left to right, which is what
+       photo_order.yml means by newest first. A column-flow masonry would read
+       top to bottom down column one instead, and put the newest photograph
+       next to one from last year.
+
+       Measured rather than calculated from the ratio: the tile's own height
+       already accounts for the column width at this breakpoint, and the CSS
+       aspect-ratio has reserved it before the file arrives. */
+    const isMasonry = grid.classList.contains('viewer-grid--masonry');
+    function layoutMasonry() {
+      if (!isMasonry || !gridBuilt || grid.hidden) return;
+      const cs   = getComputedStyle(grid);
+      const row  = parseFloat(cs.gridAutoRows) || 1;
+      const gap  = parseFloat(cs.rowGap) || 0;
+      grid.querySelectorAll('.viewer-thumb').forEach(fig => {
+        // Measure the image, not the figure. The figure is a grid item on 1px
+        // rows, so before its span is set it IS one pixel tall — measuring it
+        // would feed that pixel straight back in and every tile would collapse.
+        // The image carries the aspect-ratio, so its height is already right.
+        const img = fig.firstElementChild;
+        const h = img ? img.getBoundingClientRect().height : 0;
+        if (!h) return;
+        const mb = parseFloat(getComputedStyle(fig).marginBottom) || 0;
+        fig.style.gridRowEnd = 'span ' + Math.max(1, Math.ceil((h + mb + gap) / (row + gap)));
+      });
+    }
+
+    let relayout;
+    addEventListener('resize', () => {
+      clearTimeout(relayout);
+      relayout = setTimeout(layoutMasonry, 120);
+    });
+
     function setMode(next) {
       mode = next;
       if (mode === 'grid') buildGrid();
       stage.hidden = mode !== 'slide';
       grid.hidden  = mode !== 'grid';
+      if (mode === 'grid') layoutMasonry();
       body.classList.toggle('mode-grid', mode === 'grid');
       body.classList.toggle('mode-slide', mode === 'slide');
       modes.forEach(b => {

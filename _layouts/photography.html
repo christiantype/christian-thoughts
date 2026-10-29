@@ -32,9 +32,15 @@ layout: default
 {%- for fname in ordered_names -%}
   {%- assign meta = site.data.photo_exif[fname] -%}
   {%- assign alt  = site.data.photo_alt[fname] | default: "Photograph by Christian Solorzano" -%}
-{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":{{ meta | default: "" | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- comment -%}
+    "d" is [width, height] from _data/photo_dims.yml. The masonry grid needs a
+    tile's shape before its file has loaded, or 164 lazy images each arrive and
+    shove the column down. A photograph with no entry falls back to a square.
+  {%- endcomment -%}
+  {%- assign dims = site.data.photo_dims[fname] -%}
+{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":{{ meta | default: "" | jsonify }}{%- if dims -%},"d":{{ dims | jsonify }}{%- endif -%}}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 </script>
 
-{% include viewer.html base="/assets/images/photography/" %}
+{% include viewer.html base="/assets/images/photography/" masonry=true %}
