@@ -1063,7 +1063,7 @@
   document.querySelectorAll('[data-build]').forEach(function (build) {
     var stage = build.querySelector('.build__stage'), box = build.querySelector('[data-circles]');
     var steps = [].slice.call(build.querySelectorAll('.build__step'));
-    var words = [].slice.call(build.querySelectorAll('.inside__words span'));
+    var words = [].slice.call(build.querySelectorAll('.inside__words > span'));
     var els = [], k = 0, w = 0, spin = 0, talk = 0, step = -1;
     for (var i = 0; i < 84; i++) {
       var el = document.createElement('i');

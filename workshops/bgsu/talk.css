@@ -146,7 +146,7 @@
 
   /* ── inside the circle: the ring zoomed past the screen, the words in its middle ── */
   .inside__words { position: relative; display: grid; place-items: center; margin: 0; text-align: center; font-size: calc(clamp(2rem, 7vh, 5rem) * var(--fs)); line-height: var(--lh-display); }
-  .inside__words span { grid-area: 1 / 1; white-space: nowrap; visibility: hidden; }
+  .inside__words > span { grid-area: 1 / 1; white-space: nowrap; visibility: hidden; }
   .inside__words span.on { visibility: visible; }
   @media (max-aspect-ratio: 1/1) { .inside__words { font-size: calc(clamp(1.6rem, 9vw, 3rem) * var(--fs)); } }
 
@@ -163,9 +163,9 @@
   .now__what { position: absolute; left: calc(50% + .3em); top: calc(50% + .25em); margin: 0; }
 
   .now__news { position: absolute; inset: 4.5em var(--gutter); pointer-events: none; }
-  .now__news span { position: absolute; left: var(--x); top: var(--y); font-size: calc(clamp(1rem, 2.2vw, 2.2rem) * var(--fs)); white-space: nowrap; opacity: 0; transition: opacity .7s calc(.6s + var(--i) * .18s); }
-  .now.is-on .now__news span { opacity: 1; }
-  @media (max-aspect-ratio: 1/1) { .now__news span { font-size: calc(clamp(.9rem, 4.2vw, 1.3rem) * var(--fs)); } .now__news span { left: var(--px); top: var(--py); } }
+  .now__news > span { position: absolute; left: var(--x); top: var(--y); font-size: calc(clamp(1rem, 2.2vw, 2.2rem) * var(--fs)); white-space: nowrap; opacity: 0; transition: opacity .7s calc(.6s + var(--i) * .18s); }
+  .now.is-on .now__news > span { opacity: 1; }
+  @media (max-aspect-ratio: 1/1) { .now__news > span { font-size: calc(clamp(.9rem, 4.2vw, 1.3rem) * var(--fs)); } .now__news > span { left: var(--px); top: var(--py); } }
 
   /* ── by hand: twenty cut-paper shapes, cut one after another ── */
   /* on the page grid: words in the first five columns, the work from the sixth (the cuts from the eighth, one column each) */
@@ -288,7 +288,6 @@
   .rules__list ol { list-style: none; margin: .8em 0 0; padding: 0; font-size: calc(clamp(1.15rem, 2.3vw, 2.2rem) * var(--fs)); }
   .rules__list li { padding: .45em 0; border-bottom: 1px solid var(--hairline); }
   
-  .rules__list li span { font-family: var(--label); font-size: var(--tag); padding-top: .6em; }
   @media (max-width: 48em) { .rules__wrap { grid-template-columns: 1fr; } }
 
   /* ── the example prompt ── */
@@ -318,8 +317,8 @@
   .situ--black { background: #000; }
   .situ--grey { background: #d9d9d9; }
   .tn__list { margin-top: .5em; max-width: 30em; }
-  .tn__list span { opacity: 0; transition: opacity .5s calc(.3s + var(--i) * .12s); }
-  .tn--says.is-on .tn__list span { opacity: 1; }
+  .tn__list > span { opacity: 0; transition: opacity .5s calc(.3s + var(--i) * .12s); }
+  .tn--says.is-on .tn__list > span { opacity: 1; }
   .tn__legible span { display: inline-block; transition: filter 1.2s, transform 1.2s, letter-spacing 1.2s; }
   @media (max-width: 48em) {
     .tn__wrap--split { grid-template-columns: 1fr; }
@@ -516,7 +515,6 @@
   .rules__wrap { justify-items: center; }
   .rules__list { width: calc(var(--col) * 6 + .5rem * 5); }
   .rules__list li { display: block; text-align: center; }
-  .rules__list li span { padding: 0 .6em 0 0; vertical-align: .35em; }
   .rules__ask { justify-content: center; text-align: left; }   /* the question hangs as one block, centred */
   /* the prompt: eight columns, centred */
   .example__wrap { width: calc(var(--col) * 8 + .5rem * 7); max-width: none; margin: 0 auto; }
