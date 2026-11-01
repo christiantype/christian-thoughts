@@ -196,7 +196,7 @@
        sheen travelling up the towers, and a few cubes picked out in steel blue and sunflower */
     var RAMP = [[34, 37, 43], [70, 76, 86], [118, 126, 138], [168, 175, 186], [214, 218, 224], [238, 240, 243]];
     var STEEL = [70, 130, 180], SUNFLOWER = [255, 196, 22];
-    var TILE = [[14, 14, 18], [84, 84, 98], [198, 200, 236], [228, 228, 248], [248, 240, 214], [236, 226, 192]];
+    var TILE = [[0, 0, 235], [255, 200, 0], [198, 200, 236], [228, 228, 248], [248, 240, 214], [236, 226, 192]];   // blue and yellow lead, then lavender-silver and cream (Christian, 1 Nov)
     function ramp(v) {
       v = clamp(v) * (RAMP.length - 1);
       var i = Math.min(RAMP.length - 2, Math.floor(v)), f = v - i, a = RAMP[i], b = RAMP[i + 1];
