@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Original Practice — Research — OP/AL</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+  <style>
+    /* ── Original Practice — the Lab (tools index) — page-scoped ──────────────
+       The rest of the site keeps shared/styles.css untouched. */
+    /* The Lab runs on a black canvas — gradient tiles pop against it.
+       Nav marks stay white (the shared default), so no override needed. */
+    html, body { background: #000000; }
+    #projects { color: #ffffff; }
+    /* Match more-than.design: inherit the site's container spacing (max-width 90em, 10em inset)
+       and standard nav geometry — no tool-topbar overrides here. */
+
+    .lab-hero { padding-bottom: var(--space-10); }
+    .lab-hero__row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .lab-title { font-size: var(--h1); line-height: 1.1; margin: 0; color: #ffffff; }  /* standard h1 token */
+    .lab-title__sub { display: block; font-size: var(--body); color: rgba(255,255,255,.55); margin-top: .35em; letter-spacing: normal; }
+    /* Design System — flush right on the title row (a reference kit, not a tool) */
+    .ds-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; text-decoration: none;
+      border: 1px solid rgba(255,255,255,.26); color: rgba(255,255,255,.82); font-size: 12.5px; line-height: 1.4; letter-spacing: .01em;
+      white-space: nowrap; transition: border-color .15s, color .15s; }
+    .ds-link:hover { color: #fff; border-color: rgba(255,255,255,.55); }
+    .ds-link svg { flex: none; }
+    .lab-sub {
+      margin-top: var(--space-6);
+      max-width: 30em; line-height: 1.5; color: #ffffff;
+    }
+
+    .tool-grid { margin-top: var(--space-4); display: flex; flex-direction: column-reverse; counter-reset: lab; }
+    .tool-tile {
+      position: relative; display: flex; align-items: center; gap: var(--space-4);
+      padding: 20px 6px; text-decoration: none; color: #ffffff;
+      border-top: 1px solid rgba(255,255,255,.16); counter-increment: lab;
+      transition: padding-left 0.2s ease, opacity 0.2s ease;
+    }
+    .tool-tile:last-child { border-top: none; }
+    /* the gradient races around a circular path */
+    @keyframes tileFlow {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 50% 100%; }
+      50%  { background-position: 100% 50%; }
+      75%  { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* the whole palette spins through the spectrum — vivid and a little unhinged */
+    @keyframes tileHue {
+      from { filter: saturate(1.5) hue-rotate(0deg); }
+      to   { filter: saturate(1.5) hue-rotate(360deg); }
+    }
+    /* a soft light bloom that drifts around the tile, out of phase — keeps it feeling alive */
+    .tool-tile::before { content: none; }
+    @keyframes tileSheen {
+      0%   { transform: translate(-18%, -12%) scale(1.05); }
+      33%  { transform: translate(16%, 10%)  scale(1.25); }
+      66%  { transform: translate(-8%, 18%)  scale(1.1); }
+      100% { transform: translate(-18%, -12%) scale(1.05); }
+    }
+    /* fast + out of phase per tile: [row-in, tileFlow, tileHue] durations, then the sheen — chaotic on purpose */
+    .tool-grid .tool-tile:nth-child(2)  { animation-duration: 0.5s, 6.5s, 8s;  } .tool-grid .tool-tile:nth-child(2)::before  { animation-duration: 9s;  animation-delay: -3s; }
+    .tool-grid .tool-tile:nth-child(3)  { animation-duration: 0.5s, 4.5s, 12s; } .tool-grid .tool-tile:nth-child(3)::before  { animation-duration: 7s;  animation-delay: -7s; }
+    .tool-grid .tool-tile:nth-child(4)  { animation-duration: 0.5s, 7s, 6.5s;  } .tool-grid .tool-tile:nth-child(4)::before  { animation-duration: 11s; animation-delay: -2s; }
+    .tool-grid .tool-tile:nth-child(5)  { animation-duration: 0.5s, 5.5s, 10s; } .tool-grid .tool-tile:nth-child(5)::before  { animation-duration: 8s;  animation-delay: -9s; }
+    .tool-grid .tool-tile:nth-child(6)  { animation-duration: 0.5s, 6s, 13s;   } .tool-grid .tool-tile:nth-child(6)::before  { animation-duration: 7.5s; animation-delay: -5s; }
+    .tool-grid .tool-tile:nth-child(7)  { animation-duration: 0.5s, 4s, 7.5s;  } .tool-grid .tool-tile:nth-child(7)::before  { animation-duration: 10s; animation-delay: -11s; }
+    .tool-grid .tool-tile:nth-child(8)  { animation-duration: 0.5s, 7.5s, 9s;  } .tool-grid .tool-tile:nth-child(8)::before  { animation-duration: 8.5s; animation-delay: -4s; }
+    .tool-grid .tool-tile:nth-child(9)  { animation-duration: 0.5s, 5s, 11s;   } .tool-grid .tool-tile:nth-child(9)::before  { animation-duration: 9.5s; animation-delay: -8s; }
+    .tool-grid .tool-tile:nth-child(10) { animation-duration: 0.5s, 6.5s, 7s;  } .tool-grid .tool-tile:nth-child(10)::before { animation-duration: 6.5s; animation-delay: -6s; }
+    .tool-grid .tool-tile:nth-child(11) { animation-duration: 0.5s, 4.5s, 12.5s; } .tool-grid .tool-tile:nth-child(11)::before { animation-duration: 7s; animation-delay: -1s; }
+    .tool-grid .tool-tile:nth-child(12) { animation-duration: 0.5s, 7s, 8.5s;  } .tool-grid .tool-tile:nth-child(12)::before { animation-duration: 10.5s; animation-delay: -10s; }
+    .tool-grid .tool-tile:nth-child(13) { animation-duration: 0.5s, 5.5s, 6s;  } .tool-grid .tool-tile:nth-child(13)::before { animation-duration: 8s; animation-delay: -3s; }
+    .tool-grid .tool-tile:nth-child(14) { animation-duration: 0.5s, 6s, 13.5s; } .tool-grid .tool-tile:nth-child(14)::before { animation-duration: 11s; animation-delay: -7s; }
+    @media (prefers-reduced-motion: reduce) { .tool-tile::before { animation: none; } }
+    .tool-tile:hover { padding-left: 14px; opacity: .82; }
+    .tool-tile:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+    /* Factory-Records catalogue number */
+    .tool-tile__ver {
+      order: 1; flex: none; align-self: center;
+      font-size: var(--label); line-height: 1.4; letter-spacing: 2px; text-transform: uppercase;
+      color: #ffffff; opacity: .5; font-variant-numeric: tabular-nums;
+    }
+    .tool-tile__foot { order: 2; display: flex; align-items: baseline; gap: var(--space-4); flex: 1; min-width: 0; }
+    .tool-tile__title {
+      order: 1; flex: none;
+      font-family: var(--font-label);
+      font-size: var(--body); line-height: 1.1;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .tool-tile__desc {
+      order: 2; margin-left: auto; font-size: var(--label); line-height: 1.4; letter-spacing: 2px; text-transform: uppercase;
+      color: #ffffff; opacity: .48; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+
+    /* ── Collections ──────────────────────────────────────────────────────────
+       Some instruments were built for one job. A collection is that job, and the
+       list filters down to it. The row reads as hairline chips on the black,
+       same weight as everything else on the page — a filter, not a toolbar. */
+    .wb-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin-top: var(--space-6); }
+    .wb-chip { appearance: none; background: none; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.26); color: rgba(255,255,255,.72);
+      font-family: inherit; font-size: var(--body); line-height: 1.4; letter-spacing: normal;
+      padding: 7px 13px; border-radius: 999px; white-space: nowrap;
+      transition: border-color .15s, color .15s, background .15s; }
+    .wb-chip:hover { color: #fff; border-color: rgba(255,255,255,.6); }
+    .wb-chip.is-on { background: #fff; border-color: #fff; color: #000; }
+    .wb-chip__n { opacity: .5; margin-left: .5em; font-variant-numeric: tabular-nums; }
+    .wb-chip--new { border-style: dashed; }
+    .wb-chip--act { border-color: transparent; color: rgba(255,255,255,.5); padding-inline: 6px; }
+    .wb-chip--act:hover { color: #fff; }
+    .wb-note { margin: 10px 0 0; font-size: 12px; line-height: 1.5; color: rgba(255,255,255,.45); }
+    .wb-note[hidden] { display: none; }
+    /* the include/exclude mark, only while a collection is being edited */
+    .tool-tile__pick { order: 3; flex: none; margin-left: 14px; width: 26px; height: 26px;
+      display: none; align-items: center; justify-content: center; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.3); color: #fff; background: none;
+      font-size: 14px; line-height: 1; cursor: pointer; }
+    .tool-grid.is-editing .tool-tile__pick { display: inline-flex; }
+    .tool-tile__pick:hover { border-color: #fff; background: rgba(255,255,255,.12); }
+    .tool-tile__pick.is-in { background: #fff; border-color: #fff; color: #000; }
+    @media (max-width: 40em) { .wb-note { font-size: 11.5px; } }
+
+    /* One unique gradient per tile — OP/AL brand palette. Three stops so the flow shifts colour. */
+    .g-1 { --grad: linear-gradient(135deg, #ff94c9 0%, #ffd36e 50%, #79c7f1 100%); }
+    .g-2 { --grad: linear-gradient(135deg, #79c7f1 0%, #bbff34 50%, #ffed00 100%); }
+    .g-3 { --grad: linear-gradient(135deg, #ffed00 0%, #ff94c9 50%, #c9b8ff 100%); }
+    .g-4 { --grad: linear-gradient(135deg, #fcc1b8 0%, #79c7f1 50%, #bbff34 100%); }
+    .g-5 { --grad: linear-gradient(135deg, #bbff34 0%, #79c7f1 50%, #c9b8ff 100%); }
+    .g-6 { --grad: linear-gradient(135deg, #c9b8ff 0%, #ff94c9 50%, #ffd36e 100%); }
+
+    @media (max-width: 40em) { .tool-tile__desc { display: none; } }
+  </style>
+<style>
+  /* ── Gallery: black, calm, still (one hairline per row) ──────────────────
+     Set in Untitled Sans throughout — the house annotation face, the same one
+     the instruments are set in, so the index and the tools read as one thing.
+     Untitled is cut at 400 and 700 only; nothing here asks for anything else. */
+  @import url('/workshops/bgsu/lab/shared/OPALAB.css');
+  html, body{ background:#000 !important; }
+  #projects{ color:#fff !important; font-family:var(--font) !important; }
+  .lab-hero{ padding-bottom:36px !important; }
+  .lab-title{ font-family:var(--font-label) !important; font-weight:400 !important; color:#fff !important;
+    letter-spacing:0 !important; text-transform:none !important; }
+  .lab-sub{ color:rgba(255,255,255,.6) !important; font-family:var(--font) !important; }
+  .ds-link{ border:1px solid rgba(255,255,255,.26) !important; color:rgba(255,255,255,.85) !important; border-radius:var(--r-control) !important; }
+  .ds-link:hover{ color:#fff !important; border-color:rgba(255,255,255,.6) !important; }
+  /* tool list — clean rows, no gradients, no animation, single hairline each */
+  .tool-tile{ animation:none !important; color:#fff !important;
+    border-top:1px solid rgba(255,255,255,.14) !important; border-bottom:none !important; background:none !important; }
+  .tool-tile::before, .tool-tile::after{ display:none !important; content:none !important; }
+  .tool-tile:hover{ padding-left:16px !important; color:#fff !important; opacity:.85 !important; }
+  .tool-tile__ver{ font-family:var(--font-label) !important; color:rgba(255,255,255,.5) !important; letter-spacing:normal !important; opacity:1 !important; }
+  .tool-tile__title{ font-family:var(--font-label) !important; font-weight:400 !important; color:#fff !important;
+    text-transform:none !important; letter-spacing:0 !important; font-size:var(--body) !important; }
+  .tool-tile__desc{ font-family:var(--font-label) !important; color:rgba(255,255,255,.5) !important; text-transform:none !important; letter-spacing:0 !important; opacity:1 !important; }
+</style>
+</head>
+<body data-crumb="The Lab" data-overlay-chrome="none">
+<!-- ===================================================================
+     GENERATED — DO NOT EDIT. Everything between here and /prerender is
+     rebuilt by `node build/prerender.js` from the real markup further
+     down this file. An edit made in here is silently thrown away on the
+     next build. Scroll past it and edit the page itself.
+     =================================================================== -->
+<div id="prerender">
+<section id="projects">
+    <div class="container">
+      <div class="lab-hero">
+        <div class="lab-hero__row">
+          <h1 class="lab-title">Original Practice <span class="lab-title__sub">The Lab</span></h1>
+          <a class="ds-link" href="/workshops/bgsu/lab/lab-design-system/" title="Lab Design System — the shared kit: every token, element &amp; pattern">
+            
+            Design System
+          </a>
+        </div>
+        <p class="lab-sub">The Original Practice side of OP/AL: a workbench of tools and experiments we build for ourselves — and then use in the studio’s work.</p>
+      </div>
+
+      <div class="grid tool-grid">
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/lake-opeka/">
+          <span class="tool-tile__ver">OP-LAB-001</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Photo composition studio</span>
+            <span class="tool-tile__title">Lake Opeka</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/typography-can-be-fun/">
+          <span class="tool-tile__ver">OP-LAB-002</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Experimental type instrument</span>
+            <span class="tool-tile__title">Typography Can Be Fun</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/angel-music/">
+          <span class="tool-tile__ver">OP-LAB-003</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Playable colour &amp; sound field</span>
+            <span class="tool-tile__title">Angel Music</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/halftone/">
+          <span class="tool-tile__ver">OP-LAB-006</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Print screen · your own marks</span>
+            <span class="tool-tile__title">Halftone</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/image-train/">
+          <span class="tool-tile__ver">OP-LAB-008</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Sliced bands in motion</span>
+            <span class="tool-tile__title">Image Train</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/the-image-burns/">
+          <span class="tool-tile__ver">OP-LAB-009</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Disperse an image into rising particles</span>
+            <span class="tool-tile__title">The Image Burns</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/draw-explode/">
+          <span class="tool-tile__ver">OP-LAB-012</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Draw a line, then watch it bloom</span>
+            <span class="tool-tile__title">Draw Explode</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/sequins/">
+          <span class="tool-tile__ver">OP-LAB-013</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">An image, sewn in glittering sequins</span>
+            <span class="tool-tile__title">Sequins</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/open-lab/">
+          <span class="tool-tile__ver">OP-LAB-016</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Words, printed in dots</span>
+            <span class="tool-tile__title">Open Lab</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/offset/">
+          <span class="tool-tile__ver">OP-LAB-017</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A photo, reprinted in riso bands</span>
+            <span class="tool-tile__title">Offset</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/prism/">
+          <span class="tool-tile__ver">OP-LAB-018</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A photo, pressed in three inks</span>
+            <span class="tool-tile__title">Prism</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/facet/">
+          <span class="tool-tile__ver">OP-LAB-020</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A picture, seen through a grid of glass</span>
+            <span class="tool-tile__title">Facet</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/open-capture/">
+          <span class="tool-tile__ver">OP-LAB-022</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Batch-record four IG reels at 1080×1920</span>
+            <span class="tool-tile__title">OP/EN Capture</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/open-reel/">
+          <span class="tool-tile__ver">OP-LAB-023</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A window onto a weekly hour of stillness</span>
+            <span class="tool-tile__title">OPEN Reel</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/parametype/">
+          <span class="tool-tile__ver">OP-LAB-025</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">One letter, drawn six parametric ways</span>
+            <span class="tool-tile__title">Parametype</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/mitsuo/">
+          <span class="tool-tile__ver">OP-LAB-026</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A letter, poured into liquid dots</span>
+            <span class="tool-tile__title">Mitsuo</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/weave/">
+          <span class="tool-tile__ver">OP-LAB-027</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Photos, woven into a patchwork grid</span>
+            <span class="tool-tile__title">Weave</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/kirlian/">
+          <span class="tool-tile__ver">OP-LAB-029</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Corona-discharge aura from any image</span>
+            <span class="tool-tile__title">Kirlian</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/connected/">
+          <span class="tool-tile__ver">OP-LAB-031</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A question, drawn as a constellation</span>
+            <span class="tool-tile__title">Connected</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/pure-land/">
+          <span class="tool-tile__ver">OP-LAB-032</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A grid of squares, each one a moving gradient</span>
+            <span class="tool-tile__title">Pure Land</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/aha/">
+          <span class="tool-tile__ver">OP-LAB-033</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A band for every poster, smudged and moving</span>
+            <span class="tool-tile__title">AHA</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/image-bunch/">
+          <span class="tool-tile__ver">OP-LAB-035</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A wall of pictures that keeps changing its mind</span>
+            <span class="tool-tile__title">Image Bunch</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/flash/">
+          <span class="tool-tile__ver">OP-LAB-037</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A roll of names, set in Eunuverse</span>
+            <span class="tool-tile__title">Flash</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/liquid-type/">
+          <span class="tool-tile__ver">OP-LAB-038</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Titles set as a screen of dots</span>
+            <span class="tool-tile__title">Liquid Type</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+<script>(function(){var p=document.getElementById('prerender');if(p)p.remove();})();</script>
+<!-- /prerender -->
+  <nav>
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <a href="/workshops/bgsu/lab/workbench.html" class="nav-logo-link" aria-label="The Lab — OP/AL">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="154.5 212.9 1274.6 186.2" fill="currentColor" class="nav-wordmark"><path d="M1356.2,353.2h72.1v-13h-59.1v-100.6h-13v113.5ZM1077.3,313.7l13.5-61.1h10.6l13.3,61.1h-37.5ZM1055.3,353.2h13.3l5.8-26.5h43.3l5.8,26.5h13.3l-25.2-113.5h-30.6l-25.6,113.5ZM723.6,398.3h37.2l111.9-184.5h-37.2l-111.9,184.5ZM478.1,296.2v-43.6h28.1c5.9,0,8.3.9,13,4.7,5.2,4.3,5.9,6.1,5.9,10.6v13c0,4.5-.7,6.3-5.9,10.6-4.7,3.8-7,4.7-13,4.7h-28.1ZM465.1,353.2h13v-44h28.1c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-14.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-41.1v113.5ZM199.1,340.2h-11.9c-5.9,0-8.3-.9-13-4.7-5.2-4.3-5.9-6.1-5.9-10.6v-57c0-4.5.7-6.3,5.9-10.6,4.7-3.8,7-4.7,13-4.7h11.9c5.9,0,8.5.9,13.2,4.7,5,4.1,5.8,6.1,5.8,10.6v57c0,4.5-.7,6.5-5.8,10.6-4.7,3.8-7.2,4.7-13.2,4.7M187.2,353.2h11.9c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-58.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-11.9c-9.4,0-14.2,2-22.5,9-8.3,7-9.4,10.3-9.4,18.6v58.4c0,8.3,1.1,11.5,9.4,18.6,8.3,7,13.2,9,22.5,9"/></svg>
+        </a>
+        <a href="/" class="nav-menu-btn" aria-label="Back to OP/AL">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.7 72" width="17" height="17" fill="currentColor"><path d="M29.3,72h22c16.1,0,28.4-13.1,28.4-28.8v-14.4C79.7,13.1,67.4,0,51.3,0h-22C13.2,0,0,13.1,0,28.8v14.4c0,15.7,13.1,28.8,29.2,28.8h0Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="projects">
+    <div class="container">
+      <div class="lab-hero">
+        <div class="lab-hero__row">
+          <h1 class="lab-title">Original Practice <span class="lab-title__sub">The Lab</span></h1>
+          <a class="ds-link" href="/workshops/bgsu/lab/lab-design-system/" title="Lab Design System — the shared kit: every token, element &amp; pattern">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <rect x="0.5" y="0.5" width="5.6" height="5.6" stroke="currentColor"/>
+              <rect x="7.9" y="0.5" width="5.6" height="5.6" fill="currentColor"/>
+              <rect x="0.5" y="7.9" width="5.6" height="5.6" fill="currentColor"/>
+              <rect x="7.9" y="7.9" width="5.6" height="5.6" stroke="currentColor"/>
+            </svg>
+            Design System
+          </a>
+        </div>
+        <p class="lab-sub">The Original Practice side of OP/AL: a workbench of tools and experiments we build for ourselves — and then use in the studio’s work.</p>
+      </div>
+
+      <div class="grid tool-grid">
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/lake-opeka/" style="animation-delay:0.00s">
+          <span class="tool-tile__ver">OP-LAB-001</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Photo composition studio</span>
+            <span class="tool-tile__title">Lake Opeka</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/typography-can-be-fun/" style="animation-delay:0.04s">
+          <span class="tool-tile__ver">OP-LAB-002</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Experimental type instrument</span>
+            <span class="tool-tile__title">Typography Can Be Fun</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/angel-music/" style="animation-delay:0.16s">
+          <span class="tool-tile__ver">OP-LAB-003</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Playable colour &amp; sound field</span>
+            <span class="tool-tile__title">Angel Music</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/halftone/" style="animation-delay:0.28s">
+          <span class="tool-tile__ver">OP-LAB-006</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Print screen · your own marks</span>
+            <span class="tool-tile__title">Halftone</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/image-train/" style="animation-delay:0.40s">
+          <span class="tool-tile__ver">OP-LAB-008</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Sliced bands in motion</span>
+            <span class="tool-tile__title">Image Train</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/the-image-burns/" style="animation-delay:0.48s">
+          <span class="tool-tile__ver">OP-LAB-009</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Disperse an image into rising particles</span>
+            <span class="tool-tile__title">The Image Burns</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/draw-explode/" style="animation-delay:0.68s">
+          <span class="tool-tile__ver">OP-LAB-012</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Draw a line, then watch it bloom</span>
+            <span class="tool-tile__title">Draw Explode</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/sequins/" style="animation-delay:0.80s">
+          <span class="tool-tile__ver">OP-LAB-013</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">An image, sewn in glittering sequins</span>
+            <span class="tool-tile__title">Sequins</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/open-lab/" style="animation-delay:1.04s">
+          <span class="tool-tile__ver">OP-LAB-016</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Words, printed in dots</span>
+            <span class="tool-tile__title">Open Lab</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/offset/" style="animation-delay:1.16s">
+          <span class="tool-tile__ver">OP-LAB-017</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A photo, reprinted in riso bands</span>
+            <span class="tool-tile__title">Offset</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/prism/" style="animation-delay:1.20s">
+          <span class="tool-tile__ver">OP-LAB-018</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A photo, pressed in three inks</span>
+            <span class="tool-tile__title">Prism</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/facet/" style="animation-delay:1.28s">
+          <span class="tool-tile__ver">OP-LAB-020</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A picture, seen through a grid of glass</span>
+            <span class="tool-tile__title">Facet</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/open-capture/" style="animation-delay:1.40s">
+          <span class="tool-tile__ver">OP-LAB-022</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Batch-record four IG reels at 1080×1920</span>
+            <span class="tool-tile__title">OP/EN Capture</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/open-reel/" style="animation-delay:1.46s">
+          <span class="tool-tile__ver">OP-LAB-023</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A window onto a weekly hour of stillness</span>
+            <span class="tool-tile__title">OPEN Reel</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/parametype/" style="animation-delay:1.58s">
+          <span class="tool-tile__ver">OP-LAB-025</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">One letter, drawn six parametric ways</span>
+            <span class="tool-tile__title">Parametype</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/mitsuo/" style="animation-delay:1.64s">
+          <span class="tool-tile__ver">OP-LAB-026</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A letter, poured into liquid dots</span>
+            <span class="tool-tile__title">Mitsuo</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/weave/" style="animation-delay:1.78s">
+          <span class="tool-tile__ver">OP-LAB-027</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Photos, woven into a patchwork grid</span>
+            <span class="tool-tile__title">Weave</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/kirlian/" style="animation-delay:0.54s">
+          <span class="tool-tile__ver">OP-LAB-029</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Corona-discharge aura from any image</span>
+            <span class="tool-tile__title">Kirlian</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/connected/" style="animation-delay:2.16s">
+          <span class="tool-tile__ver">OP-LAB-031</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A question, drawn as a constellation</span>
+            <span class="tool-tile__title">Connected</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/pure-land/" style="animation-delay:2.28s">
+          <span class="tool-tile__ver">OP-LAB-032</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A grid of squares, each one a moving gradient</span>
+            <span class="tool-tile__title">Pure Land</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/aha/" style="animation-delay:2.36s">
+          <span class="tool-tile__ver">OP-LAB-033</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A band for every poster, smudged and moving</span>
+            <span class="tool-tile__title">AHA</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/image-bunch/" style="animation-delay:2.52s">
+          <span class="tool-tile__ver">OP-LAB-035</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A wall of pictures that keeps changing its mind</span>
+            <span class="tool-tile__title">Image Bunch</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/flash/" style="animation-delay:2.68s">
+          <span class="tool-tile__ver">OP-LAB-037</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A roll of names, set in Eunuverse</span>
+            <span class="tool-tile__title">Flash</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/liquid-type/" style="animation-delay:2.76s">
+          <span class="tool-tile__ver">OP-LAB-038</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Titles set as a screen of dots</span>
+            <span class="tool-tile__title">Liquid Type</span>
+          </span>
+        </a>
+        <a class="tool-tile g-1" href="/workshops/bgsu/lab/workbench/bgsu-shapes/" style="animation-delay:2.84s">
+          <span class="tool-tile__ver">OP-LAB-039</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Poster one: shapes, black and white</span>
+            <span class="tool-tile__title">Shapes</span>
+          </span>
+        </a>
+        <a class="tool-tile g-2" href="/workshops/bgsu/lab/workbench/bgsu-colour/" style="animation-delay:2.92s">
+          <span class="tool-tile__ver">OP-LAB-040</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Poster two: shapes, coloured</span>
+            <span class="tool-tile__title">Colour</span>
+          </span>
+        </a>
+        <a class="tool-tile g-3" href="/workshops/bgsu/lab/workbench/bgsu-type/" style="animation-delay:3.00s">
+          <span class="tool-tile__ver">OP-LAB-041</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Poster three: typography only</span>
+            <span class="tool-tile__title">Type</span>
+          </span>
+        </a>
+        <a class="tool-tile g-4" href="/workshops/bgsu/lab/workbench/bgsu-type-shapes/" style="animation-delay:3.08s">
+          <span class="tool-tile__ver">OP-LAB-042</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Poster four: typography and shapes</span>
+            <span class="tool-tile__title">Type and Shapes</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/bgsu-layer/" style="animation-delay:3.16s">
+          <span class="tool-tile__ver">OP-LAB-043</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">Poster five: a layer of technology</span>
+            <span class="tool-tile__title">Layer</span>
+          </span>
+        </a>
+        <a class="tool-tile g-5" href="/workshops/bgsu/lab/workbench/bgsu-instrument/" style="animation-delay:3.24s">
+          <span class="tool-tile__ver">OP-LAB-044</span>
+          <span class="tool-tile__foot">
+            <span class="tool-tile__desc">A word, an engine, a sound, some images</span>
+            <span class="tool-tile__title">Instrument</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#') || a.target === '_blank') return;
+      e.preventDefault();
+      document.body.classList.add('page-leaving');
+      setTimeout(() => { window.location.href = href; }, 260);
+    });
+    // Clear the leaving-fade whenever this page is shown again — including
+    // browser Back via bfcache — else the body stays at opacity:0 (blank screen).
+    window.addEventListener('pageshow', () => document.body.classList.remove('page-leaving'));
+
+    /* Glitch the title — split into letters, then scatter/rotate 3 random ones now and then */
+    (function glitch() {
+      /* Off for screen-sharing: on a call the scramble reads as a rendering
+         fault rather than as an effect, and the heading is the first thing a
+         guest looks at. Set to true to bring it back — nothing else changed. */
+      const GLITCH = false;
+      if (!GLITCH) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const t = document.querySelector('.lab-title');
+      if (!t) return;
+      const orig = t.textContent;
+      const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&/<>*+=';
+      let raf, t0;
+      function scramble() {
+        t0 = performance.now();
+        const DUR = 520;
+        (function step(now) {
+          const p = Math.min(1, (now - t0) / DUR);
+          let out = '';
+          for (let i = 0; i < orig.length; i++) {
+            const c = orig[i];
+            if (c === ' ') { out += ' '; continue; }
+            const lockAt = 0.45 + (i / orig.length) * 0.5;
+            out += p >= lockAt ? c : CH[(Math.random() * CH.length) | 0];
+          }
+          t.textContent = out;
+          if (p < 1) raf = requestAnimationFrame(step); else t.textContent = orig;
+        })(t0);
+      }
+      setInterval(scramble, 2800);
+    })();
+  </script>
+<script src="/workshops/bgsu/shared/tool-overlay.js"></script>
+<script>
+/* ── Collections ───────────────────────────────────────────────────────────────
+   A tool can belong to a project. SEED is the committed answer, kept in this
+   file so the grouping survives a different browser and a different machine;
+   anything made in the page is kept in localStorage on top of it, which is this
+   browser only. "Copy as code" prints the merged map back out in the shape of
+   SEED, so a grouping worked out on screen can be pasted in here and committed.
+
+   Keys are the slug in the tool's href: /lab/workbench/made-of-stuff/ -> made-of-stuff,
+   /lab/workbench/liquid-type/ -> liquid-type.                                      */
+(function () {
+  'use strict';
+
+  var SEED = {
+    'AHA':        ['aha', 'flash'],
+    'BGSU':       ['bgsu-shapes', 'bgsu-colour', 'bgsu-type', 'bgsu-type-shapes', 'bgsu-layer'],
+    'Lake Opeka': ['lake-opeka', 'opeka-type'],
+    'OP/EN':      ['open-lab', 'open-reel', 'open-capture', 'open-slots']
+  };
+
+  var KEY = 'opal-wb-collections';
+  var grid = document.querySelector('.tool-grid');
+  if (!grid) return;
+
+  var tiles = [].slice.call(grid.querySelectorAll('.tool-tile'));
+  function slugOf(a) {
+    var h = (a.getAttribute('href') || '').replace(/[?#].*$/, '');
+    h = h.replace(/\.html$/, '').replace(/\/$/, '');
+    return h.split('/').pop();
+  }
+  tiles.forEach(function (t) { t.dataset.slug = slugOf(t); });
+
+  function load() {
+    var out = {}, k;
+    for (k in SEED) if (SEED.hasOwnProperty(k)) out[k] = SEED[k].slice();
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var mine = JSON.parse(raw);
+        for (k in mine) if (mine.hasOwnProperty(k)) out[k] = mine[k].slice();
+      }
+    } catch (e) {}                       // private window, blocked storage: seed only
+    return out;
+  }
+  function save(m) { try { localStorage.setItem(KEY, JSON.stringify(m)); } catch (e) {} }
+
+  var COLL = load();
+  var active = '';                        // '' is All
+  var editing = false;
+
+  var bar  = document.createElement('div'); bar.className = 'wb-filter';
+  var note = document.createElement('p');   note.className = 'wb-note'; note.hidden = true;
+  grid.parentNode.insertBefore(bar, grid);
+  grid.parentNode.insertBefore(note, grid);
+
+  function chip(label, n, on, cls) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'wb-chip' + (on ? ' is-on' : '') + (cls ? ' ' + cls : '');
+    b.textContent = label;
+    if (n != null) {
+      var s = document.createElement('span');
+      s.className = 'wb-chip__n'; s.textContent = n; b.appendChild(s);
+    }
+    return b;
+  }
+
+  function names() { return Object.keys(COLL).sort(function (a, b) { return a.localeCompare(b); }); }
+
+  // what the chip promises has to be what the list shows
+  function countOf(n) {
+    var list = COLL[n] || [];
+    return tiles.filter(function (t) { return list.indexOf(t.dataset.slug) > -1; }).length;
+  }
+
+  function apply() {
+    var list = COLL[active] || null;
+    tiles.forEach(function (t) {
+      var show = !list || list.indexOf(t.dataset.slug) > -1;
+      t.style.display = show ? '' : 'none';
+      var p = t.querySelector('.tool-tile__pick');
+      if (p) {
+        var inIt = list && list.indexOf(t.dataset.slug) > -1;
+        p.classList.toggle('is-in', !!inIt);
+        p.textContent = inIt ? '−' : '+';
+        p.setAttribute('aria-label', (inIt ? 'Remove from ' : 'Add to ') + active);
+      }
+      if (editing) t.style.display = '';   // while editing, every tool is pickable
+    });
+    grid.classList.toggle('is-editing', editing);
+    note.hidden = !editing;
+    if (editing) {
+      note.textContent = 'Picking for “' + active + '” — the marks add and remove. ' +
+        'Kept in this browser until it is copied into the page.';
+    }
+    try {
+      history.replaceState(null, '', active ? '#c=' + encodeURIComponent(active) : location.pathname);
+    } catch (e) {}
+  }
+
+  function render() {
+    bar.textContent = '';
+    bar.appendChild(chip('All', tiles.length, !active));
+    bar.lastChild.addEventListener('click', function () {
+      active = ''; editing = false; render(); apply();
+    });
+    names().forEach(function (n) {
+      var c = chip(n, countOf(n), active === n);
+      c.addEventListener('click', function () {
+        if (active === n) { editing = false; active = ''; }
+        else { active = n; editing = false; }
+        render(); apply();
+      });
+      bar.appendChild(c);
+    });
+    var plus = chip('+ New', null, false, 'wb-chip--new');
+    plus.addEventListener('click', function () {
+      var n = (window.prompt('Name this collection') || '').trim();
+      if (!n) return;
+      if (!COLL[n]) COLL[n] = [];
+      save(COLL); active = n; editing = true; render(); apply();
+    });
+    bar.appendChild(plus);
+
+    if (active) {
+      var ed = chip(editing ? 'Done' : 'Pick tools', null, false, 'wb-chip--act');
+      ed.addEventListener('click', function () { editing = !editing; render(); apply(); });
+      bar.appendChild(ed);
+
+      var cp = chip('Copy as code', null, false, 'wb-chip--act');
+      cp.addEventListener('click', function () {
+        var lines = names().map(function (n) {
+          return "    '" + n.replace(/'/g, "\\'") + "': [" +
+                 COLL[n].map(function (s) { return "'" + s + "'"; }).join(', ') + "]";
+        });
+        var code = 'var SEED = {\n' + lines.join(',\n') + '\n  };';
+        var done = function () { cp.firstChild.nodeValue = 'Copied'; setTimeout(render, 1400); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(done, function () { window.prompt('Copy this:', code); });
+        } else { window.prompt('Copy this:', code); }
+      });
+      bar.appendChild(cp);
+
+      if (!SEED[active]) {
+        var rm = chip('Delete', null, false, 'wb-chip--act');
+        rm.addEventListener('click', function () {
+          if (!window.confirm('Delete the collection “' + active + '”? The tools stay.')) return;
+          delete COLL[active]; save(COLL); active = ''; editing = false; render(); apply();
+        });
+        bar.appendChild(rm);
+      }
+    }
+  }
+
+  // the include/exclude mark lives on the row, so picking never leaves the list
+  tiles.forEach(function (t) {
+    var p = document.createElement('button');
+    p.type = 'button'; p.className = 'tool-tile__pick'; p.textContent = '+';
+    p.setAttribute('data-no-overlay', '');     // the mark is not a way into the tool
+    p.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();   // the row itself opens the tool
+      if (!active) return;
+      var list = COLL[active], i = list.indexOf(t.dataset.slug);
+      if (i > -1) list.splice(i, 1); else list.push(t.dataset.slug);
+      save(COLL); render(); apply();
+    });
+    t.appendChild(p);
+  });
+
+  var m = /[#&]c=([^&]+)/.exec(location.hash || '');
+  if (m) { try { var want = decodeURIComponent(m[1]); if (COLL[want]) active = want; } catch (e) {} }
+
+  render(); apply();
+})();
+</script>
+</body>
+</html>

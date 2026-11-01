@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripple — OP/AL Research</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+<link rel="stylesheet" href="/workshops/bgsu/lab/tools/_public.css?v=20261010A" />
+<style>
+    /* ── header: wordmark flush left, the three doors flush right ── */
+    .sp-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.5em 0; color: #111; background: #fff; }
+    .sp-nav__row { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 2.2em; }
+    .sp-nav__logo { display: block; width: 14%; min-width: 132px; color: inherit; }
+    .sp-nav__logo svg { display: block; width: 100%; height: auto; }
+    .sp-nav__doors { display: flex; align-items: center; gap: var(--space-8); }
+    .sp-nav__side { color: inherit; text-decoration: none; font-family: "Sidepiece", sans-serif; font-size: var(--body); letter-spacing: .04em; font-weight: 400; line-height: 1; padding: .3em 0; }
+    .sp-nav__side.is-on { border-bottom: 1.5px solid currentColor; }
+    @media (max-width: 40em) { .sp-nav__logo { width: 34%; min-width: 0; } .sp-nav__doors { gap: var(--space-4); } .sp-nav__side { font-size: var(--label); } }
+
+    /* Lab shell's gate hides the body; these pages are public, so it is
+       overridden here. Removing this line blanks the page entirely. */
+    body, body.opal-drawer{ display:block !important; padding:0 !important; overflow:auto !important; height:auto !important; }
+    body.opal-drawer #wrap{ padding:0 !important; left:0 !important; }
+    html{ overflow:auto !important; height:auto !important; }
+
+    :root{ --rail:300px; --top:120px; }
+    @media (max-width:560px){ :root{ --top:112px; } }
+    *{ box-sizing:border-box; }
+    #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; }
+    #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; background:var(--mat);
+      display:flex; align-items:center; justify-content:center; padding:22px; }
+    .group{ display:flex; flex-direction:column; gap:9px; }
+    .knob{ display:flex; flex-direction:column; gap:2px; }
+    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .rowhint{ font-size:12px; line-height:1.5; color:var(--mute); margin:0; }
+    .group[hidden]{ display:none !important; }
+
+  /* The instrument draws real type, not pixels: every character is its own
+     <tspan> with its own font-size and dy, which is what the InDesign script
+     does to pointSize and baselineShift. So the artwork is an SVG and the
+     export is vector by construction — no tracing, no resolution to choose. */
+  #type { display: block; max-width: 100%; max-height: 100%; background: #fff; }
+  #type text { font-family: "Times New Roman", Times, serif; fill: #111; }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body data-skip="saveBtn,svgBtn,words,shape,drift,axis">
+  <script src="/workshops/bgsu/lab/shared/opal.js"></script>
+
+  <div id="dock">
+    <div class="group">
+      <div class="group__t">Words</div>
+      <textarea class="opal-input" id="words" rows="2" spellcheck="false" autocomplete="off" style="resize:vertical; line-height:1.3; min-height:2.4em;">Original Practice / Applied Learning</textarea>
+      <div class="rowhint">Times New Roman</div>
+    </div>
+
+    <div class="group">
+      <div class="group__t">The wave</div>
+      <div class="knob"><label>Base size <b id="baseR">120</b></label><input id="base" type="range" min="8" max="400" value="120"></div>
+      <div class="knob"><label>Amplitude <b id="ampR">45</b></label><input id="amp" type="range" min="0" max="95" value="45"></div>
+      <div class="knob"><label>Wavelength <b id="wlenR">14</b></label><input id="wlen" type="range" min="2" max="200" value="14"></div>
+      <div class="knob"><label>Phase <b id="phaseR">0</b></label><input id="phase" type="range" min="0" max="360" value="0"></div>
+      <div class="knob"><label>Motion <b id="motionR">30</b></label><input id="motion" type="range" min="0" max="100" value="30"></div>
+      <div class="knob"><label>Shape <b id="shapeR">0</b></label><input id="shape" type="range" min="-100" max="100" value="0"></div>
+      <div class="knob"><label>Drift <b id="driftR">0</b></label><input id="drift" type="range" min="-100" max="100" value="0"></div>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Baseline shift</div>
+      <div class="knob"><label>Rise <b id="riseR">38</b></label><input id="rise" type="range" min="0" max="400" value="38"></div>
+      <div class="knob"><label>Offset <b id="riseOfR">90</b></label><input id="riseOf" type="range" min="-360" max="360" value="90"></div>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Setting</div>
+      <div class="knob"><label>Axis <b id="axisR">50</b></label><input id="axis" type="range" min="0" max="100" value="50"></div>
+      <div class="knob"><label>Leading <b id="leadR">120</b></label><input id="lead" type="range" min="40" max="300" value="120"></div>
+      <div class="knob"><label>Line offset <b id="lineOfR">34</b></label><input id="lineOf" type="range" min="-180" max="180" value="34"></div>
+      <div class="knob"><label>Repeat <b id="repeatR">6</b></label><input id="repeat" type="range" min="1" max="60" value="6"></div>
+    </div>
+
+    <div class="group out" id="output" data-export-custom>
+      <div class="group__t">Output</div>
+      <div class="grid2"><button class="btn" id="svgBtn">SVG</button><button class="btn" id="saveBtn">PNG</button></div>
+    </div>
+  </div>
+
+  <header class="sp-nav">
+    <div class="container"><div class="sp-nav__row">
+      <a class="sp-nav__logo" href="/" aria-label="OP/AL"><svg xmlns="http://www.w3.org/2000/svg" viewBox="155.3 212.9 1285.8 186.2" fill="currentColor"><path d="M1356.2,353.2h72.1v-13h-59.1v-100.6h-13v113.5ZM1077.3,313.7l13.5-61.1h10.6l13.3,61.1h-37.5ZM1055.3,353.2h13.3l5.8-26.5h43.3l5.8,26.5h13.3l-25.2-113.5h-30.6l-25.6,113.5ZM723.6,398.3h37.2l111.9-184.5h-37.2l-111.9,184.5ZM478.1,296.2v-43.6h28.1c5.9,0,8.3.9,13,4.7,5.2,4.3,5.9,6.1,5.9,10.6v13c0,4.5-.7,6.3-5.9,10.6-4.7,3.8-7,4.7-13,4.7h-28.1ZM465.1,353.2h13v-44h28.1c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-14.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-41.1v113.5ZM199.1,340.2h-11.9c-5.9,0-8.3-.9-13-4.7-5.2-4.3-5.9-6.1-5.9-10.6v-57c0-4.5.7-6.3,5.9-10.6,4.7-3.8,7-4.7,13-4.7h11.9c5.9,0,8.5.9,13.2,4.7,5,4.1,5.8,6.1,5.8,10.6v57c0,4.5-.7,6.5-5.8,10.6-4.7,3.8-7.2,4.7-13.2,4.7M187.2,353.2h11.9c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-58.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-11.9c-9.4,0-14.2,2-22.5,9-8.3,7-9.4,10.3-9.4,18.6v58.4c0,8.3,1.1,11.5,9.4,18.6,8.3,7,13.2,9,22.5,9"/></svg></a>
+      <div class="sp-nav__doors">
+        <a class="sp-nav__side is-on" href="/workshops/bgsu/lab/">Research</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/studio/">Artifact</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/about.html">Info</a>
+      </div>
+    </div></div>
+  </header>
+
+  <section id="hero" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">Ripple</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">Every character takes its own size and its own baseline from a wave running along the line. Up close you read the words; from across the room you read the texture.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="credits" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>OP/AL</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Tool</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>InDesign<br><span class="text-mid">Ported from</span></p><p>OP/AL<br><span class="text-mid">Built by</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pt-stage">
+    <div id="wrap"><svg id="type" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1750" preserveAspectRatio="xMidYMid meet"></svg></div>
+
+  <!-- The bar lives INSIDE the stage: `.pt-stage .pt-bar` is a descendant
+       selector, and that rule is what puts the controls in the rail beside
+       the artwork on a wide screen. Outside it, they fall underneath. -->
+  <div class="pt-bar"><div class="container">
+    <div class="pt-bar__row">
+      <div class="pt-bar__btns"></div>
+      <div class="pt-bar__field"><input class="pt-bar__words" type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-gramm="false" value="Original Practice / Applied Learning" data-words="words" aria-label="The words"></div>
+    </div>
+    <div class="pt-bar__ctl"></div>
+  </div></div>
+  </div>
+
+<script>
+'use strict';
+/*  RIPPLE — a port of the InDesign script of the same name.
+
+    Every character gets its own size and its own baseline shift, both read
+    off a sine wave travelling along the line:
+
+        size(i)  = base * ( 1 + amplitude * wave(turns) )
+        shift(i) = rise * wave(turns + offset) - axis * (size - base)
+
+    InDesign sets pointSize and baselineShift per character; SVG sets
+    font-size and dy per <tspan>. The arithmetic is the same arithmetic —
+    this file only changes who is asked to draw it.                       */
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var svg = $('type');
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  // ?w= widens the sheet (the BGSU talk asks for a landscape page); the default is unchanged
+  var W = Math.max(600, Math.min(6000, +new URLSearchParams(location.search).get('w') || 1400)), H = 1750, MARGIN = 90;
+  var MEASURE = W - MARGIN * 2;
+
+  /* The shape slider morphs the wave: square at -100, sine at 0, saw at +100.
+     Straight from waveAt() in the script. */
+  function waveAt(s, shape) {
+    var sine = Math.sin(2 * Math.PI * s);
+    if (!shape) return sine;
+    var k = Math.abs(shape), other;
+    if (shape > 0) {
+      var frac = s - Math.floor(s);
+      other = (frac < 0.5) ? (frac * 4 - 1) : (3 - frac * 4);
+    } else {
+      other = sine > 0 ? 1 : (sine < 0 ? -1 : 0);
+    }
+    return sine * (1 - k) + other * k;
+  }
+
+  /* Advance widths. InDesign had the composer; here the browser measures,
+     through one canvas kept for the purpose. Cached per character per size
+     bucket, or a long line re-measures a few thousand times a frame. */
+  var mctx = document.createElement('canvas').getContext('2d');
+  var mcache = {};
+  function advance(ch, size) {
+    var key = ch + '|' + Math.round(size * 4);
+    var v = mcache[key];
+    if (v === undefined) {
+      mctx.font = Math.round(size * 4) / 4 + 'px "Times New Roman", Times, serif';
+      v = mctx.measureText(ch).width;
+      mcache[key] = v;
+    }
+    return v;
+  }
+
+  function val(id) { return Number($(id).value); }
+
+  /* ── The wave travels ──────────────────────────────────────────────────────
+     A wave that is not moving is a photograph of a wave. Phase advances on its
+     own and the Phase slider sets where that advance starts from, so the
+     control still does what it says — it chooses the moment, not the stillness.
+
+     Thirty frames a second, not sixty: every frame re-breaks the setting and
+     re-writes the SVG, and at this size the motion is slow enough that the
+     extra thirty would be spent on a difference nobody can see. */
+  var tPhase = 0;
+
+  /* Motion is phase per second, which is why the slider sits under Phase: one
+     chooses the moment, the other chooses how fast the moment leaves. The
+     curve is steep rather than linear — the useful settings are all at the slow
+     end, and a linear slider spends four fifths of its travel on speeds that
+     are too fast to read. At 0 the wave stands still, which is a setting and
+     not a fault. */
+  function turnsPerSecond() {
+    var v = val('motion') / 100;
+    return v <= 0 ? 0 : Math.pow(v, 1.6) * 0.6;     // 30 ≈ a cycle every 12 seconds
+  }
+
+  function build() {
+    var base   = val('base');
+    var amp    = val('amp') / 100;
+    var wlen   = Math.max(0.5, val('wlen'));
+    var phase  = val('phase') / 360 + tPhase;     // turns, plus the drift of time
+    var shape  = val('shape') / 100;
+    var drift  = val('drift') / 100;
+    var rise   = val('rise');
+    var riseOf = val('riseOf') / 360;             // turns
+    var axis   = (val('axis') / 100) * 0.72;      // 0.72 ~ the cap height ratio
+    var leadF  = val('lead') / 100;
+    var lineOf = val('lineOf') / 360;             // turns per line
+    var reps   = Math.max(1, Math.round(val('repeat')));
+    /* Justified to the measure, last line included. These were two switches;
+       they are now how the instrument sets. A ragged last line under a wave
+       that reaches both margins reads as a mistake, not as a choice. */
+    var doFill = true;
+    var doLast = true;
+
+    var body = ($('words').value || ' ').replace(/\r/g, '');
+    var source = [];
+    for (var r = 0; r < reps; r++) {
+      body.split('\n').forEach(function (l) { source.push(l); });
+    }
+
+    /* Break each paragraph to the measure at the BASE size, exactly as the
+       script surveys the composed text before disturbing it — positions
+       shift the moment sizes change, so they are taken first. */
+    var lines = [];
+    source.forEach(function (para) {
+      var words = para.split(/(\s+)/);
+      var cur = '', wNow = 0;
+      words.forEach(function (tok) {
+        var tw = 0;
+        for (var i = 0; i < tok.length; i++) tw += advance(tok[i], base);
+        if (cur && wNow + tw > MEASURE && tok.trim()) {
+          lines.push(cur); cur = tok.replace(/^\s+/, ''); wNow = 0;
+          for (var j = 0; j < cur.length; j++) wNow += advance(cur[j], base);
+        } else { cur += tok; wNow += tw; }
+      });
+      lines.push(cur);
+    });
+
+    var lead = base * leadF;
+    var out = [], lo = base, hi = base;
+    var y = MARGIN + base;
+
+    lines.forEach(function (line, L) {
+      var n = line.length;
+      var glyphs = [], x = MARGIN, total = 0;
+
+      for (var i = 0; i < n; i++) {
+        var u = i, span = Math.max(1, n);
+        // drift bends the local frequency: the wave packs tight at the ends
+        // of the line and opens out through the middle
+        var turns = u / wlen;
+        if (drift) turns += drift * (span / (2 * Math.PI * wlen)) * Math.sin(2 * Math.PI * u / span);
+        turns += phase + L * lineOf;
+
+        var size = base * (1 + amp * waveAt(turns, shape));
+        if (size < 0.5) size = 0.5;
+        if (size < lo) lo = size;
+        if (size > hi) hi = size;
+
+        // the baseline's own wave, offset from the size wave, plus the
+        // correction that keeps the character sitting on the axis. shift is
+        // positive-up, so a bigger character has to drop.
+        var lift = rise * waveAt(turns + riseOf, shape) - axis * (size - base);
+
+        var adv = advance(line[i], size);
+        glyphs.push({ ch: line[i], size: size, lift: lift, adv: adv });
+        total += adv;
+      }
+
+      // push the line out to the margins by tracking, not by scaling — the
+      // script's fillLines does the same, a few passes of adjustment
+      var track = 0;
+      var last = (L === lines.length - 1);
+      if (doFill && (!last || doLast) && glyphs.length > 1 && total > 0) {
+        track = (MEASURE - total) / (glyphs.length - 1);
+      }
+
+      glyphs.forEach(function (g) {
+        g.x = x; x += g.adv + track;
+      });
+      out.push({ y: y, glyphs: glyphs });
+      y += lead;
+    });
+
+    // The frame takes the height the setting actually needs. A fixed box left
+    // the stack sitting in the top half of an empty sheet.
+    var height = Math.round(y - lead + MARGIN + base * 0.4);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + Math.round(height));
+
+    var s = '<rect width="' + W + '" height="' + Math.round(height) + '" fill="#fff"/>';
+    out.forEach(function (ln) {
+      ln.glyphs.forEach(function (g) {
+        if (g.ch === ' ') return;
+        s += '<text x="' + g.x.toFixed(2) + '" y="' + (ln.y - g.lift).toFixed(2) +
+             '" font-size="' + g.size.toFixed(2) + '">' + esc(g.ch) + '</text>';
+      });
+    });
+    svg.innerHTML = s;
+
+    var count = out.reduce(function (a, l) { return a + l.glyphs.length; }, 0);
+    if (window.__ripplePane) window.__ripplePane.textContent =
+      count + ' characters · ' + Math.round(lo) + '–' + Math.round(hi) + ' pt · ' + out.length + ' lines';
+  }
+
+  function esc(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ---- wire the dock ----
+  var IDS = ['base','amp','wlen','phase','motion','shape','drift','rise','riseOf','axis','lead','lineOf','repeat'];
+  IDS.forEach(function (id) {
+    var el = $(id), out = $(id + 'R');
+    if (!el) return;
+    el.addEventListener('input', function () { if (out) out.textContent = el.value; build(); });
+  });
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $('motion').value = 0; $('motionR').textContent = '0';
+  }
+
+  $('words').addEventListener('input', build);
+
+  // The clock. It stops when the tab is hidden, because an instrument in a
+  // background tab is a wave nobody is watching.
+  (function run() {
+    var prev = 0, acc = 0, STEP = 1 / 30;
+    requestAnimationFrame(function tick(now) {
+      requestAnimationFrame(tick);
+      if (document.hidden) { prev = now; return; }
+      if (!prev) { prev = now; return; }
+      var dt = Math.min(0.25, (now - prev) / 1000);
+      prev = now;
+      var tps = turnsPerSecond();
+      if (!tps) { acc = 0; return; }        // held still: nothing to redraw
+      acc += dt;
+      if (acc < STEP) return;
+      tPhase = (tPhase + acc * tps) % 1;
+      acc = 0;
+      build();
+    });
+  })();
+
+  // ---- output ----
+  function download(name, blob) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  }
+  function svgText() {
+    return '<svg xmlns="' + SVGNS + '" viewBox="' + svg.getAttribute('viewBox') + '">' +
+           '<style>text{font-family:"Times New Roman",Times,serif;fill:#111}</style>' +
+           svg.innerHTML + '</svg>';
+  }
+  $('svgBtn').addEventListener('click', function () {
+    download('ripple.svg', new Blob([svgText()], { type: 'image/svg+xml' }));
+  });
+  $('saveBtn').addEventListener('click', function () {
+    var vb = svg.getAttribute('viewBox').split(' ').map(Number);
+    var scale = 1400 / vb[2];
+    var c = document.createElement('canvas');
+    c.width = Math.round(vb[2] * scale); c.height = Math.round(vb[3] * scale);
+    var img = new Image();
+    img.onload = function () {
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      c.toBlob(function (b) { download('ripple.png', b); });
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText());
+  });
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+  build();
+})();
+</script>
+
+<script src="/workshops/bgsu/lab/tools/_public.js?v=20261008B"></script>
+<script src="/workshops/bgsu/shared/cursor.js?v=20261003"></script>
+<script src="/workshops/bgsu/shared/footer.js?v=20261009B"></script>
+</body>
+</html>

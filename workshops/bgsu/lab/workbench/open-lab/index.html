@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Open Lab — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<style>
+  @font-face{ font-family:'Sidepiece'; src:url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.woff2') format('woff2'), url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.ttf') format('truetype'); font-weight:normal; font-display:swap; }
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; display:flex; align-items:center; justify-content:center; padding:24px; }
+  #art{ max-width:100%; max-height:100%; display:block; }  /* board frame owned by OPALAB (border, no shadow) */
+  #art:fullscreen{ border:0; width:100vw; height:100vh; }
+  #sizeDock{ display:flex; align-items:center; gap:10px; }
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); left:calc(var(--rail) + 24px); z-index:11;
+    display:none; align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); }
+  #recDot b{ font-variant-numeric:tabular-nums; font-weight:600; }
+
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6;
+    overflow-y:auto; overflow-x:hidden; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .knob label{ display:flex; justify-content:space-between; }
+  .knob b{ font-weight:600; font-variant-numeric:tabular-nums; }
+  textarea{ width:100%; padding:8px 9px; resize:vertical; }
+  select.btn{ width:100%; }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .grid2 .btn, .btn.full{ width:100%; }
+  .crow{ display:flex; align-items:center; justify-content:space-between; }
+  /* shape palette */
+  #shapes{ display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+  /* the preview shape is drawn in currentColor, so it reads on the white face and on the
+     accent face when the tile is selected */
+  .sh{ position:relative; aspect-ratio:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    padding:5px; transition:opacity .12s; color:var(--ink); }
+  .sh svg, .sh img{ width:100%; height:100%; object-fit:contain; }
+  .sh[aria-pressed="true"]{ color:var(--on-accent); }
+  .sh.focus{ outline:2px solid var(--ink); outline-offset:1px; }
+  /* Mix on: dim the shapes that are NOT in the mix, so deselecting reads clearly */
+  #shapes.mix .sh{ opacity:.28; }
+  #shapes.mix .sh[aria-pressed="true"]{ opacity:1; }
+  .tog{ display:flex; align-items:center; justify-content:space-between; }
+  .mhint{ color:var(--mute); margin-top:2px; }
+  .mchips{ display:flex; flex-wrap:wrap; gap:5px; }
+  .mchip{ padding:5px 8px; cursor:pointer; }
+  /* tooltip — geometry only; the flat dark face comes from OPALAB */
+  .tip{ position:fixed; z-index:60; display:none; max-width:230px; padding:9px 11px;
+    line-height:1.5; pointer-events:none; opacity:0; transition:opacity .14s ease; }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body class="dark">
+  <div id="wrap"><canvas id="art"></canvas></div>
+  <div id="hint">Type your words — they print in dots. Pick a shape and its colour, then Project or Record.</div>
+  <div id="recDot"><i></i><b>0:00</b></div>
+  <div id="sizeDock">
+    <select id="aspect" title="Canvas size">
+      <option value="1080/1350">Portrait · 4:5</option>
+      <option value="1080/1920">Story · 9:16</option>
+      <option value="1/1">Square · 1:1</option>
+      <option value="1920/1080" selected>Landscape · 16:9</option>
+    </select>
+  </div>
+
+  <div id="dock">
+
+    <!-- text -->
+    <div class="group">
+      <div class="group__t">Words · multiple fields · drag to place</div>
+      <textarea id="text" rows="3" spellcheck="false">OPEN
+LAB
+SATURDAY</textarea>
+      <div class="grid2">
+        <button class="btn" id="addTextBtn" data-tip="Add another text field. Drag it to place, resize from the corner. This box edits whichever field is selected.">Add text field</button>
+        <button class="btn" id="rmTextBtn" data-tip="Remove the selected text field.">Remove field</button>
+      </div>
+      <select id="font" data-tip="The typeface of the selected field.">
+        <option value="Sidepiece, Georgia, serif" selected>Sidepiece — house display</option>
+        <option value="Helvetica Neue, Arial, sans-serif">Helvetica — bold sans</option>
+        <option value="Georgia, Times New Roman, serif">Georgia — serif</option>
+        <option value="Impact, Haettenschweiler, sans-serif">Impact — heavy</option>
+        <option value="Courier New, monospace">Courier — mono</option>
+      </select>
+      <div class="knob" data-tip="Size of the selected field."><label>Text size <b id="sizeR">62</b></label><input id="size" type="range" min="8" max="130" value="62" /></div>
+      <div class="knob" data-tip="Letter-spacing of the selected field — tighten or open up the letters."><label>Letter-spacing <b id="trackR">0</b></label><input id="track" type="range" min="-40" max="120" value="0" /></div>
+      <div class="knob" data-tip="Line-height of the selected field — space between lines."><label>Line-height <b id="leadR">116</b></label><input id="lead" type="range" min="70" max="240" value="116" /></div>
+    </div>
+
+    <!-- halftone -->
+    <div class="group">
+      <div class="group__t">Halftone</div>
+      <div class="knob" data-tip="Spacing of the dot grid — small is a fine screen, large is bold and graphic."><label>Cell <b id="cellR">40</b></label><input id="cell" type="range" min="0" max="100" value="40" /></div>
+      <div class="knob" data-tip="Tilts the whole dot screen — the classic print angle."><label>Angle <b id="angleR">50</b></label><input id="angle" type="range" min="0" max="100" value="50" /></div>
+      <div class="knob" data-tip="How sharply the dots grow inside the letters — low is soft and grey, high is crisp and solid."><label>Contrast <b id="contrastR">55</b></label><input id="contrast" type="range" min="0" max="100" value="55" /></div>
+      <div class="knob" data-tip="Randomly varies the size of each dot — from an even screen to a scattered, hand-set feel."><label>Size jitter <b id="jitterR">0</b></label><input id="jitter" type="range" min="0" max="100" value="0" /></div>
+      <div class="knob" data-tip="Randomly throws a share of the dots out of focus — a soft, hand-set blur mixed through the crisp ones."><label>Blur dots <b id="blurR">0</b></label><input id="blur" type="range" min="0" max="100" value="0" /></div>
+    </div>
+
+    <!-- shape -->
+    <div class="group">
+      <div class="group__t">Shape · tap to pick + colour · tap again to drop</div>
+      <div id="shapes"></div>
+      <div class="crow" data-tip="The colour of the selected shape. With Mix shapes on, each shape keeps its own colour for a multi-colour screen."><label>This shape's colour</label><input type="color" id="shapeCol" value="#f4f4f8" /></div>
+      <div class="tog" data-tip="Give every dot a random shape from the set — each in its own colour."><label>Mix shapes</label><button class="btn" id="mixBtn" aria-pressed="false">Off</button></div>
+      <div class="grid2">
+        <button class="btn" id="svgBtn" data-tip="Add your own SVG as a dot shape.">Add SVG</button>
+        <button class="btn" id="randBtn" data-tip="Re-roll the random sizes and shapes for a fresh look.">Randomize</button>
+      </div>
+      <input id="svgFile" type="file" accept=".svg,image/svg+xml" hidden />
+    </div>
+
+    <!-- images -->
+    <div class="group">
+      <div class="group__t">Images · place + pen-mask</div>
+      <button class="btn full" id="addPhotoBtn" data-tip="Add a photo to the canvas. Drag it to move; drag the corner handle to resize.">Add image</button>
+      <input id="photoFile" type="file" accept="image/*" hidden />
+      <div class="tog" data-tip="Pen mask: click around the selected image to draw a shape — the image shows only inside it. Click the first point (or double-click) to close. Move mode: drag to place, corner to resize."><label>Pen mask</label><button class="btn" id="penBtn" aria-pressed="false">Off</button></div>
+      <div class="grid2">
+        <button class="btn" id="clearMaskBtn" data-tip="Remove the mask from the selected image.">Clear mask</button>
+        <button class="btn" id="delPhotoBtn" data-tip="Delete the selected image.">Delete</button>
+      </div>
+      <div class="grid2">
+        <button class="btn" id="photoBackBtn" data-tip="Send the selected image behind the type.">To back</button>
+        <button class="btn" id="photoFrontBtn" data-tip="Bring the selected image in front of the type.">To front</button>
+      </div>
+    </div>
+
+    <!-- motion -->
+    <div class="group">
+      <div class="group__t">Motion · for the wall</div>
+      <div class="knob" data-tip="A wave of size travels through the dots so the piece breathes on the wall."><label>Wave <b id="waveR">15</b></label><input id="wave" type="range" min="0" max="100" value="15" /></div>
+      <div class="tog" data-tip="Slowly turn each dot in place."><label>Spin</label><button class="btn" id="spinBtn" aria-pressed="false">Off</button></div>
+      <div class="tog" data-tip="A performance: sweeps the dials you enable below so the words drift in and out of legibility. Turns on automatically while you Record."><label>Auto-morph</label><button class="btn" id="morphBtn" aria-pressed="false">Off</button></div>
+      <div class="mhint" data-tip="Choose which dials the Auto-morph sweeps. Anything left off holds at its current value.">Morph these dials:</div>
+      <div class="mchips" id="morphChips">
+        <button class="mchip" data-k="cell" aria-pressed="true">Cell</button>
+        <button class="mchip" data-k="angle" aria-pressed="true">Angle</button>
+        <button class="mchip" data-k="contrast" aria-pressed="true">Contrast</button>
+        <button class="mchip" data-k="jitter" aria-pressed="true">Scatter</button>
+        <button class="mchip" data-k="wave" aria-pressed="true">Wave</button>
+      </div>
+    </div>
+
+    <!-- colour -->
+    <div class="group">
+      <div class="group__t">Colour</div>
+      <select id="colMode" data-tip="How the dots are coloured. Shape — each shape its own colour. Gradient — a two-colour blend across the words. Spectrum — a moving rainbow. From image — the dots take their colour from a photo you drop in.">
+        <option value="shape" selected>Shape colours</option>
+        <option value="gradient">Gradient</option>
+        <option value="spectrum">Spectrum — rainbow</option>
+        <option value="image">From image</option>
+      </select>
+      <div class="crow" data-tip="Start of the gradient."><label>Gradient from</label><input type="color" id="gradA" value="#ff5ea8" /></div>
+      <div class="crow" data-tip="End of the gradient."><label>Gradient to</label><input type="color" id="gradB" value="#3ec6ff" /></div>
+      <button class="btn full" id="colImgBtn" data-tip="Drop in a photo — the dots take their colour from it, wherever each dot falls.">Colour image…</button>
+      <input id="colImgFile" type="file" accept="image/*" hidden />
+    </div>
+
+    <!-- paper -->
+    <div class="group">
+      <div class="group__t">Paper</div>
+      <div class="crow" data-tip="The colour behind the dots."><label>Background</label><input type="color" id="paperCol" value="#0a0a10" /></div>
+    </div>
+
+    <!-- present -->
+    <div class="group">
+      <div class="group__t">Present</div>
+      <button class="btn full" id="projBtn" data-tip="Fill the screen for projection. Press Esc to exit.">Project · full screen</button>
+    </div>
+
+    <!-- output -->
+    <div class="group out" data-export-custom>
+      <div class="group__t">Output</div>
+      <div class="grid2">
+        <button class="btn" id="recBtn" aria-pressed="false">Record</button>
+        <button class="btn" id="saveBtn">Save</button>
+      </div>
+    </div>
+
+  </div>
+
+<script src="/workshops/bgsu/lab/shared/opal.js?v=3"></script>
+<script>Opal.mountTopbar({ name:'Open Lab', desc:'Words, printed in dots', about:"Type your words — line breaks and all — and they break into a halftone screen of dots. Choose the dot shape from the set or drop in your own SVG, and give each shape its own colour — turn on Mix shapes for a multi-colour, multi-shape screen. Set the cell size, screen angle and contrast, and randomize the size and shape of every dot for a scattered, hand-set feel. A wave of size travels through it so it breathes on the wall — hit Project for full screen, or Record the whole thing as a video. Made for projecting large.",
+  version:'OP-LAB-016' });</script>
+
+<script>
+(() => {
+  const cv=document.getElementById('art'); let ctx=cv.getContext('2d');
+  const $=id=>document.getElementById(id);
+  const TAU=Math.PI*2;
+  let ASPECT=1920/1080, W=0,H=0,dpr=1;
+  const P={ cell:40, angle:50, contrast:55, jitter:0, wave:15, blur:0 };
+  let FONT='Sidepiece, Georgia, serif', DEF='#f4f4f8', PAPER='#0a0a10';
+  let mixOn=false, spinOn=false, baseIdx=0, seed1=1.7, seed2=9.3;
+  // colour modes
+  const hexToRgb=h=>{ const n=parseInt(h.slice(1),16); return [n>>16&255,n>>8&255,n&255]; };
+  const rgbStr=c=>'rgb('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+')';
+  const mix=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+  const h2r=(h,s,l)=>{ h=(h%1+1)%1; const a=s*Math.min(l,1-l); const f=n=>{ const k=(n+h*12)%12; return l-a*Math.max(-1,Math.min(k-3,9-k,1)); }; return [f(0)*255,f(8)*255,f(4)*255]; };
+  let colMode='shape', GRA=[255,94,168], GRB=[62,198,255];
+  const colCv=document.createElement('canvas'); const colCtx=colCv.getContext('2d'); let colW=0,colH=0,colData=null,hasColImg=false;
+  function colourFor(x,y){
+    if(colMode==='gradient') return rgbStr(mix(GRA,GRB, x/W));
+    if(colMode==='spectrum') return rgbStr(h2r((x/W*0.9 + T*0.04)%1, 0.8, 0.62));
+    if(colMode==='image' && hasColImg){ const px=Math.min(colW-1,(x/W*colW)|0), py=Math.min(colH-1,(y/H*colH)|0), i=(py*colW+px)*4; return 'rgb('+colData[i]+','+colData[i+1]+','+colData[i+2]+')'; }
+    return null;
+  }
+  function loadColImg(img){ const long=640; colW=ASPECT>=1?long:Math.round(long*ASPECT); colH=ASPECT>=1?Math.round(long/ASPECT):long;
+    colCv.width=colW; colCv.height=colH; const s=Math.max(colW/img.width,colH/img.height), w=img.width*s, h=img.height*s;
+    colCtx.drawImage(img,(colW-w)/2,(colH-h)/2,w,h); colData=colCtx.getImageData(0,0,colW,colH).data; hasColImg=true; colMode='image'; $('colMode').value='image'; }
+
+  // ---------- shapes (each carries its own colour) ----------
+  const SVGSH={
+    dot:'',
+    square:'M8 8H92V92H8Z',
+    diamond:'M50 4L96 50L50 96L4 50Z',
+    triangle:'M50 7L95 92L5 92Z',
+    hexagon:'M50 4L91 27L91 73L50 96L9 73L9 27Z',
+    star:'M50 3L61 38L98 38L68 59L79 95L50 73L21 95L32 59L2 38L39 38Z',
+    plus:'M40 6h20v34h34v20h-34v34h-20v-34h-34v-20h34Z',
+    ring:'M50 6A44 44 0 1 1 49.9 6Z M50 32A18 18 0 1 0 50.1 32Z',
+    heart:'M50 88 C6 58 6 24 30 18 C42 15 50 24 50 33 C50 24 58 15 70 18 C94 24 94 58 50 88 Z',
+    drop:'M50 5 C50 5 84 45 84 66 A34 34 0 1 1 16 66 C16 45 50 5 50 5 Z',
+  };
+  const RULE={ ring:'evenodd' };
+  const PAL=['#f4f4f8','#ff5ea8','#ffd23f','#3ec6ff','#5be584','#c9a3ff','#ff8a3d','#ffffff','#ff4d4d','#26e0c8'];
+  const SH=[];
+  function buildBuiltins(){ let n=0; for(const k in SVGSH){ let p; if(k==='dot'){ p=new Path2D(); p.arc(50,50,47,0,TAU); } else p=new Path2D(SVGSH[k]);
+    SH.push({ key:k, type:'path', path:p, rule:RULE[k]||'nonzero', colour:PAL[n%PAL.length], on:true }); n++; } SH.forEach(s=>s.colour='#f4f4f8'); }
+  function tintCache(img, colour){ const c=document.createElement('canvas'); c.width=c.height=160; const g=c.getContext('2d');
+    g.clearRect(0,0,160,160); g.drawImage(img,0,0,160,160); g.globalCompositeOperation='source-in'; g.fillStyle=colour; g.fillRect(0,0,160,160); return c; }
+  function addSVGShape(text, name){ try{ const doc=new DOMParser().parseFromString(text,'image/svg+xml'); const svg=doc.querySelector('svg'); if(!svg||doc.querySelector('parsererror')) return;
+    let vb={w:100,h:100}; const v=svg.getAttribute('viewBox'); if(v){ const a=v.split(/[ ,]+/).map(Number); vb={w:a[2]||100,h:a[3]||100}; }
+    const stripped=svg.innerHTML.replace(/fill\s*=\s*"(?!none)[^"]*"/g,'').replace(/fill\s*:\s*[^;"'}]+/g,'');
+    const norm='<svg xmlns="http://www.w3.org/2000/svg" width="'+vb.w+'" height="'+vb.h+'" viewBox="0 0 '+vb.w+' '+vb.h+'" fill="#fff">'+stripped+'</svg>';
+    const im=new Image(); const sh={ key:name, type:'img', img:null, cache:null, ready:false, colour:'#f4f4f8', on:true };
+    im.onload=()=>{ sh.img=im; sh.cache=tintCache(im, sh.colour); sh.ready=true; SH.push(sh); baseIdx=SH.length-1; syncShapeCol(); buildShapeButtons(); };
+    im.src='data:image/svg+xml;utf8,'+encodeURIComponent(norm);
+  }catch(e){} }
+  // the tile face is white when off and solid accent when selected — a shape colour that would
+  // vanish against that face falls back to the tile's own ink (currentColor)
+  function relLum(hex){ const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex||''); if(!m) return 0.5;
+    const c=[1,2,3].map(i=>{ const v=parseInt(m[i],16)/255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4); });
+    return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2]; }
+  function previewFill(s,sel){ const L=relLum(s.colour); return sel ? (L<0.18?'currentColor':s.colour) : (L>0.72?'currentColor':s.colour); }
+  function shapeSVG(s,sel){ const fill=previewFill(s,sel); if(s.key==='dot') return '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" style="fill:'+fill+'"/></svg>';
+    return '<svg viewBox="0 0 100 100"><path d="'+SVGSH[s.key]+'"'+(RULE[s.key]?' fill-rule="'+RULE[s.key]+'"':'')+' style="fill:'+fill+'"/></svg>'; }
+  function buildShapeButtons(){ const host=$('shapes'); host.classList.toggle('mix', mixOn); host.innerHTML='';
+    SH.forEach((s,i)=>{ const b=document.createElement('button'); b.className='sh'+(i===baseIdx?' focus':''); b.title=s.key;
+      const sel=(mixOn? !!s.on : i===baseIdx);
+      b.setAttribute('aria-pressed', sel?'true':'false');
+      b.innerHTML = s.type==='path' ? shapeSVG(s,sel) : ('<img src="'+(s.cache?s.cache.toDataURL():'')+'">');
+      b.addEventListener('click', ()=>{
+        if(mixOn){
+          if(i===baseIdx){ s.on=!s.on; if(!SH.some(x=>x.on)) s.on=true; }   // click the focused one again to drop / re-add it
+          else { s.on=true; baseIdx=i; }                                    // click another to focus it AND keep it in the mix (so its colour shows)
+        } else baseIdx=i;
+        syncShapeCol(); buildShapeButtons(); });
+      host.appendChild(b); }); }
+  function syncShapeCol(){ const s=SH[baseIdx]; if(s) $('shapeCol').value=s.colour; }
+  function drawShape(sh,x,y,r,rot,forced){
+    if(sh.type==='img'){ if(!sh.ready){ ctx.fillStyle=forced||sh.colour; ctx.beginPath(); ctx.arc(x,y,r,0,TAU); ctx.fill(); return; }
+      ctx.save(); ctx.translate(x,y); if(rot) ctx.rotate(rot); ctx.drawImage(sh.cache,-r,-r,2*r,2*r); ctx.restore(); return; }  // uploaded shapes keep their own colour
+    ctx.fillStyle=forced||sh.colour; ctx.save(); ctx.translate(x,y); if(rot) ctx.rotate(rot); const s=r/50; ctx.scale(s,s); ctx.translate(-50,-50); ctx.fill(sh.path, sh.rule); ctx.restore();
+  }
+
+  // ---------- text coverage ----------
+  // ---------- text fields (multiple, placeable) ----------
+  const texts=[]; let selText=-1;
+  function makeText(content){ return { content, fcx:0.5, fcy:0.5, size:62, track:0, lead:116, font:FONT, _w:0, _h:0 }; }
+  const covCv=document.createElement('canvas'); const covCtx=covCv.getContext('2d'); let covW=0,covH=0, covArr=null;
+  function drawLine(g,line,cx,y,trackPx,canSpace){
+    if(canSpace){ g.fillText(line,cx,y); return g.measureText(line).width; }
+    const prev=g.textAlign; g.textAlign='left'; const ch=[...line]; let widths=ch.map(c=>g.measureText(c).width); let total=widths.reduce((a,b)=>a+b,0)+trackPx*Math.max(0,ch.length-1);
+    let x=cx-total/2; for(let i=0;i<ch.length;i++){ g.fillText(ch[i],x,y); x+=widths[i]+trackPx; } g.textAlign=prev; return total; }
+  function drawTextBlock(g,t){
+    const wt=(''+t.font).indexOf('Sidepiece')>=0?'400':'800'; const fontPx=covH*(0.03+(t.size/100)*0.26);
+    g.font=wt+' '+fontPx+'px '+t.font; const trackPx=(t.track/100)*fontPx*0.5;
+    const canSpace=('letterSpacing' in g); if(canSpace) g.letterSpacing=trackPx+'px';
+    const lines=((t.content!=null?t.content:' ')+'').split('\n'); const lh=fontPx*(t.lead/100); const total=lh*lines.length;
+    const cx=t.fcx*covW; let y=t.fcy*covH-total/2+lh/2; let maxw=0;
+    for(const line of lines){ const w=drawLine(g,line||' ',cx,y,trackPx,canSpace); if(w>maxw) maxw=w; y+=lh; }
+    if(canSpace) g.letterSpacing='0px'; t._w=maxw; t._h=total; }
+  function rebuildText(){ const long=1200; covW=ASPECT>=1?long:Math.round(long*ASPECT); covH=ASPECT>=1?Math.round(long/ASPECT):long;
+    covCv.width=covW; covCv.height=covH; const g=covCtx; g.fillStyle='#000'; g.fillRect(0,0,covW,covH);
+    g.fillStyle='#fff'; g.textAlign='center'; g.textBaseline='middle';
+    for(const t of texts) drawTextBlock(g,t);
+    covArr=g.getImageData(0,0,covW,covH).data;
+  }
+  function textRect(t){ const sc=W/covW; const w=t._w*sc, h=t._h*sc; return { x:t.fcx*W-w/2, y:t.fcy*H-h/2, w, h }; }
+  function cov(x,y){ const px=Math.min(covW-1,Math.max(0,(x/W*covW)|0)), py=Math.min(covH-1,Math.max(0,(y/H*covH)|0)); return covArr[(py*covW+px)*4]/255; }
+
+  // ---------- fit ----------
+  function fit(){ const fs=document.fullscreenElement===cv; let availW, availH;
+    if(fs){ availW=innerWidth; availH=innerHeight; } else { availH=innerHeight-168; availW=innerWidth-28; }
+    let h=Math.min(availH, fs?1e5:1650), w=h*ASPECT; if(w>availW){ w=availW; h=w/ASPECT; }
+    W=Math.round(w); H=Math.round(h);
+    dpr=Math.min(devicePixelRatio||1, 2);
+    cv.style.width=W+'px'; cv.style.height=H+'px'; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    rebuildText();
+  }
+
+  const hash=(i,j,s)=>{ const x=Math.sin(i*127.1+j*311.7+s*74.7)*43758.5453; return x-Math.floor(x); };
+
+  // ---------- render ----------
+  let T=0, t0=performance.now(), RSCALE=1, exporting=false;
+  function render(){
+    ctx.save(); ctx.scale(dpr,dpr);
+    ctx.fillStyle=PAPER; ctx.fillRect(0,0,W,H);
+    drawPhotos(true);                    // images sent behind the type
+    if(covArr){
+      const E = perfOn()? effP() : P;
+      const cx=W/2, cy=H/2; const cell=(6+(E.cell/100)*46)*RSCALE;   // RSCALE keeps dot density constant at export resolution
+      const ang=((E.angle/100)*2-1)*Math.PI/4; const ca=Math.cos(ang), sa=Math.sin(ang);
+      const N=Math.ceil(Math.hypot(W,H)/cell/2)+2; const gamma=0.4+(1-E.contrast/100)*1.7;
+      const jit=E.jitter/100, waveA=E.wave/100, t=T;
+      let actArr; if(mixOn){ actArr=[]; for(let k=0;k<SH.length;k++) if(SH[k].on) actArr.push(k); if(!actArr.length) actArr=[baseIdx]; }
+      for(let i=-N;i<=N;i++){ for(let j=-N;j<=N;j++){
+        const gx=i*cell, gy=j*cell; const x=cx+gx*ca-gy*sa, y=cy+gx*sa+gy*ca;
+        if(x<-cell||x>W+cell||y<-cell||y>H+cell) continue;
+        const c=cov(x,y); if(c<=0.03) continue;
+        let cc=Math.pow(c, gamma); if(cc>1) cc=1;
+        let r=cell*0.62*cc; r*=(1+(hash(i,j,seed1)-0.5)*jit*1.4);
+        if(waveA>0) r*=1+waveA*0.5*Math.sin(x*0.018 - t*2.2 + y*0.006);
+        if(r<0.35) continue;
+        const sh = mixOn ? SH[actArr[(hash(i,j,seed2)*actArr.length)|0]] : SH[baseIdx];
+        const col = colMode==='shape'? null : colourFor(x,y);
+        // randomly throw a share of the dots out of focus (seeded, so it holds while animating)
+        if(P.blur>0 && hash(i,j,seed1+seed2+7) < P.blur/100){
+          const amt = r*(0.35+hash(j,i,seed1)*0.7);   // varied softness per blurred dot
+          ctx.filter='blur('+amt.toFixed(2)+'px)'; drawShape(sh, x, y, r, spinOn? t*0.4 : 0, col); ctx.filter='none';
+        } else drawShape(sh, x, y, r, spinOn? t*0.4 : 0, col);
+      }}
+    }
+    drawPhotos(false);                   // images in front of the type
+    drawPhotoUI();                        // selection + pen guides (hidden while recording/projecting)
+    ctx.restore();
+  }
+
+  // ---------- placeable, pen-maskable images ----------
+  const photos=[]; let photoTool='move', selPhoto=-1, selWhich='none', recActive=false, drag=null;
+  // ---------- record treatment: sweep every dial in and out of legibility ----------
+  let userMorph=false, morphSeedT=0;
+  const morphSet={ cell:true, angle:true, contrast:true, jitter:true, wave:true };   // which dials the morph sweeps
+  const perfOn=()=> userMorph || recActive;
+  function effP(){ const o=(a,b,rate,ph)=> a + (b-a)*(0.5+0.5*Math.sin(T*rate+ph));
+    return {
+      cell:     morphSet.cell?     o(8, 90, 0.23, 0.0) : P.cell,       // small crisp ↔ huge blocky
+      angle:    morphSet.angle?    o(0,100, 0.11, 1.3) : P.angle,
+      contrast: morphSet.contrast? o(24,96, 0.17, 2.1) : P.contrast,   // legible high ↔ muddy low
+      jitter:   morphSet.jitter?   o(0, 82, 0.31, 0.7) : P.jitter,     // scatter drifts in and out
+      wave:     morphSet.wave?     o(0, 66, 0.19, 3.4) : P.wave }; }
+  function photoRect(im){ const w=im.fw*W, h=w*(im.img.naturalHeight/Math.max(1,im.img.naturalWidth)); return { x:im.fcx*W-w/2, y:im.fcy*H-h/2, w, h }; }
+  function maskPath(im,R){ ctx.beginPath(); im.mask.forEach((p,k)=>{ const mx=R.x+p.u*R.w, my=R.y+p.v*R.h; k?ctx.lineTo(mx,my):ctx.moveTo(mx,my); }); ctx.closePath(); }
+  function drawPhotos(back){ for(const im of photos){ if(!!im.back!==back) continue; if(!im.img.complete||!im.img.naturalWidth) continue;
+      const R=photoRect(im); ctx.save(); if(im.mask.length>=3){ maskPath(im,R); ctx.clip(); } ctx.drawImage(im.img,R.x,R.y,R.w,R.h); ctx.restore(); } }
+  function dashRect(R){ ctx.save(); ctx.lineWidth=1.5; ctx.strokeStyle='rgba(0,120,255,.9)'; ctx.setLineDash([6,4]); ctx.strokeRect(R.x,R.y,R.w,R.h); ctx.setLineDash([]);
+    ctx.fillStyle='#fff'; ctx.fillRect(R.x+R.w-7,R.y+R.h-7,14,14); ctx.strokeRect(R.x+R.w-7,R.y+R.h-7,14,14); ctx.restore(); }
+  function drawPhotoUI(){ if(document.fullscreenElement||recActive||exporting) return;
+    if(selWhich==='text' && texts[selText]){ dashRect(textRect(texts[selText])); }
+    else if(selWhich==='photo' && photos[selPhoto]){ const im=photos[selPhoto], R=photoRect(im); dashRect(R);
+      if(im.mask.length){ ctx.save(); ctx.strokeStyle='#0090ff'; ctx.lineWidth=2; ctx.beginPath(); im.mask.forEach((p,k)=>{ const mx=R.x+p.u*R.w,my=R.y+p.v*R.h; k?ctx.lineTo(mx,my):ctx.moveTo(mx,my); }); if(photoTool!=='pen'||im.penDone) ctx.closePath(); ctx.stroke();
+        im.mask.forEach((p,k)=>{ const mx=R.x+p.u*R.w,my=R.y+p.v*R.h; const first=(k===0&&photoTool==='pen'&&!im.penDone); ctx.fillStyle=first?'#ffd23f':'#0090ff'; ctx.beginPath(); ctx.arc(mx,my,first?5:3.5,0,TAU); ctx.fill(); }); ctx.restore(); } } }
+  function setPen(on){ photoTool=on?'pen':'move'; $('penBtn').textContent=on?'On':'Off'; $('penBtn').setAttribute('aria-pressed',on?'true':'false'); cv.style.cursor=on?'crosshair':'default'; }
+  function toCanvas(e){ const r=cv.getBoundingClientRect(); return { x:(e.clientX-r.left)/r.width*W, y:(e.clientY-r.top)/r.height*H }; }
+  function selRect(){ return selWhich==='photo'&&photos[selPhoto]?photoRect(photos[selPhoto]) : selWhich==='text'&&texts[selText]?textRect(texts[selText]) : null; }
+  cv.addEventListener('pointerdown', e=>{ const q=toCanvas(e), px=q.x, py=q.y;
+    if(photoTool==='pen' && selWhich==='photo' && photos[selPhoto]){ const im=photos[selPhoto], R=photoRect(im);
+      if(im.mask.length>=3){ const m0=im.mask[0]; if(Math.hypot(px-(R.x+m0.u*R.w), py-(R.y+m0.v*R.h))<15){ im.penDone=true; setPen(false); return; } }
+      im.mask.push({ u:(px-R.x)/R.w, v:(py-R.y)/R.h }); im.penDone=false; return; }
+    const sR=selRect();
+    if(sR && Math.abs(px-(sR.x+sR.w))<14 && Math.abs(py-(sR.y+sR.h))<14){
+      drag={mode:'resize', d0:Math.max(1,Math.hypot(px-(sR.x+sR.w/2),py-(sR.y+sR.h/2))), s0:(selWhich==='text'?texts[selText].size:photos[selPhoto].fw)}; cv.setPointerCapture(e.pointerId); return; }
+    for(let k=photos.length-1;k>=0;k--){ const R=photoRect(photos[k]); if(px>=R.x&&px<=R.x+R.w&&py>=R.y&&py<=R.y+R.h){ selWhich='photo'; selPhoto=k; selText=-1; drag={mode:'move', ox:px-photos[k].fcx*W, oy:py-photos[k].fcy*H}; cv.setPointerCapture(e.pointerId); return; } }
+    for(let k=texts.length-1;k>=0;k--){ const R=textRect(texts[k]); if(px>=R.x-5&&px<=R.x+R.w+5&&py>=R.y-5&&py<=R.y+R.h+5){ selWhich='text'; selText=k; selPhoto=-1; loadTextControls(); drag={mode:'move', ox:px-texts[k].fcx*W, oy:py-texts[k].fcy*H}; cv.setPointerCapture(e.pointerId); return; } }
+    selWhich='none'; selPhoto=-1; selText=-1; });
+  cv.addEventListener('pointermove', e=>{ if(!drag) return; const q=toCanvas(e), px=q.x, py=q.y;
+    if(selWhich==='photo' && photos[selPhoto]){ const im=photos[selPhoto];
+      if(drag.mode==='move'){ im.fcx=(px-drag.ox)/W; im.fcy=(py-drag.oy)/H; }
+      else { im.fw=Math.max(0.04, Math.min(3, 2*Math.abs(px-im.fcx*W)/W)); } }
+    else if(selWhich==='text' && texts[selText]){ const t=texts[selText];
+      if(drag.mode==='move'){ t.fcx=(px-drag.ox)/W; t.fcy=(py-drag.oy)/H; }
+      else { const d=Math.hypot(px-t.fcx*W, py-t.fcy*H); t.size=Math.max(6, Math.min(160, drag.s0*(d/drag.d0))); const sI=$('size'); if(sI){ sI.value=Math.max(8,Math.min(130,Math.round(t.size))); $('sizeR').textContent=Math.round(t.size); } }
+      rebuildText(); } });
+  addEventListener('pointerup', ()=>{ drag=null; });
+  cv.addEventListener('dblclick', ()=>{ if(photoTool==='pen'&&selWhich==='photo'&&photos[selPhoto]){ photos[selPhoto].penDone=true; setPen(false); } });
+  $('addPhotoBtn').addEventListener('click', ()=> $('photoFile').click());
+  $('photoFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image();
+    img.onload=()=>{ photos.push({ img, fcx:0.5, fcy:0.5, fw:0.5, back:false, mask:[], penDone:false }); selPhoto=photos.length-1; }; img.src=URL.createObjectURL(f); e.target.value=''; $('hint').style.opacity=0; });
+  $('photoFile').addEventListener('change', e=>{ if(photos.length){ selWhich='photo'; selText=-1; } });
+  $('penBtn').addEventListener('click', ()=>{ if(selWhich!=='photo' && photos.length){ selWhich='photo'; selPhoto=photos.length-1; selText=-1; } setPen(photoTool!=='pen'); });
+  $('clearMaskBtn').addEventListener('click', ()=>{ if(selWhich==='photo'&&photos[selPhoto]){ photos[selPhoto].mask=[]; photos[selPhoto].penDone=false; } });
+  $('delPhotoBtn').addEventListener('click', ()=>{ if(selWhich==='photo'&&selPhoto>=0){ photos.splice(selPhoto,1); selPhoto=-1; selWhich='none'; } });
+  $('photoBackBtn').addEventListener('click', ()=>{ if(selWhich==='photo'&&photos[selPhoto]) photos[selPhoto].back=true; });
+  $('photoFrontBtn').addEventListener('click', ()=>{ if(selWhich==='photo'&&photos[selPhoto]) photos[selPhoto].back=false; });
+  addEventListener('keydown', e=>{ if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+    if(e.key==='Escape'){ setPen(false); selWhich='none'; selPhoto=-1; selText=-1; }
+    else if((e.key==='Delete'||e.key==='Backspace')){ if(selWhich==='photo'&&selPhoto>=0){ photos.splice(selPhoto,1); selPhoto=-1; selWhich='none'; } else if(selWhich==='text'&&texts.length>1&&selText>=0){ texts.splice(selText,1); selText=-1; selWhich='none'; rebuildText(); } } });
+  function tick(now){ requestAnimationFrame(tick); const dt=Math.min(0.05,(now-t0)/1000); t0=now; T+=dt;
+    if(perfOn()){ morphSeedT+=dt; if(morphSeedT>2.6){ morphSeedT=0; seed1=Math.random()*1000; seed2=Math.random()*1000; } }
+    render(); }
+
+  // ---------- controls ----------
+  const selT=()=> selText>=0? texts[selText] : null;
+  function loadTextControls(){ const t=selT()||texts[0]; if(!t) return; $('text').value=t.content; $('font').value=t.font;
+    $('size').value=Math.max(8,Math.min(130,Math.round(t.size))); $('sizeR').textContent=Math.round(t.size);
+    $('track').value=t.track; $('trackR').textContent=t.track; $('lead').value=t.lead; $('leadR').textContent=t.lead; }
+  $('text').addEventListener('input', ()=>{ const t=selT()||texts[0]; if(t){ t.content=$('text').value; rebuildText(); } });
+  $('font').addEventListener('change', e=>{ FONT=e.target.value; const t=selT()||texts[0]; if(t){ t.font=e.target.value; rebuildText(); } });
+  $('addTextBtn').addEventListener('click', ()=>{ const t=makeText('TEXT'); t.fcx=0.5; t.fcy=0.3+Math.random()*0.4; texts.push(t); selText=texts.length-1; selWhich='text'; selPhoto=-1; loadTextControls(); rebuildText(); $('hint').style.opacity=0; });
+  $('rmTextBtn').addEventListener('click', ()=>{ if(texts.length>1 && selText>=0){ texts.splice(selText,1); selText=texts.length-1; selWhich='text'; loadTextControls(); rebuildText(); } });
+  [['size'],['track'],['lead']].forEach(([k])=>{ const inp=$(k), out=$(k+'R'); inp.addEventListener('input', ()=>{ out.textContent=inp.value; const t=selT()||texts[0]; if(t){ t[k==='size'?'size':k]=+inp.value; rebuildText(); } }); });
+  [['cell'],['angle'],['contrast'],['jitter'],['wave'],['blur']].forEach(([k])=>{ const inp=$(k), out=$(k+'R');
+    inp.addEventListener('input', ()=>{ P[k]=+inp.value; out.textContent=P[k]; }); });
+  $('shapeCol').addEventListener('input', e=>{ const s=SH[baseIdx]; if(!s) return; s.colour=e.target.value; if(s.type==='img'&&s.img) s.cache=tintCache(s.img, s.colour); buildShapeButtons(); });
+  $('mixBtn').addEventListener('click', ()=>{ mixOn=!mixOn; $('mixBtn').textContent=mixOn?'On':'Off'; $('mixBtn').setAttribute('aria-pressed',mixOn?'true':'false'); buildShapeButtons(); });
+  $('spinBtn').addEventListener('click', ()=>{ spinOn=!spinOn; $('spinBtn').textContent=spinOn?'On':'Off'; $('spinBtn').setAttribute('aria-pressed',spinOn?'true':'false'); });
+  $('morphBtn').addEventListener('click', ()=>{ userMorph=!userMorph; $('morphBtn').textContent=userMorph?'On':'Off'; $('morphBtn').setAttribute('aria-pressed',userMorph?'true':'false'); });
+  $('morphChips').addEventListener('click', e=>{ const b=e.target.closest('.mchip'); if(!b) return; const k=b.dataset.k; morphSet[k]=!morphSet[k]; b.setAttribute('aria-pressed', morphSet[k]?'true':'false'); });
+  $('randBtn').addEventListener('click', ()=>{ seed1=Math.random()*1000; seed2=Math.random()*1000; });
+  $('svgBtn').addEventListener('click', ()=> $('svgFile').click());
+  $('svgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>addSVGShape(rd.result, f.name.replace(/\.svg$/i,'')); rd.readAsText(f); });
+  $('colMode').addEventListener('change', e=>{ colMode=e.target.value; if(colMode==='image' && !hasColImg) $('colImgFile').click(); });
+  $('gradA').addEventListener('input', e=>{ GRA=hexToRgb(e.target.value); });
+  $('gradB').addEventListener('input', e=>{ GRB=hexToRgb(e.target.value); });
+  $('colImgBtn').addEventListener('click', ()=> $('colImgFile').click());
+  $('colImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>loadColImg(img); img.src=URL.createObjectURL(f); });
+  $('paperCol').addEventListener('input', e=>{ PAPER=e.target.value; cv.style.background=e.target.value; });
+  $('aspect').addEventListener('change', e=>{ const [x,y]=e.target.value.split('/').map(Number); ASPECT=x/y; fit(); });
+  $('projBtn').addEventListener('click', ()=>{ if(document.fullscreenElement) document.exitFullscreen(); else cv.requestFullscreen&&cv.requestFullscreen(); });
+  document.addEventListener('fullscreenchange', ()=>{ fit(); });
+
+  // ---------- record ----------
+  let rec=null, chunks=[], recCv=null, recCtx=null, recRAF=0, recStart=0, recTimer=0;
+  const recFmt=ms=>{ const s=Math.floor(ms/1000); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+  $('recBtn').addEventListener('click', ()=>{ if(rec && rec.state==='recording'){ rec.stop(); return; }
+    const long=1920, ev2=n=>n-(n&1);
+    const rw=ev2(ASPECT>=1?long:Math.round(long*ASPECT)), rh=ev2(ASPECT>=1?Math.round(long/ASPECT):long);
+    recCv=document.createElement('canvas'); recCv.width=rw; recCv.height=rh; recCtx=recCv.getContext('2d');
+    recCtx.imageSmoothingEnabled=true; recCtx.imageSmoothingQuality='high';
+    const drawFrame=()=>{ recCtx.drawImage(cv,0,0,rw,rh); }; drawFrame();
+    const stream=recCv.captureStream(30);
+    const mime=['video/mp4;codecs=avc1.640029','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
+    const ext=mime.indexOf('mp4')>=0?'mp4':'webm';
+    rec=new MediaRecorder(stream,{mimeType:mime, videoBitsPerSecond:28000000}); chunks=[];
+    rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    rec.onstop=()=>{ cancelAnimationFrame(recRAF); clearInterval(recTimer); recActive=false; $('recDot').classList.remove('on');
+      const blob=new Blob(chunks,{type:mime}); const a2=document.createElement('a'); a2.href=URL.createObjectURL(blob); a2.download='open-lab.'+ext; a2.click();
+      $('recBtn').textContent='Record'; $('recBtn').setAttribute('aria-pressed','false'); };
+    recActive=true; rec.start();
+    (function comp(){ drawFrame(); if(rec && rec.state==='recording') recRAF=requestAnimationFrame(comp); })();
+    recStart=performance.now(); $('recDot').classList.add('on'); $('recDot').querySelector('b').textContent='0:00';
+    recTimer=setInterval(()=>{ $('recDot').querySelector('b').textContent=recFmt(performance.now()-recStart); }, 250);
+    $('recBtn').textContent='Stop'; $('recBtn').setAttribute('aria-pressed','true'); });
+  // Re-render the EXACT composition (your real settings, no morph) at an arbitrary resolution,
+  // dots scaled so the density matches what's on screen — used by the shared Output panel.
+  function renderExport(px){
+    const long=Math.max(64, px|0);
+    const ew=ASPECT>=1?long:Math.round(long*ASPECT), eh=ASPECT>=1?Math.round(long/ASPECT):long;
+    const off=document.createElement('canvas'); off.width=ew; off.height=eh;
+    const sCtx=ctx,sW=W,sH=H,sDpr=dpr,sRS=RSCALE,sExp=exporting,dispH=H||eh;
+    ctx=off.getContext('2d'); W=ew; H=eh; dpr=1; RSCALE=eh/dispH; exporting=true;   // exporting≠recActive → no morph sweep
+    try{ render(); } finally { ctx=sCtx; W=sW; H=sH; dpr=sDpr; RSCALE=sRS; exporting=sExp; }
+    return off;
+  }
+  // Shared Output panel: PNG · JPG · PDF · pixel size · DPI (replaces the old single-PNG Save)
+  Opal.mountOutput(cv, 'open-lab', { render: renderExport });
+  (function(){ const s=document.querySelector('.opal-ex-scale'); if(!s) return;   // default to a large, projection-worthy size
+    const hi=Math.min(parseInt(s.max)||8192, 3000); s.value=String(hi); s.dataset.touched='1'; s.dispatchEvent(new Event('input',{bubbles:true})); })();
+
+  addEventListener('resize', ()=>{ if(!document.fullscreenElement) fit(); });
+  setTimeout(()=>{ $('hint').style.opacity=0; }, 5000);
+
+  // ---------- tooltips ----------
+  let tipEl=null, tipT=null, tipFor=null;
+  function hideTip(){ clearTimeout(tipT); tipFor=null; if(tipEl){ tipEl.style.opacity='0'; tipEl.style.display='none'; } }
+  function showTip(host){ const text=host.getAttribute('data-tip'); if(!text) return;
+    if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl); }
+    tipEl.textContent=text; tipEl.style.display='block'; tipEl.style.opacity='0';
+    const r=host.getBoundingClientRect(), t=tipEl.getBoundingClientRect();
+    let top=r.top-t.height-8; if(top<8) top=Math.min(innerHeight-t.height-8, r.bottom+8);
+    tipEl.style.left=Math.max(8,Math.min(r.left, innerWidth-t.width-8))+'px'; tipEl.style.top=top+'px'; tipEl.style.opacity='1'; }
+  addEventListener('pointerover', e=>{ const h=e.target.closest&&e.target.closest('[data-tip]'); if(h===tipFor) return;
+    clearTimeout(tipT); if(!h){ hideTip(); return; } tipFor=h; tipT=setTimeout(()=>showTip(h),240); });
+  addEventListener('pointerdown', hideTip); addEventListener('scroll', hideTip, true);
+
+  // ---------- go ----------
+  texts.push(makeText($('text').value)); selText=0; selWhich='text';
+  buildBuiltins(); syncShapeCol(); buildShapeButtons(); fit(); requestAnimationFrame(tick);
+  // re-measure once web fonts (Sidepiece) are ready
+  if(document.fonts){ try{ document.fonts.load("40px Sidepiece").then(rebuildText).catch(()=>{}); document.fonts.ready.then(rebuildText); }catch(e){} }
+})();
+</script>
+</body>
+</html>

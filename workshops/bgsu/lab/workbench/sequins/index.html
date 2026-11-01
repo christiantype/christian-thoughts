@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Sequins — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<style>
+  /* layout only — every control is owned by OPALAB.css (loaded last) */
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; margin:0; overscroll-behavior:none; }
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; display:flex; align-items:center; justify-content:center; padding:24px; }
+  #art{ max-width:100%; max-height:100%; display:block; }  /* board frame owned by OPALAB (border, no shadow) */
+  #sizeDock{ display:flex; align-items:center; gap:10px; }
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); left:calc(var(--rail) + 24px); z-index:11; display:none;
+    align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); animation:recblink 1s infinite; }
+  #recDot b{ font-variant-numeric:tabular-nums; font-weight:600; }
+  @keyframes recblink{ 50%{ opacity:.25; } }
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; overflow-x:hidden; }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .grid2 .btn, .btn.full{ width:100%; }
+  select.full{ width:100%; }
+  #sliders{ display:flex; flex-direction:column; gap:14px; width:100%; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .tip{ position:fixed; z-index:60; display:none; max-width:230px; padding:9px 11px;
+    line-height:1.5; pointer-events:none; opacity:0; transition:opacity .14s ease; }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body class="dark">
+  <div id="wrap"><canvas id="art"></canvas></div>
+  <input id="file" type="file" accept="image/*" hidden />
+  <div id="hint">Add an image — it becomes a field of sequins</div>
+  <div id="recDot"><i></i><b>0:00</b></div>
+  <div id="sizeDock">
+    <select id="aspect" title="Canvas size">
+      <option value="1080/1350">Portrait · 4:5</option>
+      <option value="1080/1920">Story · 9:16</option>
+      <option value="1/1">Square · 1:1</option>
+      <option value="1920/1080">Landscape · 16:9</option>
+    </select>
+  </div>
+
+  <div id="dock">
+
+    <!-- primary action -->
+    <div class="group">
+      <button class="btn primary full" id="uploadBtn" data-tip="Load your own photo — it's resampled into a field of sequins, each disc taking the colour underneath it.">Add image</button>
+    </div>
+
+    <!-- form -->
+    <div class="group">
+      <div class="group__t">Form</div>
+      <div id="sliders">
+        <div class="knob" data-tip="How big each sequin disc is."><label>Size <b id="sizeR">18</b></label><input id="size" type="range" min="6" max="46" value="18" /></div>
+        <div class="knob" data-tip="The spacing left between sequins — more gap shows the backdrop between them."><label>Gap <b id="gapR">14</b></label><input id="gap" type="range" min="0" max="60" value="14" /></div>
+        <div class="knob" data-tip="Rounds each sequin from a square into a perfect disc."><label>Roundness <b id="roundR">100</b></label><input id="round" type="range" min="0" max="100" value="100" /></div>
+        <div class="knob" data-tip="How many sequins are stitched in — lower thins them out for a sparser, scattered look."><label>Density <b id="densityR">100</b></label><input id="density" type="range" min="30" max="100" value="100" /></div>
+      </div>
+    </div>
+
+    <!-- shimmer -->
+    <div class="group">
+      <div class="group__t">Shimmer</div>
+      <div class="knob" data-tip="How much the sequins twinkle — the strength of the catching-the-light sparkle."><label>Shimmer <b id="shimmerR">55</b></label><input id="shimmer" type="range" min="0" max="100" value="55" /></div>
+      <div class="knob" data-tip="Brightness of the glints — how boldly each sparkle flares."><label>Glow <b id="glowR">60</b></label><input id="glow" type="range" min="0" max="100" value="60" /></div>
+      <div class="knob" data-tip="The rainbow foil shift — how much a travelling spectrum plays across the sequins as they twinkle."><label>Iridescence <b id="iridR">45</b></label><input id="irid" type="range" min="0" max="100" value="45" /></div>
+    </div>
+
+    <!-- colour -->
+    <div class="group">
+      <div class="group__t">Colour</div>
+      <div class="knob" data-tip="Rotates every sequin's colour around the wheel."><label>Hue <b id="hueR">0</b></label><input id="hue" type="range" min="0" max="100" value="0" /></div>
+      <div class="knob" data-tip="How vivid the colours are — from near-grey up to fully saturated."><label>Saturation <b id="satR">55</b></label><input id="sat" type="range" min="0" max="100" value="55" /></div>
+    </div>
+
+    <!-- canvas -->
+    <div class="group">
+      <div class="group__t">Canvas</div>
+      <button class="btn full" id="bgBtn" aria-pressed="true" data-tip="Switch the backdrop behind the sequins between dark and light.">Dark</button>
+    </div>
+
+    <!-- output -->
+    <div class="group out" data-export-custom>
+      <div class="group__t">Output</div>
+      <div class="grid2">
+        <button class="btn" id="recBtn" aria-pressed="false" data-tip="Record the shimmer to a video file.">Record</button>
+        <button class="btn" id="saveBtn" data-tip="Save the current frame as a PNG image.">Save</button>
+      </div>
+    </div>
+
+  </div>
+
+<script src="/workshops/bgsu/lab/shared/opal.js?v=3"></script>
+<script>Opal.mountTopbar({ name:'Sequins', desc:'An image, sewn in glittering sequins',
+  about:"Drop in an image and it becomes a field of sequins — each one a little disc of colour that catches the light, shimmering and glinting as if stitched from sequins. Tune size, glow and iridescence, then record the sparkle or save a still.",
+  version:'OP-LAB-013' });</script>
+
+<script>
+(() => {
+  const cv=document.getElementById('art'), ctx=cv.getContext('2d');
+  const $=id=>document.getElementById(id);
+  const sample=document.createElement('canvas'), sctx=sample.getContext('2d',{willReadFrequency:true});
+  let img=null, cells=[], W=0, H=0, dpr=1, dark=true, F=0, need=true;
+  let ASPECT=1080/1350;   // canvas shape, driven by the top-right size dock
+  const P={ size:18, gap:14, shimmer:55, glow:60, irid:45, sat:55, round:100, density:100, hue:0 };
+
+  /* default demo image — a few vivid overlapping blooms so it shows immediately */
+  function demo(){ const c=document.createElement('canvas'); c.width=900; c.height=1120; const x=c.getContext('2d');
+    x.fillStyle='#0a0a12'; x.fillRect(0,0,c.width,c.height);
+    const blobs=[['#ff3b6b',300,340,340],['#ffcf3a',560,300,300],['#39d0ff',430,640,380],['#8b5cff',300,820,320],['#31e08a',640,860,300]];
+    for(const [col,cx,cy,r] of blobs){ const g=x.createRadialGradient(cx,cy,0,cx,cy,r); g.addColorStop(0,col); g.addColorStop(1,'rgba(10,10,18,0)');
+      x.globalCompositeOperation='lighter'; x.fillStyle=g; x.beginPath(); x.arc(cx,cy,r,0,6.2832); x.fill(); }
+    x.globalCompositeOperation='source-over'; const im=new Image(); im.onload=()=>{ img=im; need=true; }; im.src=c.toDataURL(); }
+
+  function fit(){ const availH=innerHeight-168, availW=innerWidth-28; const ar = ASPECT;
+    let h=Math.min(availH, 1120), w=h*ar; if(w>availW){ w=availW; h=w/ar; }
+    W=Math.round(w); H=Math.round(h);
+    dpr=Math.max(Math.min(devicePixelRatio||1,2), 2160/Math.max(W,H));   // hi-res backing so Save + Record are crisp
+    cv.style.width=W+'px'; cv.style.height=H+'px'; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0); need=true; }
+
+  function rgb2hsl(r,g,b){ r/=255;g/=255;b/=255; const mx=Math.max(r,g,b),mn=Math.min(r,g,b); let h,s,l=(mx+mn)/2;
+    if(mx===mn){h=s=0;} else { const d=mx-mn; s=l>0.5?d/(2-mx-mn):d/(mx+mn);
+      h = mx===r ? (g-b)/d+(g<b?6:0) : mx===g ? (b-r)/d+2 : (r-g)/d+4; h/=6; } return [h,s,l]; }
+  function hsl(h,s,l,a){ return 'hsla('+((h*360)%360).toFixed(0)+','+(s*100).toFixed(0)+'%,'+(l*100).toFixed(0)+'%,'+a+')'; }
+
+  /* build the sequin grid by sampling the source image */
+  function build(){ if(!img) return; need=false;
+    const step=(P.size+P.gap); cells=[];
+    const SW=Math.max(2,Math.round(W)), SH=Math.max(2,Math.round(H));
+    sample.width=SW; sample.height=SH; sctx.drawImage(img,0,0,SW,SH);
+    const data=sctx.getImageData(0,0,SW,SH).data;
+    const cols=Math.ceil(W/step), rows=Math.ceil(H/step);
+    const skip = P.density<100;
+    for(let gy=0; gy<rows; gy++) for(let gx=0; gx<cols; gx++){
+      const cx=gx*step+step/2, cy=gy*step+step/2; if(cx>=W||cy>=H) continue;
+      if(skip && Math.random()*100 > P.density) continue;
+      const sx=Math.min(SW-1,(cx)|0), sy=Math.min(SH-1,(cy)|0), i=(sy*SW+sx)*4;
+      const r=data[i],g=data[i+1],b=data[i+2];
+      const [h,s,l]=rgb2hsl(r,g,b);
+      const bright=(r*0.299+g*0.587+b*0.114)/255;
+      cells.push({ x:cx, y:cy, h, s, l, bright, seed:Math.random()*6.28, freq:0.6+Math.random()*1.8, jit:Math.random() });
+    }
+  }
+
+  function frame(){ requestAnimationFrame(frame); F++;
+    if(need && img){ build(); }
+    if(!img){ return; }
+    const t=F*0.05;
+    ctx.fillStyle = dark ? '#07070c' : '#f4f2ee'; ctx.fillRect(0,0,W,H);
+    const R=P.size*0.5, sh=P.shimmer/100, glow=P.glow/100, irid=P.irid/100, satB=P.sat/100, round=P.round/100;
+    // base discs
+    for(const c of cells){
+      const hue=(c.h + P.hue/100 + Math.sin(t*0.5*c.freq + c.seed)*(0.10+0.24*irid));
+      const s=Math.min(1, c.s*0.5 + satB*0.7);
+      const l=0.18 + c.bright*0.5;
+      const rr=R*(0.72 + c.bright*0.28);
+      ctx.fillStyle=hsl(hue, s, l, 1);   // flat — one solid colour per sequin, no radial shading
+      if(round>0.5){ ctx.beginPath(); ctx.arc(c.x,c.y,rr,0,6.2832); ctx.fill(); }
+      else { const k=rr*0.9; ctx.save(); ctx.translate(c.x,c.y); ctx.rotate(c.seed);
+        ctx.fillRect(-k,-k,k*2,k*2); ctx.restore(); }
+    }
+    // glints (additive glow + twinkle)
+    ctx.globalCompositeOperation='lighter';
+    for(const c of cells){
+      const tw=Math.pow(Math.max(0, Math.sin(t*c.freq*1.4 + c.seed*3)), 6) * sh + 0.12;
+      const rr=R*(0.72 + c.bright*0.28);
+      const gx=c.x - rr*0.34, gy=c.y - rr*0.34;
+      const a=Math.min(1, tw*glow*(0.5+c.bright));
+      if(a<0.02) continue;
+      // holographic foil: a rainbow that travels across the scales and shifts as they twinkle
+      const holo=(t*0.11 + c.seed*0.5 + (c.x+c.y)*0.0016 + P.hue/100);
+      const g=ctx.createRadialGradient(gx,gy,0, gx,gy, rr*0.98);
+      g.addColorStop(0,'rgba(255,255,255,'+a.toFixed(3)+')');                     // white specular core
+      g.addColorStop(0.32, hsl(holo,        1, 0.62, a*(0.45+0.55*irid)));        // rainbow ring
+      g.addColorStop(0.62, hsl(holo+0.14,   1, 0.55, a*0.4*(0.4+0.6*irid)));
+      g.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(gx,gy,rr*0.98,0,6.2832); ctx.fill();
+    }
+    ctx.globalCompositeOperation='source-over';
+    window.__seqReady=true;
+  }
+
+  /* controls */
+  Object.keys(P).forEach(k=>{ const inp=$(k), out=$(k+'R'); inp.addEventListener('input', ()=>{ P[k]=+inp.value; out.textContent=inp.value;
+    if(k==='size'||k==='gap'||k==='density') need=true; }); });
+  $('bgBtn').addEventListener('click', ()=>{ dark=!dark; $('bgBtn').textContent=dark?'Dark':'Light'; $('bgBtn').setAttribute('aria-pressed',dark?'true':'false'); });
+  $('aspect').addEventListener('change', e=>{ const [x,y]=e.target.value.split('/').map(Number); ASPECT=x/y; fit(); });
+
+  $('uploadBtn').addEventListener('click', ()=> $('file').click());
+  $('file').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const url=URL.createObjectURL(f);
+    const im=new Image(); im.onload=()=>{ img=im; ASPECT=im.width/im.height; fit(); need=true; URL.revokeObjectURL(url); }; im.src=url; });
+
+  let rec=null, chunks=[], recRAF=0, recStart=0, recTimer=0;
+  const recFmt=ms=>{ const s=Math.floor(ms/1000); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+  $('recBtn').addEventListener('click', ()=>{ if(rec&&rec.state==='recording'){ rec.stop(); return; }
+    // Record from a fixed-size high-res buffer (long edge 2160, even dims) so output is crisp and consistent
+    const ar=W/H, long=2160, ev2=n=>n-(n&1);
+    const rw=ev2(ar>=1?long:Math.round(long*ar)), rh=ev2(ar>=1?Math.round(long/ar):long);
+    const recCv=document.createElement('canvas'); recCv.width=rw; recCv.height=rh; const recCtx=recCv.getContext('2d');
+    recCtx.imageSmoothingEnabled=true; recCtx.imageSmoothingQuality='high';
+    const drawFrame=()=>{ recCtx.drawImage(cv,0,0,rw,rh); };
+    drawFrame();
+    const stream=recCv.captureStream(30);
+    const mime=['video/mp4;codecs=avc1.640029','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
+    const ext=mime.indexOf('mp4')>=0?'mp4':'webm';
+    rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:40000000}); chunks=[];
+    rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    rec.onstop=()=>{ cancelAnimationFrame(recRAF); clearInterval(recTimer); $('recDot').classList.remove('on');
+      const blob=new Blob(chunks,{type:mime}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='sequins.'+ext; a.click();
+      $('recBtn').textContent='Record'; $('recBtn').setAttribute('aria-pressed','false'); };
+    rec.start();
+    (function comp(){ drawFrame(); if(rec&&rec.state==='recording') recRAF=requestAnimationFrame(comp); })();
+    recStart=performance.now(); $('recDot').classList.add('on'); $('recDot').querySelector('b').textContent='0:00';
+    recTimer=setInterval(()=>{ $('recDot').querySelector('b').textContent=recFmt(performance.now()-recStart); }, 250);
+    $('recBtn').textContent='Stop'; $('recBtn').setAttribute('aria-pressed','true'); });
+
+  try{ Opal.mountOutput(cv,'sequins'); }catch(e){}   // shared export panel (PNG/JPG/PDF · size · DPI) on the artwork canvas
+
+  setTimeout(()=>{ $('hint').style.opacity=0; }, 3600);
+
+  // ---- tooltips ----
+  let tipEl=null, tipT=null, tipFor=null;
+  function hideTip(){ clearTimeout(tipT); tipFor=null; if(tipEl){ tipEl.style.opacity='0'; tipEl.style.display='none'; } }
+  function showTip(host){ const text=host.getAttribute('data-tip'); if(!text) return;
+    if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl); }
+    tipEl.textContent=text; tipEl.style.display='block'; tipEl.style.opacity='0';
+    const r=host.getBoundingClientRect(), t=tipEl.getBoundingClientRect();
+    let top=r.top-t.height-8; if(top<8) top=Math.min(innerHeight-t.height-8, r.bottom+8);
+    tipEl.style.left=Math.max(8,Math.min(r.left, innerWidth-t.width-8))+'px'; tipEl.style.top=top+'px'; tipEl.style.opacity='1'; }
+  addEventListener('pointerover', e=>{ const h=e.target.closest&&e.target.closest('[data-tip]'); if(h===tipFor) return;
+    clearTimeout(tipT); if(!h){ hideTip(); return; } tipFor=h; tipT=setTimeout(()=>showTip(h),240); });
+  addEventListener('pointerdown', hideTip); addEventListener('scroll', hideTip, true);
+
+  demo(); fit(); requestAnimationFrame(frame);
+  addEventListener('resize', ()=>{ fit(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js" data-hash="6ee307fa6547a34b90c188c833c48bbcae055008720805d925df26b4044c2caf" data-scope="bgsu-workshop"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop assignments — Heart, Intuition and Technology</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  /* One assignment to a sheet of US Letter. On screen the sheets stack like paper; print with
+     the browser (Cmd-P, Letter, margins: none) and each lands on its own page. */
+  @font-face { font-family: 'Signifier'; src: url('/workshops/bgsu/shared/fonts/signifier-regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Untitled Sans'; src: url('/workshops/bgsu/shared/fonts/untitled-sans-regular.woff2') format('woff2'); font-weight: 400; }
+  @page { size: letter; margin: 0; }
+  :root { --display: 'Signifier', Georgia, serif; --label: 'Untitled Sans', system-ui, sans-serif; --ink: #000; }
+  * { box-sizing: border-box; }
+  html { font-variant-numeric: oldstyle-nums; font-feature-settings: 'onum' 1; }
+  body { margin: 0; background: #e6e6e6; color: var(--ink); font-family: var(--display); }
+  .sheet { width: 8.5in; height: 11in; margin: .4in auto; padding: .75in .75in .6in; background: #fff; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+  .head { display: flex; justify-content: space-between; font-family: var(--label); font-size: 9pt; line-height: 1.45; }
+  .eyebrow { font-family: var(--label); font-size: 10pt; margin: 1.1in 0 .15in; }
+  h1 { font-weight: 400; font-size: 54pt; line-height: 1.05; margin: 0; letter-spacing: -.01em; }
+  .brief { font-size: 17pt; line-height: 1.3; margin: .28in 0 0; max-width: 6in; }
+  ol, ul { list-style: none; padding: 0; margin: .3in 0 0; }
+  .rules li { font-size: 15pt; line-height: 1.3; padding: .09in 0; border-bottom: 1px solid #d9d9d9; }
+  .rules li span { font-family: var(--label); font-size: 9pt; padding-top: .05in; }
+  .lines { flex: 1; margin-top: .35in; background: linear-gradient(to bottom, transparent calc(100% - 1px), #d9d9d9 calc(100% - 1px)) 0 0 / 100% .4in repeat-y; }
+  .box { flex: 1; margin-top: .35in; border: 1px solid #d9d9d9; }
+  .ask { margin-top: .3in; }
+  .ask div { display: grid; grid-template-columns: 3.3in 1fr; align-items: end; font-size: 14pt; padding: .12in 0 .02in; border-bottom: 1px solid #d9d9d9; min-height: .62in; }
+  .prompt { font-size: 11.5pt; line-height: 1.4; margin-top: .25in; }
+  .prompt li { padding: .05in 0 .05in .2in; text-indent: -.2in; }
+  .prompt li::before { content: '–  '; }
+  .imagine li:first-child { border-top: 0; }
+  .imagine li { font-size: 12.5pt; line-height: 1.3; padding: .06in 0; border-top: 1px solid #d9d9d9; }
+  .foot { font-family: var(--label); font-size: 9pt; margin-top: .25in; display: flex; justify-content: space-between; }
+  .print { position: fixed; right: 1rem; top: 1rem; font: 13px var(--label); padding: .6em 1em; background: #000; color: #fff; border: 0; cursor: pointer; }
+  @media print { body { background: none; } .sheet { margin: 0; break-after: page; } .print { display: none; } }
+  @media (max-width: 9in) { .sheet { transform-origin: top left; } }
+</style>
+</head>
+<body>
+<button class="print" onclick="print()">Print</button>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Liminal Space · Bowling Green · 1 and 2 November</span></div>
+  <p class="eyebrow">Before we begin</p>
+  <h1>Establishing rules</h1>
+  <ol class="rules">
+    <li>Don’t think too much.</li>
+    <li>Bad and good don’t exist.</li>
+    <li>Open attitude.</li>
+    <li>Five posters.</li>
+    <li>Work mindfully.</li>
+  </ol>
+  <div class="foot"><span>Christian Solorzano · OP/AL</span><span>1</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Heart</span></div>
+  <p class="eyebrow">By hand</p>
+  <h1>Cut twenty shapes</h1>
+  <p class="brief">Settle into your body. With construction paper and scissors, cut twenty shapes of all kinds. Count them as you go.</p>
+  <div class="box"></div>
+  <div class="foot"><span>Twenty shapes</span><span>2</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Heart</span></div>
+  <p class="eyebrow">Compose</p>
+  <h1>Five shapes, five colors, one canvas</h1>
+  <p class="brief">From your twenty, choose five, each a different color. Compose them on one canvas.</p>
+  <div class="box"></div>
+  <div class="foot"><span>From twenty to five</span><span>3</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Intuition</span></div>
+  <p class="eyebrow">Write</p>
+  <h1>Six lines</h1>
+  <p class="brief">Write a poem of six lines about something that matters to you: a feeling, a mood, a thought, a place, a person. It is not about the shapes.</p>
+  <div class="lines"></div>
+  <div class="foot"><span>Your poem</span><span>4</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Intuition</span></div>
+  <p class="eyebrow">Design</p>
+  <h1>The poem into the shapes</h1>
+  <p class="brief">Bring the six lines and the five shapes together on one canvas. Where each word goes is yours to choose.</p>
+  <div class="box"></div>
+  <div class="foot"><span>Words and shapes</span><span>5</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Technology</span></div>
+  <p class="eyebrow">Constraints</p>
+  <h1>To create a tool, we need to establish constraints</h1>
+  <div class="ask">
+    <div><span>What do we want to control?</span><span></span></div>
+    <div><span>What do we want to produce?</span><span></span></div>
+    <div><span>What do we want to input?</span><span></span></div>
+    <div><span>What do we want to output?</span><span></span></div>
+    <div><span>What do we want to feel?</span><span></span></div>
+    <div><span>What do we want to experience?</span><span></span></div>
+  </div>
+  <div class="foot"><span>Answer all six before you open Claude</span><span>6</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day one · Technology</span></div>
+  <p class="eyebrow">The prompt</p>
+  <h1>Your tool, first iteration</h1>
+  <div class="prompt">
+    <p>I want to create a tool that allows me to draw shapes by hand or generate them at random, color them, and scatter a poem across them, and it needs to include the following features:</p>
+    <ul>
+      <li>Shapes I can draw and control myself, or have served to me at random.</li>
+      <li>Color for every shape: chosen by hand, one at a time, or picked for me from a palette.</li>
+      <li>A choice of canvas sizes, with a background color I can change.</li>
+      <li>Select any single shape and place an image inside it.</li>
+      <li>A field where I type a poem. The tool splits it into lines, words or letters and scatters them across the canvas.</li>
+      <li>A control for the scatter frequency: how much of the poem lands, and how far it spreads.</li>
+      <li>A choice of fonts for the poem.</li>
+    </ul>
+    <p>And I want to be able to export it to be used for a tabloid poster.</p>
+  </div>
+  <div class="lines"></div>
+  <div class="foot"><span>Paste it into your own Claude, then change it</span><span>7</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Overnight</span></div>
+  <p class="eyebrow">Overnight</p>
+  <h1>Keep tinkering with your tool</h1>
+  <p class="brief">Change one thing, then another. Bring what you made, and what broke, to the wall tomorrow at 11:30.</p>
+  <div class="lines"></div>
+  <div class="foot"><span>Notes</span><span>8</span></div>
+</section>
+
+<section class="sheet">
+  <div class="head"><span>Heart, Intuition and Technology</span><span>Day two · Technology</span></div>
+  <p class="eyebrow">Day two</p>
+  <h1>Build a tool that includes image, sound, type, color, shape, motion</h1>
+  <p class="brief" style="font-size:13pt">Start from your constraints and your prompt. Then print five posters, 11 × 17, in color. If you need a way in, imagine if…</p>
+  <ul class="imagine">
+    <li>every O vibrated like my breath.</li>
+    <li>every period was a different color.</li>
+    <li>the spaces between words could sing.</li>
+    <li>every vowel melted in the sun.</li>
+    <li>a poster changed with the weather outside.</li>
+    <li>your voice became a typeface as you spoke.</li>
+    <li>commas were seeds.</li>
+  </ul>
+  <div class="foot"><span>Image, sound, type, color, shape, motion</span><span>9</span></div>
+</section>
+</body>
+</html>

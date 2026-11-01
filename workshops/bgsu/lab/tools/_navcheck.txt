@@ -1,0 +1,4 @@
+The old site nav (shared/nav.js) shows the wordmark + ⓘ only. The new split header (Lab · wordmark · Studio) is
+inline in each mock page. When this goes live, nav.js becomes the split header everywhere (white ground on light
+pages, difference-blend on dark ones) so it is consistent site-wide — including the Lake Opeka project page,
+where the current dark links vanish against the black.

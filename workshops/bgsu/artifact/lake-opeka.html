@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lake Opeka — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://more-than.design/artifact/lake-opeka-artwork.html">
+  <meta name="description"  content="Album design for Chicago musician Sean Fermoyle.">
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="OP/AL">
+  <meta property="og:title"       content="Lake Opeka — OP/AL">
+  <meta property="og:description" content="Album design for Chicago musician Sean Fermoyle.">
+  <meta property="og:image"       content="https://more-than.design/images/LO-share.png">
+  <meta property="og:url"         content="https://more-than.design/artifact/lake-opeka.html">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Lake Opeka — OP/AL">
+  <meta name="twitter:description" content="Album design for Chicago musician Sean Fermoyle.">
+  <meta name="twitter:image"       content="https://more-than.design/images/LO-share.png">
+  <link rel="stylesheet" href="../shared/styles.css?v=20261011A">
+  <style>
+    body.project { background: #fff !important; }
+    body.project #hero h1,
+    body.project #hero h2,
+    body.project #hero p { color: #000 !important; }
+    body.project #credits p { color: #000 !important; }
+    body.project .label { color:#000 !important; }
+    body.project .text-mid { color: #000 !important; }
+
+    #lo-player {
+      width: 100%;
+      height: 520px;
+      border: none;
+      display: block;
+      background: #f4f4f3;
+    }
+    /* player bar lives in the parent page, fixed to the viewport, so it
+       follows the user across the whole case study */
+    #lo-playerbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 106px;
+      border: none;
+      display: block;
+    }
+    body.project { padding-bottom: 106px; }
+    @media (max-width: 768px) {
+      #lo-playerbar { height: 150px; }
+      body.project { padding-bottom: 150px; }
+      html, body { max-width: 100vw; overflow-x: hidden; }
+      body.project #hero .grid, body.project #credits .grid { grid-template-columns: 1fr; }
+      body.project #hero .col-9, body.project #hero .col-12, body.project #credits [class*="col-"] { grid-column: 1 / -1; width: 100%; max-width: 100%; }
+      body.project #hero h2 { font-size: 1.05em; line-height: 1.5; }
+      #lo-gallery .lo-gallery-row { flex-direction: column; align-items: center; gap: 48px; }
+      #lo-gallery .lo-gallery-item { width: calc(100vw - 32px) !important; max-width: 100% !important; }
+      #lo-gallery .lo-gallery-section:not(.lo-social) { padding: 0 16px; }
+      #lo-gallery img { max-width: 100%; height: auto; }
+      #lo-player { height: 420px; }
+    }
+
+    /* ── Social: the reel in a phone, on black ── */
+    .lo-social { background: #000; margin: 0 calc(50% - 50vw) 0; padding: 120px 16px 120px; }
+    .lo-gallery-section.lo-social { margin-bottom: 80px; }   /* the print-files block sits centred between the black band and the footer */
+    .lo-social .lo-gallery-section-title { color: #fff; }
+    .lo-social .lo-gallery-caption { color: rgba(255,255,255,.7) !important; }
+    .lo-social__item { width: auto !important; max-width: none !important; }
+    .lo-social .values-phone { position:relative; height:min(82vh,48em); width:auto; aspect-ratio:9/19.5; padding:clamp(7px,.7vw,10px); background:#0d0d0d; border:1px solid rgba(255,255,255,.14); border-radius:clamp(30px,3.2vw,46px); box-shadow:0 40px 80px -30px rgba(0,0,0,.8); margin:0 auto; }
+    .lo-social .values-phone__screen { position:relative; width:100%; height:100%; border-radius:clamp(24px,2.6vw,38px); overflow:hidden; background:#000; }
+    .lo-social .video-spot__media { width:100% !important; height:100% !important; object-fit:contain; border-radius:0 !important; box-shadow:none !important; display:block; }
+    .lo-social .video-spot__sound { position:absolute; right:1em; bottom:1em; z-index:2; width:2.6em; height:2.6em; display:flex; align-items:center; justify-content:center; padding:0; border:0; border-radius:50%; color:#fff; background:rgba(20,22,30,.55); backdrop-filter:blur(4px); cursor:pointer; }
+    .lo-social .video-spot__sound svg { width:1.3em; height:1.3em; }
+    .lo-social .video-spot__sound.is-on .spk-slash { display:none; }
+    .lo-social .video-spot__sound:not(.is-on) .spk-wave { display:none; }
+    /* the Reels skin over the video */
+    .ig-reel { position:absolute; inset:0; z-index:2; pointer-events:none; font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); }
+    .ig-reel svg { width:26px; height:26px; display:block; stroke:#fff; stroke-width:1.6; fill:none; filter:drop-shadow(0 1px 1px rgba(0,0,0,.45)); }
+    .ig-reel__rail span { min-width:56px; }
+    .ig-reel * { text-decoration:none !important; }
+    .ig-reel__top { position:absolute; top:20px; left:16px; right:16px; display:flex; justify-content:space-between; align-items:center; }
+    .ig-reel__title { font-size:22px; font-weight:700; letter-spacing:-.01em; }
+    .ig-reel__rail { position:absolute; right:12px; bottom:90px; display:flex; flex-direction:column; align-items:center; gap:18px; }
+    .ig-reel__rail span { display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .ig-reel__rail b { font-size:12px; font-weight:600; white-space:nowrap; letter-spacing:0; }
+    .ig-reel__rail { width:56px; }
+    .ig-reel__disc { width:28px; height:28px; border-radius:6px; overflow:hidden; border:2px solid #fff; }
+    .ig-reel__disc img { width:100%; height:100%; object-fit:cover; display:block; }
+    .ig-reel__meta { position:absolute; left:14px; right:70px; bottom:22px; display:flex; flex-direction:column; gap:10px; }
+    .ig-reel__who { display:flex; align-items:center; gap:8px; font-size:14px; }
+    .ig-reel__who img { width:30px; height:30px; border-radius:50%; border:1.5px solid #fff; object-fit:cover; display:block; }
+    .ig-reel__who b { font-weight:600; letter-spacing:0; }
+    .ig-reel__who i { all:unset; font-family:inherit; font-size:12px; font-weight:600; line-height:1; color:#fff; padding:5px 10px; border:1px solid rgba(255,255,255,.85); border-radius:6px; background:transparent; }
+    .ig-reel__cap { font-size:13px; line-height:1.35; }
+    .ig-reel__cap span { color:rgba(255,255,255,.75); }
+    .ig-reel__audio { display:flex; align-items:center; gap:6px; font-size:12px; }
+    .ig-reel__audio svg { width:14px; height:14px; }
+    .lo-social .video-spot__sound { bottom:auto; top:18px; right:auto; left:50%; transform:translateX(-50%); z-index:3; width:2.2em; height:2.2em; }
+    .lo-social .video-spot__media { object-fit: contain !important; background:#000; }
+    @media (max-width: 768px) {
+      /* the phone: sized by width on a phone, so it always sits centred */
+      #lo-gallery .lo-gallery-section.lo-social .lo-gallery-item { width: min(340px, 100vw - 72px) !important; max-width: none !important; }
+      #lo-gallery .lo-social .lo-gallery-row { padding: 0; }
+      .lo-social .values-phone { height: auto; width: 100%; }
+    }
+    /* flip cards: record (A/B) and sleeve (front/back) */
+    .lo-flip { perspective: 1400px; cursor: pointer; width: 100%; aspect-ratio: 1 / 1; position: relative; }
+    .lo-flip__card { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.4,0,.2,1); }
+    .lo-flip.is-flipped .lo-flip__card { transform: rotateY(180deg); }
+    .lo-flip__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .lo-flip__face--back { transform: rotateY(180deg); }
+    .lo-flip .lo-record--cover { margin-top: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+    .lo-flip .lo-art { width: 100%; height: 100%; object-fit: cover; }
+    /* ── Cinematic image gallery ── */
+    #lo-gallery {
+      padding: 120px 0 80px;
+      background: #f4f4f3;
+    }
+    .lo-gallery-section {
+      margin-bottom: 140px;
+    }
+    .lo-gallery-section:last-child { margin-bottom: 0; }
+    .lo-gallery-section-title {
+      font-size: 11px;
+      letter-spacing: .2em;
+      color: #000;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .lo-gallery-section-title .punc { color:#000; }
+
+    body.project #hero h2 .wip { color: #e02020 !important; }
+    .lo-gallery-row {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 0 32px;
+    }
+    .lo-gallery-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    #lo-gallery a, #lo-gallery p { color: #000 !important; opacity: 1 !important; }
+    #lo-gallery .lo-social p { color: #fff !important; }
+    .lo-gallery-caption {
+      font-size: 10px;
+      letter-spacing: .16em;
+      color: #000;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Cover / back artwork — rounded, grounded contact shadow */
+    .lo-art {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.18),
+        0 34px 44px -14px rgba(0,0,0,0.5);
+    }
+
+    /* ── Spinning vinyl record (labels in real record) ── */
+    .lo-record {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      flex-shrink: 0;
+    }
+    /* record sized relative to its cover, with breathing room above */
+    .lo-record--cover {
+      width: 95%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      margin-top: 36px;
+    }
+    /* a record on its own, the same width as the covers beside it */
+    .lo-record--solo { width: 100%; height: auto; aspect-ratio: 1 / 1; margin-top: 0; }
+    /* grounded contact shadow — record resting on a surface */
+    .lo-record--cover::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      left: 50%; bottom: -3%;
+      transform: translateX(-50%);
+      width: 78%; height: 7%;
+      background: radial-gradient(ellipse at center,
+        rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.28) 45%, transparent 72%);
+      filter: blur(9px);
+    }
+    .lo-record-disc {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      animation: lo-spin 4s linear infinite;
+      will-change: transform;
+      background:
+        conic-gradient(from 0deg,
+          #0b0b0b 0deg, #111 18deg, #0a0a0a 36deg, #121212 54deg,
+          #0b0b0b 72deg, #111 90deg, #0a0a0a 108deg, #131313 126deg,
+          #0b0b0b 144deg, #111 162deg, #0a0a0a 180deg, #121212 198deg,
+          #0b0b0b 216deg, #111 234deg, #0a0a0a 252deg, #131313 270deg,
+          #0b0b0b 288deg, #111 306deg, #0a0a0a 324deg, #121212 342deg, #0b0b0b 360deg);
+      box-shadow:
+        0 26px 32px -10px rgba(0,0,0,0.6),
+        0 10px 16px -6px rgba(0,0,0,0.45),
+        inset 0 0 40px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(0,0,0,0.95);
+    }
+    .lo-record-disc::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent 0px, transparent 3px,
+        rgba(255,255,255,0.022) 3px, rgba(255,255,255,0.022) 4px);
+    }
+    .lo-record-disc::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 35deg,
+        transparent 0%, rgba(255,255,255,0.0) 8%,
+        rgba(255,255,255,0.06) 14%, rgba(255,255,255,0.015) 20%,
+        transparent 30%, transparent 55%,
+        rgba(255,255,255,0.04) 64%, transparent 74%, transparent 100%);
+      pointer-events: none;
+    }
+    .lo-record-label {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 33.3%; height: 33.3%;   /* 100 mm label on a 300 mm record */
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 2;
+      box-shadow: 0 0 0 1.5px rgba(0,0,0,0.9), 0 0 0 3px rgba(255,255,255,0.04);
+    }
+    .lo-record-label img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .lo-record-hole {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2.4%; height: 2.4%; border-radius: 50%;   /* 7.2 mm hole */
+      background: #0a0a0a;
+      z-index: 3;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.95);
+    }
+    @keyframes lo-spin { to { transform: rotate(360deg); } }
+
+    /* ── Booklet spreads — large, cinematic ── */
+    .lo-gallery-spread {
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.18),
+        0 40px 50px -16px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .lo-gallery-spread::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
+      width: 60px; transform: translateX(-50%);
+      background: linear-gradient(90deg,
+        rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 38%,
+        rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.05) 62%, rgba(0,0,0,0) 100%);
+      filter: blur(8px);
+      pointer-events: none; z-index: 2;
+    }
+    .lo-gallery-spread img {
+      display: block;
+      height: auto;
+    }
+    .lo-gallery-single {
+      border-radius: 4px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.18),
+        0 40px 50px -16px rgba(0,0,0,0.5);
+      overflow: hidden;
+    } 
+    .lo-gallery-single img { display: block; width: 100%; height: auto; }
+
+    @media (max-width: 768px) {
+      #lo-player { height: 100vh; height: 100dvh; }
+      #lo-gallery { padding: 80px 0 60px; }
+      .lo-gallery-section.lo-social { margin-bottom: 60px; }
+      .lo-gallery-section { margin-bottom: 90px; }
+      .lo-gallery-row { flex-direction: column; align-items: center; gap: 56px; }
+      /* covers / singles fill more width; spreads stay side-by-side (keep clamp width) */
+      #lo-gallery .lo-gallery-section:not(:last-child) .lo-gallery-item { width: 88% !important; max-width: 460px; }
+      .lo-col-6, .lo-col-4, .lo-col-3 { grid-column: span 12; }
+    }
+
+    #images {
+      padding: var(--space-2) 0 0;
+    }
+
+    .lo-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-2);
+      padding: 0 var(--space-2);
+    }
+
+    .lo-grid + .lo-grid {
+      margin-top: var(--space-2);
+    }
+
+    .lo-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .lo-col-6  { grid-column: span 6; }
+    .lo-col-4  { grid-column: span 4; }
+    .lo-col-3  { grid-column: span 3; }
+    .lo-col-12 { grid-column: span 12; }
+
+    #next-project {
+      padding: var(--space-16) 0;
+    }
+
+    /* ── LP Mockup ── */
+    #lo-mockup {
+      background: #dddbd8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0 100px;
+    }
+
+    .lo-scene {
+      position: relative;
+      width: 560px;
+      height: 420px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Floor shadow */
+    .lo-floor-shadow {
+      position: absolute;
+      bottom: -30px;
+      left: 40px;
+      right: -80px;
+      height: 40px;
+      background: radial-gradient(ellipse at 40% 0%, rgba(0,0,0,0.28) 0%, transparent 70%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    /* Vinyl disc */
+    .lo-vinyl {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: -8px 4px 32px rgba(0,0,0,0.38), -2px 0 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background:
+        conic-gradient(from 0deg,
+          #0b0b0b 0deg, #0e0d0b 18deg, #0a0a0a 36deg, #0d0c0a 54deg,
+          #0b0b0b 72deg, #0e0c0a 90deg, #0a0a0a 108deg, #0d0b09 126deg,
+          #0b0b0b 144deg, #0e0d0b 162deg, #0a0a0a 180deg, #0c0b09 198deg,
+          #0b0b0b 216deg, #0e0c0a 234deg, #0a0a0a 252deg, #0d0c0a 270deg,
+          #0b0b0b 288deg, #0e0d0b 306deg, #0a0a0a 324deg, #0d0b09 342deg,
+          #0b0b0b 360deg);
+    }
+
+    /* Groove rings */
+    .lo-vinyl::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,255,255,0.018) 3px,
+        rgba(255,255,255,0.018) 4px
+      );
+    }
+
+    /* Rim */
+    .lo-vinyl::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .lo-vinyl-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 37%;
+      height: 37%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .lo-vinyl-label img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .lo-vinyl-hole {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+      z-index: 2;
+    }
+
+    /* Album sleeve */
+    .lo-sleeve {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) perspective(1400px) rotateY(-7deg) rotateX(0.5deg);
+      transform-origin: left center;
+      width: 360px;
+      height: 360px;
+      z-index: 2;
+      box-shadow:
+        6px 6px 40px rgba(0,0,0,0.32),
+        2px 2px 10px rgba(0,0,0,0.18),
+        inset -3px 0 8px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .lo-sleeve img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Spine edge sheen */
+    .lo-sleeve-spine {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 6px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.18) 0%, rgba(255,255,255,0.06) 100%);
+    }
+
+    @media (max-width: 768px) {
+      .lo-scene { transform: scale(0.65); transform-origin: center center; }
+    }
+  </style>
+</head>
+<body class="project">
+<!-- ===================================================================
+     GENERATED — DO NOT EDIT. Everything between here and /prerender is
+     rebuilt by `node build/prerender.js` from the real markup further
+     down this file. An edit made in here is silently thrown away on the
+     next build. Scroll past it and edit the page itself.
+     =================================================================== -->
+<div id="prerender">
+<section id="hero">
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">Lake Opeka</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">An album design for Chicago musician Sean Fermoyle <span>—</span> cover<span>,</span> back<span>,</span> inner sleeve<span>,</span> centre labels<span>,</span> and a twelve<span>-</span>page booklet for his record<span>,</span> Lake Opeka<span>.</span> Every image was made with the Lab’s own tools<span>:</span> eight lake surfaces<span>,</span> one accent sunk under each<span>,</span> grown into fields of fused circles<span>;</span> the track titles set in dots<span>.</span></h2>
+      </div>
+    </div>
+  </section>
+<section id="credits">
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>Sean Fermoyle</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Album Artwork</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>OP<span><span>/</span></span>AL<br><span class="text-mid">Design</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+<section id="lo-flatlay">
+    <img src="../lake-opeka-player/assets/v2/flatlay.webp" alt="Lake Opeka — the full package: jacket, records, inner sleeve and booklet" decoding="async" loading="lazy">
+  </section>
+<section id="lo-gallery">
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Jacket</p>
+      <div class="lo-gallery-row">
+        <div class="lo-gallery-item">
+          <div class="lo-flip" title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/cover-front.webp" alt="Front cover" decoding="async" loading="lazy"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/cover-back.webp" alt="Back cover" decoding="async" loading="lazy"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span>Front</span> <span class="punc">·</span> click to flip</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Record <span class="punc"><span>&amp;</span></span> Inner&nbsp;Sleeve</p>
+      <div class="lo-gallery-row">
+        <div class="lo-gallery-item">
+          <div class="lo-flip" title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><div class="lo-record lo-record--solo lo-record--cover"><div class="lo-record-disc"><div class="lo-record-label"><img src="../lake-opeka-player/assets/v2/label-A.webp" alt="Side A label" decoding="async" loading="lazy"></div><div class="lo-record-hole"></div></div></div></div>
+              <div class="lo-flip__face lo-flip__face--back"><div class="lo-record lo-record--solo lo-record--cover"><div class="lo-record-disc"><div class="lo-record-label"><img src="../lake-opeka-player/assets/v2/label-B.webp" alt="Side B label" decoding="async" loading="lazy"></div><div class="lo-record-hole"></div></div></div></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span>Side A</span> <span class="punc">·</span> click to flip</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-flip" title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/sleeve-front.webp" alt="Inner sleeve, front" decoding="async" loading="lazy"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/sleeve-back.webp" alt="Inner sleeve, back — the poems" decoding="async" loading="lazy"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span>Front</span> <span class="punc">·</span> click to flip</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Booklet</p>
+      <div>
+        <div class="lo-gallery-item">
+          <div class="lo-flip" title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/page-01R.webp" alt="Booklet cover" decoding="async" loading="lazy"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/page-01L.webp" alt="Booklet back cover" decoding="async" loading="lazy"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span>Cover</span> <span class="punc">·</span> click to flip</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-02.webp" alt="Booklet spread 2" decoding="async" loading="lazy"></div>
+          <span class="lo-gallery-caption">Opitus Season</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-03.webp" alt="Booklet spread 3" decoding="async" class="im im-here" loading="lazy"></div>
+          <span class="lo-gallery-caption">Ships in the Night <span class="punc">·</span> Jazz Relapse</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-04.webp" alt="Booklet spread 4" decoding="async" class="im im-here" loading="lazy"></div>
+          <span class="lo-gallery-caption">Walk of the Bird <span class="punc">·</span> Good Evening</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-05.webp" alt="Booklet spread 5" decoding="async" class="im im-here" loading="lazy"></div>
+          <span class="lo-gallery-caption">Cherry Blossom Interlude <span class="punc">·</span> Off in the Distance</span>
+        </div>
+        <div class="lo-gallery-item">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-06.webp" alt="Booklet spread 6" decoding="async" class="im im-here" loading="lazy"></div>
+          <span class="lo-gallery-caption">A Little Nervous <span class="punc">·</span> Credits</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="lo-gallery-section lo-social">
+      <p class="lo-gallery-section-title">Social</p>
+      <div class="lo-gallery-row">
+        <div class="lo-gallery-item lo-social__item">
+          <div class="values-phone"><div class="values-phone__screen video-spot__frame">
+            
+            <!-- the Reels skin -->
+            
+            <button class="video-spot__sound" type="button" aria-label="Toggle sound" aria-pressed="false"></button>
+          </div></div>
+          <span class="lo-gallery-caption">Reel <span class="punc">·</span> 70 seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Print files -->
+    <div class="lo-gallery-section">
+      <div>
+        <a href="#" id="lo-files">Print<span>-</span>ready files →</a>
+      </div>
+      <p>Print PDFs<span><span>,</span></span> Illustrator files and links<span>,</span> and a preview <span class="punc">·</span> password&nbsp;required.</p>
+    </div>
+
+  </section>
+</div>
+<script>(function(){var p=document.getElementById('prerender');if(p)p.remove();})();</script>
+<!-- /prerender -->
+  <script src="../shared/nav.js?v=20261011A"></script>
+
+  <section id="hero" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">Lake Opeka</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">An album design for Chicago musician Sean Fermoyle — cover, back, inner sleeve, centre labels, and a twelve-page booklet for his record, Lake Opeka. Every image was made with the Lab’s own tools: eight lake surfaces, one accent sunk under each, grown into fields of fused circles; the track titles set in dots.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="credits" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>Sean Fermoyle</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Album Artwork</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>OP/AL<br><span class="text-mid">Design</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lo-flatlay" style="background:#5c789e;">
+    <img src="../lake-opeka-player/assets/v2/flatlay.webp" alt="Lake Opeka — the full package: jacket, records, inner sleeve and booklet" style="display:block; width:100%; height:auto;">
+  </section>
+
+  <section id="images">
+    <iframe id="lo-player" src="../lake-opeka-player/" title="Fermoyle — Lake Opeka"></iframe>
+  </section>
+
+  <section id="lo-gallery" data-no-reveal>
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Jacket</p>
+      <div class="lo-gallery-row" style="gap: 56px;">
+        <div class="lo-gallery-item" style="width: clamp(240px, 36%, 440px)">
+          <div class="lo-flip" data-flip title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/cover-front.webp" alt="Front cover"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/cover-back.webp" alt="Back cover"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span data-flip-label data-front="Front" data-back="Back">Front</span> <span class="punc">·</span> click to flip</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Record <span class="punc">&amp;</span> Inner Sleeve</p>
+      <div class="lo-gallery-row" style="gap: 56px;">
+        <div class="lo-gallery-item" style="width: clamp(240px, 36%, 440px)">
+          <div class="lo-flip" data-flip title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><div class="lo-record lo-record--solo lo-record--cover"><div class="lo-record-disc"><div class="lo-record-label"><img src="../lake-opeka-player/assets/v2/label-A.webp" alt="Side A label"></div><div class="lo-record-hole"></div></div></div></div>
+              <div class="lo-flip__face lo-flip__face--back"><div class="lo-record lo-record--solo lo-record--cover"><div class="lo-record-disc" style="animation-duration: 4.6s;"><div class="lo-record-label"><img src="../lake-opeka-player/assets/v2/label-B.webp" alt="Side B label"></div><div class="lo-record-hole"></div></div></div></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span data-flip-label>Side A</span> <span class="punc">·</span> click to flip</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(240px, 36%, 440px)">
+          <div class="lo-flip" data-flip title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/sleeve-front.webp" alt="Inner sleeve, front"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/sleeve-back.webp" alt="Inner sleeve, back — the poems"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span data-flip-label data-front="Front" data-back="Back · the poems">Front</span> <span class="punc">·</span> click to flip</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lo-gallery-section">
+      <p class="lo-gallery-section-title">Booklet</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:96px;">
+        <div class="lo-gallery-item" style="width: clamp(240px, 36%, 440px)">
+          <div class="lo-flip" data-flip title="Click to flip">
+            <div class="lo-flip__card">
+              <div class="lo-flip__face"><img class="lo-art" src="../lake-opeka-player/assets/v2/page-01R.webp" alt="Booklet cover"></div>
+              <div class="lo-flip__face lo-flip__face--back"><img class="lo-art" src="../lake-opeka-player/assets/v2/page-01L.webp" alt="Booklet back cover"></div>
+            </div>
+          </div>
+          <span class="lo-gallery-caption"><span data-flip-label data-front="Cover" data-back="Back">Cover</span> <span class="punc">·</span> click to flip</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(300px, 84%, 1040px)">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-02.webp" alt="Booklet spread 2"></div>
+          <span class="lo-gallery-caption">Opitus Season</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(300px, 84%, 1040px)">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-03.webp" alt="Booklet spread 3"></div>
+          <span class="lo-gallery-caption">Ships in the Night <span class="punc">·</span> Jazz Relapse</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(300px, 84%, 1040px)">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-04.webp" alt="Booklet spread 4"></div>
+          <span class="lo-gallery-caption">Walk of the Bird <span class="punc">·</span> Good Evening</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(300px, 84%, 1040px)">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-05.webp" alt="Booklet spread 5"></div>
+          <span class="lo-gallery-caption">Cherry Blossom Interlude <span class="punc">·</span> Off in the Distance</span>
+        </div>
+        <div class="lo-gallery-item" style="width: clamp(300px, 84%, 1040px)">
+          <div class="lo-gallery-single"><img src="../lake-opeka-player/assets/v2/spread-06.webp" alt="Booklet spread 6"></div>
+          <span class="lo-gallery-caption">A Little Nervous <span class="punc">·</span> Credits</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="lo-gallery-section lo-social">
+      <p class="lo-gallery-section-title">Social</p>
+      <div class="lo-gallery-row" style="gap: 56px;">
+        <div class="lo-gallery-item lo-social__item">
+          <div class="values-phone"><div class="values-phone__screen video-spot__frame">
+            <video class="video-spot__media" autoplay muted loop playsinline preload="none" poster="../lake-opeka-player/social/reel-poster.webp"><source data-src="../lake-opeka-player/social/reel.mp4" type="video/mp4"></video>
+            <!-- the Reels skin -->
+            <div class="ig-reel" aria-hidden="true">
+              <div class="ig-reel__top"><span class="ig-reel__title">Reels</span><span class="ig-reel__cam"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span></div>
+              <div class="ig-reel__meta">
+                <div class="ig-reel__who"><img src="../lake-opeka-player/social/avatar.webp" alt=""><b>seangfermoyle</b></div>
+                <div class="ig-reel__audio"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>Sean Fermoyle · Opitus Season</span></div>
+              </div>
+            </div>
+            <button class="video-spot__sound" type="button" aria-label="Toggle sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h3.5L13 19V5L7.5 9H4z" fill="currentColor" stroke="none"/><path class="spk-wave" d="M16.5 9.2a4 4 0 0 1 0 5.6"/><path class="spk-wave" d="M19 6.7a7.5 7.5 0 0 1 0 10.6"/><line class="spk-slash" x1="3.5" y1="3.5" x2="20.5" y2="20.5"/></svg></button>
+          </div></div>
+          <span class="lo-gallery-caption">Reel <span class="punc">·</span> 70 seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Print files -->
+    <div class="lo-gallery-section" style="text-align:center; padding-top:0;">
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <a href="#" id="lo-files" style="display:inline-block; font-size:14px; letter-spacing:.03em; text-decoration:none; border:1px solid currentColor; border-radius:999px; padding:13px 26px; color:#000; border-color:#000; opacity:1;">Print-ready files &rarr;</a>
+      </div>
+      <p style="margin-top:14px; font-size:14px; letter-spacing:.02em; color:#000; opacity:1;">Print PDFs, Illustrator files and links, and a preview <span class="punc">·</span> password required.</p>
+    </div>
+
+  </section>
+
+  <!-- Fixed audio player — pinned to the viewport across the whole page -->
+  <iframe id="lo-playerbar" src="../lake-opeka-player/playerbar.html" title="Lake Opeka — Player" scrolling="no"></iframe>
+
+<script>
+  // the player tells us its height; the iframe follows it (no dead space, no cropping)
+  window.addEventListener('message', function(e){ if(e.data && e.data.loPlayerHeight){ var f=document.getElementById('lo-player'); if(f) f.style.height=(e.data.loPlayerHeight+8)+'px'; } });
+</script>
+<script>
+  // the print files sit behind a password; only its hash lives here
+  (function(){
+    var link=document.getElementById('lo-files'); if(!link) return;
+    var HASH='f8840c70381d4e683f1ec5c3d33c7168de978495bc06aec1617ed942a543b3ec', URL_B64='aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMUFyeXhpdS1ESWdnOGo2b3M5dC0zS25HNnI2SEN1SExZP3VzcD1zaGFyaW5n';
+    async function sha256(t){ var b=new TextEncoder().encode(t); var h=await crypto.subtle.digest('SHA-256',b); return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+    link.addEventListener('click', async function(e){ e.preventDefault(); var p=window.prompt('Password'); if(p===null) return;
+      if(await sha256(p.trim())===HASH){ window.open(atob(URL_B64),'_blank','noopener'); } else { window.alert('That\u2019s not it.'); } });
+  })();
+</script>
+<script>
+  // the reel’s speaker: click for sound, click again to mute — the same toggle as the Values reel
+  (function(){ document.querySelectorAll('.video-spot__sound').forEach(function(btn){ var v=btn.closest('.video-spot__frame').querySelector('.video-spot__media'); if(!v) return;
+    btn.addEventListener('click',function(e){ e.stopPropagation(); if(v.muted){ v.muted=false; v.volume=1; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } else { v.muted=true; }
+      btn.classList.toggle('is-on',!v.muted); btn.setAttribute('aria-pressed',String(!v.muted)); }); }); })();
+</script>
+<script>
+  // flip cards: click toggles the face; the caption follows
+  (function(){ document.querySelectorAll('[data-flip]').forEach(function(card){ card.addEventListener('click',function(){ card.classList.toggle('is-flipped');
+    var lab=card.parentElement.querySelector('[data-flip-label]'); if(!lab) return; var back=card.classList.contains('is-flipped');
+    if(lab.dataset.front){ lab.textContent=back?lab.dataset.back:lab.dataset.front; } else { lab.textContent=back?'Side B':'Side A'; } }); }); })();
+</script>
+<script src="../shared/footer.js?v=20261009B"></script>
+  <script src="../shared/grid.js?v=20261003"></script>
+  <script src="../shared/cursor.js?v=20261003"></script>
+  <script src="../shared/animate.js?v=20261009B"></script>
+</body>
+</html>

@@ -1,0 +1,624 @@
+/* Heart, Intuition and Technology: the talk and the workshop share this sheet */
+  /* ── Heart, Intuition and Technology — BGSU, 1–2 November 2026 ─────────────
+     A talk you scroll. One idea per screen, the words said rather than shown;
+     the rest lives in the notes (press n). Arrow keys, space and page keys step
+     a screen at a time. Black and white; color only where the poster asks. */
+
+  @font-face { font-family: 'Signifier'; src: url('/workshops/bgsu/shared/fonts/signifier-regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Signifier'; src: url('/workshops/bgsu/shared/fonts/signifier-regular-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Untitled Sans'; src: url('/workshops/bgsu/shared/fonts/untitled-sans-regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+  :root {
+    /* ── TYPE SIZE: one number for every piece of type in the talk. 1 is the original size; .85 is 15% smaller.
+       Change it here, or press - and = during the talk (it remembers your choice on this computer). ── */
+    --fs: .85;
+    --paper: #ffffff;
+    --ink: #000000;
+    --display: 'Signifier', Georgia, serif;
+    --label: 'Untitled Sans', system-ui, sans-serif;
+    --hero: calc(clamp(2.6rem, 9vw, 9rem) * var(--fs));
+    --big: calc(clamp(2rem, 6.4vw, 6.4rem) * var(--fs));
+    --mid: calc(clamp(1.4rem, 3.4vw, 3rem) * var(--fs));
+    --tag: calc(clamp(0.8rem, 1.1vw, 1rem) * var(--fs));
+    /* the website's grid: 10em margins, a container that stops at 100em, 12 columns with a .5em gap;
+       4em margins under 64em, and 1.25em with 6 columns under 40em */
+    --gutter: max(10rem, calc((100vw - 80rem) / 2));
+    --grid-gap: .5em;
+    /* three line-heights for every piece of type: display (hero, big), text (mid, poem, prompt, lists), label */
+    --lh-display: 1.1;
+    --lh-text: 1.3;
+    --lh-label: 1.45;
+    --rule: 3px;
+    --hairline: #d9d9d9;   /* the thin rules between rows and list items: light grey */
+  }
+
+  * { box-sizing: border-box; }
+  body { transition: background-color .25s linear; }
+  html, body { overflow-x: clip; }   /* nothing ever pushes the talk sideways (clip, not hidden: hidden breaks the pinned stages) */
+  @media (max-width: 64em) { :root { --gutter: 4rem; } }
+  @media (max-width: 40em) { :root { --gutter: 1.25rem; } }
+  .grid-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; display: none; padding: 0 var(--gutter); }
+  .grid-overlay.is-on { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--grid-gap); }
+  .grid-overlay i { box-shadow: inset .5px 0 0 rgba(255, 0, 80, .45), inset -.5px 0 0 rgba(255, 0, 80, .45); background: rgba(255, 0, 80, .035); }
+  @media (max-width: 40em) { .grid-overlay.is-on { grid-template-columns: repeat(6, 1fr); } .grid-overlay i:nth-child(n+7) { display: none; } }
+  html { font-variant-numeric: oldstyle-nums; font-feature-settings: 'onum' 1; }
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: var(--paper); }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--display); font-weight: 400; font-style: normal;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, p { margin: 0; font-weight: 400; }
+
+  /* ── a screen ── */
+  .s {
+    position: relative; min-height: 100vh; min-height: 100svh;
+    scroll-snap-align: start;
+    display: grid; place-items: center;
+    padding: 5em var(--gutter);
+    overflow: hidden;
+  }
+  .s.ink { background: var(--ink); color: var(--paper); --hairline: #4a4a4a; }
+  .s.red { background: #e3241b; color: #fff; }
+  /* over the red screen the frame is plain white; difference would turn it cyan */
+  body.on-red .chrome, body.on-red .count, body.on-red .hint { mix-blend-mode: normal; }
+  /* over the pink of Now it is plain black */
+  body.tool-ctl .chrome, body.tool-ctl .count { opacity: 0; }   /* out of the way of the tool's controls */
+  body.on-pink .chrome, body.on-pink .count, body.on-pink .hint { mix-blend-mode: normal; color: #000; }
+  .center { text-align: center; }
+  .hero { font-size: var(--hero); line-height: var(--lh-display); letter-spacing: -0.02em; }
+  .big  { font-size: var(--big); line-height: var(--lh-display); letter-spacing: -0.015em; }
+  .mid  { font-size: var(--mid); line-height: var(--lh-text); }
+  .tag  { font-family: var(--label); font-size: var(--tag); line-height: var(--lh-label); }
+
+  /* ── the fixed frame: name left, sections right, count bottom ── */
+  .chrome {
+    position: fixed; z-index: 10; left: 0; right: 0; top: 0;
+    display: flex; justify-content: space-between; gap: 1em;
+    padding: 1.25em var(--gutter);
+    font-family: var(--label); font-size: var(--tag);
+    color: #fff; mix-blend-mode: difference; pointer-events: none;
+  }
+  .chrome a { color: inherit; text-decoration: none; pointer-events: auto; margin-left: 1.5em; }
+  .chrome a:hover, .chrome a.is-on { text-decoration: underline; text-underline-offset: .25em; }
+  .count {
+    position: fixed; z-index: 10; right: var(--gutter); bottom: 1.25em;
+    font-family: var(--label); font-size: var(--tag);
+    color: #fff; mix-blend-mode: difference; pointer-events: none;
+  }
+  .hint {
+    position: fixed; z-index: 10; left: var(--gutter); bottom: 1.25em;
+    font-family: var(--label); font-size: var(--tag);
+    color: #fff; mix-blend-mode: difference; pointer-events: none;
+    transition: opacity .6s;
+  }
+  .hint.is-gone { opacity: 0; }
+  /* while m is held: a small mark bottom left, so you know the room is being heard */
+  .mic-dot { position: fixed; z-index: 11; left: var(--gutter); bottom: 1.25em; font-family: var(--label); font-size: var(--tag); color: #fff; mix-blend-mode: difference; display: none; pointer-events: none; }
+  .mic-dot::before { content: ''; display: inline-block; width: .6em; height: .6em; border-radius: 50%; background: currentColor; margin-right: .5em; vertical-align: .05em; animation: blink 1s steps(1) infinite; }
+  body.mic-on .mic-dot { display: block; }
+  body.mic-on .hint { opacity: 0; }
+
+  /* ── speaker notes: hidden until n ── */
+  .note { display: none; }
+  body.notes .note {
+    display: block; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 3.5em;
+    max-width: 40em; padding: 1em 1.25em;
+    font-family: var(--label); font-size: calc(15px * var(--fs)); line-height: 1.5;
+    background: #fff; color: #000; border: 1px solid #000; text-align: left;
+  }
+  .note ul { margin: 0; padding-left: 1.1em; }
+  .note li + li { margin-top: .3em; }
+
+  /* ── title ── */
+  .title-wrap { text-align: center; }
+  .title-wrap .tag { margin-top: 2.2em; }
+  /* the title as particles: the real text stays in place for layout and screen readers, drawn invisibly;
+     the canvas over it carries every letter as specks of white */
+  .particle-src { color: transparent; }
+  .particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* technology: each letter keeps giving off a copy of itself that rises and goes to vapour */
+  .w-tech .word { display: inline-block; white-space: nowrap; }
+  .w-tech .word span { position: relative; display: inline-block; animation: thin var(--d) ease-in-out var(--o) infinite; }
+  .w-tech .word span::after { content: attr(data-ch); position: absolute; left: 0; top: 0; pointer-events: none; animation: vapour var(--d) ease-out var(--o) infinite; opacity: 0; }
+  @keyframes thin { 0%, 30%, 100% { opacity: 1; filter: blur(0); } 55% { opacity: .12; filter: blur(.03em); } 75% { opacity: .5; filter: blur(.015em); } }
+  @keyframes vapour {
+    0%, 28% { opacity: 0; transform: translate(0, 0); filter: blur(0); }
+    34%     { opacity: .85; transform: translate(0, -.04em); filter: blur(.01em); }
+    80%     { opacity: 0; transform: translate(var(--x), -.7em) scale(1.15); filter: blur(.18em); }
+    100%    { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .w-tech .word span, .w-tech .word span::after { animation: none; } }
+
+  /* ── research / artifact ── */
+  .poles { width: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.2em; }
+  .poles .line { position: relative; height: 160px; }
+  .poles .line::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: var(--rule) solid currentColor; }
+  .poles svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .poles.drawn .line::before { display: none; }
+  .poles.drawn { grid-template-columns: minmax(max-content, 1fr) clamp(110px, 20vw, 280px) minmax(max-content, 1fr); }
+  .poles.drawn .big:last-child { justify-self: end; }
+  .poles.drawn .line { height: clamp(110px, 20vw, 280px); }
+  .poles .circles { position: absolute; inset: 0; }
+  .poles .circles img { position: absolute; left: 50%; top: 50%; height: 100%; width: auto; max-width: 100%; object-fit: contain; transform: translate(-50%, -50%); visibility: hidden; }
+  .poles .circles img.on { visibility: visible; }
+  .poles .circles img.pair { height: 62%; }
+
+  /* ── inside the circle: the ring zoomed past the screen, the words in its middle ── */
+  .inside__words { position: relative; display: grid; place-items: center; margin: 0; text-align: center; font-size: calc(clamp(2rem, 7vh, 5rem) * var(--fs)); line-height: var(--lh-display); }
+  .inside__words span { grid-area: 1 / 1; white-space: nowrap; visibility: hidden; }
+  .inside__words span.on { visibility: visible; }
+  @media (max-aspect-ratio: 1/1) { .inside__words { font-size: calc(clamp(1.6rem, 9vw, 3rem) * var(--fs)); } }
+
+  /* ── typed ── */
+  .typed { min-height: 2.5em; }
+  .typed .caret { display: inline-block; width: .06em; height: .9em; margin-left: .06em; vertical-align: -.08em; background: currentColor; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── now: the last mark on the timeline, close up ── */
+  .now { padding-left: 0; padding-right: 0; }
+  .now__line { position: relative; width: 100%; height: 60vh; }
+  .now__line::after { content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: currentColor; }
+  .now__when { position: absolute; left: calc(50% + .8em); bottom: calc(50% + 1em); font-size: calc(clamp(1.1rem, 2.4vw, 2.4rem) * var(--fs)); }
+  .now__what { position: absolute; left: calc(50% + .3em); top: calc(50% + .25em); margin: 0; }
+
+  .now__news { position: absolute; inset: 4.5em var(--gutter); pointer-events: none; }
+  .now__news span { position: absolute; left: var(--x); top: var(--y); font-size: calc(clamp(1rem, 2.2vw, 2.2rem) * var(--fs)); white-space: nowrap; opacity: 0; transition: opacity .7s calc(.6s + var(--i) * .18s); }
+  .now.is-on .now__news span { opacity: 1; }
+  @media (max-aspect-ratio: 1/1) { .now__news span { font-size: calc(clamp(.9rem, 4.2vw, 1.3rem) * var(--fs)); } .now__news span { left: var(--px); top: var(--py); } }
+
+  /* ── by hand: twenty cut-paper shapes, cut one after another ── */
+  /* on the page grid: words in the first five columns, the work from the sixth (the cuts from the eighth, one column each) */
+  .hand__wrap { width: 100%; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--grid-gap); align-items: center; }
+  .hand__wrap > :first-child { grid-column: 1 / span 5; }
+  .hand__wrap > :nth-child(2) { grid-column: 6 / -1; }
+  .hand__wrap > .hand__cuts { grid-column: 8 / -1; }
+  .hand__head .mid { margin: .6em 0 1.2em; }
+  .hand__cuts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 1.4em) var(--grid-gap); }
+  .hand__cuts figure { margin: 0; }
+  .hand__cuts svg { display: block; width: 100%; height: auto; overflow: visible; opacity: 0; transform: translateY(.4em) rotate(var(--r)); transition: opacity .35s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+  .hand__cuts figcaption { font-family: var(--label); font-size: var(--tag); margin-top: .3em; opacity: 0; transition: opacity .35s; }
+  .hand.is-on .hand__cuts .is-cut svg { opacity: 1; transform: translateY(0) rotate(var(--r)); }
+  .hand.is-on .hand__cuts .is-cut figcaption { opacity: 1; }
+  @media (max-width: 48em) { .hand__wrap { grid-template-columns: 1fr; gap: 1.5em; } .hand__wrap > :first-child, .hand__wrap > :nth-child(2), .hand__wrap > .hand__cuts { grid-column: 1 / -1; } }
+  @media (max-width: 40em) { .hand__cuts { grid-template-columns: repeat(6, minmax(0, 1fr)); } }   /* one shape to a column on the six-column phone grid */
+
+  .compose__canvas { position: relative; aspect-ratio: 11 / 17; max-height: 72vh; margin: 0 auto; width: auto; height: 72vh; background: #f4f1ea; box-shadow: 0 0 0 1px rgba(0,0,0,.2); overflow: hidden; }
+  .compose__canvas .word-line { position: absolute; white-space: nowrap; font-family: var(--display); line-height: 1; color: #111; transform-origin: 0 50%; transition: left 1.1s cubic-bezier(.6, 0, .2, 1), top 1.1s cubic-bezier(.6, 0, .2, 1), font-size 1.1s cubic-bezier(.6, 0, .2, 1), transform 1.1s cubic-bezier(.6, 0, .2, 1); }
+  .compose__canvas svg { position: absolute; overflow: visible; transition: left 1.1s cubic-bezier(.6, 0, .2, 1), top 1.1s cubic-bezier(.6, 0, .2, 1), width 1.1s cubic-bezier(.6, 0, .2, 1), transform 1.1s cubic-bezier(.6, 0, .2, 1), opacity .5s; }
+  @media (max-width: 48em) { .compose__canvas { height: auto; width: 70%; max-height: none; } }
+
+  .poem__lines { margin: 0; line-height: var(--lh-text); min-height: 7.4em; padding-left: 1.4em; border-left: 1px solid var(--hairline); }
+
+  .eyebrow { margin: 0 0 .9em; }
+  .ask { max-width: 100%; }
+  .ask .big { font-size: calc(clamp(1.8rem, 4.6vw, 4.6rem) * var(--fs)); }
+  /* the question in terminal green, set in Signifier */
+  .ask__term { color: #4af626; white-space: nowrap; font-size: calc(clamp(1rem, 4.3vw, 4.6rem) * var(--fs)) !important; }
+  .ask .mid { margin-top: 1.2em; }
+
+  /* ── what I do / where I play: the work, from the site ── */
+  .work--studio { padding: 0; }
+  /* one project at a time, whole and uncropped, small in the middle with white all round */
+  .work--studio .work__wrap, .work--studio .work__grid { position: absolute; inset: 0; display: block; }
+  .work--studio .work__grid figure { position: absolute; inset: 18vh 18vw; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .5s; }
+  .work--studio .work__grid figure.on { opacity: 1; }
+  /* placeholders until the pictures are chosen: a 4:3 frame per project */
+  .work__ph { width: min(100%, calc((100vh - 36vh) * 4 / 3)); aspect-ratio: 4 / 3; box-shadow: inset 0 0 0 1px currentColor; display: grid; place-items: center; }
+  .work__ph span { font-family: var(--label); font-size: var(--tag); }
+  .work--studio .work__grid img, .work--studio .work__grid video { width: auto; height: auto; max-width: 100%; max-height: 100%; min-width: 0; min-height: 0; aspect-ratio: auto; object-fit: contain; background: none; }
+  @media (max-aspect-ratio: 1/1) { .work--studio .work__grid figure { inset: 22vh 8vw; } }
+  .work__wrap { width: 100%; }
+  .work .big { margin: 0 0 .5em; }
+  .work__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(8px, 1.2vw, 1.2em); }
+  .work--lab .work__grid { grid-template-columns: repeat(4, 1fr); }
+  .work__grid figure { margin: 0; }
+  .work__grid img, .work__grid video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eee; }
+  .work__grid figcaption { font-family: var(--label); font-size: var(--tag); margin-top: .4em; }
+  @media (max-width: 48em) { .work--lab .work__grid { grid-template-columns: repeat(3, 1fr); } .work__grid figcaption { display: none; } }
+
+  /* ── thinking, then doing, then the circle, then inside it: one pinned stage, the steps scroll past it ── */
+  .build { position: relative; }
+  .build__stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; padding: 5em var(--gutter); overflow: hidden; z-index: 0; transition: background-color .12s, color .12s; }
+  .build__step { background: transparent; position: relative; z-index: 1; }
+  /* the first step slides up under the stage; the stage keeps its own height, so it lets go when the last step ends */
+  .build__step:first-of-type { margin-top: -100vh; margin-top: -100svh; }
+  .build__doing { opacity: 0; transition: opacity .9s; }
+  .build[data-step="1"] .build__doing, .build[data-step="2"] .build__doing { opacity: 1; }
+  .build .poles > .big { transition: opacity .6s; }
+  .build[data-step="3"] .poles > .big { opacity: 0; }
+  .build .circles { transform: translate(var(--dx, 0), var(--dy, 0)) scale(0); transition: transform .9s cubic-bezier(.3, 1.4, .5, 1); }
+  .build[data-step="2"] .circles { transform: translate(0, 0) scale(1); }
+  .build[data-step="3"] .circles { transform: translate(var(--dx, 0), var(--dy, 0)) scale(var(--zoom, 4)); transition: transform 1.6s cubic-bezier(.6, 0, .2, 1); }
+  .build .inside__words { position: absolute; inset: 0; opacity: 0; transition: opacity .6s; pointer-events: none; }
+  .build[data-step="3"] .inside__words { opacity: 1; transition-delay: 1.3s; }
+
+  /* ── one word alone, left or right ── */
+  .solo { place-items: center stretch; }
+  .solo--left .hero { text-align: left; }
+  .solo--right .hero { text-align: right; }
+
+  /* ── the circle between thinking and doing: each circle its own ink on its own ground ── */
+  .poles .circles i { position: absolute; inset: 0; background: currentColor; -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; visibility: hidden; }
+  .poles .circles i.on { visibility: visible; }
+  .poles .circles i.pair { inset: 19% 0; }
+
+  /* ── a designer today is ── */
+  .is-a__wrap { width: 100%; }
+  /* the underscore sits under the word itself and is exactly as long as it */
+  .is-a .big { font-size: var(--hero); white-space: nowrap; text-align: center; }   /* the words alone, centered: no lead-in */
+  .is-a__blank { display: inline-block; border-bottom: var(--rule) solid currentColor; line-height: var(--lh-display); padding-bottom: .14em; white-space: nowrap; }
+  /* the one place the talk uses italic, at Christian's ask: the changing word, each in its own color */
+  .is-a__word { display: inline-block; font-style: italic; }
+  .is-a__blank { transition: color .2s; }
+  .rotate { font-style: italic; }   /* italic at Christian's ask, like the designer slide */
+
+  /* ── one idea ── */
+  /* the square sits exactly where the system's first square will be, centred and the same size */
+  .pin { position: relative; }
+  .pin__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; z-index: 0; }
+  .pin__step { background: transparent; position: relative; z-index: 1; }
+  .pin__step:first-of-type { margin-top: -100vh; margin-top: -100svh; }
+  .pin .idea__wrap { position: absolute; left: var(--gutter); top: 5em; transition: opacity .5s; }
+  .pin .idea__square { transition: opacity .35s; }
+  .pin .sys__art { opacity: 0; transition: opacity .35s; }
+  .pin[data-step="1"] .idea__wrap, .pin[data-step="1"] .idea__square { opacity: 0; }
+  .pin[data-step="1"] .sys__art { opacity: 1; }
+  .idea__square { position: absolute; left: 50%; top: 50%; width: 36vmin; height: 36vmin; margin: -18vmin 0 0 -18vmin; overflow: visible; }
+  .idea__square path { fill: none; stroke: currentColor; stroke-width: 2.6px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+
+  /* ── one shape becomes many ── */
+  .morph { padding: 0; }
+  .morph__art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ── input, the scribble, output ── */
+  .flow { padding: 4.5em var(--gutter); }
+  .flow__art { width: 100%; height: 100%; max-height: 80vh; overflow: visible; }
+  .flow__art .cone { fill: none; stroke: currentColor; stroke-width: 1.6px; vector-effect: non-scaling-stroke; }
+  .flow__art .lab { font-family: var(--display); fill: currentColor; }
+  .flow__art .sub { font-family: var(--label); fill: currentColor; }
+
+  /* ── constraints: four rules ── */
+  .rules__wrap { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1em, 3vh, 2.4em); align-items: start; }
+  .rules .big { color: #e3241b; }
+  .rules .big { font-size: calc(clamp(2rem, 4.6vw, 4.6rem) * var(--fs)); }
+  /* the question once, and its ends hanging beneath one another */
+  .rules__ask { display: flex; gap: .28em; margin: 0; font-size: calc(clamp(1.15rem, 2.3vw, 2.2rem) * var(--fs)); line-height: var(--lh-text); }
+  .rules__words { display: flex; flex-direction: column; }
+  .rules__list ol { list-style: none; margin: .8em 0 0; padding: 0; font-size: calc(clamp(1.15rem, 2.3vw, 2.2rem) * var(--fs)); }
+  .rules__list li { padding: .45em 0; border-bottom: 1px solid var(--hairline); }
+  
+  .rules__list li span { font-family: var(--label); font-size: var(--tag); padding-top: .6em; }
+  @media (max-width: 48em) { .rules__wrap { grid-template-columns: 1fr; } }
+
+  /* ── the example prompt ── */
+  .example__wrap { width: 100%; max-width: 64rem; }
+  .example__text { font-size: calc(clamp(.95rem, 1.7vw, 1.75rem) * var(--fs)); line-height: var(--lh-text); }
+  .example__text p { margin: 0 0 .7em; }
+  .example__text ul { margin: 0 0 .7em; padding: 0; list-style: none; }
+  .example__text li { padding: .3em 0 .3em 1.2em; border-top: 1px solid var(--hairline); position: relative; }
+  .example__text li:last-child { border-bottom: 1px solid var(--hairline); }
+  .example__text li::before { content: '–'; position: absolute; left: 0; }
+
+  /* ── Typography New.0 ── */
+  .tn__wrap { width: 100%; }
+  .tn__q { margin-top: .6em; }
+  .tn__wrap--split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5em, 4vw, 4em); align-items: center; }
+  .tn__refs { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.2vw, 1.2em); align-items: end; }
+  .tn__refs--two { grid-template-columns: repeat(2, 1fr); }
+  .tn__refs figure, .tn__made figure { margin: 0; }
+  .tn__refs img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .tn__refs figcaption, .tn__made figcaption { font-family: var(--label); font-size: var(--tag); line-height: var(--lh-label); margin-top: .5em; }
+  .tn__made { display: grid; grid-template-columns: 1fr 1.6fr 1.6fr; gap: clamp(8px, 1.4vw, 1.4em); align-items: end; margin-top: 1em; }
+  .tn__made img { display: block; width: 100%; height: 52vh; object-fit: contain; object-position: left bottom; }
+  /* in situ: one piece per screen, the screen full height, the piece smaller in its middle */
+  .situ { padding: 0; }
+  .situ__img { position: absolute; inset: 15vh 18vw; width: calc(100% - 36vw); height: calc(100% - 30vh); object-fit: contain; }
+  @media (max-aspect-ratio: 1/1) { .situ__img { inset: 22vh 8vw; width: calc(100% - 16vw); height: calc(100% - 44vh); } }
+  .situ--black { background: #000; }
+  .situ--grey { background: #d9d9d9; }
+  .tn__list { margin-top: .5em; max-width: 30em; }
+  .tn__list span { opacity: 0; transition: opacity .5s calc(.3s + var(--i) * .12s); }
+  .tn--says.is-on .tn__list span { opacity: 1; }
+  .tn__legible span { display: inline-block; transition: filter 1.2s, transform 1.2s, letter-spacing 1.2s; }
+  @media (max-width: 48em) {
+    .tn__wrap--split { grid-template-columns: 1fr; }
+    .tn__made { grid-template-columns: 1fr 1fr; } .tn__made figure:first-child { grid-row: span 2; }
+    .tn__made img { height: 24vh; }
+  }
+  /* each instrument, live: the tool's own page with everything but its stage hidden */
+  .tool { padding: 0; place-items: stretch; }
+  .tool__ask { position: absolute; left: var(--gutter); right: var(--gutter); top: 4.4rem; z-index: 2; margin: 0; pointer-events: none; color: #fff; mix-blend-mode: difference; }   /* reads on light and dark canvases alike */
+  .tool__frame { position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; /* the tool is the background of its screen; its line sits over it */ border: 0; background: #fff; opacity: 0; transition: opacity .4s; }
+  .tool__frame.is-ready { opacity: 1; }   /* shown only once its own settings (and any saved ones) are on: never big, then small */
+
+  /* ── day two brief: the five things every tool must hold ── */
+  .brief__wrap { width: 100%; }
+  .brief__list { list-style: none; margin: .2em 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 .45em; font-size: calc(clamp(2.4rem, 7vw, 7rem) * var(--fs)); line-height: var(--lh-display); }
+
+  /* ── idea and action, crushed into each other ── */
+  .collide { padding: 0; }
+  .collide__words { display: flex; justify-content: center; align-items: baseline; white-space: nowrap; margin: 0; color: transparent; }   /* the real words, for layout and screen readers */
+  .collide__art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* beginner's mind: a plain grey ring behind the words, no fill, eased in as the screen arrives */
+  .enso__disc { position: absolute; left: 50%; top: 50%; width: min(78vh, 70vw); aspect-ratio: 1; transform: translate(-50%, -50%) rotate(-90deg); overflow: visible; pointer-events: none; }
+  /* the ring is drawn, one stroke from the top, clockwise, each time the screen arrives */
+  .enso__disc circle { fill: none; stroke: #9a9a9a; stroke-width: .36; stroke-dasharray: 1.02 1.02; stroke-dashoffset: 1.02; transition: stroke-dashoffset 0s; }
+  .enso.is-on .enso__disc circle { stroke-dashoffset: 0; transition: stroke-dashoffset 2.6s cubic-bezier(.45, .05, .35, 1) .2s; }
+  @media (prefers-reduced-motion: reduce) { .enso__disc circle { transition: none !important; stroke-dashoffset: 0; } }
+  .enso h2 { position: relative; }
+
+  /* ── the work: one project to a screen ── */
+  .proj { padding: 0; }
+  .proj--bleed img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }   /* full width, edge to edge */
+  /* Lake Opeka: the whole flatlay, never cropped, on a ground graded like the photograph's own blue (sampled from its edges) */
+  .proj--fit { background: linear-gradient(#748eb1, #647c9d); }
+  .proj--fit img { left: 50%; right: auto; width: auto; max-width: none; height: 100%; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }   /* its sides feathered into the ground, so no seam */
+  .proj--poster img { position: absolute; left: 50%; top: 50%; height: calc(100% - 10em); width: auto; transform: translate(-50%, -50%); box-shadow: 0 1.4em 3em -1.2em rgba(0,0,0,.35); }
+  .proj--cycle .proj__cycle img { opacity: 0; transition: opacity .9s ease; }   /* one picture after another, crossfading */
+  .proj--cycle .proj__cycle img.on { opacity: 1; }
+  /* faculty: a card that turns over, cover to hummingbird to first spread, each time the screen comes up */
+  .proj--flip { background: #000; perspective: 2400px; }
+  .flip { position: absolute; left: 50%; top: 50%; width: min(78vw, calc((100vh - 9em) * 1.5)); aspect-ratio: 3 / 2; transform: translate(-50%, -50%); }
+  .flip__card { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1.25s cubic-bezier(.6, 0, .25, 1); }
+  .flip__face { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .flip__face--b { transform: rotateY(180deg); }
+  /* the phone, dead center: a black body round the reel, the case study's own proportions */
+  .proj__phone { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); height: calc(100% - 10em); aspect-ratio: 9 / 16; padding: clamp(7px, .7vw, 10px); background: #0d0d0d; border: 1px solid rgba(255,255,255,.14); border-radius: clamp(30px, 3.2vw, 46px); box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); box-sizing: border-box; }
+  .proj__phone video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: clamp(24px, 2.6vw, 38px); background: #000; }
+  /* overnight: a night sky, deep blue to black, stars that twinkle and now and then one that falls */
+  .night { background: radial-gradient(120% 90% at 50% 110%, #0d1a3a 0%, #060b1c 45%, #000 100%); }
+  .night__sky { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .night__words { position: relative; }
+  #talk-toast { position: fixed; left: 50%; bottom: 1.25em; transform: translateX(-50%); z-index: 200; font-family: var(--label); font-size: var(--tag); padding: .55em 1em; background: #000; color: #fff; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  #talk-toast.is-on { opacity: 1; }
+  /* ── the koan screens ── */
+  .huatou__def { max-width: 34em; margin: 1.4em auto 0; }
+  .koan__wrap { width: 100%; max-width: 62rem; justify-self: start; }   /* on the left margin, like every other flush-left screen */
+  .koan__then { margin-top: .8em; }
+
+  /* ── what if a page comes to life: an open book, both pages live ── */
+  .book { background: #e4e1da; }
+  .book__spread { position: absolute; left: 50%; top: 8.5rem; bottom: 6.5rem; transform: translateX(-50%); display: flex; aspect-ratio: 1.44; max-width: calc(100% - 2 * var(--gutter));
+    filter: drop-shadow(0 1.6em 2.2em rgba(40, 30, 20, .22)) drop-shadow(0 .2em .4em rgba(40, 30, 20, .18)); }
+  .book__page { position: relative; flex: 1 1 0; overflow: hidden; background-color: #f5f1e8;
+    /* paper: a faint grain over warm off-white */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3  0 0 0 0 .25  0 0 0 0 .2  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  /* the stack of pages under each side, showing at the outer edges */
+  .book__page:first-child { border-radius: 3px 0 0 3px; box-shadow: -1px 0 0 #e7e2d6, -2px 1px 0 #d6d0c2, -3px 1px 0 #ebe6da, -4px 2px 0 #d3ccbd, -5px 2px 0 #e9e3d6, -6px 3px 0 #cfc8b8; }
+  .book__page:last-child  { border-radius: 0 3px 3px 0; box-shadow: 1px 0 0 #e7e2d6, 2px 1px 0 #d6d0c2, 3px 1px 0 #ebe6da, 4px 2px 0 #d3ccbd, 5px 2px 0 #e9e3d6, 6px 3px 0 #cfc8b8; }
+  /* the paper curving down into the spine, and a little light on the rise */
+  .book__page::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+  .book__page:first-child::after { background: linear-gradient(to right, rgba(0,0,0,.035) 0%, rgba(255,255,255,.18) 8%, rgba(0,0,0,0) 60%, rgba(0,0,0,.05) 84%, rgba(0,0,0,.16) 96%, rgba(0,0,0,.28) 100%); }
+  .book__page:last-child::after  { background: linear-gradient(to left,  rgba(0,0,0,.035) 0%, rgba(255,255,255,.18) 8%, rgba(0,0,0,0) 60%, rgba(0,0,0,.05) 84%, rgba(0,0,0,.18) 96%, rgba(0,0,0,.32) 100%); }
+  .book .book__page .tool__frame { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; }
+  /* running heads and folios, as a book sets them */
+  .book__head, .book__folio { position: absolute; z-index: 3; font-family: var(--display); font-size: calc(clamp(.6rem, .8vw, .85rem) * var(--fs)); letter-spacing: .08em; color: #2a2620; pointer-events: none; }
+  .book__head { top: 4.6%; }
+  .book__folio { bottom: 4.2%; }
+  .book__page:first-child .book__head, .book__page:first-child .book__folio { left: 10%; }
+  .book__page:last-child .book__head, .book__page:last-child .book__folio { right: 10%; }
+  @media (max-aspect-ratio: 1/1) { .book__spread { top: 50%; bottom: auto; transform: translate(-50%, -50%); width: calc(100% - 2 * var(--gutter)); height: auto; } }
+
+  /* ── the idea, in its box ── */
+  .idea__word { font-family: var(--display); font-size: calc(22px * var(--fs)); fill: currentColor; stroke: none; }
+
+  /* ── into Now: the pink node grows from where it sat on the timeline until it is the whole screen ── */
+  /* the timeline's own Now dot is lifted out and grown with the scroll, until the next screen is all pink */
+  .zoomnow { background: transparent; }
+  .zoomnow.is-full { background: #b0e0e6; }
+  .zoomnow__dot { position: fixed; left: 0; top: 0; border-radius: 50%; background: #b0e0e6; pointer-events: none; z-index: 0; display: none; will-change: transform; }
+  .zoomnow__say { position: relative; color: #000; opacity: 0; transition: opacity .8s; }
+  .zoomnow.is-on .zoomnow__say { opacity: 1; transition-delay: .25s; }
+  /* and the next screen stays pink: the sentence gives way to what it communicates */
+  .s.pinkbg { background: #b0e0e6; }   /* powder blue now; the class name is kept */
+  .tn--says.pinkbg .tn__wrap { display: flex; justify-content: center; }
+  .tn--says.pinkbg .tn__list { margin: 0 auto; max-width: 16em; text-align: center; color: #000; font-size: calc(clamp(2rem, 4.2vw, 4.2rem) * var(--fs)); line-height: var(--lh-display); }
+
+  /* ── imagine if: a field of prompts ── */
+  .imagine__wrap { width: 100%; }
+  .imagine__list { list-style: none; margin: .8em 0 0; padding: 0; columns: 2; column-gap: var(--grid-gap); font-size: calc(clamp(1rem, 1.9vw, 1.9rem) * var(--fs)); line-height: var(--lh-text); }
+  .imagine__list li { break-inside: avoid; padding: .3em 0; border-top: 1px solid var(--hairline); }
+  @media (max-width: 48em) { .imagine__list { columns: 1; } }
+
+  /* ── timeline ── */
+  .time { width: 100%; position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--grid-gap); }
+  .mark { position: relative; height: 15em; grid-column: span 2; }   /* each date takes two columns of the page grid */
+  .mark .when { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(50% + 1.6em); font-size: calc(clamp(1.1rem, 2.4vw, 2.4rem) * var(--fs)); white-space: nowrap; }
+  .mark .what { position: absolute; left: 50%; transform: translateX(-50%); top: calc(50% + 1.6em); font-family: var(--label); font-size: var(--tag); line-height: var(--lh-label); white-space: nowrap; text-align: center; }
+  /* the line is metaballs: dots that swell as a wave runs through them and run together,
+     melting into the bigger nodes at each date */
+  .goo { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .pulse { position: absolute; left: 0; right: 0; top: 50%; height: 0; pointer-events: none; }
+  .pulse i { position: absolute; left: var(--p); top: 0; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 2px; background: currentColor; opacity: .3; animation: pulse 2.8s ease-in-out var(--d) infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1, 1); opacity: .3; } 45% { transform: scale(3.4, 1.25); opacity: 1; } }
+  .now__line .pulse i { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
+  @media (prefers-reduced-motion: reduce) { .pulse i { animation: none; opacity: .6; } }
+  @media (max-width: 48em) {
+    .time { grid-template-columns: 1fr; gap: 1.6em; } .time .mark { grid-column: auto; }
+    .time .pulse { left: 0; right: auto; top: 0; bottom: 0; width: 0; height: auto; }
+    .time .pulse i { left: 0; top: var(--p); animation-name: pulse-down; }
+    @keyframes pulse-down { 0%, 100% { transform: scale(1, 1); opacity: .3; } 45% { transform: scale(1.25, 3.4); opacity: 1; } }
+    .mark { height: auto; padding-left: 1.4em; }
+    .mark .when, .mark .what { position: static; display: block; transform: none; text-align: left; }
+    .mark .what { margin-top: .3em; }
+  }
+
+  /* ── systems ── */
+  .sys { padding: 0; cursor: pointer; }
+  .sys__art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ── questions ── */
+  .qs { display: grid; gap: .3em; text-align: center; }
+
+  /* ── the mad lib: the prompt, with the blanks left for them ── */
+  .lib { width: 100%; max-width: 76rem; }
+  .lib__text { font-size: calc(clamp(1.6rem, 4.2vw, 4.2rem) * var(--fs)); line-height: var(--lh-text); }
+  .blank {
+    display: inline; min-width: 4em; padding: 0 .1em; outline: none;
+    border-bottom: var(--rule) solid currentColor;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .blank:empty::before { content: attr(data-ph); }
+  .blank:focus { background: rgba(0,0,0,.05); }
+  .lib__bar { margin-top: 2.4em; display: flex; flex-wrap: wrap; align-items: center; gap: 1.2em; }
+  .lib__copy {
+    font: inherit; color: var(--paper); background: var(--ink); border: 0;
+    padding: .7em 1.2em; cursor: pointer;
+  }
+
+  /* ── frames: placeholders for drawings, prompts, tools ── */
+  .frames { width: 100%; display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: clamp(12px, 2vw, 2em); }
+  .frame { aspect-ratio: 3 / 4; border: 2px dashed currentColor; display: flex; align-items: flex-end; padding: 1em; }
+  .frame span { font-family: var(--label); font-size: var(--tag); }
+  .ink .frame { border-color: rgba(255,255,255,.7); }
+  .focus { width: 100%; display: grid; grid-template-columns: auto 1fr; gap: clamp(1.5em, 4vw, 4em); align-items: center; }
+  .focus .frame { aspect-ratio: 16 / 9; }
+  @media (max-width: 48em) {
+    .frames { grid-template-columns: repeat(2, 1fr); }
+    .focus { grid-template-columns: 1fr; }
+  }
+
+  /* ── posters ── */
+  .posters { width: 100%; display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(12px, 2vw, 2em); }
+  figure.poster { margin: 0; }
+  .poster svg { width: 100%; height: auto; display: block; border: 1px solid #000; }
+  .poster figcaption { font-family: var(--label); font-size: var(--tag); margin-top: .8em; }
+  .poster text { font-family: var(--display); }
+  @media (max-width: 48em) { .posters { grid-template-columns: repeat(2, 1fr); } .frames[style*="--n:5"] { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ── schedule ── */
+  .sched { width: 100%; max-width: 60em; }
+  .sched h2 { margin-bottom: .2em; }
+  .sched .tag { margin-bottom: 1.4em; }
+  .sched .big { font-size: calc(clamp(2rem, 4.6vw, 4.6rem) * var(--fs)); }
+  .sched .row { padding: .5em 0; }
+  .row { display: grid; grid-template-columns: 9em 1fr 1.4fr; gap: 1em; padding: .8em 0; border-top: 1px solid var(--hairline); font-family: var(--label); font-size: calc(clamp(.9rem, 1.2vw, 1.1rem) * var(--fs)); line-height: var(--lh-label); }
+  .row:last-child { border-bottom: 1px solid var(--hairline); }
+  .row .part { font-family: var(--display); font-size: 1.15em; }
+  @media (max-width: 48em) { .row, .sched .row { grid-template-columns: 4em 1fr; padding: .35em 0; font-size: calc(.8rem * var(--fs)); gap: 0 .8em; } .row .part { font-size: 1em; } .row .what { grid-column: 2; } .sched .tag { margin-bottom: 1.2em; } }
+  /* ── everything centered, on the grid (31 Oct): blocks span an even number of the twelve columns,
+     centered, so both edges land on column lines; the type inside is centered ── */
+  /* (the gap in rem, the overlay's own: em would follow each block's type size) */
+  :root { --col: calc((100vw - 2 * var(--gutter) - 11 * .5rem) / 12); }
+  .s { text-align: center; }
+  .note, .note * { text-align: left; }
+  /* meaning beside technology, thinking in systems, a designer today */
+  .tn__wrap { text-align: center; }
+  .solo--left .hero, .solo--right .hero { text-align: center; }
+  .is-a .big { text-align: center; }
+  /* the schedules: eight columns, the head centred, each row on the columns (time 1, part 2, what 5) */
+  .sched { width: calc(var(--col) * 8 + .5rem * 7); max-width: none; margin: 0 auto; }
+  .row, .sched .row { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0 .5rem; text-align: left; }
+  .row > :nth-child(2) { grid-column: span 2; }
+  .row > :nth-child(3) { grid-column: span 5; }
+  /* the rules and the constraints: the heading centred, the list six columns, each line centred */
+  .rules__wrap { justify-items: center; }
+  .rules__list { width: calc(var(--col) * 6 + .5rem * 5); }
+  .rules__list li { display: block; text-align: center; }
+  .rules__list li span { padding: 0 .6em 0 0; vertical-align: .35em; }
+  .rules__ask { justify-content: center; text-align: left; }   /* the question hangs as one block, centred */
+  /* the prompt: eight columns, centred */
+  .example__wrap { width: calc(var(--col) * 8 + .5rem * 7); max-width: none; margin: 0 auto; }
+  .example__text li { padding-left: 0; }
+  .example__text li::before { content: none; }
+  /* build a tool that includes: the list centred under its line */
+  .brief__list { justify-content: center; gap: 0 .24em; }   /* a word space after each comma, no more */
+  /* imagine if: ten columns, two to a row, centred */
+  .imagine__wrap { width: calc(var(--col) * 10 + .5rem * 9); margin: 0 auto; }
+  /* two columns, at Christian's ask (31 Oct): the activities keep their own grid (words in 1–5, the work
+     from 6), and the constraints, the prompt and imagine-if split six and six; all set flush left */
+  .hand__wrap, .hand__wrap * { text-align: left; }
+  .rules--two .rules__wrap, .example__text, .imagine.two .imagine__wrap { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 .5rem; align-items: start; justify-items: stretch; text-align: left; }
+  .rules--two .rules__wrap > * { grid-column: span 6; }
+  .rules--two .rules__list { width: auto; }
+  .rules--two .rules__ask { justify-content: flex-start; margin-top: .3em; }
+  .example__wrap, .example__wrap * { text-align: left; }
+  .example__wrap { width: 100%; }
+  .example__text > p { grid-column: 1 / span 6; padding-right: 1em; }
+  .example__text > p:last-of-type { grid-row: 2; }
+  .example__text > ul { grid-column: 7 / span 6; grid-row: 1 / span 3; }
+  .imagine.two .imagine__wrap { width: 100%; }
+  .imagine.two .imagine__wrap, .imagine.two .imagine__wrap * { text-align: left; }
+  .imagine.two .imagine__wrap > h2 { grid-column: 1 / span 6; }
+  .imagine.two .imagine__list { grid-column: 7 / span 6; columns: 1; margin-top: 0; }
+  @media (max-width: 48em) { .rules--two .rules__wrap > *, .example__text > p, .example__text > ul, .imagine.two .imagine__wrap > h2, .imagine.two .imagine__list { grid-column: 1 / -1; grid-row: auto; } }
+  @media (max-width: 40em) {
+    :root { --col: calc((100vw - 2 * var(--gutter) - 5 * .5rem) / 6); }
+    .sched, .rules__list, .hand__wrap > .hand__cuts, .example__wrap, .imagine__wrap { width: 100%; }
+    .row, .sched .row { grid-template-columns: 4em 1fr; } .row > :nth-child(2), .row > :nth-child(3) { grid-column: auto; } .row .what { grid-column: 2; }
+  }
+
+/* Heart + machine (the workshop): a pink heart that beats and a grey gear that turns */
+.hm__row { display: flex; align-items: center; justify-content: center; gap: .32em; margin: 0; }
+.hm svg { width: 1.9em; height: 1.9em; overflow: visible; fill: none; stroke: currentColor; stroke-width: var(--rule); vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.hm__heart path { fill: #f49ac1; stroke: none; }   /* the heart in pink */
+.hm__gear path { fill: #b3b3b3; stroke: none; }    /* the machine in grey, the axle left open */
+.hm__gear circle { fill: var(--paper); stroke: none; }
+.hm svg.hm__plus { width: .8em; height: .8em; }   /* the OP/AL crossbar (the cursor on Nicolette's site, the Values collateral) */
+.hm__plus path { fill: currentColor; stroke: none; }
+.hm__heart { transform-origin: 50% 60%; animation: hm-beat 1.6s ease-in-out infinite; }
+.hm__gear { animation: hm-turn 9s linear infinite; }
+@keyframes hm-beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.07); } 24% { transform: scale(.99); } 36% { transform: scale(1.05); } 52% { transform: scale(1); } }
+@keyframes hm-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .hm__heart, .hm__gear { animation: none; } }
+
+/* the constraints, alone on their screen: the question hangs as one block, centred, the six words stacked under "to" */
+.constraints .rules__ask { justify-content: center; text-align: left; font-size: calc(clamp(1.6rem, 3.4vw, 3.4rem) * var(--fs)); line-height: var(--lh-text); }
+
+/* the agendas, in two columns like the other two-column screens: the day and its date on columns 1–5,
+   the schedule on 6–12 (time 1, part 2, what 4), flush left */
+.sched.sched--two { width: 100%; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 .5rem; align-items: start; text-align: left; margin: 0; }
+.sched--two .sched__head { grid-column: 1 / span 5; }
+.sched--two .sched__head .tag { margin-bottom: 0; }
+.sched--two .sched__rows { grid-column: 6 / span 7; }
+.sched--two .row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.sched--two .row > :nth-child(2) { grid-column: span 2; }
+.sched--two .row > :nth-child(3) { grid-column: span 4; }
+@media (max-width: 48em) { .sched--two .sched__head, .sched--two .sched__rows { grid-column: 1 / -1; } .sched--two .sched__head { margin-bottom: 1.2em; } .sched--two .row { grid-template-columns: 4em 1fr; } .sched--two .row > :nth-child(2), .sched--two .row > :nth-child(3) { grid-column: auto; } .sched--two .row .what { grid-column: 2; } }
+
+/* Open mind (the workshop): the O fills like a balloon each time the screen arrives, pushing the words aside,
+   overshooting a touch, then floating there, breathing */
+.om__o { display: inline-block; font-size: 1em; transform-origin: 50% 85%; }
+.om.is-on .om__o { animation: om-fill 3.2s cubic-bezier(.3, .1, .3, 1) .35s forwards, om-float 3.6s ease-in-out 3.6s infinite; }
+@keyframes om-fill { 0% { font-size: 1em; } 72% { font-size: 2.05em; } 84% { font-size: 1.9em; } 93% { font-size: 1.98em; } 100% { font-size: 1.95em; } }
+@keyframes om-float { 0%, 100% { font-size: 1.95em; transform: translateY(0) scale(1, 1); } 50% { font-size: 1.95em; transform: translateY(-.04em) scale(1.015, .99); } }
+@media (prefers-reduced-motion: reduce) { .om.is-on .om__o { animation: none; font-size: 1.95em; } }
+
+/* Not-knowing (the workshop): the word drawn in outline, empty inside */
+.nk .hero { color: transparent; -webkit-text-stroke: .012em var(--ink); paint-order: stroke fill; font-size: min(13.6vw, 28vh); line-height: 1; white-space: nowrap; justify-self: center; margin: 0; }   /* big: the word across most of the screen, centred on it */
+.s.nk { display: grid; place-items: center; justify-content: center; }
+
+/* Artificial intelligence (the workshop): set in capitals, tracked out, one line across the middle */
+.ai__word { margin: 0 -.32em 0 0; font-weight: 400; text-transform: uppercase; letter-spacing: .32em; font-size: calc(clamp(1.4rem, 3.3vw, 3.3rem) * var(--fs)); line-height: var(--lh-display); white-space: nowrap; }
+
+/* never a rule above the first item of a list: rules only fall between items (and under the last) */
+.example__text li:first-child, .imagine__list li:first-child, .sched .row:first-child, .sched__rows .row:first-child { border-top: 0; }
+
+/* the constraints scroll: each word rises in turn to the sentence's line and takes a color there; the ones
+   that have had their turn go on up out of sight above the line, the ones to come wait below */
+.constraints .rules__ask { clip-path: inset(0 -50vw -50vh -50vw); }
+.constraints .rules__words { transition: transform .9s cubic-bezier(.5, 0, .2, 1); }
+.constraints .rules__words > span { transition: color .5s ease .45s; }
+@media (prefers-reduced-motion: reduce) { .constraints .rules__words, .constraints .rules__words > span { transition: none; } }
+
+/* Not-knowing kerned by eye at display size: in outline every collision shows, so the tight pairs open up */
+.nk .hero { letter-spacing: .004em; }
+.nk__t { margin-right: .015em; }
+.nk__k { margin-right: .05em; }
+.nk__w { margin-right: .03em; }
+
+/* a tool shown whole (Opeka Type, with its own panel): the talk's header and count step aside */
+body.ui-tool .chrome, body.ui-tool .count, body.ui-tool .hint { opacity: 0; pointer-events: none; }
+
+/* the city's colors, chosen on the slide (` on the cube) */
+#sys-colors { position: fixed; top: 0; right: 0; bottom: 0; width: min(22rem, 34vw); z-index: 100; background: #fff; color: #000; border-left: 1px solid #000; padding: 1.6rem; font-family: var(--label); font-size: .85rem; line-height: 1.4; overflow: auto; transform: translateX(101%); transition: transform .3s ease; }
+#sys-colors.is-on { transform: none; }
+.sys-colors__t { margin: 0 0 .4em; font-size: 1rem; }
+.sys-colors__h { margin: 0 0 1.4em; }
+.sys-colors__grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1rem; }
+.sys-colors__grid label { display: flex; align-items: center; gap: .6em; cursor: pointer; }
+.sys-colors__grid input { -webkit-appearance: none; appearance: none; width: 2.2rem; height: 2.2rem; padding: 0; border: 1px solid #d9d9d9; border-radius: 50%; background: none; cursor: pointer; }
+.sys-colors__grid input::-webkit-color-swatch-wrapper { padding: 0; }
+.sys-colors__grid input::-webkit-color-swatch { border: 0; border-radius: 50%; }
+.sys-colors__reset { margin-top: 1.6rem; width: 100%; padding: .7em; font: inherit; background: #fff; color: #000; border: 1px solid #000; border-radius: 6px; cursor: pointer; }

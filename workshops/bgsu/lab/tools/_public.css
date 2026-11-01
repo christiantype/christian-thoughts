@@ -1,0 +1,440 @@
+/* OP/AL public tool: the page opens like every project page (title, description, meta), then the
+   instrument fills a screen — the canvas above, every one of its controls in a bar below. Works on a phone. */
+/* The reading face, self-hosted with the rest. The tool pages do not load the
+   site's stylesheet, so the face is declared again here. */
+@font-face{ font-family:'Signifier';
+  src:url('/workshops/bgsu/shared/fonts/signifier-regular.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Signifier';
+  src:url('/workshops/bgsu/shared/fonts/signifier-regular-italic.woff2') format('woff2');
+  font-weight:400; font-style:italic; font-display:swap; }
+@font-face{ font-family:'Signifier';
+  src:url('/workshops/bgsu/shared/fonts/signifier-bold.woff2') format('woff2');
+  font-weight:700; font-style:normal; font-display:swap; }
+
+html,body{ margin:0 !important; background:#fff !important; font-family:"Signifier",Georgia,serif !important; -webkit-font-smoothing:antialiased; }
+body{ padding:0 !important; font-size:1em !important; }
+/* the Lab shell's chrome stays home */
+#gate-wrap,#dock,div#sizeDock,#sizeDock *,.opal-navscrim,.opal-nav,.opal-navbtn,#recDot,.topbar,#output,nav,.opal-topbar,.opal-drawer-btn,.opal-menu,.opal-drawer,[class*="opal-top"],[class*="opal-drawer"],[id*="opal-top"],[class*="opal-hamb"],[id*="opal-hamb"],[class*="opal-burger"],.opal-export,#opal-save,body > button,#sizeDock *{ display:none !important; }
+html body div#sizeDock{ display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; overflow:hidden !important; }
+.pt-bar,.pt-bar *,.pt-meta,.pt-meta *,.pt-desc,.pt-for,.sp-nav,.sp-nav *{ font-family:"Signifier",Georgia,serif !important; }
+
+/* the site's grid, not the Lab shell's: the same container on every page */
+
+/* the top: the very same hero + credits as every project page (shared/styles.css draws them);
+   the Lab shell must not restyle the type there */
+#hero, #credits{ position:relative; z-index:5; background:#fff; }
+#hero{ padding-top:140px !important; padding-bottom:6em !important; }
+#hero h1{ font-family:"Signifier",Georgia,serif !important; font-size:1em !important; font-weight:400 !important; letter-spacing:2px !important; line-height:1.1 !important; margin:0 0 1em !important; color:#111 !important; }
+#hero h2{ font-family:"Signifier",Georgia,serif !important; font-weight:400 !important; font-size:1em !important; line-height:1.6 !important; color:#393939 !important; margin:0 0 2em !important; letter-spacing:0 !important; text-transform:none !important; }
+#credits{ padding-top:var(--space-12) !important; padding-bottom:var(--space-12) !important; border-top:.3px solid #ccc !important; }
+#credits .label{ font-family:"Signifier",Georgia,serif !important; font-size:1em !important; font-weight:400 !important; letter-spacing:2px !important; color:#000 !important; display:block !important; margin-bottom:1em !important; }
+#credits p{ font-family:"Signifier",Georgia,serif !important; color:#111 !important; margin:0 0 1em !important; font-size:1em !important; line-height:1.8 !important; }
+#credits p a{ color:inherit; text-decoration:none; font-feature-settings:"ss01"; }
+#credits .text-mid{ color:#000 !important; }
+.pt-top .container, .sp-nav .container, .pt-stage .container, #hero .container, #credits .container{ width:100% !important; max-width:90em !important; margin:0 auto !important; padding:0 10em !important; box-sizing:border-box; }
+@media (max-width:64em){ .pt-top .container, .sp-nav .container, .pt-stage .container, #hero .container, #credits .container{ padding:0 4em !important; } }
+@media (max-width:40em){ .pt-top .container, .sp-nav .container, .pt-stage .container, #hero .container, #credits .container{ padding:0 1.25em !important; } }
+
+/* the instrument: a square canvas as wide as the grid (all twelve columns), the bar beneath it */
+/* The instrument occupies exactly one screen: the canvas takes whatever height
+   the control bar leaves, so the artwork and its controllers are always visible
+   together. It grows to the grid's full width but never past the viewport. */
+.pt-stage{ position:relative; display:flex; flex-direction:column; height:100vh; height:100dvh; background:#fff; color:#111; padding-top:1em; box-sizing:border-box; }
+.pt-stage #wrap{ position:relative !important; inset:auto !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; box-sizing:border-box; flex:1 1 auto; min-height:0; width:100% !important; max-width:90em !important; height:auto !important; aspect-ratio:auto !important; margin:0 auto !important; padding:0 10em !important; display:flex !important; align-items:center !important; justify-content:center !important; background:#fff !important; border:0 !important; }
+@media (max-width:64em){ .pt-stage #wrap{ padding:0 4em !important; } }
+@media (max-width:40em){ .pt-stage #wrap{ padding:0 1.25em !important; } }
+/* a canvas the engine has filled with a colour carries its own edge */
+#art.is-filled, #render-canvas.is-filled{ border:0 !important; }
+/* the thin grey rule belongs to the canvas, not the box that centres it */
+/* The canvas's own look — white ground, a hairline rule, no drop shadow — is
+   the same on every instrument, so it is written once for both ids. It used to
+   name #art only, and Flora, whose canvas is #render-canvas, carried a
+   hand-copied duplicate in its own file to match. Sizing stays with #art:
+   Flora sets its display size itself, from the artboard. */
+#art, #render-canvas{ display:block !important; border:1px solid #ccc !important; box-shadow:none !important; background:#fff !important; }
+#art{ max-width:100% !important; max-height:100% !important; width:auto !important; height:auto !important; }
+
+/* the bar */
+.pt-bar{ position:relative; flex:none; z-index:20; padding:18px 0 calc(14px + env(safe-area-inset-bottom)); color:#111; }
+.pt-bar button{ all:unset; box-sizing:border-box; }
+.pt-bar__row{ display:grid; grid-template-columns:repeat(12,1fr); gap:var(--grid-gap); align-items:center; }
+.pt-bar__btns{ grid-column:1 / span 3; display:flex; gap:10px; }
+/* the transport sits on the artwork, bottom left, with the picture rather than
+   with the parameters */
+/* The transport rides on the foot of the picture: placed against the canvas's
+   own rectangle by _public.js, not against the corner of the box the canvas is
+   centred in. Out of the bar, so it carries its own button rule. */
+.pt-transport{ position:absolute; left:0; top:0; z-index:5; display:flex; gap:10px;
+  transform:translateY(-100%); padding:0 0 10px 10px; box-sizing:content-box;
+  grid-column:auto !important; }
+.pt-transport .pt-bar__btn{ all:unset; box-sizing:border-box; width:36px; height:36px;
+  border-radius:50%; border:1px solid rgba(0,0,0,.35); background:rgba(255,255,255,.82);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  color:#111; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+.pt-transport .pt-bar__btn:hover{ border-color:#111; }
+.pt-transport .pt-bar__btn[aria-pressed="true"]{ background:#111; color:#fff; border-color:#111; }
+.pt-transport .pt-bar__btn svg{ width:16px; height:16px; }
+/* One mark on the artwork, not two. The canvases carried a crosshair (Bloom)
+   and an I-beam (Opeka Type) of their own, which sat under the site's dot and
+   made two cursors on one picture. The dot grows over the artwork instead, so
+   the picture still says it can be acted on. */
+.has-custom-cursor #art, .has-custom-cursor #render-canvas,
+.has-custom-cursor #wrap, .has-custom-cursor .pt-stage { cursor: none !important; }
+/* the blank cell that finishes a row of sliders */
+.pt-c--pad{ visibility:hidden; pointer-events:none; }
+#wrap{ position:relative; }
+.pt-bar__field{ grid-column:4 / span 6; }
+.pt-bar .pt-bar__btn{ width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,.35); color:#111; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+.pt-bar .pt-bar__btn[aria-pressed="true"]{ background:#111; color:#fff; border-color:#111; }
+.pt-bar__btn svg{ width:16px; height:16px; }
+.pt-bar__words{ width:100%; box-sizing:border-box; background:transparent; border:0; border-bottom:1px solid rgba(0,0,0,.3); color:#111 !important; font:inherit; font-size:16px !important; letter-spacing:.04em; padding:8px 0; outline:none !important; box-shadow:none !important; text-align:center; caret-color:#111; }
+.pt-bar__words:focus{ border-bottom-color:#111; }
+/* every control of the engine, on the grid: sliders two columns, small things one */
+.pt-bar__ctl{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px var(--grid-gap); margin-top:18px; align-items:end; }
+.pt-bar__ctl:empty{ display:none; }
+.pt-c{ grid-column:span 2; min-width:0; font-size:11px; line-height:1.4; letter-spacing:.02em; color:#111; }
+.pt-c--range,.pt-c--sel,.pt-c--col{ display:flex; flex-direction:column; gap:7px; }
+/* The label's line box was 10.67px tall with overflow hidden, so the tops of
+   the letters were cut off by the box itself. The clip is only there to stop a
+   long name pushing its value out of the column, which is a horizontal problem
+   — so it is solved horizontally, on the name, and the line is given room. */
+.pt-c__l{ display:flex; justify-content:space-between; align-items:baseline;
+  gap:8px; white-space:nowrap; line-height:1.4; overflow:visible; }
+.pt-c__n{ min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.pt-c__v{ font-weight:400; color:#000; font-variant-numeric:tabular-nums; }
+.pt-c input[type=range]{ -webkit-appearance:none !important; appearance:none !important; width:100% !important; height:2px !important; background:rgba(0,0,0,.2) !important; border-radius:1px !important; outline:none; cursor:pointer; margin:8px 0 !important; padding:0 !important; border:0 !important; display:block; }
+.pt-c input[type=range]::-webkit-slider-runnable-track{ background:transparent !important; height:2px !important; border-radius:0 !important; }
+.pt-c input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none !important; width:18px !important; height:18px !important; margin-top:-8px !important; border-radius:50% !important; background:#111 !important; border:0 !important; box-shadow:0 0 0 3px #fff !important; }
+.pt-c input::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:#111; border:0; }
+.pt-c select{ -webkit-appearance:none; appearance:none; width:100%; box-sizing:border-box; height:34px; padding:0 22px 0 10px; border:1px solid rgba(0,0,0,.3); border-radius:17px; background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23111' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 10px center/10px 6px; color:#111; font:inherit; font-size:12px; outline:none; cursor:pointer; }
+.pt-c select option{ color:#000; }
+.pt-c--col,.pt-bar .pt-c--swb{ grid-column:span 1; }
+.pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ grid-column:span 2; }
+/* A colour is a square with its name beside it, not a circle with its name
+   floating above. A round swatch reads as a button; a square reads as a sample
+   of the colour, which is what it is. */
+.pt-c--col{ flex-direction:row !important; align-items:center; gap:9px; }
+.pt-c--col .pt-c__l{ order:2; flex:1 1 auto; }
+.pt-c--col .pt-c__sw{ order:1; flex:0 0 auto; }
+.pt-c__sw{ position:relative; display:block; width:22px; height:22px; border-radius:2px; border:1px solid rgba(0,0,0,.35); overflow:hidden; cursor:pointer; }
+.pt-c__sw input{ position:absolute; inset:-8px; width:60px; height:60px; opacity:0; cursor:pointer; }
+.pt-bar .pt-c--swb{ width:22px; height:22px; border-radius:2px; border:1px solid rgba(0,0,0,.35); cursor:pointer; align-self:end; }
+.pt-bar .pt-c--swb[aria-pressed="true"]{ box-shadow:0 0 0 2px #fff, 0 0 0 3px #111; }
+.pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ height:34px; padding:0 14px; border:1px solid rgba(0,0,0,.3); border-radius:17px; color:#111; font-size:12px; white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:100%; overflow:hidden; }
+.pt-bar .pt-c--tog[aria-pressed="true"],.pt-bar .pt-c--btn[aria-pressed="true"]{ background:#111; color:#fff; border-color:#111; }
+/* where the tool has been used: one quiet line under the bar */
+.pt-for{ display:block; margin-top:16px; text-align:center; color:#000; text-decoration:none; font-size:11px; letter-spacing:.02em; }
+.pt-for:hover{ color:#111; }
+
+@media (max-width:64em){ .pt-c{ grid-column:span 3; } .pt-c--col,.pt-bar .pt-c--swb{ grid-column:span 1; } .pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ grid-column:span 3; } .pt-bar .pt-c--swb{ justify-self:start; } }
+@media (max-width:40em){
+  .pt-bar{ padding-top:14px; }
+  .pt-bar__row{ grid-template-columns:repeat(6,1fr); }
+  .pt-bar__btns{ grid-column:1 / span 6; justify-content:center; order:2; margin-top:14px; }
+  .pt-bar__field{ grid-column:1 / span 6; order:1; }
+  /* On a phone the controls stack and the page scrolls. They used to be one
+     strip you swiped sideways, which meant that on the screen where the
+     instrument matters most, twenty-odd of its controls were off the edge and
+     nothing said so. A column is longer and it is all there. */
+  .pt-bar__ctl{ display:grid; grid-template-columns:repeat(6,1fr); gap:20px var(--grid-gap);
+    margin:18px 0 0; padding:0; align-items:end; }
+  .pt-bar__ctl::-webkit-scrollbar{ display:none; }
+  .pt-c{ grid-column:1 / span 6; }
+  .pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ grid-column:span 3; width:100%; }
+  .pt-bar .pt-c--col{ grid-column:span 3; justify-self:start; }
+  .pt-bar .pt-c--swb{ grid-column:span 1; justify-self:center; }
+  /* ── The phone ────────────────────────────────────────────────────────────
+     The artwork has the screen. Everything else is in a drawer. */
+  /* svh, not vh or dvh: the small viewport height does not change when the
+     address bar collapses, so nothing resizes under a moving finger.
+
+     The stage is exactly one screen and the page does not scroll. It used to
+     be min-height with padding, which made the document a little taller than
+     the screen — enough to scroll, and scrolling gave an accidental peek at
+     the drawer sitting under the fold. Nothing to scroll, nothing to peek. */
+  html.is-embed, html.is-embed body{ overflow:hidden !important; height:100% !important; }
+  .pt-stage{ position:relative; display:flex !important; flex-direction:column !important;
+    align-items:center !important; justify-content:center !important;
+    height:100vh !important; height:100svh !important; min-height:0 !important;
+    overflow:hidden;
+    padding:1em 0 calc(1.25em + env(safe-area-inset-bottom)) !important;
+    transition:padding-bottom .26s cubic-bezier(.32,.72,0,1); }
+  /* `flex: 1 1 auto` made #wrap grow along the column's main axis, which is
+     vertical — so its height was decided by the flex line and every height we
+     set on it was ignored. It sizes to its content now, and the artwork's own
+     max-height is the thing that decides how big the picture is. */
+  .pt-stage #wrap{ flex:0 0 auto !important; min-height:0 !important;
+    height:auto !important; width:100% !important;
+    display:flex !important; align-items:center !important; justify-content:center !important;
+    padding:0 1.25em !important; }
+  .pt-stage #art, .pt-stage #render-canvas, .pt-stage #type{ width:auto !important; height:auto !important;
+    max-width:100% !important;
+    max-height:var(--art-max, calc(100svh - 4em)) !important;
+    transition:max-height .26s cubic-bezier(.32,.72,0,1); }
+  @media (prefers-reduced-motion:reduce){
+    .pt-stage #art, .pt-stage #render-canvas, .pt-stage #type{ transition-duration:.01s; } }
+
+  /* the one mark over the picture, bottom right, where a thumb already is */
+  .pt-drawer__open{ position:fixed; right:1.25em; bottom:calc(1.25em + env(safe-area-inset-bottom));
+    z-index:60; width:52px; height:52px; display:inline-flex; align-items:center; justify-content:center;
+    padding:0; border:0; border-radius:50%; cursor:pointer;
+    color:#fff; background:rgba(17,17,17,.9); box-shadow:0 2px 14px rgba(0,0,0,.22); }
+  .pt-drawer__open svg{ width:23px; height:23px; display:block; }
+  .pt-drawer__open:active{ background:#000; }
+
+  /* the scrim is only for dismissing; it does not dim the artwork, because the
+     artwork is the thing you are watching while you move a control */
+  .pt-drawer__scrim{ position:fixed; inset:0; z-index:70; background:transparent; }
+  .pt-drawer__scrim[hidden]{ display:none; }
+
+  /* the drawer itself: square corners, the tool's name on it, and the controls
+     scrolling inside it */
+  .pt-bar--drawer{ position:fixed; left:0; right:0; bottom:0; z-index:80;
+    max-height:62vh; overflow-y:auto; overscroll-behavior:contain;
+    background:#fff; border-top:.3px solid #ccc;
+    padding:0 1.25em calc(1.5em + env(safe-area-inset-bottom)) !important;
+    transform:translateY(101%); transition:transform .26s cubic-bezier(.32,.72,0,1);
+    box-shadow:0 -2px 24px rgba(0,0,0,.14); }
+  .pt-bar--drawer.is-open{ transform:translateY(0); }
+  @media (prefers-reduced-motion:reduce){ .pt-bar--drawer{ transition-duration:.01s; } }
+
+  .pt-drawer__head{ position:sticky; top:0; z-index:2; background:#fff;
+    display:flex; align-items:center; justify-content:space-between; gap:1em;
+    padding:1em 0 .9em; border-bottom:.3px solid #ccc; margin-bottom:.4em; }
+  .pt-drawer__name{ font-size:1.25em; line-height:1.1; color:#000; }
+  /* `.pt-bar button{ all:unset }` sits above this in the cascade, so the close
+     mark has to be named through its bar to keep a size at all */
+  .pt-bar--drawer .pt-drawer__x{ flex:0 0 auto; width:44px; height:44px; display:inline-flex;
+    align-items:center; justify-content:center; font-size:1.6em; line-height:1;
+    background:none; border:0; color:#000; cursor:pointer; padding:0; margin:0; }
+  .pt-bar--drawer > .container{ padding:0 !important; }
+
+  /* a control on a touch screen needs a target, not a hairline: the input keeps
+     a finger-sized box and the track is drawn thin inside it */
+  .pt-c input[type=range]{ height:34px !important; margin:6px 0 !important; background:transparent !important; }
+  .pt-c input[type=range]::-webkit-slider-runnable-track{ height:3px !important; background:rgba(0,0,0,.2) !important; }
+  .pt-c input[type=range]::-moz-range-track{ height:3px; background:rgba(0,0,0,.2); }
+  .pt-c input[type=range]::-webkit-slider-thumb{ width:26px !important; height:26px !important; margin-top:-11.5px !important; }
+  .pt-c input::-moz-range-thumb{ width:26px; height:26px; }
+  /* 16px, not 15: under sixteen iOS zooms the whole instrument when the
+     menu takes focus, and does not zoom back out. */
+  .pt-c select{ height:44px; font-size:16px; }
+  .pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ height:44px; min-height:44px; }
+  /* a colour well is a thing you tap, so it gets a thumb's worth of room —
+     the drawn circle stays the size it was, the target around it grows */
+  .pt-c__sw{ width:44px !important; height:44px !important; }
+  .pt-c__sw input[type=color]{ position:absolute !important; inset:0 !important;
+    width:44px !important; height:44px !important; opacity:0; cursor:pointer; }
+  .pt-bar .pt-c--swb{ min-width:44px; min-height:44px; }
+  .pt-bar .pt-swatches .pt-c--swb{ min-width:0; min-height:36px; }
+  .pt-bar .pt-bar__btn{ width:44px; height:44px; }
+  .pt-for{ margin-top:12px; }
+}
+
+/* ── Embedded in the overlay ──────────────────────────────────────────────────
+   The instrument alone: the page furniture belongs to the page it was opened
+   from, which is still sitting behind the overlay. */
+html.is-embed .pt-for,
+html.is-embed .sp-nav,
+html.is-embed #hero,
+html.is-embed #credits,
+html.is-embed .lab-band,
+html.is-embed footer,
+html.is-embed .footer-thermal { display: none !important; }
+html.is-embed .pt-stage { height: 100vh !important; height: 100dvh !important; padding-top: 1.25em !important; }
+html.is-embed body { overflow: hidden !important; }
+
+/* the palette row: twenty combinations, each a chip of its three colours */
+.pt-bar .pt-c--swb { width:22px; height:22px; border-radius:2px; }
+.pt-bar .pt-c--swb[aria-pressed="true"] { box-shadow: 0 0 0 2px #fff, 0 0 0 3px #000; }
+
+
+/* ── Side by side ────────────────────────────────────────────────────────────
+   On a wide screen the instrument and its controls sit next to each other on
+   the page grid: the canvas across eight columns, every control in the four
+   beside it, two to a row. Stacked, the controls had to be crammed twelve to a
+   line to fit under the artwork; here they have room to breathe, and both are
+   still in one screen. Narrow screens keep the stacked layout. */
+@media (min-width:64em){
+  .pt-stage{ display:grid !important; grid-template-columns:repeat(12,1fr); gap:0 var(--grid-gap);
+    align-items:stretch; width:100%; max-width:90em; margin:0 auto; box-sizing:border-box;
+    /* one screen, but never at the cost of the canvas leaving its columns: on a
+       short window the stage grows rather than shrinking the artwork off-grid */
+    height:auto !important; min-height:100vh; min-height:100dvh;
+    padding:1em 10em calc(1.5em + env(safe-area-inset-bottom)) 10em; }
+  /* the artwork fills its eight columns exactly — its edges are the grid's */
+  .pt-stage #art, .pt-stage #render-canvas, .pt-stage #type{ width:100% !important; height:auto !important;
+    max-width:100% !important; max-height:none !important; }
+  /* The canvas is held in from the page edge by one column on each side and
+     centred in the screen: the artwork is the thing, and it sits in the middle
+     of its own field. */
+  .pt-stage #wrap{ grid-column:2 / span 6; padding:0 !important; min-height:0; height:100% !important;
+    align-items:center !important; }
+
+
+
+  /* the instrument's name at the top of its column, the controls at the foot */
+  /* The name is placed at the canvas's top edge rather than pushed there: a
+     margin would eat the flexible space that holds the controls at the foot. */
+  .pt-stage .pt-bar{ position:relative; }
+  /* The page names the instrument once, at the top; in the overlay the path
+     names it again. A third copy at the head of this column was the same word
+     twice on one screen. */
+  .pt-stage .pt-drawer__head{ display:none; }
+  /* the palette as a strip: every swatch on one line, across the column */
+  .pt-bar .pt-swatches{ grid-column:1 / -1; display:flex; flex-wrap:nowrap; gap:5px;
+    align-items:center; overflow:hidden; }
+  .pt-bar .pt-swatches .pt-c--swb{ grid-column:auto; flex:1 1 0; min-width:0;
+    width:auto; aspect-ratio:1; height:auto; border-radius:2px; }
+  /* The column scrolls when an engine has more controls than fit, but its
+     scrollbar is hidden: the site's bar is 14px of solid black and it sat on
+     top of the slider values and pushed the column off its four columns. The
+     controls run to the bottom edge, which is what says there is more. */
+  /* The controls sit on the bottom of the screen, level with the foot of the
+     canvas, rather than hanging from the top with a hole under them — an
+     engine with four sliders and one with thirty then read the same way.
+     margin-top:auto rather than justify-content, so a column that does
+     overflow still scrolls from its first control. */
+  /* The controls sit on the middle of the column, level with the middle of the
+     artwork, and grow up and down from there — one spacer above and one below.
+     Pinned to the foot they read as hanging off the bottom of the picture. */
+  .pt-stage .pt-bar{ grid-column:9 / span 4; min-height:0; overflow-y:auto; overscroll-behavior-y:contain;
+    padding:0 0 .5em; display:flex; flex-direction:column; scrollbar-width:none; -ms-overflow-style:none; }
+  .pt-bar__spacer{ flex:1 1 auto; min-height:0; }
+  .pt-stage .pt-bar::-webkit-scrollbar{ width:0; height:0; display:none; }
+  /* not `margin:0` — the auto top margin below is what pins the controls to
+     the foot of the screen */
+  .pt-stage .pt-bar > .container{ width:100% !important; max-width:none !important; padding:0 !important;
+    margin-left:0 !important; margin-right:0 !important; margin-bottom:0 !important; }
+  /* two controls to a row, not twelve */
+  .pt-bar__row{ grid-template-columns:repeat(4,1fr); gap:0 var(--grid-gap); }
+  .pt-bar__btns{ grid-column:1 / span 4; }
+  .pt-bar__field{ grid-column:1 / span 4; margin-top:14px; }
+  /* The control column is columns 9–12 of the page grid, and its own contents
+     keep those same four columns: a slider takes all four and they stack, one
+     to a line; a button takes two; a swatch takes one. Nothing in here sits off
+     the grid. */
+  /* Two controls to a row, not one. Text size beside letter-spacing, multiply
+     beside spread — a slider needs half this column, not all of it, and a
+     column of fourteen single-file sliders is a scroll where a list would do. */
+  .pt-bar__ctl{ grid-template-columns:repeat(4,1fr); gap:14px var(--grid-gap); }
+  .pt-bar .pt-c{ grid-column:span 2; font-size:12px; }
+  .pt-bar .pt-c--range{ gap:4px; }
+  .pt-bar .pt-c--tog,.pt-bar .pt-c--btn{ grid-column:span 2; }
+  .pt-bar .pt-c--col{ grid-column:span 2; justify-self:stretch; }
+  .pt-bar .pt-c--swb{ grid-column:span 1; justify-self:center; }
+  .pt-bar .pt-c--col .pt-c__l{ overflow:hidden; }
+  /* Two menus to a row as well. An option longer than the half-column is cut
+     with an ellipsis rather than given a line of its own — the menu says what
+     is chosen, and the full name is there when it is open. */
+  .pt-bar .pt-c--sel{ grid-column:span 2; }
+  .pt-bar .pt-c--sel select{ text-overflow:ellipsis; padding-right:24px; }
+  .pt-bar__words{ text-align:left; }
+  .pt-for{ text-align:left; }
+}
+/* No narrower gutter here: .container is 10em on every page at every width, so
+   a tool that narrows its own gutter stops sharing the site's columns. */
+
+
+/* ── The stage: an instrument set live into a page ────────────────────────────
+   Framed in a case study the instrument keeps the shape it has on a wide
+   screen — artwork on the left, every control in the rail beside it — but the
+   page's own margin comes off. Ten em of gutter and an empty first column are
+   written for a window that has a header and a margin around it; inside a
+   frame they are 160px of nothing on each side and all they do is make the
+   artwork small. So the stage closes the gutter and takes a column back.
+
+   Scoped to a frame, not to `?embed=1`: the overlay opens at the full width of
+   the window, where the page's own measure is the right one, and QA loads the
+   tool pages standalone with that flag. */
+@media (min-width: 64em) {
+  html.is-stage .pt-stage{ padding-left:2.5em !important; padding-right:2.5em !important; }
+  html.is-stage .pt-stage #wrap{ grid-column:1 / span 7; }
+}
+
+/* On a stage the frame draws the edge, so the canvas does not need one of its
+   own. Left to itself the rule is adaptive — a white sheet gets a hairline so
+   it has an edge on white paper, a canvas the engine has filled already has
+   one — which is right on the tool's own page but reads as an inconsistency in
+   a row of four: Flora's corner is white, Mitsuo's is washed pale yellow by the
+   fan, and the other two are black, so only Flora came up ruled. */
+html.is-stage #art,
+html.is-stage #render-canvas{ border:0 !important; }
+
+/* An instrument set live into a case study must not hold the page's scroll.
+   Its document came out three pixels taller than the frame — enough to make
+   it scrollable, and a scrollable iframe eats the wheel: put the pointer on
+   the controls and the study stops moving under it. The phone already had
+   this rule for the drawer; a stage needs it at every width, for the same
+   reason and a smaller margin. */
+html.is-stage, html.is-stage body { overflow: hidden !important; height: 100% !important; }
+
+/* ── On a phone, the instrument comes first ────────────────────────────────
+   A tool page opened on a phone showed the title, the description and a whole
+   screen of credits before the thing itself: the artwork sat about eleven
+   hundred pixels down, below the fold, and you had to scroll past the
+   apparatus to find out there was an instrument at all.
+
+   The page becomes a flex column at phone size so the stage can be pulled to
+   the top. Nothing moves in the markup — the heading still precedes the
+   artwork for anything reading the document in order — only the painting order
+   changes, which is what `order` is for. Every tool sets its own body class
+   (eng-fan, opal-drawer and the rest), so this is keyed on the page's parts,
+   not on the body's name, and carries !important because several tools set
+   `display:block !important` on the body themselves.
+
+   Desktop is untouched: it has the room to show both at once. */
+@media (max-width: 40em) {
+  /* `html body[class]` and not plain `body`: every tool page carries its own
+     `body.opal-drawer { display:block !important }`, which outranks a bare
+     element selector however many !importants it is given. `html > body`
+     covers Flora and VoiceType, whose bodies carry no class at all. */
+  html > body,
+  html body[class] { display: flex !important; flex-direction: column !important; }
+  body > header.sp-nav   { order: 0; }
+  body > .pt-stage       { order: 1; }
+  body > #hero           { order: 2; padding-top: 2em !important; }
+  body > #credits        { order: 3; }
+  body > .footer-thermal { order: 9; }
+  body > script, body > style { order: 0; }
+
+  /* the stage is a screen of its own, under the header and nothing else */
+  body > .pt-stage {
+    min-height: calc(100svh - var(--header-h, 5.2em)) !important;
+    padding-top: 1em !important;
+  }
+}
+
+/* ── Play ───────────────────────────────────────────────────────────────────
+   The instrument with the dock put away: the artwork fills the frame and the
+   only things left are the ones you act with — a text field, the transport,
+   the brush. Everything that sets a parameter goes; nothing that takes an
+   action does. */
+html.is-play .pt-bar,
+html.is-play .pt-bar__spacer,
+html.is-play .pt-for,
+html.is-play .sp-nav,
+html.is-play #hero,
+html.is-play #credits,
+html.is-play .footer-thermal,
+html.is-play .vt-say { display: none !important; }
+
+html.is-play, html.is-play body { overflow: hidden !important; height: 100% !important; margin: 0 !important; }
+
+html.is-play .pt-stage { height: 100% !important; padding: 0 !important; }
+html.is-play #wrap { width: 100% !important; max-width: none !important; height: 100% !important; margin: 0 !important; }
+html.is-play #wrap > svg,
+html.is-play #wrap > canvas,
+html.is-play #art { width: 100% !important; height: 100% !important; }
+
+/* The drawer's tool name only had its leading set inside the narrow breakpoint,
+   so at desktop width it fell back to the page's 0.667 and was laid out on a
+   line shorter than its own type. The leading belongs to the element, not to
+   one screen width. */
+.pt-drawer__name{ line-height:1.1; }
+/* `.pt-bar button{ all:unset }` outranks `.pt-c`, and `unset` on line-height
+   means inherit — so a control that happens to be a button fell back to the
+   page's 0.667 and was laid out on a line shorter than its own type. Named
+   through the bar so it carries the same weight as the reset. */
+.pt-bar button.pt-c{ line-height:1.4; }

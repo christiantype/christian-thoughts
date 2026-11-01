@@ -73,3 +73,14 @@ defaults:
     values:
       image: /assets/images/og/default.jpg
       image_alt: "I Trust You & I Believe You — a poster by Christian Solorzano, set on black"
+  # the BGSU talk and workshop (/workshops/bgsu/): password-gated slides, kept out of the sitemap
+  - scope:
+      path: "workshops"
+    values:
+      sitemap: false
+
+# files the BGSU bundle needs that Jekyll would otherwise skip for their leading underscore
+include:
+  - _maps.json
+  - _public.css
+  - _public.js

@@ -1,0 +1,61 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Community from the Inside Out
+#
+# This is the text of the study. Edit it, save, refresh the page.
+#
+#   A heading in CAPITALS on its own line starts a section.
+#   A BLANK LINE starts a new paragraph.
+#   Inside POSITION and RESEARCH, every paragraph after the first is indented
+#   on the page automatically — you do not need to type any indents.
+#   Lines starting with # are notes to yourself and never appear on the site.
+#
+#   You can use <em>italic</em>, <strong>bold</strong>, <cite>a title</cite>
+#   and <a class="u" href="/somewhere">a link</a> anywhere in the text.
+#
+# Pictures, instruments and the column layout live in the .js file next to this
+# one. This file is only the words.
+# ─────────────────────────────────────────────────────────────────────────────
+
+TITLE
+
+Community
+
+QUESTION
+
+What does it take to lead a community — to hold a room where people belong, learn from each other, and keep coming back?
+
+PROVOCATION
+
+We make spaces for belonging and learning — where a community gathers, and where design and conversation shape the industry and the identity of Chicago.
+
+POSITION
+
+It started in 2020. The design community in this city fractured, and the fracture was not metaphorical. Nobody knew where any of us would be in a matter of weeks. On top of that came polarization, politics, police brutality, and a period in which every designer had to decide what their work was for. What began as a desire to gather around books quickly turned into a strong community that continues today.
+
+Long before the club, a design group had taken root inside the corporate consulting firm where we were working, and it had already shown what happens when you simply put creative people in a room and let them talk. But running a grassroots organization inside a mammoth meant corporate bureaucracy and politics, and the friction that created eventually halted things.
+
+Today the Chicago Graphic Design Club holds, as it has from the beginning, to three pillars.
+
+<strong class="pillar">Theory</strong> is the act of thinking about what we make: what a thing is for, who it serves, and the responsibility carried in choosing where to put our time. It is the part of the discipline most often skipped, and the part that decides whether the other two are worth anything.
+
+<strong class="pillar">Craft</strong> is the system. The aesthetics, the choices, the typography, the color, the grid — the material facts of the work and the standard we hold them to. Craft is where a position stops being an opinion and becomes an artifact somebody can interpret.
+
+<strong class="pillar">Practice</strong> is how we keep going: how the work evolves, and how it continues to evolve long before anything takes shape. Practice is the part that outlasts the project, and it is the only one of the three that cannot be finished.
+
+Everything the club does is meant to sit on at least one of them, and the program is worth what it is worth in proportion to how many it touches at once.
+
+The reading started small and the books were charged. <a class="u" href="https://chicagographicdesign.club/programming/design-as-art-by-bruno-munari/" target="_blank" rel="noopener"><cite>Design as Art</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/the-abcs-of-triangle-square-circle-the-bauhaus-design-theory/" target="_blank" rel="noopener"><cite>The ABC’s of Triangle, Square, Circle: The Bauhaus &amp; Design Theory</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/designing-design-by-kenya-hara/" target="_blank" rel="noopener"><cite>Designing Design</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/are-we-human-beatriz-colomina-mark-wigley/" target="_blank" rel="noopener"><cite>Are We Human?</cite></a>, then <a class="u" href="https://chicagographicdesign.club/programming/caps-lock-by-ruben-pater/" target="_blank" rel="noopener"><cite>CAPS LOCK</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/reframing-design-through-anti-racism/" target="_blank" rel="noopener"><cite>Reframing Design Through Anti-Racism</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/ways-of-seeing/" target="_blank" rel="noopener"><cite>Ways of Seeing</cite></a>, <a class="u" href="https://chicagographicdesign.club/programming/design-after-capitalism/" target="_blank" rel="noopener"><cite>Design After Capitalism</cite></a>, and a talk on <a class="u" href="https://chicagographicdesign.club/programming/design-emergency-building-a-better-future/" target="_blank" rel="noopener"><cite>Design Emergency</cite></a>. That list is an argument in itself. It says that design is not merely decoration — not corporate identities, not advertising, not selling hard liquor to young adults. Design is a vocation, and this city takes it seriously.
+
+The Chicago Graphic Design Club began on May 6, 2020, with a book talk on Bruno Munari’s <a class="u" href="https://chicagographicdesign.club/programming/design-as-art-by-bruno-munari/" target="_blank" rel="noopener"><cite>Design as Art</cite></a>, and six years later the record is 114 programs, 116 podcast episodes, two printed journals, fifty posters, forty radio mixes and fifty-seven articles. That archive is the experiment. What follows is what reading it back actually shows.
+
+<strong>The program found its shape by accident.</strong> The talk that changed it was The Narrative’s, in December 2020 — the brand identity for a Mies van der Rohe building, shown as process rather than as portfolio, and made with our friends at <a class="u" href="https://www.murmur-ring.com/" target="_blank" rel="noopener">Murmur Ring</a>, and with Ashley Lukasik, who remains an ongoing collaborator and a strong supporter of the club. After that the club was a producer of talks, and the roster since has run from <a class="u" href="https://elupton.com/" target="_blank" rel="noopener">Ellen Lupton</a> and <a class="u" href="https://www.rickvalicenti.com/" target="_blank" rel="noopener">Rick Valicenti</a> to <a class="u" href="https://chicagographicdesign.club/programming/an-evening-with-jennifer-sterling/" target="_blank" rel="noopener">Jennifer Sterling</a>, <a class="u" href="https://erikcarter.net/" target="_blank" rel="noopener">Erik Carter</a>, <a class="u" href="https://mitchgoldstein.com/" target="_blank" rel="noopener">Mitch Goldstein</a> and <a class="u" href="https://www.motherdesign.com/" target="_blank" rel="noopener">Mother Design</a>, alongside others. The discipline works when it is bridged across generation, craft and trade. It stops working the moment it is sorted — illustrators here, web designers there, the trendy studio over there. We believe in breaking down walls.
+
+<strong>Confidence came before competence, and that turned out to be the method.</strong> The first exhibition — CGDC and MNML, April 2023 — was put together by people with almost no experience of putting an exhibition together, and it worked. The club’s license to try things it is unqualified for is the single most productive thing about it, and it will calcify the day that licence is withdrawn.
+
+<strong>The club talks more than it makes.</strong> Of 114 programs, 37 are talks, 24 are social hours, 18 are tours and 15 are book talks — 94 of 114 programs in which the primary activity is listening or conversation.
+
+<strong>The podcast turned out to be the real artifact and oral history.</strong> Underscore began on May 3, 2022, as a way of keeping the conversation going between events. It now runs to 116 episodes and 117.7 hours, and — since September 2026 — every one of them carries a full transcript. That is roughly 1.13 million words of designers in one city describing their own practice, in their own words, searchable. No single event this department has run will outlive that corpus. The gathering was the work. The recording is what is left of it.
+
+<strong>The work that produced disagreement was the work that was structurally forced to.</strong> <a class="u" href="/workshops/bgsu/artifact/values.html">A Call for Values</a> put a one-word brief to a large group of designers and hung the answers next to each other: 40+ entries were displayed at the gallery. The same is true of <a class="u" href="/workshops/bgsu/artifact/faculty.html">Faculty</a>, whose two issues carry 51 and 58 contributors respectively.
+
+Moving forward, the programming expands on the work already done. Six years of gatherings, recordings and printed matter have told us which formats carry weight and which do not, and the next stretch is built on that evidence rather than on instinct — more of what asks people to make something together, held to the same terms set out below.

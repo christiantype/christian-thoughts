@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Gated with the lab experiments: nothing public links here, and an
+     unfinished instrument found by a stranger reads as a broken one. -->
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>VoiceType — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+<link rel="stylesheet" href="/workshops/bgsu/lab/tools/_public.css?v=20261010A" />
+<style>    /* ── header: wordmark flush left, the three doors flush right ── */
+    .sp-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.5em 0; color: #111; background: #fff; }
+    .sp-nav__row { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 2.2em; }
+    .sp-nav__logo { display: block; width: 14%; min-width: 132px; color: inherit; }
+    .sp-nav__logo svg { display: block; width: 100%; height: auto; }
+    .sp-nav__doors { display: flex; align-items: center; gap: var(--space-8); }
+    .sp-nav__side { color: inherit; text-decoration: none; font-family: "Sidepiece", sans-serif; font-size: var(--body); letter-spacing: .04em; font-weight: 400; line-height: 1; padding: .3em 0; }
+    .sp-nav__side.is-on { border-bottom: 1.5px solid currentColor; }
+    @media (max-width: 40em) { .sp-nav__logo { width: 34%; min-width: 0; } .sp-nav__doors { gap: var(--space-4); } .sp-nav__side { font-size: var(--label); } }
+
+    /* Lab shell's gate hides the body; these pages are public, so it is
+       overridden here. Removing this line blanks the page entirely. */
+    body, body.opal-drawer{ display:block !important; padding:0 !important; overflow:auto !important; height:auto !important; }
+    body.opal-drawer #wrap{ padding:0 !important; left:0 !important; }
+    html{ overflow:auto !important; height:auto !important; }
+    html.zlmc-locked body > *:not(.zlmc-gate){ display:revert !important; }
+    /* `revert` drops to the user-agent default — block for a <div> — so it also
+       undid .pt-stage's grid and stacked the controls under the artwork, while the
+       pages that do not load the gate kept the side-by-side layout. Nobody ever
+       unlocks these (the gate is disabled just below), so that stacked state was
+       what every visitor saw. Put the layout the stylesheet asks for back. */
+    html.zlmc-locked body > .pt-stage{ display:flex !important; }
+    @media (min-width:64em){ html.zlmc-locked body > .pt-stage{ display:grid !important; } }
+    .zlmc-gate{ display:none !important; }
+
+  </style>
+<style>
+  @font-face{ font-family:'Sidepiece'; src:url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.woff2') format('woff2'), url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.ttf') format('truetype'); font-weight:normal; font-display:swap; }
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0;
+    display:flex; align-items:center; justify-content:center; padding:28px; }
+  #art{ max-width:100%; max-height:100%; }
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); right:24px; z-index:11;
+    display:none; align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); }
+  #recDot b{ font-variant-numeric:tabular-nums; font-weight:600; }
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .knob label{ display:flex; justify-content:space-between; }
+  .crow{ display:flex; align-items:center; justify-content:space-between; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  #letterIn{ width:100%; font-size:15px; letter-spacing:.02em; }
+  [hidden]{ display:none !important; }
+  .rowhint{ margin:0; font-size:12px; color:var(--mute); line-height:1.45; }
+  /* glow-layer rows (built by JS) */
+  #glowList{ display:flex; flex-direction:column; gap:10px; }
+  .glow-row{ display:flex; flex-direction:column; gap:7px; padding:11px;
+    border:1px solid var(--hair); border-radius:var(--r-island,6px); }
+  .glow-row .top{ display:flex; align-items:center; gap:8px; }
+  .glow-row .top .lbl{ font-size:12px; color:var(--mute); flex:1; }
+  .glow-row .x{ width:24px; height:24px; padding:0; font-size:14px; line-height:1; }
+  /* engine show/hide */
+  body.eng-metaball .eng-fan{ display:none !important; }
+  body.eng-fan .eng-metaball{ display:none !important; }
+  /* fan palette swatches */
+  #fanColList{ display:flex; flex-wrap:wrap; gap:8px; }
+  .fan-col{ position:relative; }
+  .fan-col .x{ position:absolute; top:-6px; right:-6px; width:18px; height:18px; padding:0; font-size:11px; line-height:1;
+    display:none; }
+  .fan-col:hover .x{ display:block; }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body data-skip="micBtn,resetBtn,svgBtn,pngBtn,gridExport,colors">
+
+  <!-- the split header: Lab left · wordmark centred on its slash · Studio right -->
+  <header class="sp-nav">
+    <div class="container"><div class="sp-nav__row">
+      <a class="sp-nav__logo" href="/" aria-label="OP/AL"><svg xmlns="http://www.w3.org/2000/svg" viewBox="155.3 212.9 1285.8 186.2" fill="currentColor"><path d="M1356.2,353.2h72.1v-13h-59.1v-100.6h-13v113.5ZM1077.3,313.7l13.5-61.1h10.6l13.3,61.1h-37.5ZM1055.3,353.2h13.3l5.8-26.5h43.3l5.8,26.5h13.3l-25.2-113.5h-30.6l-25.6,113.5ZM723.6,398.3h37.2l111.9-184.5h-37.2l-111.9,184.5ZM478.1,296.2v-43.6h28.1c5.9,0,8.3.9,13,4.7,5.2,4.3,5.9,6.1,5.9,10.6v13c0,4.5-.7,6.3-5.9,10.6-4.7,3.8-7,4.7-13,4.7h-28.1ZM465.1,353.2h13v-44h28.1c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-14.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-41.1v113.5ZM199.1,340.2h-11.9c-5.9,0-8.3-.9-13-4.7-5.2-4.3-5.9-6.1-5.9-10.6v-57c0-4.5.7-6.3,5.9-10.6,4.7-3.8,7-4.7,13-4.7h11.9c5.9,0,8.5.9,13.2,4.7,5,4.1,5.8,6.1,5.8,10.6v57c0,4.5-.7,6.5-5.8,10.6-4.7,3.8-7.2,4.7-13.2,4.7M187.2,353.2h11.9c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-58.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-11.9c-9.4,0-14.2,2-22.5,9-8.3,7-9.4,10.3-9.4,18.6v58.4c0,8.3,1.1,11.5,9.4,18.6,8.3,7,13.2,9,22.5,9"/></svg></a>
+      <div class="sp-nav__doors">
+        <a class="sp-nav__side is-on" href="/workshops/bgsu/lab/">Research</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/studio/">Artifact</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/about.html">Info</a>
+      </div>
+    </div></div>
+  </header>
+  <section id="hero" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">VoiceType</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">Type set by the voice, as it is spoken. Each word is drawn from a variable font while you say it: loudness sets the weight and the ink, pitch moves the baseline so the contour of the sentence draws a line through it, how long you hold a sound stretches the width, and the pause before a word becomes the space in front of it. The prosody — the part of language that type has never carried — is the typography.</h2>
+      </div>
+    </div>
+  </section>
+  <section id="credits" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>OP/AL</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Tool</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>Roboto Flex<br><span class="text-mid">Typeface, SIL Open Font Licence</span></p><p>fontkit<br><span class="text-mid">Outlines, MIT</span></p><p>OP/AL<br><span class="text-mid">Built by</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="pt-stage">
+<div id="wrap"><svg id="type" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The phrase, set by voice"></svg></div>
+
+<!-- What the instrument is telling you. It has to live out here: the control
+     dock is hidden on a published page, and an instrument you speak to is
+     useless if you cannot see whether it is listening or which word it is
+     waiting for. -->
+<div class="vt-say">
+  <span id="level" aria-hidden="true"><i></i></span>
+  <p id="status" role="status">Loading&hellip;</p>
+  <p id="typeInfo"></p>
+</div>
+
+<!-- The instrument's own controls. The public bar at the foot is built from
+     these, so anything meant to reach the bar lives in a .knob or a .crow with
+     a label; anything named in the body's data-skip stays in the Lab only. -->
+<div id="dock">
+  <div class="group">
+    <div class="group__t">Voice</div>
+    <p class="rowhint"><strong>Beta.</strong> Press Start and talk. The browser supplies the words as it recognises them and the voice sets each one, so it needs Chrome, Edge or Safari and a connection. Twenty words to the sheet — the type is sized from that — and nothing you say leaves this tab.</p>
+    <div class="grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn" id="micBtn">Start</button>
+      <button class="btn" id="resetBtn">Reset</button>
+    </div>
+    <div class="crow"><label>Baseline grid</label><input type="checkbox" id="gridOn" checked></div>
+
+  </div>
+
+  <div class="group out" id="output" data-export-custom>
+    <div class="group__t">Output</div>
+    <div class="knob"><label>Colour</label>
+      <select id="colors" aria-label="Colours">
+        <option value="light">Black on white</option>
+        <option value="dark">White on black</option>
+        <option value="clear">Black, no ground</option>
+      </select>
+    </div>
+    <div class="crow"><label>Include the grid</label><input type="checkbox" id="gridExport"></div>
+    <div class="grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn" id="svgBtn">SVG</button>
+      <button class="btn" id="pngBtn">PNG</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* The type itself. The engine draws outlines into this <svg>; everything
+     here is the frame around them, in the house's own terms. */
+  #wrap { display: flex; align-items: center; justify-content: center;
+    min-height: 0; }   /* so a flex parent may actually shrink it */
+  /* The artwork letterboxes into whatever the stage is, rather than being
+     sized by its own width. `height: auto` on a 4:5 viewBox made the type as
+     tall as the width demanded, so when the phone's drawer opened and the
+     stage shrank the artwork stayed its old height and the drawer covered it.
+     An SVG with a viewBox fits itself to the box it is given. */
+  #type { display: block; max-width: 100%; max-height: 100%; background: #fff; }
+  /* the input level, as a rule that fills rather than a meter that ticks */
+  /* The instrument's own line, under the type: how loud you are, what it is
+     waiting for, and the size the type is actually set at. */
+  /* The stage is a grid, not the flex column it looks like. A plain sibling of
+     #wrap became a second COLUMN beside the type; taking a whole ROW instead
+     then stole the height the artwork was centring in, and the artwork went to
+     the top of the stage. So the line is taken out of the flow altogether and
+     laid along the foot of the stage, and #wrap keeps a bottom padding the
+     size of it so the type never reaches it. */
+  .pt-stage { position: relative; }
+  .vt-say { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    width: 100%; max-width: 90em; margin: 0 auto;
+    padding: 0 10em .6em; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: .35em; pointer-events: none; }
+  /* NOT padding on #wrap. The transport — Start and Clear — is positioned
+     against the top of #wrap, so padding there pushed the artwork down and
+     left the buttons behind: inside the overlay they sat 26px above the
+     viewport, hidden under its bar, and there was no way to start the thing.
+     The room for the line is taken out of the ARTWORK instead, in fit(), so
+     #wrap keeps its box and the artwork keeps its centre. */
+  @media (max-width: 64em) { .vt-say { padding: 0 4em .6em; } }
+  @media (max-width: 40em) {
+    .vt-say { padding: 0 1.25em .5em; }
+
+  }
+  .vt-say p { margin: 0; font-family: 'Untitled Sans', 'Sidepiece-HoneyPie', sans-serif;
+    font-size: 0.72rem; letter-spacing: .04em; line-height: 1.5; color: #111; }
+  .vt-say #typeInfo { color: rgba(0,0,0,.45); }
+  .vt-say #typeInfo:empty, .vt-say #status:empty { display: none; }
+  #level { display: block; height: 2px; background: rgba(0,0,0,.12); }
+  #level i { display: block; height: 100%; width: 0; background: #111; transition: width 90ms linear; }
+  #status:empty { display: none; }
+</style>
+
+<!-- Load order matters: fontkit, then the font, then the engine. -->
+<script src="/workshops/bgsu/lab/tools/voicetype/vendor/fontkit.min.js"></script>
+<script src="/workshops/bgsu/lab/tools/voicetype/voice-flex.js"></script>
+<script src="/workshops/bgsu/lab/tools/voicetype/voice-type.js"></script>
+<script>
+'use strict';
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var setStatus = function(t){ var e=$('#status'); if(e) e.textContent = t; };
+
+  function loadFont(){
+    var inline = window.VOICE_FLEX_B64;
+    if (inline) return Promise.resolve(Uint8Array.from(atob(inline.trim()), function(c){ return c.charCodeAt(0); }));
+    return fetch('/workshops/bgsu/lab/tools/voicetype/voice-flex.ttf')
+      .then(function(r){ return r.arrayBuffer(); })
+      .then(function(b){ return new Uint8Array(b); });
+  }
+
+  /* A file leaves by the browser's own download, not by an upload. Nothing a
+     voice says here is sent anywhere: the recognition is the browser's, the
+     outlines are drawn in this tab, and the export is written locally. */
+  function saveFile(name, data){
+    var blob = data instanceof Blob ? data : new Blob([data], { type:'image/svg+xml' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  }
+
+  var COLORS = { light:{ ink:'#111111', bg:'#ffffff' },
+                  dark:{ ink:'#f4f4f2', bg:'#0d0d0d' },
+                  clear:{ ink:'#111111', bg:null } };
+
+  function slug(){
+    var t = vt && vt.words ? vt.words.map(function(w){ return w.text; }).join(' ') : '';
+    return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'voicetype';
+  }
+
+  var vt = null;
+  var setMic = function(on){ var b=$('#micBtn'); if(!b) return; b.textContent = on ? 'Stop' : 'Start'; b.setAttribute('aria-pressed', String(on)); };
+  var micMsg = function(e){
+    return (e && e.name === 'NotAllowedError' ? 'The microphone was blocked.' : 'The microphone could not start.')
+      + ' Open this page in its own tab and allow it.';
+  };
+
+  loadFont().then(function(fontData){
+    try {
+      vt = new VoiceType({
+        svg: $('#type'),
+        fontData: fontData,
+        /* Twenty words to the sheet, and not the visitor's to change: the
+           type size is derived from the limit, so a slider for it is really a
+           slider for the type size wearing a different label. */
+        options: { maxWords: 20, gridColor: 'rgba(0,0,0,.28)' },
+        onLevel: function(m){
+          var i = $('#level i'); if(!i) return;
+          i.style.width = Math.min(100, Math.max(0, (m.db + 70) / 60 * 100)) + '%';
+        }
+      });
+      window.__vt = vt;
+    } catch (e) {
+      setStatus('The type engine could not load: ' + ((e && e.message) || e));
+      return;
+    }
+
+    vt.onStatus = function(kind, detail){
+      if (kind === 'listening' || kind === 'word') setStatus('Say “' + detail + '”, then pause.');
+      if (kind === 'transcribing') setStatus('Listening. Talk normally.');
+      if (kind === 'full') { setStatus('The canvas is full. Export it, or reset to start again.'); setMic(false); }
+      if (kind === 'complete') { setStatus('Done. Click a word to say it again, or export.'); setMic(false); }
+      if (kind === 'stopped') { setMic(false); var i=$('#level i'); if(i) i.style.width = '0'; }
+      if (kind === 'error') {
+        var msg = { 'network':'Speech recognition needs a connection — the browser sends the audio to its own service.',
+                    'not-allowed':'Speech recognition is blocked here. Open the page in its own tab and allow the microphone.',
+                    'service-not-allowed':'This browser will not run speech recognition on this page. Try Chrome.',
+                    'audio-capture':'No microphone was found.' }[detail];
+        if (msg) setStatus(msg);
+      }
+    };
+
+    // the type size, in points at 8 × 10 in, so the grid has a number beside it
+    var info = function(){
+      var t = vt.typeInfo(), e = $('#typeInfo'); if(!e) return;
+      e.textContent = 'Type ' + t.pt.toFixed(1) + ' pt / leading ' + t.leadingPt.toFixed(1) + ' pt at 8 × 10 in'
+        + (t.shrunk ? ' (reduced to fit)' : '');
+    };
+    var _render = vt.render.bind(vt);
+    vt.render = function(){ _render(); info(); };
+
+    /* One way in: free speech. The phrase mode and its word-by-word walk are
+       gone, so there is no mode to apply — only the opening message, which
+       depends on whether this browser can transcribe at all. */
+    function ready() {
+      vt.mode = 'free'; vt.clear();
+      setStatus(VoiceType.canTranscribe
+        ? 'Beta. Press Start and talk — the words arrive as they are recognised.'
+        : 'Beta. Free speech needs Chrome, Edge or Safari, and a connection.');
+    }
+
+    function start() {
+      if (vt.full) { setStatus('The sheet is full. Export it, or reset to start again.'); return; }
+      var p;
+      try { p = vt.startTranscribe({ keep: true }); }
+      catch (e) { setStatus(micMsg(e)); return; }
+      Promise.resolve(p).then(function(){ setMic(true); }).catch(function(e){
+        setStatus(e && e.name === 'NoSpeechRecognition'
+          ? 'Free speech needs Chrome, Edge or Safari, and a connection.'
+          : micMsg(e));
+      });
+    }
+
+    $('#gridOn').onchange = function(){ vt.showGrid = $('#gridOn').checked; vt.render(); };
+    $('#micBtn').onclick = function(){
+      if (vt.listening) { vt.stop(); setStatus('Paused. Press Start to carry on.'); }
+      else start();
+    };
+    $('#resetBtn').onclick = function(){
+      if (vt.listening) vt.stop();
+      vt.clear();
+      setStatus('Cleared. Press Start to go again.');
+    };
+
+
+
+    $('#svgBtn').onclick = function(){
+      var c = COLORS[$('#colors').value];
+      saveFile(slug() + '.svg', vt.exportSVG({ ink:c.ink, bg:c.bg, grid: $('#gridExport').checked }));
+    };
+    $('#pngBtn').onclick = function(){
+      var c = COLORS[$('#colors').value];
+      vt.exportPNG({ ink:c.ink, bg:c.bg, grid: $('#gridExport').checked })
+        .then(function(blob){ saveFile(slug() + '.png', blob); })
+        .catch(function(){ setStatus('This browser could not render the PNG. The SVG export will work.'); });
+    };
+
+    /* Fit the artwork to the stage, the way every other instrument here does.
+       The stage is a flex column and #wrap takes what is left of it; leaving
+       the SVG to size itself from its own width made it as tall as a 4:5
+       viewBox demands, so on a phone the drawer opened and covered it. */
+    function fit(){
+      var wrap = $('#wrap'), svg = $('#type');
+      if (!wrap || !svg) return;
+      var cs = getComputedStyle(wrap);
+      var w = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var h = wrap.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      /* And never under the drawer. On a phone the control bar rises over the
+         stage rather than pushing it, so the stage's own height is not the
+         room the artwork actually has — the distance to the top of the bar is.
+         A 4:5 canvas is tall enough for the difference to matter. */
+      /* The artwork is centred in #wrap by flex, so the room it has is not the
+         distance down to an obstacle — it is twice the distance from the
+         wrap's CENTRE to that obstacle. Subtracting the obstacle's height from
+         the top and the bottom instead collapsed the artwork to nothing on a
+         phone, where both clamps applied at once. Two obstacles: the say-line
+         at the foot of the stage, and on a phone the control drawer rising
+         over it. */
+      var wr = wrap.getBoundingClientRect();
+      var mid = wr.top + wr.height / 2;
+      var room = function (obstacleTop) {
+        return Math.max(80, 2 * (obstacleTop - 6 - mid));
+      };
+      var say = $('.vt-say');
+      if (say) { var sy = say.getBoundingClientRect(); if (sy.top > mid) h = Math.min(h, room(sy.top)); }
+      var bar = document.querySelector('.pt-bar');
+      if (bar) { var br = bar.getBoundingClientRect(); if (br.top > mid) h = Math.min(h, room(br.top)); }
+      if (!(w > 0) || !(h > 0)) return;
+      var ratio = (vt.opts.canvasW || 1600) / (vt.opts.canvasH || 2000);
+      var sw = Math.min(w, h * ratio), sh = sw / ratio;
+      svg.style.width = sw + 'px';
+      svg.style.height = sh + 'px';
+    }
+    addEventListener('resize', fit);
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(fit);
+      ro.observe($('#wrap'));
+      var bar = document.querySelector('.pt-bar');
+      if (bar) ro.observe(bar);          // the drawer opening is a resize too
+    }
+    /* The drawer slides over the stage rather than resizing anything, so no
+       resize fires when it opens — watch the button itself, and settle a
+       couple of times after load while the public bar builds. */
+    document.addEventListener('click', function(e){
+      if (e.target.closest && e.target.closest('.pt-drawer__open, .pt-drawer__shut')) {
+        setTimeout(fit, 60); setTimeout(fit, 420);
+      }
+    }, true);
+    fit();
+    [200, 600, 1200].forEach(function(t){ setTimeout(fit, t); });
+
+    ready();
+  }).catch(function(e){
+    setStatus('The typeface could not be read: ' + ((e && e.message) || e));
+  });
+})();
+</script>
+<div class="pt-bar"><div class="container">
+  <div class="pt-bar__row">
+    <div class="pt-bar__btns"><button class="pt-bar__btn" type="button" data-proxy="micBtn" aria-label="Start or stop listening" title="Start or stop listening" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button><button class="pt-bar__btn" type="button" data-proxy="resetBtn" aria-label="Clear" title="Clear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4.5h-4.5"/></svg></button></div>
+  </div>
+  <div class="pt-bar__ctl"></div>
+  <a class="pt-for" href="/workshops/bgsu/lab/typography-new-0/">Prosody as a typographic parameter &middot; nothing you say leaves this tab</a>
+</div></div>
+<script src="/workshops/bgsu/lab/tools/_public.js?v=20261008B"></script>
+<!-- the instrument draws its own cursor: inside the overlay this page is an
+     iframe, and the page behind it cannot see the pointer once it crosses in -->
+<script src="/workshops/bgsu/shared/cursor.js?v=20261003"></script>
+  </div>
+  <script src="/workshops/bgsu/shared/footer.js?v=20261009B"></script>
+</body>
+</html>

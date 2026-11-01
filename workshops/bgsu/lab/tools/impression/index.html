@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Gated with the lab experiments: nothing public links here, and an
+     unfinished instrument found by a stranger reads as a broken one. -->
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Impression — OP/AL Research</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+<link rel="stylesheet" href="/workshops/bgsu/lab/tools/_public.css?v=20261010A" />
+<style>    /* ── header: wordmark flush left, the three doors flush right ── */
+    .sp-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.5em 0; color: #111; background: #fff; }
+    .sp-nav__row { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 2.2em; }
+    .sp-nav__logo { display: block; width: 14%; min-width: 132px; color: inherit; }
+    .sp-nav__logo svg { display: block; width: 100%; height: auto; }
+    .sp-nav__doors { display: flex; align-items: center; gap: var(--space-8); }
+    .sp-nav__side { color: inherit; text-decoration: none; font-family: "Sidepiece", sans-serif; font-size: var(--body); letter-spacing: .04em; font-weight: 400; line-height: 1; padding: .3em 0; }
+    .sp-nav__side.is-on { border-bottom: 1.5px solid currentColor; }
+    @media (max-width: 40em) { .sp-nav__logo { width: 34%; min-width: 0; } .sp-nav__doors { gap: var(--space-4); } .sp-nav__side { font-size: var(--label); } }
+
+    /* Lab shell's gate hides the body; these pages are public, so it is
+       overridden here. Removing this line blanks the page entirely. */
+    body, body.opal-drawer{ display:block !important; padding:0 !important; overflow:auto !important; height:auto !important; }
+    body.opal-drawer #wrap{ padding:0 !important; left:0 !important; }
+    html{ overflow:auto !important; height:auto !important; }
+    html.zlmc-locked body > *:not(.zlmc-gate){ display:revert !important; }
+    /* `revert` drops to the user-agent default — block for a <div> — so it also
+       undid .pt-stage's grid and stacked the controls under the artwork, while the
+       pages that do not load the gate kept the side-by-side layout. Nobody ever
+       unlocks these (the gate is disabled just below), so that stacked state was
+       what every visitor saw. Put the layout the stylesheet asks for back. */
+    html.zlmc-locked body > .pt-stage{ display:flex !important; }
+    @media (min-width:64em){ html.zlmc-locked body > .pt-stage{ display:grid !important; } }
+    .zlmc-gate{ display:none !important; }
+
+  </style>
+<style>
+  @font-face{ font-family:'Sidepiece'; src:url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.woff2') format('woff2'), url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.ttf') format('truetype'); font-weight:normal; font-display:swap; }
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0;
+    display:flex; align-items:center; justify-content:center; padding:28px; }
+  /* the sheet and, laid exactly over it, the forme: the word waiting to be struck */
+  #sheet{ position:relative; max-width:100%; flex:none; }
+  #sheet canvas{ display:block; width:100%; height:100%; }
+  #sheet #forme{ position:absolute; inset:0; pointer-events:none; }
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .knob label{ display:flex; justify-content:space-between; }
+  .crow{ display:flex; align-items:center; justify-content:space-between; }
+  [hidden]{ display:none !important; }
+  .rowhint{ margin:0; font-size:12px; color:var(--mute); line-height:1.45; }
+</style>
+
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body data-skip="micBtn,resetBtn,backBtn,pngBtn">
+
+  <!-- the split header: Lab left · wordmark centred on its slash · Studio right -->
+  <header class="sp-nav">
+    <div class="container"><div class="sp-nav__row">
+      <a class="sp-nav__logo" href="/" aria-label="OP/AL"><svg xmlns="http://www.w3.org/2000/svg" viewBox="155.3 212.9 1285.8 186.2" fill="currentColor"><path d="M1356.2,353.2h72.1v-13h-59.1v-100.6h-13v113.5ZM1077.3,313.7l13.5-61.1h10.6l13.3,61.1h-37.5ZM1055.3,353.2h13.3l5.8-26.5h43.3l5.8,26.5h13.3l-25.2-113.5h-30.6l-25.6,113.5ZM723.6,398.3h37.2l111.9-184.5h-37.2l-111.9,184.5ZM478.1,296.2v-43.6h28.1c5.9,0,8.3.9,13,4.7,5.2,4.3,5.9,6.1,5.9,10.6v13c0,4.5-.7,6.3-5.9,10.6-4.7,3.8-7,4.7-13,4.7h-28.1ZM465.1,353.2h13v-44h28.1c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-14.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-41.1v113.5ZM199.1,340.2h-11.9c-5.9,0-8.3-.9-13-4.7-5.2-4.3-5.9-6.1-5.9-10.6v-57c0-4.5.7-6.3,5.9-10.6,4.7-3.8,7-4.7,13-4.7h11.9c5.9,0,8.5.9,13.2,4.7,5,4.1,5.8,6.1,5.8,10.6v57c0,4.5-.7,6.5-5.8,10.6-4.7,3.8-7.2,4.7-13.2,4.7M187.2,353.2h11.9c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-58.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-11.9c-9.4,0-14.2,2-22.5,9-8.3,7-9.4,10.3-9.4,18.6v58.4c0,8.3,1.1,11.5,9.4,18.6,8.3,7,13.2,9,22.5,9"/></svg></a>
+      <div class="sp-nav__doors">
+        <a class="sp-nav__side is-on" href="/workshops/bgsu/lab/">Research</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/studio/">Artifact</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/about.html">Info</a>
+      </div>
+    </div></div>
+  </header>
+  <section id="hero" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">Impression</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">Letterpress, struck by the voice. The type is fixed, as metal type is, and the voice is the press. How loud you say a word sets how deep it bites into the sheet; a voiced word carries ink and a whispered one goes down blind; holding a sound is dwell, and the ink squashes past the edge of the letter; a voice that slides in pitch slurs the impression, and a shout bruises the paper. Talk, or set the words first and strike them one at a time.</h2>
+      </div>
+    </div>
+  </section>
+  <section id="credits" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>OP/AL</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Tool</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>OP/AL<br><span class="text-mid">Built by</span></p><p>Signifier<br><span class="text-mid">Typeface, Klim Type Foundry</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="pt-stage">
+<div id="wrap"><div id="sheet" role="img" aria-label="The sheet, struck by voice"><canvas id="print"></canvas><canvas id="forme"></canvas></div></div>
+<!-- What the press is telling you: how hard you are pressing, what it is
+     waiting for, and what the last strike did. -->
+<div class="vt-say">
+  <span id="level" aria-hidden="true"><i></i></span>
+  <p id="status" role="status">Loading&hellip;</p>
+  <p id="typeInfo"></p>
+</div>
+<div id="dock">
+  <div class="group">
+    <div class="group__t">Press</div>
+    <p class="rowhint">Press Start and talk. Leave the words empty and the browser supplies them as it recognises them (Chrome, Edge or Safari, with a connection); set words and each burst of voice strikes the next one. Nothing you say is kept.</p>
+    <textarea id="phraseIn" hidden></textarea>
+    <button class="btn" id="micBtn">Start</button>
+    <button class="btn" id="backBtn">Back</button>
+    <button class="btn" id="resetBtn">Clear</button>
+    <div class="knob"><label>Ink</label>
+      <select id="inkSel">
+        <option value="black">Black</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="white">White</option>
+        <option value="blind">Blind</option>
+      </select>
+    </div>
+    <div class="knob"><label>Stock</label>
+      <select id="stockSel">
+        <option value="white">White</option>
+        <option value="black">Black</option>
+      </select>
+    </div>
+    <div class="knob"><label>Type size</label>
+      <select id="sizeSel">
+        <option value="36">36 pt</option>
+        <option value="48" selected>48 pt</option>
+        <option value="72">72 pt</option>
+      </select>
+    </div>
+    <div class="knob"><label>Sensitivity <b id="sensVal">50</b></label>
+      <input type="range" id="sens" min="0" max="100" value="50">
+    </div>
+  </div>
+  <div class="group out" id="output" data-export-custom>
+    <div class="group__t">Output</div>
+    <button class="btn" id="pngBtn">PNG</button>
+  </div>
+</div>
+
+<style>
+  .pt-stage { position: relative; }
+  .vt-say { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    width: 100%; max-width: 90em; margin: 0 auto;
+    padding: 0 10em .6em; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: .35em; pointer-events: none; }
+  @media (max-width: 64em) { .vt-say { padding: 0 4em .6em; } }
+  /* on a phone the drawer's round button sits at the foot, right; the line stops short of it */
+  @media (max-width: 40em) { .vt-say { padding: 0 6em .5em 1.25em; } }
+  .vt-say p { margin: 0; font-family: 'Untitled Sans', 'Sidepiece-HoneyPie', sans-serif;
+    font-size: 0.72rem; letter-spacing: .04em; line-height: 1.5; color: #111; }
+  .vt-say #typeInfo { color: rgba(0,0,0,.45); font-variant-numeric: tabular-nums; }
+  .vt-say #typeInfo:empty, .vt-say #status:empty { display: none; }
+  /* the pressure, as a rule that fills rather than a meter that ticks */
+  #level { display: block; height: 2px; background: rgba(0,0,0,.12); }
+  #level i { display: block; height: 100%; width: 0; background: #111; transition: width 60ms linear; }
+</style>
+
+<script src="/workshops/bgsu/lab/tools/impression/impression.js"></script>
+<script>
+'use strict';
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var setStatus = function(t){ var e=$('#status'); if(e) e.textContent = t; };
+  var im = null;
+
+  var setMic = function(on){ var b=$('#micBtn'); if(!b) return; b.textContent = on ? 'Stop' : 'Start'; b.setAttribute('aria-pressed', String(on)); };
+  var micMsg = function(e){
+    return (e && e.name === 'NotAllowedError' ? 'The microphone was blocked.' : 'The microphone could not start.')
+      + ' Open this page in its own tab and allow it.';
+  };
+  var waiting = function(){
+    if (im.full) return 'The sheet is full. Save it, or clear it and start again.';
+    if (im.mode === 'phrase') {
+      var w = im.phrase[im.phraseIdx];
+      return w ? 'Say “' + w + '”, then pause.' : 'Every word is struck. Set more, or clear.';
+    }
+    return Impression.canTranscribe ? 'Press Start and talk.' : 'Set some words below — this browser cannot transcribe — then strike them by voice.';
+  };
+
+  /* What the last strike did, in the press's own terms. */
+  var readout = function(s){
+    var e=$('#typeInfo'); if(!e) return;
+    if (!s) { e.textContent=''; return; }
+    var bits = ['“' + s.text + '”', 'pressure ' + Math.round(s.pressure*100)];
+    bits.push(s.blind ? 'blind' : 'ink ' + Math.round(s.inkLevel*100));
+    if (s.squash > 0.05) bits.push('dwell ' + Math.round(s.raw.dur) + ' ms');
+    if (s.slur > 0.05) bits.push('slur ' + Math.round(s.slur*100));
+    if (s.bruise) bits.push('bruised');
+    e.textContent = bits.join(' · ');
+  };
+
+  function saveFile(name, blob){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  }
+  function slug(){
+    return im.strikes.map(function(s){ return s.text; }).join(' ').toLowerCase()
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'impression';
+  }
+
+  /* The face has to be in hand before the first word is measured, or the
+     layout is worked out in a fallback serif and every strike lands short. */
+  document.fonts.load('48px Signifier').then(start, start);
+
+  function start(){
+    im = new Impression({
+      canvas: $('#print'), overlay: $('#forme'), font: 'Signifier, Georgia, serif',
+      onLevel: function(m){ var i=$('#level i'); if(i) i.style.width = Math.round(m.live*100) + '%'; },
+      onStrike: function(s){ readout(s); },
+      onStatus: function(kind, detail){
+        if (kind === 'transcribing') setStatus('Listening. Talk normally — each word is struck as it is recognised.');
+        if (kind === 'phrase' || kind === 'spent') setStatus(waiting());
+        if (kind === 'full') { setStatus(waiting()); if (im.listening) im.stop(); }
+        if (kind === 'stopped') setMic(false);
+        if (kind === 'error') {
+          var msg = { 'network':'Speech recognition needs a connection — the browser sends the audio to its own service. Set words below to strike without it.',
+                      'not-allowed':'Speech recognition is blocked here. Open the page in its own tab and allow the microphone.',
+                      'service-not-allowed':'This browser will not run speech recognition on this page. Set words below to strike without it.',
+                      'audio-capture':'No microphone was found.' }[detail];
+          if (msg) setStatus(msg);
+        }
+      }
+    });
+    window.__im = im;
+
+    $('#phraseIn').addEventListener('input', function(){ im.setPhrase(this.value); if (!im.listening) setStatus(waiting()); });
+    im.setPhrase($('#phraseIn').value);
+
+    $('#micBtn').onclick = function(){
+      if (im.listening) { im.stop(); setStatus('Paused. Press Start to carry on.'); return; }
+      if (im.full) { setStatus(waiting()); return; }
+      im.start().then(function(){ setMic(true); }).catch(function(e){
+        setStatus(e && e.name === 'NoSpeechRecognition'
+          ? 'This browser cannot transcribe. Set some words below and strike them by voice.'
+          : micMsg(e));
+      });
+    };
+    $('#backBtn').onclick = function(){ im.back(); readout(im.strikes[im.strikes.length-1]); if (!im.listening) setStatus(waiting()); };
+    $('#resetBtn').onclick = function(){ im.clear(); readout(null); if (!im.listening) setStatus(waiting()); };
+    $('#inkSel').onchange = function(){ im.set({ ink: this.value }); };
+    $('#stockSel').onchange = function(){
+      im.set({ stock: this.value });
+      /* white ink on white stock is a blind strike by another name; follow the stock */
+      if (this.value === 'black' && $('#inkSel').value === 'black') { $('#inkSel').value = 'white'; im.set({ ink:'white' }); }
+      if (this.value === 'white' && $('#inkSel').value === 'white') { $('#inkSel').value = 'black'; im.set({ ink:'black' }); }
+    };
+    $('#sizeSel').onchange = function(){ im.set({ size: +this.value }); if (!im.listening) setStatus(waiting()); };
+    $('#sens').oninput = function(){ $('#sensVal').textContent = this.value; im.set({ sensitivity: +this.value }); };
+    $('#pngBtn').onclick = function(){
+      im.exportPNG().then(function(b){ saveFile(slug() + '.png', b); })
+        .catch(function(){ setStatus('This browser could not write the PNG.'); });
+    };
+
+    /* Fit the sheet to the stage. The width is the column's; the height is
+       the WINDOW's — what is left under the header once the say-line has its
+       room. Never #wrap's height: #wrap is as tall as the sheet inside it, so
+       sizing the sheet from it shrank both a little on every pass, and the
+       sheet ratcheted down to 80px and could not grow back. */
+    function fit(){
+      var wrap = $('#wrap'), el = $('#sheet');
+      if (!wrap || !el) return;
+      var cs = getComputedStyle(wrap);
+      var w = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var nav = document.querySelector('.sp-nav'), say = $('.vt-say');
+      var h = innerHeight - (nav ? nav.offsetHeight : 0) - (say ? say.offsetHeight : 0) - 32;
+      if (!(w > 0) || !(h > 0)) return;
+      var ratio = Impression.SHEET.w / Impression.SHEET.h;
+      var sw = Math.min(w, h * ratio);
+      el.style.width = sw + 'px'; el.style.height = (sw / ratio) + 'px';
+    }
+    addEventListener('resize', fit);
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(fit); ro.observe($('#wrap'));
+      var bar = document.querySelector('.pt-bar'); if (bar) ro.observe(bar);
+    }
+    document.addEventListener('click', function(e){
+      if (e.target.closest && e.target.closest('.pt-drawer__open, .pt-drawer__shut')) { setTimeout(fit, 60); setTimeout(fit, 420); }
+    }, true);
+    fit(); [200, 600, 1200].forEach(function(t){ setTimeout(fit, t); });
+
+    setStatus(waiting());
+  }
+})();
+</script>
+<div class="pt-bar"><div class="container">
+  <div class="pt-bar__row">
+    <div class="pt-bar__btns"><button class="pt-bar__btn" type="button" data-proxy="micBtn" aria-label="Start or stop listening" title="Start or stop listening" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button><button class="pt-bar__btn" type="button" data-proxy="backBtn" aria-label="Lift the last strike" title="Lift the last strike"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="pt-bar__btn" type="button" data-proxy="resetBtn" aria-label="Clear the sheet" title="Clear the sheet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4.5h-4.5"/></svg></button></div><div class="pt-bar__field"><input class="pt-bar__words" type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-gramm="false" value="" placeholder="Words to strike, or leave empty and talk" data-words="phraseIn" aria-label="Words to strike"></div></div>
+  <div class="pt-bar__ctl"></div>
+  <a class="pt-for" href="/workshops/bgsu/lab/tools/voicetype/">A companion to VoiceType &middot; nothing you say is kept</a>
+</div></div>
+<script src="/workshops/bgsu/lab/tools/_public.js?v=20261008B"></script>
+<!-- the instrument draws its own cursor: inside the overlay this page is an
+     iframe, and the page behind it cannot see the pointer once it crosses in -->
+<script src="/workshops/bgsu/shared/cursor.js?v=20261003"></script>
+  </div>
+  <script src="/workshops/bgsu/shared/footer.js?v=20261009B"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posters — OP/AL</title>
+  <meta name="description"  content="A sheet at a time. Posters made by OP/AL — for a show, for a sentence worth saying, for the practice itself.">
+  <link rel="canonical" href="https://more-than.design/artifact/posters.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="OP/AL">
+  <meta property="og:title"       content="Posters — OP/AL">
+  <meta property="og:description" content="A sheet at a time. Posters made by OP/AL — for a show, for a sentence worth saying, for the practice itself.">
+  <meta property="og:image"       content="https://more-than.design/images/opal-open-graph.jpg?v=20261009">
+  <meta property="og:url"         content="https://more-than.design/artifact/posters.html">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Posters — OP/AL">
+  <meta name="twitter:description" content="A sheet at a time. Posters made by OP/AL — for a show, for a sentence worth saying, for the practice itself.">
+  <meta name="twitter:image"       content="https://more-than.design/images/opal-open-graph.jpg?v=20261009">
+  <link rel="stylesheet" href="../shared/styles.css?v=20261011A">
+<style>
+  /* ── A sheet to a screen ────────────────────────────────────────────────
+     The same move the Sidepiece spreads make: each poster takes a screen of
+     its own and is centred on a ground, rather than scrolling past on the
+     black. A poster is met on a surface — a wall, a table — so it is given
+     one, and sized to the viewport so the whole sheet is in view at once
+     without the reader doing anything.
+
+     The ground is the counterweight to the sheet, not a decoration: the
+     black sheet lies on paper grey, the white sheet on a deep slate pulled
+     from its own blue. Two grounds that differ also stop the two stages
+     bleeding into one as you scroll between them. */
+  .poster-stage {
+    /* Full bleed. The stage sits inside the page's container, so without
+       this the ground stops at the measure and reads as a panel on the page
+       rather than a surface the sheet is lying on — the same edge-to-edge
+       the Sidepiece spreads take. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: var(--space-6);
+    padding: calc(var(--header-h) + var(--space-8)) var(--space-8) var(--space-10);
+    background: var(--ground, #e6e6e6);
+    color: var(--on-ground, #111);
+  }
+
+  /* Height-led, not width-led. A poster is portrait, so what decides whether
+     the whole sheet is on screen is the room left under the header — the
+     width follows from the sheet's own proportions. */
+  .poster-sheet { margin: 0; display: flex; flex-direction: column;
+    align-items: center; gap: var(--space-4); }
+  .poster-sheet img {
+    display: block;
+    max-height: calc(100svh - var(--header-h) - var(--space-8) - var(--space-10) - 5.5em);
+    max-width: min(88vw, 46em);
+    width: auto; height: auto;
+    /* Depth: a contact shadow tight under the sheet and a soft cast well
+       beyond it. One alone reads as a sticker; the pair reads as paper
+       lifted off a surface. */
+    box-shadow:
+      0 1px 2px var(--shade-near, rgba(0,0,0,.16)),
+      0 2px 8px var(--shade-near, rgba(0,0,0,.16)),
+      0 28px 70px var(--shade-far, rgba(0,0,0,.26));
+  }
+
+  .poster-cap { display: flex; flex-wrap: wrap; gap: .4em var(--space-6);
+    align-items: baseline; justify-content: center; text-align: center;
+    font-family: var(--font-label); font-size: var(--tag); letter-spacing: .5px; }
+  /* The ink is said on the caption and on everything in it. `inherit` was
+     not enough: a project page paints figcaption white for its dark grounds,
+     so on the paper-grey stage the label came out white on light grey at
+     1.25:1 — there, and unreadable. The stage states its own ink. */
+  .poster-stage .poster-cap,
+  .poster-stage .poster-cap * { color: var(--on-ground, #111); }
+  .poster-stage .poster-cap .m { opacity: .6; }
+
+  /* Three sheets on one stage, read across. They are the same brief answered
+     three ways, so they belong side by side rather than a screen apart — and
+     they are shown as printed, footers and all, which is where the credit
+     already lives. */
+  .poster-row { display: flex; align-items: flex-end; justify-content: center;
+    gap: clamp(16px, 2.4vw, 40px); width: 100%; }
+  .poster-row img { display: block; width: auto; flex: 0 1 auto;
+    max-height: calc(100svh - var(--header-h) - var(--space-8) - var(--space-10) - 5.5em);
+    max-width: 30%;
+    box-shadow:
+      0 1px 2px var(--shade-near, rgba(0,0,0,.16)),
+      0 2px 8px var(--shade-near, rgba(0,0,0,.16)),
+      0 24px 60px var(--shade-far, rgba(0,0,0,.26)); }
+  @media (max-width: 48em) {
+    .poster-row { flex-direction: column; align-items: center; }
+    .poster-row img { max-width: 86%; max-height: none; }
+  }
+
+  /* On a phone the header eats most of the screen, so the sheet takes the
+     width it can and the stage shrinks to it rather than padding it out. */
+  @media (max-width: 40em) {
+    .poster-stage { min-height: 0; padding: var(--space-12) var(--space-6); }
+    .poster-sheet img { max-height: none; max-width: 100%; }
+  }
+  /* The band the stages sit in keeps its own padding, so after the last
+     sheet there was a strip of the showcase's black between the ground and
+     the footer — a gap that read as a mistake because every stage above it
+     runs edge to edge. The band gives up its padding when it holds stages,
+     the same way it does for the Sidepiece spreads. */
+  #images:has(.poster-stage) { padding-top: 0; padding-bottom: 0; }
+
+  @media (prefers-reduced-motion: reduce) { .poster-sheet img { transition: none; } }
+</style>
+</head>
+<body>
+<!-- ===================================================================
+     GENERATED — DO NOT EDIT. Everything between here and /prerender is
+     rebuilt by `node build/prerender.js` from the real markup further
+     down this file. An edit made in here is silently thrown away on the
+     next build. Scroll past it and edit the page itself.
+     =================================================================== -->
+<div id="prerender">
+<section id="hero">
+    <div class="container">
+      <div class="grid">
+        <p class="tag proj-hero__path col-8">Artifact  <span>/</span>  Poster <span>/</span> Print</p>
+      </div>
+      <div class="grid">
+        <h1 class="col-8">Posters</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-8">Printed artifacts for various occasions<span>.</span> Composition and form on one surface<span>:</span> meaning made from image<span>,</span> typography<span>,</span> color<span>,</span> and the choices between them<span>.</span></h2>
+      </div>
+      
+    </div>
+  </section>
+<section id="credits">
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>Various</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Poster <span>/</span> Print</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>Ongoing</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p>OP<span><span>/</span></span>AL<br><span class="text-mid">Design</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+<section id="images"><div class="container project-html"><div class="poster-stage"><figure class="poster-sheet"><img src="../images/Poster-more-than.webp" alt="Poster: a black sheet with type exploding outward from a white diagonal slash, the words more than / design set small at the lower left" decoding="async" class="im im-here" loading="lazy"><figcaption class="poster-cap"><span class="t">More Than <span>/</span> Design</span><span class="m">OP<span>/</span>AL<span>,</span> 2026</span></figcaption></figure></div></div><div class="container project-html"><div class="poster-stage"><figure class="poster-sheet"><div class="poster-row"><img src="../images/Poster-aha-rick.webp" alt="Poster: Compassion by Rick Valicenti, a pale curtain of fabric falling in soft folds" decoding="async" class="im im-here" loading="lazy"><img src="../images/Poster-aha-barry.webp" alt="Poster: Sanity by Barry Deck, the word drawn in looping line over a flat green field" decoding="async" class="im im-here" loading="lazy"><img src="../images/Poster-aha-christian.webp" alt="Poster: Honesty by Christian Solorzano, I TRUST YOU above I BELIEVE YOU over turning blue and yellow rings" decoding="async" class="im im-here" loading="lazy"></div><figcaption class="poster-cap"><span class="t">A Call for Values</span><span class="m">2026</span></figcaption></figure></div></div><div class="container project-html"><div class="poster-stage"><figure class="poster-sheet"><img src="../images/Poster-humanity-first.webp" alt="Poster: HUMANITY FIRST in heavy ornamented black type over an aqua field" decoding="async" class="im im-here" loading="lazy"><figcaption class="poster-cap"><span class="t">Humanity First</span><span class="m">Barry Deck<span>,</span> 2026</span></figcaption></figure></div></div></section>
+</div>
+<script>(function(){var p=document.getElementById('prerender');if(p)p.remove();})();</script>
+<!-- /prerender -->
+  <script>
+    const PROJECT = {
+      title:       "Posters",
+      description: "Printed artifacts for various occasions. Composition and form on one surface: meaning made from image, typography, color, and the choices between them.",
+      client:      "Various",
+      medium:      "Poster / Print",
+      year:        "Ongoing",
+      /* OP/AL first, then Various, and no names. The Acknowledgements on this
+         page name the practice and nothing else — a sheet is credited on its
+         own wall label, under the poster, where the credit belongs to the
+         work rather than to the page. */
+      credits:     [
+        { name: "OP/AL", title: "Design" }
+      ],
+      role:        "Designer",
+      images: [
+        /* ground / ink / the two shadows, per stage — a black poster needs a
+           light surface under it and a white poster a dark one. */
+        { html: '<div class="poster-stage" style="--ground:#e6e6e6;--on-ground:#111;'
+              + '--shade-near:rgba(0,0,0,.18);--shade-far:rgba(0,0,0,.30)">'
+              + '<figure class="poster-sheet">'
+              + '<img src="../images/Poster-more-than.webp" alt="Poster: a black sheet with type exploding outward from a white diagonal slash, the words more than / design set small at the lower left">'
+              + '<figcaption class="poster-cap"><span class="t">More Than / Design</span>'
+              + '<span class="m">OP/AL, 2026</span></figcaption></figure></div>' },
+
+        { html: '<div class="poster-stage" style="--ground:#17171a;--on-ground:#f2f2f2;'
+              + '--shade-near:rgba(0,0,0,.45);--shade-far:rgba(0,0,0,.6)">'
+              + '<figure class="poster-sheet"><div class="poster-row">'
+              + '<img src="../images/Poster-aha-rick.webp" alt="Poster: Compassion by Rick Valicenti, a pale curtain of fabric falling in soft folds">'
+              + '<img src="../images/Poster-aha-barry.webp" alt="Poster: Sanity by Barry Deck, the word drawn in looping line over a flat green field">'
+              + '<img src="../images/Poster-aha-christian.webp" alt="Poster: Honesty by Christian Solorzano, I TRUST YOU above I BELIEVE YOU over turning blue and yellow rings">'
+              + '</div><figcaption class="poster-cap"><span class="t">A Call for Values</span>'
+              + '<span class="m">2026</span></figcaption></figure></div>' },
+
+        { html: '<div class="poster-stage" style="--ground:#163529;--on-ground:#f2f2f2;'
+              + '--shade-near:rgba(0,0,0,.42);--shade-far:rgba(0,0,0,.55)">'
+              + '<figure class="poster-sheet">'
+              + '<img src="../images/Poster-humanity-first.webp" alt="Poster: HUMANITY FIRST in heavy ornamented black type over an aqua field">'
+              + '<figcaption class="poster-cap"><span class="t">Humanity First</span>'
+              + '<span class="m">Barry Deck, 2026</span></figcaption></figure></div>' }
+      ],
+      next: { title: "Values", url: "values.html" }
+    };
+  </script>
+  <script src="../shared/project.js?v=20261009C"></script>
+</body>
+</html>

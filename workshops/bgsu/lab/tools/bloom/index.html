@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Gated with the lab experiments: nothing public links here, and an
+     unfinished instrument found by a stranger reads as a broken one. -->
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Bloom — OP/AL Research</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+<link rel="stylesheet" href="/workshops/bgsu/lab/tools/_public.css?v=20261010A" />
+<style>    /* ── header: wordmark flush left, the three doors flush right ── */
+    .sp-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.5em 0; color: #111; background: #fff; }
+    .sp-nav__row { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 2.2em; }
+    .sp-nav__logo { display: block; width: 14%; min-width: 132px; color: inherit; }
+    .sp-nav__logo svg { display: block; width: 100%; height: auto; }
+    .sp-nav__doors { display: flex; align-items: center; gap: var(--space-8); }
+    .sp-nav__side { color: inherit; text-decoration: none; font-family: "Sidepiece", sans-serif; font-size: var(--body); letter-spacing: .04em; font-weight: 400; line-height: 1; padding: .3em 0; }
+    .sp-nav__side.is-on { border-bottom: 1.5px solid currentColor; }
+    @media (max-width: 40em) { .sp-nav__logo { width: 34%; min-width: 0; } .sp-nav__doors { gap: var(--space-4); } .sp-nav__side { font-size: var(--label); } }
+
+    /* Lab shell's gate hides the body; these pages are public, so it is
+       overridden here. Removing this line blanks the page entirely. */
+    body, body.opal-drawer{ display:block !important; padding:0 !important; overflow:auto !important; height:auto !important; }
+    body.opal-drawer #wrap{ padding:0 !important; left:0 !important; }
+    html{ overflow:auto !important; height:auto !important; }
+    html.zlmc-locked body > *:not(.zlmc-gate){ display:revert !important; }
+    /* `revert` drops to the user-agent default — block for a <div> — so it also
+       undid .pt-stage's grid and stacked the controls under the artwork, while the
+       pages that do not load the gate kept the side-by-side layout. Nobody ever
+       unlocks these (the gate is disabled just below), so that stacked state was
+       what every visitor saw. Put the layout the stylesheet asks for back. */
+    html.zlmc-locked body > .pt-stage{ display:flex !important; }
+    @media (min-width:64em){ html.zlmc-locked body > .pt-stage{ display:grid !important; } }
+    .zlmc-gate{ display:none !important; }
+
+  </style>
+<style>
+  /* layout only — every control is owned by OPALAB.css (loaded last) */
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; margin:0; overscroll-behavior:none; }
+
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; display:flex; align-items:center; justify-content:center; padding:24px; }
+  #art{ max-width:100%; max-height:100%; display:block; touch-action:none; cursor:crosshair; }  /* board frame owned by OPALAB (border, no shadow) */
+  #sizeDock{ display:flex; align-items:center; gap:10px; }
+
+  /* left-side control rail — matches the other tools' shells */
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; overflow-x:hidden; }
+  .row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-start; }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .grid2 .btn, .grid3 .btn, .btn.full{ width:100%; }
+  select.full{ width:100%; }
+  .field{ width:100%; }
+  #sliders{ display:flex; flex-direction:column; gap:14px; width:100%; }
+  #sliders.locked{ opacity:.35; pointer-events:none; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  /* hover tooltips on the controls — matches the other tools */
+  .tip{ position:fixed; z-index:60; display:none; max-width:230px; padding:9px 11px;
+    line-height:1.5; pointer-events:none; opacity:0; transition:opacity .14s ease; }
+  /* ink colour swatches — the chip itself is owned by OPALAB */
+  .swrow{ display:flex; flex-wrap:wrap; gap:7px; align-items:center; }
+  /* recording timer — matches the other tools */
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); left:calc(var(--rail) + 24px); z-index:11; display:none;
+    align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); animation:recblink 1s infinite; }
+  #recDot b{ font-variant-numeric:tabular-nums; font-weight:600; }
+  @keyframes recblink{ 50%{ opacity:.25; } }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body data-skip="doneBtn,restartBtn,photoBtn,saveBtn,recBtn,editBtn">
+    <!-- the split header: Lab left · wordmark centred on its slash · Studio right -->
+  <header class="sp-nav">
+    <div class="container"><div class="sp-nav__row">
+      <a class="sp-nav__logo" href="/" aria-label="OP/AL"><svg xmlns="http://www.w3.org/2000/svg" viewBox="155.3 212.9 1285.8 186.2" fill="currentColor"><path d="M1356.2,353.2h72.1v-13h-59.1v-100.6h-13v113.5ZM1077.3,313.7l13.5-61.1h10.6l13.3,61.1h-37.5ZM1055.3,353.2h13.3l5.8-26.5h43.3l5.8,26.5h13.3l-25.2-113.5h-30.6l-25.6,113.5ZM723.6,398.3h37.2l111.9-184.5h-37.2l-111.9,184.5ZM478.1,296.2v-43.6h28.1c5.9,0,8.3.9,13,4.7,5.2,4.3,5.9,6.1,5.9,10.6v13c0,4.5-.7,6.3-5.9,10.6-4.7,3.8-7,4.7-13,4.7h-28.1ZM465.1,353.2h13v-44h28.1c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-14.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-41.1v113.5ZM199.1,340.2h-11.9c-5.9,0-8.3-.9-13-4.7-5.2-4.3-5.9-6.1-5.9-10.6v-57c0-4.5.7-6.3,5.9-10.6,4.7-3.8,7-4.7,13-4.7h11.9c5.9,0,8.5.9,13.2,4.7,5,4.1,5.8,6.1,5.8,10.6v57c0,4.5-.7,6.5-5.8,10.6-4.7,3.8-7.2,4.7-13.2,4.7M187.2,353.2h11.9c9.4,0,14.2-2,22.5-9,8.3-7,9.4-10.3,9.4-18.6v-58.4c0-8.3-1.1-11.5-9.4-18.6-8.3-7-13.2-9-22.5-9h-11.9c-9.4,0-14.2,2-22.5,9-8.3,7-9.4,10.3-9.4,18.6v58.4c0,8.3,1.1,11.5,9.4,18.6,8.3,7,13.2,9,22.5,9"/></svg></a>
+      <div class="sp-nav__doors">
+        <a class="sp-nav__side is-on" href="/workshops/bgsu/lab/">Research</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/studio/">Artifact</a>
+        <a class="sp-nav__side" href="/workshops/bgsu/about.html">Info</a>
+      </div>
+    </div></div>
+  </header>
+  <section id="hero" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <h1 class="col-12">Bloom</h1>
+      </div>
+      <div class="grid">
+        <h2 class="col-9">Draw a line, then watch it bloom. A drawn stroke grows into a field of lines that flow, spiral and thicken — over white, or over a photograph of your own.</h2>
+      </div>
+    </div>
+  </section>
+  <section id="credits" data-no-reveal>
+    <div class="container">
+      <div class="grid">
+        <div class="col-3">
+          <span class="label">Client</span>
+          <p>OP/AL</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Medium</span>
+          <p>Tool</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Year</span>
+          <p>2026</p>
+        </div>
+        <div class="col-3">
+          <span class="label">Acknowledgements</span>
+          <p><a href="/workshops/bgsu/lab/">Research</a><br><span class="text-mid">Featured in</span></p><p>OP/AL<br><span class="text-mid">Built by</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="pt-stage">
+<div id="wrap"><canvas id="art"></canvas></div>
+  <input id="photoFile" type="file" accept="image/*" hidden />
+  <div id="hint">Draw a line — then hit Bloom</div>
+  <div id="recDot"><i></i><b>0:00</b></div>
+  <div id="sizeDock">
+    <select id="aspect" title="Canvas size">
+      <option value="1080/1350">Portrait · 4:5</option>
+      <option value="1080/1920" selected>Story · 9:16</option>
+      <option value="1/1">Square · 1:1</option>
+      <option value="1920/1080">Landscape · 16:9</option>
+    </select>
+  </div>
+
+  <div id="dock">
+
+    <!-- primary action -->
+    <div class="group">
+      <button class="btn primary full" id="doneBtn">Bloom</button>
+      <div class="grid2" id="modRow" style="display:none">
+        <button class="btn" id="editBtn">Edit lines</button>
+        <button class="btn" id="restartBtn">Redraw</button>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="group">
+      <div class="group__t">Form</div>
+      <div id="sliders">
+        <div class="knob" data-tip="The mark-making style of the ink — Charcoal grain, a smooth Ink stroke, a fine Pen line, a soft airbrush Spray, or Pencil graphite."><label>Brush</label><select id="brush" class="full"><option value="charcoal" selected>Charcoal</option><option value="ink">Ink — smooth</option><option value="pen">Pen — fine line</option><option value="spray">Spray — airbrush</option><option value="pencil">Pencil</option></select></div>
+        <div class="knob" data-tip="How many stems of ink trail along each line you drew. More stems build up denser, richer growth."><label>Stems <b id="densityR">10</b></label><input id="density" type="range" min="0" max="100" value="10" /></div>
+        <div class="knob" data-tip="How much the stems bloom outward from your line. Low hugs your stroke; high sends them looping and expanding off it."><label>Expand <b id="flowR">100</b></label><input id="flow" type="range" min="0" max="100" value="100" /></div>
+        <div class="knob" data-tip="Adds a circular swirl to the stems' motion, coiling the lines as they travel."><label>Swirl <b id="spiralR">100</b></label><input id="spiral" type="range" min="0" max="100" value="100" /></div>
+        <div class="knob" data-tip="Thickness of the ink — thin and delicate on the left, thick and heavy on the right."><label>Brush size <b id="weightR">10</b></label><input id="weight" type="range" min="0" max="100" value="10" /></div>
+        <div class="knob" data-tip="How much ink each pass lays down. Higher builds up darker and denser."><label>Ink density <b id="inkR">10</b></label><input id="ink" type="range" min="0" max="100" value="10" /></div>
+        <div class="knob" data-tip="Wetness of the ink — fatter, heavier strokes that bleed, so where stems cross the ink POOLS into solid black. High enough and heavy pools drip."><label>Wet <b id="wetR">0</b></label><input id="wet" type="range" min="0" max="100" value="0" /></div>
+        <div class="knob" data-tip="How long one full pass along your line takes. Higher is slower and more meditative."><label>Time <b id="timeR">5s</b></label><input id="time" type="range" min="0" max="100" value="20" /></div>
+      </div>
+      <button class="btn full" id="rndBtn" data-tip="Roll a fresh combination of every control — and a colour — for a new bloom to explore, like a strange attractor searching its space.">Randomize</button>
+    </div>
+
+    <!-- ink & colour -->
+    <div class="group">
+      <div class="group__t">Ink &amp; colour</div>
+      <div class="knob" data-tip="How much colour is mixed into the ink — 0 is plain black, up brings the chosen colour in."><label>Colour <b id="colorR">0</b></label><input id="color" type="range" min="0" max="100" value="0" /></div>
+      <div class="group__t" style="margin-top:3px">Ink</div>
+      <div class="swrow" data-tip="Pick the ink colour — the first swatch is the rainbow (every hue), or choose one; the last is a custom picker. Raise Colour to bring it in.">
+        <button class="sw" data-ink="rainbow" aria-pressed="true" title="Rainbow — every hue" style="background:conic-gradient(from 0deg,#e0483c,#e6902a,#e8c020,#4f9d69,#2f7fd0,#6a4fb0,#c0468f,#e0483c);"></button>
+        <button class="sw" data-ink="#e0483c" title="Red" style="background:#e0483c"></button>
+        <button class="sw" data-ink="#e8c020" title="Gold" style="background:#e8c020"></button>
+        <button class="sw" data-ink="#4f9d69" title="Green" style="background:#4f9d69"></button>
+        <button class="sw" data-ink="#2f7fd0" title="Blue" style="background:#2f7fd0"></button>
+        <button class="sw" data-ink="#6a4fb0" title="Violet" style="background:#6a4fb0"></button>
+        <button class="sw" data-ink="#c0468f" title="Magenta" style="background:#c0468f"></button>
+        <input class="sw" id="inkPick" type="color" value="#ff2d55" title="Custom colour" />
+      </div>
+      <div class="group__t" style="margin-top:3px">Paper</div>
+      <div class="swrow" data-tip="The paper colour behind the ink. On a dark paper the ink flips to a light stroke so it always shows.">
+        <button class="sw bg" data-bg="#ffffff" aria-pressed="true" title="White" style="background:#ffffff"></button>
+        <button class="sw bg" data-bg="#f7f4e0" title="Cream" style="background:#f7f4e0"></button>
+        <button class="sw bg" data-bg="#e8e2d0" title="Sand" style="background:#e8e2d0"></button>
+        <button class="sw bg" data-bg="#0b0c12" title="Ink black" style="background:#0b0c12"></button>
+        <button class="sw bg" data-bg="#101826" title="Navy" style="background:#101826"></button>
+        <button class="sw bg" data-bg="#1a1420" title="Aubergine" style="background:#1a1420"></button>
+        <input class="sw" id="bgPick" type="color" value="#ffffff" title="Custom paper colour" />
+      </div>
+    </div>
+
+    <!-- type -->
+    <div class="group">
+      <div class="group__t">Type</div>
+      <input id="textIn" class="field" type="text" placeholder="Type words to pour…" autocomplete="off" data-tip="Type words and the chains draw them out as letterforms — the text pours itself down the canvas." />
+      <button class="btn full" id="textBtn">Pour text</button>
+    </div>
+
+    <!-- effects -->
+    <div class="group">
+      <div class="group__t">Effects</div>
+      <div class="knob" data-tip="Strobe — the ink rapidly flashes and cycles through colour as it draws. 0 is off; higher flashes faster and harder."><label>Flash <b id="flashR">0</b></label><input id="flash" type="range" min="0" max="100" value="0" /></div>
+      <div class="grid2">
+        <button class="btn" id="chromeBtn" aria-pressed="false" data-tip="Render the lines as polished chrome — adapts to your paper: a metallic glow on dark paper, shiny liquid chrome on light paper.">Chrome</button>
+        <button class="btn" id="soundBtn" aria-pressed="false" data-tip="An eerie synth soundtrack, generated live from the motion. Pick a voice below — each moves differently. Recording does not capture it.">Sound</button>
+      </div>
+      <select id="soundMode" class="full" title="Sound voice">
+        <option value="swarm" selected>Swarm — drifting</option>
+        <option value="rubber">Rubber — vibrato</option>
+        <option value="scrape">Scrape — dry</option>
+        <option value="machine">Machine — metallic</option>
+        <option value="wind">Wind — hollow</option>
+      </select>
+    </div>
+
+    <!-- lines & photo -->
+    <div class="group">
+      <div class="group__t">Lines &amp; photo</div>
+      <div class="grid3">
+        <button class="btn" id="photoBtn">Photo</button>
+        <button class="btn" id="adjustBtn" style="display:none" aria-pressed="false" data-tip="Reposition the photo without distorting it — drag to move, scroll or pinch to resize. Toggle off to draw.">Move photo</button>
+        <button class="btn" id="eraseBtn" aria-pressed="false" data-tip="Erase mode — drag across your drawn lines to remove them. Toggle off to draw again.">Eraser</button>
+        <button class="btn" id="undoBtn">Undo</button>
+        <button class="btn" id="clearBtn">Clear</button>
+      </div>
+    </div>
+
+    <!-- output — every export setting (format · pixels · print size · DPI) lives here -->
+    <div class="group out" data-export-custom>
+      <div class="group__t">Output</div>
+      <div class="grid2">
+        <button class="btn" id="recBtn" aria-pressed="false">Record</button>
+        <button class="btn" id="saveBtn">Save</button>
+      </div>
+    </div>
+
+  </div>
+
+<script src="/workshops/bgsu/lab/shared/opal.js?v=3"></script>
+
+
+<script>
+(() => {
+  const cv=document.getElementById('art'); let ctx=cv.getContext('2d');
+  const $=id=>document.getElementById(id);
+  let ASPECT=1080/1920;   // default: Instagram Reel (9:16)
+  let W=0,H=0,dpr=1, mode='draw';
+  let strokes=[], strokeCol=[], cur=null, walkers=[], raf=0, F=0, lastTs=0, aT=0, gT=0, RT=0, traceRef=null;
+  const P={ density:10, length:50, flow:100, spiral:100, weight:10, ink:10, wet:0, time:20, color:0, flash:0, brush:'charcoal' };
+
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function makeNoise(seed){ const rand=mulberry32(seed);
+    const p=new Uint8Array(256); for(let i=0;i<256;i++)p[i]=i;
+    for(let i=255;i>0;i--){ const j=(rand()*(i+1))|0, t=p[i]; p[i]=p[j]; p[j]=t; }
+    const perm=new Uint8Array(512); for(let i=0;i<512;i++)perm[i]=p[i&255];
+    const fade=t=>t*t*t*(t*(t*6-15)+10), lerp=(a,b,t)=>a+(b-a)*t;
+    const grad=(h,x,y)=>((h&1)?x:-x)+((h&2)?y:-y);
+    return (x,y)=>{ const X=Math.floor(x)&255,Y=Math.floor(y)&255; x-=Math.floor(x); y-=Math.floor(y);
+      const u=fade(x),v=fade(y);
+      const aa=perm[perm[X]+Y],ab=perm[perm[X]+Y+1],ba=perm[perm[X+1]+Y],bb=perm[perm[X+1]+Y+1];
+      return lerp(lerp(grad(aa,x,y),grad(ba,x-1,y),u), lerp(grad(ab,x,y-1),grad(bb,x-1,y-1),u), v); }; }
+  const noise=makeNoise(1337);
+
+  function fit(){ const box=document.getElementById('wrap').getBoundingClientRect(); const availH=box.height||innerHeight-168, availW=box.width||innerWidth-28;   // public: the canvas fills the grid-wide square
+    let h=Math.min(availH,1650), w=h*ASPECT; if(w>availW){ w=availW; h=w/ASPECT; }
+    W=Math.round(w); H=Math.round(h);
+    // Render the backing store at high resolution (long edge ≥ 2160) so Save + Record are crisp
+    // regardless of window size — the canvas is just CSS-scaled down to fit on screen.
+    dpr=Math.max(Math.min(devicePixelRatio||1,2), 2160/Math.max(W,H));
+    cv.style.width=W+'px'; cv.style.height=H+'px'; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0); }
+
+  function pos(e){ const r=cv.getBoundingClientRect(); return { x:(e.clientX-r.left)/r.width, y:(e.clientY-r.top)/r.height }; }
+
+  // smooth + resample a raw stroke into an even polyline (0..1 space)
+  function prep(stroke){ if(stroke.length<2) return stroke.slice();
+    const sm=[]; for(let i=0;i<stroke.length;i++){ const a=stroke[Math.max(0,i-1)], b=stroke[i], c=stroke[Math.min(stroke.length-1,i+1)];
+      sm.push({x:(a.x+2*b.x+c.x)/4, y:(a.y+2*b.y+c.y)/4}); }
+    let len=0; for(let i=1;i<sm.length;i++) len+=Math.hypot(sm[i].x-sm[i-1].x, sm[i].y-sm[i-1].y);
+    const step=Math.max(0.006, len/Math.max(20,len/0.008)); const out=[sm[0]]; let acc=0,i=1,prev=sm[0];
+    while(i<sm.length){ const d=Math.hypot(sm[i].x-prev.x, sm[i].y-prev.y);
+      if(acc+d>=step){ const t=(step-acc)/d; prev={x:prev.x+(sm[i].x-prev.x)*t, y:prev.y+(sm[i].y-prev.y)*t}; out.push(prev); acc=0; }
+      else { acc+=d; prev=sm[i]; i++; } }
+    if(out.length<2) out.push(sm[sm.length-1]); return out; }
+
+  function strokePoint(path,t){ const n=path.length; if(n<2) return {x:path[0].x, y:path[0].y};
+    const f=((t%1)+1)%1*(n-1), i=Math.floor(f), fr=f-i, a=path[i], b=path[Math.min(n-1,i+1)];
+    return {x:a.x+(b.x-a.x)*fr, y:a.y+(b.y-a.y)*fr}; }
+
+  const HUES=['#e0483c','#e6902a','#e8c020','#4f9d69','#2f7fd0','#6a4fb0','#c0468f'];
+  function hueFor(t){ return HUES[Math.floor(((t%1)+1)%1*HUES.length)%HUES.length]; }
+  function rgba(hex,a){ const n=parseInt(hex.slice(1),16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+Math.min(1,a).toFixed(3)+')'; }
+  // chrome: a vertical reflection ramp — cool sky highlight up top, a dark horizon band, warm sheen below
+  let chrome=false;
+  let imgT={x:0.5,y:0.5,scale:1}, adjustPhoto=false, erasing=false;   // photo placement (aspect-preserved) + eraser mode
+  let inkColor='rainbow';   // 'rainbow' = per-chain multi-hue, or a chosen hex
+  let bgColor='#ffffff';    // paper colour behind the ink
+  const bgLuma = ()=>{ const n=parseInt(bgColor.slice(1),16); return (0.299*(n>>16&255)+0.587*(n>>8&255)+0.114*(n&255))/255; };
+
+  // ---- eerie synth: selectable VCO / FM / noise-scrape voices, each with LFO motion (drift, vibrato,
+  //      filter sweeps), all further driven by the bloom's movement (opt-in) ----
+  let audio=null, soundOn=false, soundMode='swarm';
+  const PRESETS={   // mix = voice levels; bp = noise band; osc = VCO; fm = metallic; lp = tone; slow/fast/vib = LFO motion; drive = grit; pM = pitch↔motion
+    swarm:  { mix:{n:0.06,a:0.5,b:0.5}, bp:{f:1800,q:1},   osc:{w:'triangle',hz:118,det:7}, fm:0,                 lpB:2200,lpM:1300, slow:{r:0.08,d:320}, fast:{r:0,d:0},    vib:{r:0.9,d:16}, drive:0.30, pM:0.18 },
+    rubber: { mix:{n:0.20,a:0.6,b:0},   bp:{f:1100,q:5},   osc:{w:'sawtooth',hz:96,det:0},  fm:0,                 lpB:1500,lpM:1700, slow:{r:0.2,d:220},  fast:{r:0,d:0},    vib:{r:6.5,d:58}, drive:0.45, pM:0.5 },
+    scrape: { mix:{n:1.0,a:0,b:0},      bp:{f:820,q:2.2},  osc:{w:'sawtooth',hz:60,det:0},  fm:0,                 lpB:1600,lpM:2900, slow:{r:0.12,d:520}, fast:{r:26,d:1500}, vib:{r:0,d:0},    drive:0.70, pM:0.25 },
+    machine:{ mix:{n:0.08,a:0.7,b:0},   bp:{f:2600,q:1},   osc:{w:'square',hz:68,det:0},    fm:{ratio:2.61,depth:200}, lpB:1800,lpM:2400, slow:{r:0.5,d:900},  fast:{r:0,d:0},    vib:{r:0,d:0},    drive:0.50, pM:0.12 },
+    wind:   { mix:{n:1.0,a:0,b:0},      bp:{f:600,q:0.8},  osc:{w:'sine',hz:60,det:0},      fm:0,                 lpB:520, lpM:1600, slow:{r:0.05,d:260}, fast:{r:0.25,d:150},vib:{r:0,d:0},    drive:0.15, pM:0 },
+  };
+  function shaperCurve(k){ const n=1024, c=new Float32Array(n); k=Math.max(0.001,k)*40;
+    for(let i=0;i<n;i++){ const x=i/(n-1)*2-1; c[i]=(1+k)*x/(1+k*Math.abs(x)); } return c; }   // soft-clip drive → harmonics/grit
+  function initAudio(){ if(audio) return; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return; const ac=new AC();
+    const buf=ac.createBuffer(1, ac.sampleRate*2, ac.sampleRate), dd=buf.getChannelData(0);
+    for(let i=0;i<dd.length;i++) dd[i]=Math.random()*2-1;
+    const noise=ac.createBufferSource(); noise.buffer=buf; noise.loop=true;
+    const bp=ac.createBiquadFilter(); bp.type='bandpass';
+    const nGain=ac.createGain(); nGain.gain.value=0; noise.connect(bp); bp.connect(nGain);
+    const oscA=ac.createOscillator(), oscB=ac.createOscillator();
+    const aGain=ac.createGain(), bGain=ac.createGain(); aGain.gain.value=0; bGain.gain.value=0;
+    oscA.connect(aGain); oscB.connect(bGain);
+    const fmOsc=ac.createOscillator(), fmGain=ac.createGain(); fmGain.gain.value=0; fmOsc.connect(fmGain); fmGain.connect(oscA.frequency);   // FM
+    const pre=ac.createGain(); nGain.connect(pre); aGain.connect(pre); bGain.connect(pre);
+    const shaper=ac.createWaveShaper(); shaper.curve=shaperCurve(0.3); pre.connect(shaper);
+    const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.Q.value=0.7; shaper.connect(lp);   // tames the whistle
+    const level=ac.createGain(); level.gain.value=0; lp.connect(level);                        // motion swell
+    const comp=ac.createDynamicsCompressor(); comp.threshold.value=-14; comp.ratio.value=6; level.connect(comp);
+    const master=ac.createGain(); master.gain.value=0.7; comp.connect(master); master.connect(ac.destination);
+    // LFOs — the constant "motion": filter drift, grain, pitch vibrato
+    const slow=ac.createOscillator(), slowG=ac.createGain(); slow.type='sine';     slowG.gain.value=0; slow.connect(slowG); slowG.connect(lp.frequency);
+    const fast=ac.createOscillator(), fastG=ac.createGain(); fast.type='triangle'; fastG.gain.value=0; fast.connect(fastG); fastG.connect(bp.frequency);
+    const vib =ac.createOscillator(), vibG =ac.createGain(); vib.type='sine';      vibG.gain.value=0;  vib.connect(vibG);  vibG.connect(oscA.frequency); vibG.connect(oscB.frequency);
+    [noise,oscA,oscB,fmOsc,slow,fast,vib].forEach(o=>o.start());
+    audio={ac,bp,nGain,oscA,oscB,aGain,bGain,fmOsc,fmGain,shaper,lp,level,master,slow,slowG,fast,fastG,vib,vibG,cur:null};
+    window.__bloomAudio=()=>audio&&({state:audio.ac.state, level:+audio.level.gain.value.toFixed(3), n:+audio.nGain.gain.value.toFixed(3), a:+audio.aGain.gain.value.toFixed(3), b:+audio.bGain.gain.value.toFixed(3), oscA:Math.round(audio.oscA.frequency.value), lp:Math.round(audio.lp.frequency.value), vib:+audio.vibG.gain.value.toFixed(1), fm:+audio.fmGain.gain.value.toFixed(1)});
+    applyPreset(soundMode); }
+  function applyPreset(name){ if(!audio) return; const p=PRESETS[name]||PRESETS.swarm; audio.cur=p;
+    const t=audio.ac.currentTime, S=(pm,v)=>pm.setTargetAtTime(v,t,0.05);
+    S(audio.nGain.gain, p.mix.n*0.5); S(audio.aGain.gain, p.mix.a*0.35); S(audio.bGain.gain, p.mix.b*0.35);
+    S(audio.bp.frequency, p.bp.f); S(audio.bp.Q, p.bp.q);
+    audio.oscA.type=p.osc.w; audio.oscB.type=p.osc.w; S(audio.oscB.detune, p.osc.det);
+    S(audio.oscA.frequency, p.osc.hz); S(audio.oscB.frequency, p.osc.hz);
+    S(audio.fmOsc.frequency, p.osc.hz*(p.fm?p.fm.ratio:1)); S(audio.fmGain.gain, p.fm?p.fm.depth:0);
+    audio.shaper.curve=shaperCurve(p.drive);
+    S(audio.slow.frequency, p.slow.r); S(audio.slowG.gain, p.slow.d);
+    S(audio.fast.frequency, p.fast.r); S(audio.fastG.gain, p.fast.d);
+    S(audio.vib.frequency,  p.vib.r);  S(audio.vibG.gain,  p.vib.d);
+    S(audio.lp.frequency, p.lpB); }
+  function silenceAudio(){ if(!audio) return; audio.level.gain.setTargetAtTime(0, audio.ac.currentTime, 0.2); }
+  function audioFromMotion(a){ if(!audio||!soundOn) return; a=a<0?0:a>1?1:a; const p=audio.cur||PRESETS.swarm, t=audio.ac.currentTime;
+    audio.level.gain.setTargetAtTime(0.05 + a*0.9, t, 0.08);                 // overall swell with movement
+    audio.lp.frequency.setTargetAtTime(p.lpB + a*p.lpM, t, 0.06);            // brighter as it moves (LFO drifts around this)
+    if(p.pM){ const f=p.osc.hz*(1+a*p.pM); audio.oscA.frequency.setTargetAtTime(f,t,0.05); audio.oscB.frequency.setTargetAtTime(f,t,0.05);
+      if(p.fm) audio.fmOsc.frequency.setTargetAtTime(f*p.fm.ratio,t,0.05); }
+    if(p.mix.n>0.5) audio.bp.frequency.setTargetAtTime(p.bp.f + a*900 + (Math.random()-0.5)*500, t, 0.02); }  // scratch grit jitter
+  // real-chrome vertical reflection: bright sky → dark horizon → sharp specular → warm/steel ground
+  // CHR = for DARK paper (drawn additively, so bright bands glow and dark bands stay black)
+  const CHR=[[0,168,196,232],[0.30,58,80,120],[0.46,6,9,18],[0.50,2,3,9],[0.535,232,242,255],[0.62,70,82,104],[0.74,158,124,80],[0.90,224,190,138],[1,246,224,180]];
+  // CHRL = for LIGHT paper (drawn opaque): full steel values so it reads as polished metal, dark reflection band + sharp specular
+  const CHRL=[[0,96,108,128],[0.24,168,180,200],[0.42,18,24,40],[0.49,44,50,68],[0.525,252,253,255],[0.60,104,112,132],[0.72,26,32,48],[0.86,150,160,180],[1,64,72,92]];
+  function rampCol(R,ny,a){ ny=ny<0?0:ny>1?1:ny; let i=0; while(i<R.length-1 && ny>R[i+1][0]) i++;
+    const s0=R[i], s1=R[Math.min(R.length-1,i+1)], f=(ny-s0[0])/((s1[0]-s0[0])||1);
+    return 'rgba('+Math.round(s0[1]+(s1[1]-s0[1])*f)+','+Math.round(s0[2]+(s1[2]-s0[2])*f)+','+Math.round(s0[3]+(s1[3]-s0[3])*f)+','+Math.min(1,a).toFixed(3)+')'; }
+  const chromeCol =(ny,a)=>rampCol(CHR,ny,a);    // metallic sheen for dark paper (additive)
+  const chromeColL=(ny,a)=>rampCol(CHRL,ny,a);   // liquid chrome for light paper (source-over)
+
+  // every slider is a plain 0–100; these map the count / duration ones onto their real ranges
+  const stemCount = ()=> Math.max(1, Math.round(1 + (P.density/100)*39));   // 0→1, 50→~20, 100→40 stems
+  const secsFor   = ()=> 3*Math.pow(20, P.time/100);                        // 0→3s, 50→13s, 100→60s per pass
+
+  const STAGGER=0.5;   // how much of a pass the pour-in spreads across (top stroke first, last stroke +STAGGER)
+  function walkersFor(path, si, startAt){ const scale=Math.min(W,H); const rand=mulberry32((si*131+7)>>>0); const out=[];
+    // the chain starts collapsed at the line's first point and grows out along your path as the head advances
+    const h=strokePoint(path,0);
+    const dens=stemCount();
+    for(let e=0;e<dens;e++){
+      const nodeCount=6+Math.round((P.length/100)*38);
+      const lenJit=0.7+rand()*0.6, nodeLen=(0.005+(P.length/100)*0.012)*scale*lenJit;
+      const nodes=[];
+      for(let i=0;i<nodeCount;i++) nodes.push({x:h.x*W, y:h.y*H});
+      out.push({ path, si, t:0, startAt:startAt||0, born:RT, col:(strokeCol[si]!==undefined?strokeCol[si]:inkColor), phase:rand()*1000,
+        speedMul:0.6+rand()*0.9, lenJit, spiralRand:rand(),   // dynamics read live so knobs never reset the run
+        nodeCount, nodeLen, nodes, last:nodes.map(n=>({x:n.x,y:n.y})),
+        brushW:0.4+rand()*1.2, ink:0.5+rand()*0.6, hue:rand(), spin:rand()<0.5?1:-1,
+        wander:0.4+rand()*1.0 }); }
+    return out; }
+  function buildWalkers(){ walkers=[];
+    const prepped=strokes.map(s=>prep(s.map(p=>({x:p.x,y:p.y}))));
+    // reading order per stroke — top-to-bottom, then left-to-right — so the drawing pours in, in sequence
+    const ord=prepped.map(path=>{ let sx=0,sy=0; for(const p of path){ sx+=p.x; sy+=p.y; } const n=path.length||1; return (sy/n)*0.82+(sx/n)*0.18; });
+    const mn=Math.min(...ord), mx=Math.max(...ord), rng=(mx-mn)||1;
+    prepped.forEach((path,si)=>{ walkersFor(path, si, ((ord[si]-mn)/rng)*STAGGER).forEach(w=>walkers.push(w)); }); }
+
+  function drawRaw(s){ if(s.length<2){ if(s.length){ ctx.beginPath(); ctx.arc(s[0].x*W,s[0].y*H,1.6,0,6.28); ctx.fillStyle='#141414'; ctx.fill(); } return; }
+    ctx.beginPath(); ctx.moveTo(s[0].x*W,s[0].y*H); for(let i=1;i<s.length;i++) ctx.lineTo(s[i].x*W,s[i].y*H); ctx.stroke(); }
+  // arrowhead at the end, pointing the way the bloom will draw (from the first point onward)
+  function drawArrow(s,col){ if(!s||s.length<2) return; const n=s.length, p1=s[n-1]; let p0=s[n-2];
+    for(let i=n-2;i>=0;i--){ if(Math.hypot(s[i].x-p1.x,s[i].y-p1.y)>0.02){ p0=s[i]; break; } }   // step back for a steady heading
+    const ang=Math.atan2(p1.y-p0.y, p1.x-p0.x), x=p1.x*W, y=p1.y*H, len=Math.min(W,H)*0.032, back=ang+Math.PI, sp=0.5;
+    ctx.save(); ctx.strokeStyle=col; ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath(); ctx.moveTo(x+Math.cos(back+sp)*len, y+Math.sin(back+sp)*len); ctx.lineTo(x,y); ctx.lineTo(x+Math.cos(back-sp)*len, y+Math.sin(back-sp)*len); ctx.stroke(); ctx.restore(); }
+  function renderDraw(){ ctx.fillStyle=bgColor; ctx.fillRect(0,0,W,H); drawRef(0.36); ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineWidth=1.6;
+    const guide = bgLuma()<0.5 ? 'rgba(235,236,240,.85)' : 'rgba(20,20,26,.85)';   // the drawn-line preview flips on dark paper
+    strokes.forEach((s,si)=>{ const c=strokeCol[si], col=(c&&c!=='rainbow')?c:guide; ctx.strokeStyle=col; drawRaw(s); drawArrow(s,col); });
+    if(cur){ const col=(inkColor&&inkColor!=='rainbow')?inkColor:guide; ctx.strokeStyle=col; drawRaw(cur); drawArrow(cur,col); } }
+
+  // draw the photo backdrop preserving its aspect ratio (never stretched), positioned + scaled by imgT
+  function refDims(){ const iw=traceRef.naturalWidth||traceRef.width, ih=traceRef.naturalHeight||traceRef.height;
+    const fs=Math.min(W/iw, H/ih)*imgT.scale, dw=iw*fs, dh=ih*fs;
+    return { dw, dh, x0:imgT.x*W-dw/2, y0:imgT.y*H-dh/2 }; }
+  function drawRef(a){ if(!traceRef) return; const d=refDims();
+    ctx.save(); ctx.globalAlpha=a; ctx.drawImage(traceRef, d.x0, d.y0, d.dw, d.dh); ctx.restore(); }
+  function startSim(){ ctx.fillStyle=bgColor; ctx.fillRect(0,0,W,H); aT=0; buildWalkers(); cancelAnimationFrame(raf); step(); }
+
+  // ---- true-resolution export (for the Output panel's PDF / PNG / JPG at print size) ----
+  // The bloom is an accumulating, stochastic sim, so we can't upscale the preview crisply —
+  // instead we REPLAY it at the requested long-edge into an offscreen canvas, then restore
+  // the live state. Draw mode just re-renders the line. Uses logical W,H with a scaled ctx
+  // transform, so all the sim's coordinate maths is unchanged.
+  function fenceDims(px){ return ASPECT>=1 ? [Math.round(px), Math.round(px/ASPECT)]
+                                           : [Math.round(px*ASPECT), Math.round(px)]; }
+  function renderExport(px){
+    const [ew,eh]=fenceDims(px);
+    const c=document.createElement('canvas'); c.width=ew; c.height=eh;
+    const ex=c.getContext('2d'); const s=ew/W;                    // logical W,H → export pixels
+    // swap the module drawing context to the offscreen; keep W,H logical
+    const sCtx=ctx, sWalkers=walkers, sAT=aT, sRT=RT, sF=F, sLast=lastTs, sSound=soundOn;
+    ctx=ex; ctx.setTransform(s,0,0,s,0,0); soundOn=false;   // no audio while replaying
+    ctx.fillStyle=bgColor; ctx.fillRect(0,0,W,H);
+    if(mode==='modify' && sWalkers.length){
+      // replay the bloom to the SAME motion-clock point the live view has reached
+      // (bounded so a very-long-running bloom still exports quickly — ~65s of emergence)
+      aT=0; RT=0; F=0; lastTs=0; buildWalkers();
+      let guard=0; const dt=1/60;
+      while(aT < sAT && guard++ < 4000) simFrame(dt);
+    } else {
+      // draw mode: re-render the drawn strokes (and any tracing photo) crisply
+      renderDraw();
+    }
+    // restore live state
+    ctx=sCtx; walkers=sWalkers; aT=sAT; RT=sRT; F=sF; lastTs=sLast; soundOn=sSound;
+    return c;
+  }
+  function step(ts){ raf=requestAnimationFrame(step);
+    const dt=(lastTs&&ts)?Math.min(0.05,(ts-lastTs)/1000):0.016; if(ts) lastTs=ts;
+    simFrame(dt); }
+  // One simulation frame, WITHOUT scheduling the next — so export can replay the bloom
+  // synchronously at any resolution (the live loop calls this via step()).
+  function simFrame(dt){ F++;
+    const secs=secsFor();
+    aT += dt/Math.max(0.5,secs);   // shared motion clock — advances ~1 per pass, so Time slows the whole thing
+    RT += dt;                         // always-running real-time clock, for each chain's slow attack
+    const flow=P.flow/100, spiral=P.spiral/100, colAmt=P.color/100, scale=Math.min(W,H);
+    const ink=0.015+(P.ink/100)*0.13, wBase=0.3+(P.weight/100)*3.0, wet=P.wet/100;
+    const darkPaper = bgLuma()<0.5;
+    const baseInk = darkPaper ? 236 : 13;   // plain-ink endpoint (Colour=0): light on dark paper, near-black on light paper
+    let sMot=0, sAct=0;                      // accumulate head motion this frame → drives the eerie audio
+    // Flash — a per-frame strobe: the ink rapidly cycles colour and pulses as it draws
+    const fa=P.flash/100; let flashOn=fa>0, flashCol=0, flashPulse=1;
+    if(flashOn){ const fh=(RT*(1.4+fa*11))%1; flashCol=parseInt(hueFor(fh).slice(1),16);
+      flashPulse=0.28+0.72*(0.5+0.5*Math.sin(RT*(9+fa*26))); }
+    for(const w of walkers){
+      if(aT < w.startAt) continue;   // pour-in stagger: this stroke hasn't begun yet
+      // head drifts in 2D via noise, centred on a slowly-advancing point of the drawn stroke —
+      // the chain then swings behind it into curves (cheyuwu's wandering head, pinned to your line)
+      w.t+=(dt/Math.max(0.5,secs))*w.speedMul; const base=strokePoint(w.path,w.t);   // one pass ≈ secs seconds
+      // slow attack: this chain's wander + swirl ease in from zero over its first seconds, so a dropped
+      // line first traces your path, then slowly unfurls — no instant burst
+      let ev=(RT-w.born)/Math.max(3,secs*0.55); ev=ev<0?0:ev>1?1:ev; ev=ev*ev*(3-2*ev);
+      // birth: each stroke is born as a single, almost-invisible dot at its first point, then the
+      // opacity swells in and the dab grows — so it appears faintly and expands out of that dot
+      let bf=(RT-w.born)/Math.max(1.6,secs*0.9); bf=bf<0?0:bf>1?1:bf; bf=bf*bf*(3-2*bf);
+      const born=0.03+0.97*bf, grow=0.35+0.65*bf;
+      const rad=(0.004+flow*0.16)*scale*w.wander*ev;
+      const nx=noise(w.phase + aT*4*(0.5+w.wander), 0.5), ny=noise(w.phase+70 + aT*4*(0.5+w.wander), 9.1);
+      let hx=base.x*W + nx*rad, hy=base.y*H + ny*rad;
+      if(w.spiralRand < spiral*0.5 && spiral>0.02){ const r=spiral*0.05*scale*ev, a=aT*7*w.spin+w.phase; hx+=Math.cos(a)*r; hy+=Math.sin(a)*r; }
+      w.last=w.nodes.map(n=>({x:n.x,y:n.y}));
+      if(soundOn){ const dxh=hx-w.last[0].x, dyh=hy-w.last[0].y; sMot+=Math.sqrt(dxh*dxh+dyh*dyh); sAct++; }
+      w.nodes[0].x=hx; w.nodes[0].y=hy;
+      for(let i=1;i<w.nodes.length;i++){ const p=w.nodes[i-1], n=w.nodes[i];
+        let dx=n.x-p.x, dy=n.y-p.y; const d=Math.hypot(dx,dy)||1; n.x=p.x+dx/d*w.nodeLen; n.y=p.y+dy/d*w.nodeLen; }
+      let cr=0,cg=0,cb=0,alpha=0;
+      if(chrome){ if(darkPaper) ctx.globalCompositeOperation='lighter'; }   // dark paper: additive glow; light paper: normal (source-over)
+      else {
+        // blend smoothly from black ink toward the stroke's colour as Colour rises (rainbow = per-chain hue)
+        const wc=w.col||inkColor; const cn=parseInt((wc==='rainbow'?hueFor(w.hue+colAmt*0.5):wc).slice(1),16);
+        cr=Math.round((cn>>16&255)*colAmt + baseInk*(1-colAmt)); cg=Math.round((cn>>8&255)*colAmt + baseInk*(1-colAmt)); cb=Math.round((cn&255)*colAmt + baseInk*(1-colAmt));
+        alpha=ink*w.ink*(1+0.3*colAmt)*born;
+        if(flashOn){ cr=flashCol>>16&255; cg=flashCol>>8&255; cb=flashCol&255;          // bold, fully-saturated flash hue…
+          alpha=Math.min(0.85,(0.2+fa*0.62)*flashPulse)*born*(0.55+0.45*w.ink); }      // …bold + pulsing, so the top layer strobes
+        else alpha=Math.min(0.9, alpha*(1+wet*1.7));                                    // WET: heavier ink so crossings pool to solid
+        ctx.fillStyle = 'rgba('+cr+','+cg+','+cb+','+alpha.toFixed(3)+')';
+      }
+      const wr=1+wet*1.9, wj=1-wet*0.4;                                                 // WET: fatter dabs, less scatter → a fuller, bleeding stroke
+      const brush = chrome ? 'charcoal' : (P.brush||'charcoal');                        // chrome keeps its own dab look
+      if(brush==='ink' || brush==='pen'){
+        // a SMOOTH continuous stroke through the chain — sumi ink, or a fine technical pen
+        ctx.strokeStyle=ctx.fillStyle; ctx.lineCap='round'; ctx.lineJoin='round';
+        ctx.lineWidth = brush==='pen' ? Math.max(0.7, wBase*w.brushW*grow*0.5)
+                                      : wBase*w.brushW*grow*(0.9+wet*1.8);
+        ctx.beginPath(); ctx.moveTo(w.nodes[0].x, w.nodes[0].y);
+        for(let i=1;i<w.nodes.length;i++) ctx.lineTo(w.nodes[i].x, w.nodes[i].y);
+        ctx.stroke();
+      } else {
+        for(let i=0;i<w.nodes.length;i++){ const a=w.last[i], b=w.nodes[i];
+          if(brush==='spray'){
+            // AIRBRUSH — a soft cloud of tiny specks scattered over a wide radius
+            const R=wBase*w.brushW*grow*(2.4+wet*3.2);
+            for(let o=0;o<7;o++){ const ang=Math.random()*6.2832, rr=Math.sqrt(Math.random())*R;
+              ctx.beginPath(); ctx.arc(b.x+Math.cos(ang)*rr, b.y+Math.sin(ang)*rr, Math.random()*0.9+0.25, 0, 6.2832); ctx.fill(); }
+          } else if(brush==='pencil'){
+            // GRAPHITE — fine, light, grainy short marks
+            for(let o=0;o<3;o++){ const px=a.x+(b.x-a.x)*o/3, py=a.y+(b.y-a.y)*o/3;
+              ctx.beginPath(); ctx.arc(px+(Math.random()-0.5)*wBase*grow*0.8, py+(Math.random()-0.5)*wBase*grow*0.8, Math.random()*wBase*w.brushW*grow*0.5, 0, 6.2832); ctx.fill(); }
+          } else {
+            // CHARCOAL (default) — scattered grainy dabs
+            for(let o=0;o<5;o++){ const px=a.x+(b.x-a.x)*o/5, py=a.y+(b.y-a.y)*o/5;
+              if(chrome) ctx.fillStyle = darkPaper ? chromeCol(py/H, (0.25 + ink*w.ink*3.0)*born*(0.6+Math.random()*0.7))              // bright reflections build on black
+                                                   : chromeColL(py/H, Math.min(0.9, (0.34 + ink*w.ink*4.0)*born*(0.62+Math.random()*0.5)));  // solid polished metal on light paper
+              ctx.beginPath(); ctx.arc(px+(Math.random()-0.5)*wBase*grow*wj, py+(Math.random()-0.5)*wBase*grow*wj, Math.random()*wBase*w.brushW*grow*wr, 0, 6.2832); ctx.fill(); } }
+        }
+      }
+      // WET — a soft, fatter dab bleeds off the head; where chains cross, these build up into solid pools of ink
+      if(wet>0.02 && !chrome){
+        const hb=w.nodes[0], hr=wBase*w.brushW*grow*(1.4+wet*5.5)*(0.55+Math.random()*0.6);
+        ctx.fillStyle='rgba('+cr+','+cg+','+cb+','+Math.min(0.6, alpha*0.7).toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(hb.x+(Math.random()-0.5)*hr*0.5, hb.y+(Math.random()-0.5)*hr*0.5, hr, 0, 6.2832); ctx.fill();
+        // heavy pools shed the occasional drip — a thin line down to a bead (gravity), which persists on the paper
+        if(wet>0.4 && Math.random() < (wet-0.35)*0.012){
+          const dn=w.nodes[(Math.random()*w.nodes.length)|0], dl=(14+Math.random()*70*wet)*(Math.min(W,H)/1000), dx=(Math.random()-0.5)*3;
+          ctx.strokeStyle='rgba('+cr+','+cg+','+cb+','+Math.min(0.85, alpha*4).toFixed(3)+')';
+          ctx.lineWidth=Math.max(0.6, wBase*w.brushW*grow*(0.35+wet*0.7)); ctx.lineCap='round';
+          ctx.beginPath(); ctx.moveTo(dn.x,dn.y); ctx.lineTo(dn.x+dx, dn.y+dl); ctx.stroke();
+          ctx.fillStyle=ctx.strokeStyle; ctx.beginPath(); ctx.arc(dn.x+dx, dn.y+dl, wBase*w.brushW*grow*(0.6+wet*0.9), 0,6.2832); ctx.fill();
+        }
+      }
+      if(chrome && darkPaper) ctx.globalCompositeOperation='source-over';
+    }
+    if(soundOn) audioFromMotion((sMot/Math.max(1,sAct))/(scale*0.006));   // mean head speed → scratch intensity
+  }
+
+  // Keep each stroke stocked with P.density chains, adding/removing live (never clears the canvas)
+  function syncDensity(){ const by={}; walkers.forEach(w=>{ (by[w.si]=by[w.si]||[]).push(w); }); const dens=stemCount();
+    strokes.forEach((s,si)=>{ const have=by[si]||[];
+      if(have.length>dens){ const rm=new Set(have.slice(dens)); walkers=walkers.filter(w=>!rm.has(w)); }
+      else if(have.length<dens){ walkersFor(prep(s.map(p=>({x:p.x,y:p.y}))), si).slice(have.length).forEach(w=>walkers.push(w)); } }); }
+  // Brush is a select (string), not a numeric slider — wire it on its own
+  { const bs=$('brush'); if(bs) bs.addEventListener('change', ()=>{ P.brush=bs.value; }); }
+  Object.keys(P).forEach(k=>{ if(typeof P[k]!=='number') return; const inp=$(k), out=$(k+'R'); if(!inp) return;
+    inp.addEventListener('input', ()=>{ P[k]=+inp.value; out.textContent=(k==='time')?Math.round(secsFor())+'s':inp.value;
+      if(mode!=='modify') return;
+      // Flow, Spiral, Weight, Ink, Speed, Colour are all read live in step() — they never reset.
+      if(k==='density') syncDensity();
+      else if(k==='length'){ const scale=Math.min(W,H); walkers.forEach(w=>{ w.nodeLen=(0.005+(P.length/100)*0.012)*scale*w.lenJit; }); }
+    }); });
+
+  // eraser: drag over your drawn lines to delete them (nearest stroke within reach)
+  const ERASE_R=0.045;
+  function eraseAt(pt){ if(!strokes.length) return; let bi=-1,bd=1e9;
+    strokes.forEach((s,si)=>{ for(const p of s){ const dx=p.x-pt.x, dy=p.y-pt.y, d=dx*dx+dy*dy; if(d<bd){bd=d;bi=si;} } });
+    if(bi<0 || bd>ERASE_R*ERASE_R) return;
+    strokes.splice(bi,1); strokeCol.splice(bi,1);
+    walkers=walkers.filter(w=>w.si!==bi); walkers.forEach(w=>{ if(w.si>bi) w.si--; });   // keep walker→stroke indices valid
+    renderDraw(); }
+
+  // Draw in EITHER mode. In modify, new strokes spawn live chains into the running animation
+  // (and the recording) without clearing what's there — keep drawing while it moves.
+  // Pointer also serves two other modes: adjusting the photo (drag = move, pinch/scroll = resize) and erasing.
+  const ptrs=new Map(); let panS=null, pinchS=null, eDrag=false;
+  cv.addEventListener('pointerdown', e=>{ e.preventDefault(); cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);
+    if(adjustPhoto && traceRef){ ptrs.set(e.pointerId,{cx:e.clientX,cy:e.clientY});
+      if(ptrs.size===2){ const a=[...ptrs.values()]; pinchS={d:Math.hypot(a[0].cx-a[1].cx,a[0].cy-a[1].cy)||1, s:imgT.scale}; panS=null; }
+      else { const p=pos(e); panS={px:p.x,py:p.y,ix:imgT.x,iy:imgT.y}; }
+      return; }
+    if(erasing){ eDrag=true; eraseAt(pos(e)); return; }
+    cur=[pos(e)]; });
+  cv.addEventListener('pointermove', e=>{ e.preventDefault();
+    if(adjustPhoto && traceRef){ if(!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId,{cx:e.clientX,cy:e.clientY});
+      if(ptrs.size>=2 && pinchS){ const a=[...ptrs.values()]; const d=Math.hypot(a[0].cx-a[1].cx,a[0].cy-a[1].cy)||1;
+        imgT.scale=Math.max(0.1,Math.min(10, pinchS.s*(d/pinchS.d))); }
+      else if(panS){ const p=pos(e); imgT.x=panS.ix+(p.x-panS.px); imgT.y=panS.iy+(p.y-panS.py); }
+      renderDraw(); return; }
+    if(erasing){ if(eDrag) eraseAt(pos(e)); return; }
+    if(!cur) return; const p=pos(e);
+    const last=cur[cur.length-1]; if(Math.hypot(p.x-last.x,p.y-last.y)>0.0015){ cur.push(p);
+      if(mode==='draw') renderDraw(); } });   // in bloom, draw blind — the bloom traces your line, no guide path left behind
+  function endPtr(e){
+    if(adjustPhoto){ ptrs.delete(e.pointerId); if(ptrs.size<2) pinchS=null; if(ptrs.size===0) panS=null; return; }
+    if(erasing){ eDrag=false; return; }
+    if(!cur) return;
+    if(cur.length>1){ strokes.push(cur); strokeCol.push(inkColor);   // each line remembers the colour it was drawn in
+      if(mode==='modify') walkersFor(prep(cur.map(p=>({x:p.x,y:p.y}))), strokes.length-1).forEach(w=>walkers.push(w)); }
+    else if(cur.length===1){ recolorNearest(cur[0]); }               // a tap (no drag) recolours the nearest line
+    const wasDraw=mode==='draw'; cur=null; if(wasDraw) renderDraw(); }
+  cv.addEventListener('pointerup', endPtr);
+  cv.addEventListener('pointercancel', endPtr);
+  cv.addEventListener('wheel', e=>{ if(!adjustPhoto||!traceRef) return; e.preventDefault();
+    imgT.scale=Math.max(0.1,Math.min(10, imgT.scale*Math.exp(-e.deltaY*0.0015))); renderDraw(); }, {passive:false});
+  // tap a line to repaint it in the current swatch colour — even while it's moving (new ink switches colour live)
+  function recolorNearest(pt){ if(!strokes.length) return; let bi=-1, bd=1e9;
+    strokes.forEach((s,si)=>{ for(const p of s){ const d=(p.x-pt.x)*(p.x-pt.x)+(p.y-pt.y)*(p.y-pt.y); if(d<bd){ bd=d; bi=si; } } });
+    if(bi<0 || bd>0.02) return;
+    strokeCol[bi]=inkColor; walkers.forEach(w=>{ if(w.si===bi) w.col=inkColor; });
+    $('hint').textContent='Recoloured that line'; $('hint').style.opacity=1; setTimeout(()=>{ if(mode==='modify') $('hint').style.opacity=0; }, 1400);
+    if(mode!=='modify') renderDraw(); }
+
+  function toDraw(){ mode='draw'; cancelAnimationFrame(raf); silenceAudio();
+    $('doneBtn').style.display=''; $('modRow').style.display='none';
+    $('hint').textContent='Draw a line — then hit Bloom'; $('hint').style.opacity=1; renderDraw(); }
+  function toModify(){ if(!strokes.length){ $('hint').textContent='Draw a line first'; $('hint').style.opacity=1; return; }
+    adjustPhoto=false; $('adjustBtn').setAttribute('aria-pressed','false'); erasing=false; $('eraseBtn').setAttribute('aria-pressed','false'); cv.style.cursor='crosshair';
+    mode='modify'; $('sliders').classList.remove('locked'); $('doneBtn').style.display='none';
+    $('modRow').style.display='grid';
+    $('hint').textContent='Now it moves — keep drawing to add more, live'; $('hint').style.opacity=1;
+    setTimeout(()=>{ if(mode==='modify') $('hint').style.opacity=0; }, 3800); startSim(); }
+  $('aspect').addEventListener('change', e=>{ const [a,b]=e.target.value.split('/').map(Number); ASPECT=a/b; fit();
+    if(mode==='modify') startSim(); else renderDraw(); });
+
+  /* ---- add a photo as a tracing guide: it sits faintly on the canvas so you draw your own
+         strokes over it. Only your strokes drive the chains; the photo stays as a soft backdrop
+         once it animates, and your raw guide-lines are dropped. ---- */
+  $('photoBtn').addEventListener('click', ()=> $('photoFile').click());
+  $('photoFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const url=URL.createObjectURL(f);
+    const im=new Image(); im.onload=()=>{ traceRef=im; imgT={x:0.5,y:0.5,scale:1};   // reset placement; aspect preserved, no stretch
+      $('adjustBtn').style.display=''; fit();   // keep the current canvas size — the photo fits into it, undistorted
+      if(mode!=='draw') toDraw(); else renderDraw();
+      $('hint').textContent='Trace over the photo — or Move photo to reposition & resize it'; $('hint').style.opacity=1; };
+    im.src=url; e.target.value=''; });
+
+  /* ---- typography: render typed words, trace their letterforms into vector paths, and let the
+         chains draw the text itself, pouring down the canvas ---- */
+  function traceContours(img, w, h){
+    const d=img.data, lum=new Float32Array(w*h);
+    for(let i=0;i<w*h;i++) lum[i]=0.299*d[i*4]+0.587*d[i*4+1]+0.114*d[i*4+2];
+    const at=(xx,yy)=>lum[Math.min(h-1,Math.max(0,yy))*w+Math.min(w-1,Math.max(0,xx))];
+    const gx=new Float32Array(w*h), gy=new Float32Array(w*h), mag=new Float32Array(w*h); let mx=1e-3;
+    for(let yy=0;yy<h;yy++)for(let xx=0;xx<w;xx++){
+      const a=(at(xx+1,yy-1)+2*at(xx+1,yy)+at(xx+1,yy+1))-(at(xx-1,yy-1)+2*at(xx-1,yy)+at(xx-1,yy+1));
+      const b=(at(xx-1,yy+1)+2*at(xx,yy+1)+at(xx+1,yy+1))-(at(xx-1,yy-1)+2*at(xx,yy-1)+at(xx+1,yy-1));
+      const i=yy*w+xx; gx[i]=a; gy[i]=b; mag[i]=Math.hypot(a,b); if(mag[i]>mx) mx=mag[i]; }
+    const T=mx*0.24, visited=new Uint8Array(w*h), out=[];
+    function walk(sx,sy,dir){ const pts=[{x:sx,y:sy}]; let px=sx,py=sy;
+      let i0=(py|0)*w+(px|0), tx=-gy[i0]*dir, ty=gx[i0]*dir; { const m=Math.hypot(tx,ty)||1; tx/=m; ty/=m; }
+      for(let s=0;s<500;s++){ px+=tx*1.15; py+=ty*1.15; const ix=px|0, iy=py|0;
+        if(ix<1||iy<1||ix>=w-1||iy>=h-1) break; const i=iy*w+ix; if(mag[i]<T) break;
+        visited[i]=1; visited[i+1]=1; visited[i-1]=1; visited[i+w]=1; visited[i-w]=1;
+        pts.push({x:px,y:py}); let nx=-gy[i], ny=gx[i]; const m=Math.hypot(nx,ny)||1; nx/=m; ny/=m;
+        if(nx*tx+ny*ty<0){ nx=-nx; ny=-ny; } tx=nx; ty=ny; } return pts; }
+    const seeds=[]; for(let i=0;i<w*h;i++) if(mag[i]>T) seeds.push(i);
+    seeds.sort((a,b)=>mag[b]-mag[a]);
+    for(const seed of seeds){ if(out.length>=500) break; if(visited[seed]) continue;
+      const sx=seed%w, sy=(seed/w)|0; const fwd=walk(sx,sy,1), bwd=walk(sx,sy,-1); bwd.reverse();
+      const path=bwd.concat(fwd.slice(1));
+      if(path.length>=5) out.push(path.map(p=>({x:p.x/w, y:p.y/h}))); }
+    return out;
+  }
+  function textToStrokes(str){
+    str=(str||'').trim(); if(!str) return [];
+    const W0=640, H0=Math.max(160,Math.round(W0/ASPECT));
+    const c=document.createElement('canvas'); c.width=W0; c.height=H0; const x=c.getContext('2d');
+    x.fillStyle='#fff'; x.fillRect(0,0,W0,H0); x.fillStyle='#000'; x.textBaseline='alphabetic';
+    const words=str.split(/\s+/);
+    // pick a font size that lets the words stack and pour down the canvas
+    let fs=Math.round(H0*0.2/Math.max(1,Math.sqrt(words.length))); fs=Math.max(28,Math.min(fs, Math.round(H0*0.26)));
+    const font=w=>('800 '+w+'px Georgia, "Times New Roman", serif');
+    x.font=font(fs);
+    const maxW=W0*0.9, lines=[]; let line='';
+    for(const w of words){ const test=line?line+' '+w:w; if(x.measureText(test).width>maxW && line){ lines.push(line); line=w; } else line=test; }
+    if(line) lines.push(line);
+    const lineH=fs*1.12, totalH=lines.length*lineH; let y=(H0-totalH)/2 + fs;
+    for(const ln of lines){ const w=x.measureText(ln).width; x.fillText(ln, (W0-Math.min(w,maxW))/2, y); y+=lineH; }
+    return traceContours(x.getImageData(0,0,W0,H0), W0, H0);
+  }
+  function pourText(){ const s=textToStrokes($('textIn').value); if(!s.length){ $('hint').textContent='Type some words first'; $('hint').style.opacity=1; return; }
+    strokes=s; strokeCol=s.map(()=>inkColor); cur=null; traceRef=null; toModify(); }
+  $('textBtn').addEventListener('click', pourText);
+  $('textIn').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); pourText(); } });
+
+  $('doneBtn').addEventListener('click', toModify);
+  $('editBtn').addEventListener('click', toDraw);
+  $('restartBtn').addEventListener('click', ()=>{ if(mode==='modify') startSim(); });
+  $('undoBtn').addEventListener('click', ()=>{ strokes.pop(); strokeCol.pop(); if(mode==='modify') startSim(); else renderDraw(); });
+  $('clearBtn').addEventListener('click', ()=>{ strokes=[]; strokeCol=[]; cur=null; traceRef=null;
+    $('adjustBtn').style.display='none'; setAdjust(false); toDraw(); });
+
+  function setAdjust(on){ adjustPhoto=on&&!!traceRef; if(adjustPhoto) setErase(false);
+    $('adjustBtn').setAttribute('aria-pressed', adjustPhoto?'true':'false');
+    cv.style.cursor = adjustPhoto?'move':'crosshair';
+    if(adjustPhoto){ $('hint').textContent='Drag to move · scroll or pinch to resize'; $('hint').style.opacity=1; } }
+  function setErase(on){ erasing=on; if(erasing){ setAdjust(false); if(mode!=='draw') toDraw(); }
+    $('eraseBtn').setAttribute('aria-pressed', erasing?'true':'false');
+    cv.style.cursor = erasing?'cell':(adjustPhoto?'move':'crosshair');
+    if(erasing){ $('hint').textContent='Erase — drag across a line to remove it'; $('hint').style.opacity=1; } }
+  $('adjustBtn').addEventListener('click', ()=> setAdjust(!adjustPhoto));
+  $('eraseBtn').addEventListener('click', ()=> setErase(!erasing));
+  $('soundBtn').addEventListener('click', ()=>{ initAudio(); if(audio && audio.ac.state==='suspended') audio.ac.resume();
+    soundOn=!soundOn; $('soundBtn').setAttribute('aria-pressed', soundOn?'true':'false');
+    if(!soundOn){ silenceAudio(); }
+    else { $('hint').textContent='Sound on — '+soundMode+' voice, moving with the bloom'; $('hint').style.opacity=1;
+      setTimeout(()=>{ if(mode==='modify') $('hint').style.opacity=0; }, 2400); } });
+  $('soundMode').addEventListener('change', e=>{ soundMode=e.target.value; if(audio) applyPreset(soundMode);
+    if(soundOn){ $('hint').textContent=soundMode+' voice'; $('hint').style.opacity=1; setTimeout(()=>{ if(mode==='modify') $('hint').style.opacity=0; }, 1600); } });
+
+  let rec=null, chunks=[], recCv=null, recCtx=null, recRAF=0, recStart=0, recTimer=0;
+  const recFmt=ms=>{ const s=Math.floor(ms/1000); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+  $('recBtn').addEventListener('click', ()=>{ if(rec && rec.state==='recording'){ rec.stop(); return; }
+    // Record from a fixed-size buffer that matches the chosen aspect, so the OUTPUT size is always the
+    // same and never depends on the window/display size. Long edge 1440.
+    const long=2160, ev2=n=>n-(n&1);   // high-res output; even dimensions for H.264
+    const rw=ev2(ASPECT>=1?long:Math.round(long*ASPECT)), rh=ev2(ASPECT>=1?Math.round(long/ASPECT):long);
+    recCv=document.createElement('canvas'); recCv.width=rw; recCv.height=rh; recCtx=recCv.getContext('2d');
+    if(mode==='modify') startSim();   // re-seed the bloom so the recording captures the emergence from the first faint dots
+    const drawFrame=()=>{ recCtx.fillStyle=bgColor; recCtx.fillRect(0,0,rw,rh); recCtx.drawImage(cv,0,0,rw,rh); };
+    drawFrame();   // seed one frame so the stream has content
+    const stream=recCv.captureStream(30);
+    const mime=['video/mp4;codecs=avc1.640029','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
+    const ext=mime.indexOf('mp4')>=0?'mp4':'webm';
+    rec=new MediaRecorder(stream,{mimeType:mime, videoBitsPerSecond:40000000}); chunks=[];
+    rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    rec.onstop=()=>{ cancelAnimationFrame(recRAF); clearInterval(recTimer); $('recDot').classList.remove('on');
+      const blob=new Blob(chunks,{type:mime}); const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download='bloom.'+ext; a.click(); $('recBtn').textContent='Record'; $('recBtn').setAttribute('aria-pressed','false'); };
+    rec.start();
+    (function comp(){ drawFrame(); if(rec && rec.state==='recording') recRAF=requestAnimationFrame(comp); })();   // keep compositing live frames while recording
+    recStart=performance.now(); $('recDot').classList.add('on'); $('recDot').querySelector('b').textContent='0:00';
+    recTimer=setInterval(()=>{ $('recDot').querySelector('b').textContent=recFmt(performance.now()-recStart); }, 250);
+    $('recBtn').textContent='Stop'; $('recBtn').setAttribute('aria-pressed','true'); });
+
+  function setInk(val, isCustom){ inkColor=val;
+    document.querySelectorAll('.sw[data-ink]').forEach(s=>s.setAttribute('aria-pressed', (!isCustom && s.getAttribute('data-ink')===val)?'true':'false'));
+    if(+$('color').value===0){ const c=$('color'); c.value=80; c.dispatchEvent(new Event('input',{bubbles:true})); }   // bring colour in on first pick
+  }
+  document.querySelectorAll('.sw[data-ink]').forEach(btn=>btn.addEventListener('click', ()=> setInk(btn.getAttribute('data-ink'), false)));
+  $('inkPick').addEventListener('input', ()=> setInk($('inkPick').value, true));
+
+  function setBg(val, isPreset){ bgColor=val; if(isPreset) $('bgPick').value=val;
+    document.querySelectorAll('.bg[data-bg]').forEach(s=>s.setAttribute('aria-pressed', s.getAttribute('data-bg')===val?'true':'false'));
+    if(mode==='modify') startSim(); else renderDraw();   // repaint the paper live
+  }
+  document.querySelectorAll('.bg[data-bg]').forEach(btn=>btn.addEventListener('click', ()=> setBg(btn.getAttribute('data-bg'), true)));
+  $('bgPick').addEventListener('input', ()=> setBg($('bgPick').value, false));
+
+  // Randomize — borrowed from ATTRACTOR: roll a fresh combination of every control (and a colour),
+  // then re-bloom your drawn line from the start so the whole new look takes at once.
+  function randomizeBloom(){
+    const R=(lo,hi)=>lo+Math.round(Math.random()*(hi-lo));
+    const vals={ density:R(25,90), flow:R(20,90), spiral:R(0,85), weight:R(15,70), ink:R(35,85), time:R(30,80), color:R(35,100) };
+    const sws=[...document.querySelectorAll('.sw[data-ink]')];
+    setInk(sws[(Math.random()*sws.length)|0].getAttribute('data-ink'), false);
+    Object.keys(vals).forEach(k=>{ const i=$(k); if(!i) return; i.value=vals[k]; i.dispatchEvent(new Event('input',{bubbles:true})); });
+    if(mode==='modify') startSim();
+  }
+  $('rndBtn').addEventListener('click', randomizeBloom);
+
+  $('chromeBtn').addEventListener('click', ()=>{ chrome=!chrome; $('chromeBtn').setAttribute('aria-pressed', chrome?'true':'false');
+    if(mode==='modify') startSim(); });
+  $('saveBtn').addEventListener('click', ()=>{ const a=document.createElement('a'); a.download='fence.png'; a.href=cv.toDataURL('image/png'); a.click(); });
+
+  // Output island: one consistent export panel (format · pixels · print size · DPI · quality),
+  // with a true-resolution replay of the bloom so PDFs print crisp at any size.
+  Opal.mountOutput(cv, 'bloom', { render: renderExport });
+  fit(); renderDraw(); window.__fenceReady=true;
+  addEventListener('resize', ()=>{ const wasMod=mode==='modify'; fit(); if(wasMod) startSim(); else renderDraw(); });
+
+  /* hover tooltips on any [data-tip] control — same behaviour as the other tools */
+  let tipEl=null, tipT=null, tipFor=null;
+  function hideTip(){ clearTimeout(tipT); tipFor=null; if(tipEl){ tipEl.style.opacity='0'; tipEl.style.display='none'; } }
+  function showTip(host){ const text=host.getAttribute('data-tip'); if(!text) return;
+    if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl); }
+    tipEl.textContent=text; tipEl.style.display='block'; tipEl.style.opacity='0';
+    const r=host.getBoundingClientRect(), t=tipEl.getBoundingClientRect();
+    let top=r.top-t.height-8; if(top<8) top=Math.min(innerHeight-t.height-8, r.bottom+8);
+    tipEl.style.left=Math.max(8,Math.min(r.left, innerWidth-t.width-8))+'px'; tipEl.style.top=top+'px'; tipEl.style.opacity='1'; }
+  addEventListener('pointerover', e=>{ const h=e.target.closest&&e.target.closest('[data-tip]'); if(h===tipFor) return;
+    clearTimeout(tipT); if(!h){ hideTip(); return; } tipFor=h; tipT=setTimeout(()=>showTip(h),240); });
+  addEventListener('pointerdown', hideTip); addEventListener('scroll', hideTip, true);
+})();
+</script>
+<div class="pt-bar"><div class="container">
+  <div class="pt-bar__row"><div class="pt-bar__btns"><button class="pt-bar__btn" type="button" data-proxy="doneBtn" aria-label="Bloom" title="Bloom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M12 10c-4 0-6-3-6-6 3 0 6 2 6 6Z"/><path d="M12 10c4 0 6-3 6-6-3 0-6 2-6 6Z"/></svg></button><button class="pt-bar__btn" type="button" data-proxy="restartBtn" aria-label="Redraw" title="Redraw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.34-5.66"/><path d="M4 4v4.5h4.5"/></svg></button><button class="pt-bar__btn" type="button" data-proxy="photoBtn" aria-label="Photo" title="Photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></button></div></div>
+  <div class="pt-bar__ctl"></div>
+  <span class="pt-for">Draw a line on the canvas, then let it bloom</span>
+</div></div>
+<script src="/workshops/bgsu/lab/tools/_public.js?v=20261008B"></script>
+<!-- the instrument draws its own cursor: inside the overlay this page is an
+     iframe, and the page behind it cannot see the pointer once it crosses in -->
+<script src="/workshops/bgsu/shared/cursor.js?v=20261003"></script>
+  </div>
+  <script src="/workshops/bgsu/shared/footer.js?v=20261009B"></script>
+</body>
+</html>

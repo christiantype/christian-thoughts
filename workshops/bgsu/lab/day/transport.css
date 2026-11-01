@@ -1,0 +1,57 @@
+/* The transport, shared by the instruments. Bottom right, out of the way of
+   whatever each one puts along the foot, and quiet until it is looked for. */
+/* Reserved space, so nothing in an instrument's own footer ends up underneath
+   the transport. */
+.w-bot, .d-bot { padding-right: 17em; }
+@media (max-width: 52em) { .w-bot, .d-bot { padding-right: 0; padding-bottom: 4.6em; } }
+
+.op-transport {
+  position: fixed; right: var(--pad, 3vw); bottom: var(--pad, 3vw); z-index: 12;
+  display: flex; align-items: center; gap: .55em;
+  padding: .55em .7em;
+  background: rgba(0,0,0,.26); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.16);
+}
+.op-t__btn {
+  font: inherit; width: 2.2em; height: 2.2em; display: grid; place-items: center;
+  background: none; border: 1px solid rgba(255,255,255,.22); color: #fff;
+  cursor: pointer; transition: background .16s, border-color .16s, color .16s;
+}
+.op-t__btn:hover { border-color: rgba(255,255,255,.7); }
+.op-t__btn[aria-pressed="true"] { background: #fff; color: #0b0d14; border-color: #fff; }
+.op-t__glyph { font-size: .78em; line-height: 1; }
+.op-t__vol { display: flex; align-items: center; }
+.op-t__vol input { width: 7.5em; accent-color: #fff; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px;
+  padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* The info a dial carries: a mark beside its name, and the sentence underneath
+   once it is asked for. Not a hover tooltip — a tooltip arrives late, in a
+   system font, and never on a phone at all. */
+.op-info {
+  font: inherit; width: 1.25em; height: 1.25em; margin-left: .5em;
+  display: inline-grid; place-items: center; flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.34); border-radius: 50%;
+  background: none; color: #fff; cursor: pointer; opacity: .55;
+  font-size: .72em; line-height: 1; transition: opacity .16s, background .16s, color .16s;
+}
+.op-info:hover { opacity: 1; }
+.op-info[aria-expanded="true"] { background: #fff; color: #0b0d14; opacity: 1; }
+/* The note sits above the dial rather than under it, out of the flow. In the
+   flow it made its own dial taller, and a row aligned to its bottom edge then
+   lifted that one dial out of line with the other three — so asking what a
+   control does moved the control. */
+.op-note {
+  position: absolute; left: 0; bottom: calc(100% + .9em);
+  margin: 0; padding: .9em 1em;
+  font-size: var(--tag); letter-spacing: .5px; line-height: 1.65;
+  opacity: .92; max-width: 22em; min-width: 16em;
+  background: rgba(0,0,0,.52); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.16);
+}
+.op-note[hidden] { display: none; }
+
+@media (max-width: 40em) {
+  .op-transport { right: auto; left: var(--pad, 1.2em); bottom: var(--pad, 1.2em); }
+  .op-t__vol input { width: 5.5em; }
+}

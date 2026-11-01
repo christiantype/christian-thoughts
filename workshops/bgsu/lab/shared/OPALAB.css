@@ -1,0 +1,492 @@
+/* ============================================================================
+   OP/AL LAB — OPALAB.css   ·   the ONE shared stylesheet
+   ----------------------------------------------------------------------------
+   Every tool loads exactly this, LAST in <head> (after the tool's own <style>).
+   It is the single source of truth for type, colour, the flat component
+   library, and the geometry of BOTH shells:
+     · the rail-and-artboard tools  — a #dock left rail
+     · the bespoke / full-bleed tools — a #rail or #panel left rail
+   A tool supplies its canvas + art. It should not restyle a button, slider,
+   island, heading, swatch, toggle or size dock — they all live here.
+
+   The look: FLAT. One white surface; every edge is a hairline; no shadows, no
+   gradients, nothing 3D. IBM Plex for type, one accent for selected + focus
+   (a solid fill with white ink). Flat cards, flat buttons, thin-line sliders
+   with a flat dot, flat pill toggles.
+
+   Contents
+     0  Type faces + tokens
+     1  Flat — the component library (buttons · fields · sliders · toggles)
+     2  Base + canvas / artboard mat
+     3  Topbar + sub-header
+     4  Left rail  (#dock)  ·  islands  ·  Output island
+     5  Group heading + labels + accordion
+     6  Sliders (base geometry)      9  Colour rows + swatches
+     7  Buttons + focus             10  Toggles · tips · size dock · Save dialog
+     8  Segmented · selects · fields 11  Bespoke shells (#rail · #panel · #output)
+   ========================================================================== */
+
+/* 0 — TYPE FACES + TOKENS =================================================== */
+/* The interface is set in Untitled Sans, the house annotation face — the same
+   one the site uses for every label. It is cut at 400 and 700 and nothing
+   between, so no rule in here may ask for 500 or 600: CSS would quietly serve
+   400 for one and a synthesised bold for the other, and the hierarchy would
+   come apart. Where a heading needs to separate from its labels it does it by
+   colour, not by a weight that does not exist. */
+@font-face{ font-family:'Untitled Sans'; font-weight:400; font-style:normal; font-display:swap;
+  src:url('/workshops/bgsu/shared/fonts/untitled-sans-regular.woff2') format('woff2'); }
+@font-face{ font-family:'Untitled Sans'; font-weight:700; font-style:normal; font-display:swap;
+  src:url('/workshops/bgsu/shared/fonts/untitled-sans-bold.woff2') format('woff2'); }
+/* self-hosted IBM Plex (latin) — kept for --mono only: the numeric readouts
+   change while a slider is dragged, and a proportional figure makes them jump. */
+@font-face{ font-family:'IBM Plex Mono'; font-weight:400; font-style:normal; font-display:swap;
+  src:url('/workshops/bgsu/shared/fonts/ibm-plex-mono-400.woff2') format('woff2'); }
+@font-face{ font-family:'IBM Plex Mono'; font-weight:500; font-style:normal; font-display:swap;
+  src:url('/workshops/bgsu/shared/fonts/ibm-plex-mono-500.woff2') format('woff2'); }
+/* Mono is cut at 400 and 500 and no further, but a readout is often marked up
+   as <b> — which asks for 700. The browser answered by smearing the outline:
+   a fake bold, in a face that has a real one a step below. This hands every
+   weight above 500 the 500 file, so the heaviest mono we actually own is what
+   gets drawn. */
+@font-face{ font-family:'IBM Plex Mono'; font-weight:501 1000; font-style:normal; font-display:swap;
+  src:url('/workshops/bgsu/shared/fonts/ibm-plex-mono-500.woff2') format('woff2'); }
+
+:root{
+  /* type */
+  --font:'Untitled Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* ink + greys */
+  --ink:#000000;                 /* text, slider thumbs */
+  --dim:#454545; --mute:#454545; /* muted labels / captions */
+  --line:rgba(0,0,0,.16);        /* hairlines draw every edge — there are no shadows */
+  --hair:rgba(0,0,0,.18);        /* control + panel edges */
+  --track:rgba(0,0,0,.18);       /* slider tracks — a thin flat line */
+  --paper:#ffffff;               /* the page + rail ground */
+  --cell:#ffffff;                /* button / input face — white, edged by a hairline */
+  --mat:#ebecef;                 /* canvas mat behind the artboard — a step darker, so the white board reads */
+  --rail-bg:var(--paper);        /* the left rail */
+  --island:#ffffff;              /* a control card — white, hairline-edged */
+  --rec:#da1e28;                 /* record indicator (Carbon red-60, AA) */
+  /* the one interactive accent — IBM Blue */
+  --accent:#000000;              /* primary, selected, focus */
+  --accent-hover:#2b00ff;        /* hover */
+  --accent-active:#002d9c;       /* Blue 80 */
+  --on-accent:#ffffff;
+  /* radii — crisp and flat */
+  --r-island:6px; --r-control:6px; --r-input:6px; --r-seg:6px;
+  /* FLAT — there are no shadows. The tokens stay defined (all none / transparent) so any
+     tool that references them keeps working; nothing may reintroduce a shadow. */
+  --nm-lo:transparent; --nm-hi:transparent;
+  --shadow:none; --shadow-float:none; --shadow-inset:none; --shadow-sm:none; --shadow-pressed:none;
+}
+
+/* 1 — FLAT — the component library ========================================= */
+/* flat buttons — a white face with a hairline. Selected goes solid accent with white ink.
+   No shadows, no gradients, no recess. Kept low-specificity so :active / :hover /
+   selected reliably win; the special buttons (.rowhead / .opal-info / .tw) reset below. */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export,.opal-save__panel) button:not(.sw),
+.opal-sessions-btn, .filebtn, .chip, .seg button, .railact button, .btn{
+  background:var(--cell) !important; border:1px solid var(--hair) !important; box-shadow:none !important;
+  border-radius:var(--r-control) !important; color:var(--ink) !important;
+  transition:background .12s ease, color .12s ease, border-color .12s ease; }
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export) button:not(.sw):hover, .opal-sessions-btn:hover, .btn:hover, .seg button:hover{
+  background:#f0f0f2 !important; border-color:rgba(0,0,0,.32) !important; }
+/* click — a firmer face, no recess */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button:not(.sw):active, .btn:active, .seg button:active, .railact button:active, .chip:active, .filebtn:active, .opal-sessions-btn:active{
+  background:#e2e2e6 !important; }
+/* selected / on → solid accent, white ink */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button:not(.sw)[aria-pressed="true"], .seg button[aria-pressed="true"],
+.btn[aria-pressed="true"], .btn.primary, .chip.active, .railact button.primary, .railact button.on,
+:where(#dock,#rail,#panel,.ds-demo) button.is-active, .seg button.is-active{
+  background:var(--accent) !important; border-color:var(--accent) !important; color:var(--on-accent) !important; }
+/* the special buttons keep their own look (accordion headers, info glyph, tooltip word) */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button.rowhead,
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button.opal-info,
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button.tw, .rowhead, .opal-info, .tw{
+  background:none !important; box-shadow:none !important; transform:none !important; }
+/* accordion heads in the #rail twins are plain captions — no button box around them
+   (same weight as the button rule above, so the border kill wins) */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button.rowhead, .rowhead{
+  border:none !important; padding-left:0 !important; padding-right:0 !important; }
+.seg{ border:none !important; background:transparent !important; box-shadow:none !important; gap:10px !important; display:flex !important; flex-wrap:wrap !important; }
+/* …but a seg that opal.js collapsed into a select must stay hidden: it sets an inline
+   display:none, which this rule's !important would otherwise beat (showing both). */
+.seg[data-autosel]{ display:none !important; }
+.seg button{ flex:0 1 auto; min-width:0; }
+/* fields — inset. background-COLOR only, so the tool's chevron survives; add our own chevron + padding */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export) select, #sizeDock select, .opal-export select{
+  background-color:var(--cell) !important; border:1px solid var(--hair) !important; box-shadow:none !important;
+  border-radius:var(--r-input) !important; color:var(--ink) !important;
+  -webkit-appearance:none !important; appearance:none !important;
+  padding:10px 34px 10px 14px !important; line-height:1.2 !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none' stroke='%236b7280' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important; background-position:right 13px center !important; }
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export) input[type=text],
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export) input[type=number],
+:where(#dock,#rail,#panel,.ds-demo) textarea{
+  background:var(--cell) !important; border:1px solid var(--hair) !important; box-shadow:none !important;
+  border-radius:var(--r-input) !important; color:var(--ink) !important; padding:10px 12px !important; }
+/* sliders — a thin flat line + a flat accent dot */
+:where(#dock,#rail,#panel,.ds-demo,#output) input[type=range]{ height:22px !important; background:transparent !important; }
+:where(#dock,#rail,#panel,.ds-demo,#output) input[type=range]::-webkit-slider-runnable-track{
+  height:3px !important; border-radius:3px !important; background:var(--track) !important; box-shadow:none !important; }
+:where(#dock,#rail,#panel,.ds-demo,#output) input[type=range]::-moz-range-track{
+  height:3px !important; border-radius:3px !important; background:var(--track) !important; box-shadow:none !important; }
+:where(#dock,#rail,#panel,.ds-demo,#output) input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none !important; appearance:none !important; width:16px !important; height:16px !important; margin-top:-6.5px !important;
+  border-radius:50% !important; background:var(--accent) !important; border:none !important; box-shadow:none !important; cursor:pointer; }
+:where(#dock,#rail,#panel,.ds-demo,#output) input[type=range]::-moz-range-thumb{
+  width:16px !important; height:16px !important; border-radius:50% !important; background:var(--accent) !important; border:none !important; box-shadow:none !important; }
+/* breathing room so the soft shadows never collide or clip into each other */
+:where(#dock,#rail,#panel,.ds-demo) .btn, :where(#dock,#rail,#panel,.ds-demo) select, :where(#dock,#rail,#panel,.ds-demo) input[type=range],
+:where(#dock,#rail,#panel,.ds-demo) input[type=text], :where(#dock,#rail,#panel,.ds-demo) input[type=number], :where(#dock,#rail,#panel,.ds-demo) .filebtn,
+:where(#dock,#rail,#panel,.ds-demo) input[type=color]{ margin-top:5px !important; margin-bottom:5px !important; }
+#dock > .group, #dock > .row, #rail.rail-l .row, #panel .grp, #panel .eng-params{ padding:18px !important; margin-bottom:18px !important; }
+/* .ctrl-btn keeps a defined grey edge (per request) */
+.ctrl-btn{ border:1px solid #919191 !important; box-shadow:none !important; }
+/* controllers that float over the artwork (size dock + Output) — NO drop shadow; a hairline instead */
+#sizeDock, #output, .group.out, #dock > .group.out, #dock > .row.out{
+  box-shadow:none !important; border:1px solid var(--hair) !important; }
+/* every slider reads the same accent dial — native range thumbs AND custom SVG knobs */
+.knob .k-vl, .knob .k-pt{ stroke:var(--accent) !important; }
+/* checkboxes → flat pill switches: a grey track (goes accent ON) + a plain white knob */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) input[type=checkbox]{
+  -webkit-appearance:none !important; appearance:none !important; width:42px !important; height:24px !important; flex:none;
+  border-radius:999px !important; position:relative; cursor:pointer; margin:0;
+  background:#d6d7dc !important; border:1px solid var(--hair) !important; box-shadow:none !important;
+  transition:background .2s ease, border-color .2s ease; }
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) input[type=checkbox]::after{
+  content:''; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+  background:#ffffff; box-shadow:none; transition:left .2s ease; }
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) input[type=checkbox]:checked{
+  background:var(--accent) !important; border-color:var(--accent) !important; }
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) input[type=checkbox]:checked::after{ left:20px; }
+/* islands carry a hairline — nothing else defines the edge now */
+#dock > .group, #dock > .row, #rail.rail-l .row, #output, .group.out, #sizeDock, #panel .grp, #panel .eng-params, .opal-sessions-pop{ border:1px solid var(--hair) !important; }
+
+/* 2 — BASE + CANVAS / ARTBOARD MAT ========================================= */
+html, body{ background:var(--paper); color:var(--ink); font-family:var(--font); }
+html{ accent-color:var(--accent); }
+button, input, select, textarea, .btn{ font-family:inherit; }
+code, kbd, samp, pre, .mono, [data-mono]{ font-family:var(--mono); }
+
+/* the artboard: a WHITE board with a thin border on a grey mat, NEVER a drop
+   shadow. Fixed border colour so a tool's own tokens can't wash it out. */
+#wrap, #stagewrap, #canvasArea{ background:var(--mat); }
+#art, #gl, #stage, #view{ background:#fff; border:1px solid rgba(0,0,0,.2);
+  box-shadow:none !important; border-radius:0 !important; }
+#art:fullscreen, #gl:fullscreen, #stage:fullscreen, #view:fullscreen{ border:0; }
+
+/* 3 — TOPBAR + SUB-HEADER =================================================== */
+/* white bar with a hairline under it; wordmark is currentColor. Covered both with
+   and without the legacy body.dark hook so tools that don't carry the class still
+   get the shell topbar. */
+.opal-topbar, body.dark .opal-topbar{ background:var(--paper); border:none; color:var(--ink);
+  border-bottom:1px solid rgba(0,0,0,.10); }
+/* sub-header band BELOW the topbar — the tool's identity (name · desc · info · version) */
+.opal-subhead, body.dark .opal-subhead{ position:fixed; top:82px; left:0; right:0; z-index:9; height:38px; box-sizing:border-box;
+  display:flex; align-items:center; gap:12px; padding:0 160px;
+  background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.opal-subhead__id{ display:flex; align-items:center; gap:11px; min-width:0; }
+.opal-subhead__name, body.dark .opal-subhead__name{ color:var(--ink); font-size:13px; font-weight:700; white-space:nowrap; }
+.opal-subhead__desc, body.dark .opal-subhead__desc{ color:var(--mute); font-size:12px; text-transform:none;
+  letter-spacing:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.opal-subhead__ver, body.dark .opal-subhead__ver{ color:var(--mute); font-size:11px; margin-left:auto; }
+@media (max-width:900px){ .opal-subhead{ padding:0 64px; } }
+@media (max-width:560px){ .opal-subhead{ padding:0 20px; top:74px; } }
+/* every tool's content clears the topbar (82) + subhead (38) */
+:root{ --top:120px; }
+@media (max-width:560px){ :root{ --top:112px; } }
+
+/* 4 — LEFT RAIL (#dock) · ISLANDS · OUTPUT ================================= */
+/* a distinct grey panel, set apart from the white topbar + canvas · 16px grid */
+#dock{ background:var(--rail-bg); border-right:1px solid rgba(0,0,0,.14);
+  padding:16px !important; gap:16px !important; display:flex; flex-direction:column;
+  /* kill the legacy frosted-rail blur — the rail is opaque now, and the blur
+     created a containing block that trapped the fixed bottom-right OUTPUT panel */
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+/* the same kill for the bespoke rails and every floating chrome piece — nothing in the
+   shell is frosted, blurred or shadowed, whatever the tool's own stylesheet says */
+#rail, #panel, .rail, #recDot, .tip, #sizeDock, #output, .group.out,
+.opal-about, .opal-card, .opal-sessions-pop, .opal-topbar, .opal-navtoggle{
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important; box-shadow:none !important; }
+#recDot{ letter-spacing:0 !important; }
+/* island rhythm is the rail's own gap — a tool's legacy `.group + .group` spacer must not add to it.
+   Only the margin: this rule used to drop border-top as well, from the days when a group was a
+   band in one continuous panel and that border was a separator between bands. A group is an
+   island now, edged on all four sides by the hairline above, so zeroing the top edge took the
+   lid off every island except the first — the gap across the top of Grid, Particles, Assets. */
+#dock > .group + .group, #dock > .row + .row{ margin-top:0 !important; }
+
+/* the rail holds flat cards — white on the ground, edged by a hairline. */
+#dock > .group, #dock > .row{ background:var(--island);
+  border-radius:var(--r-island); padding:16px !important; box-shadow:none; }
+/* Same story as the top edge above: a `.row` was a band in a panel and its
+   bottom border was the line to the next band. It is an island now, so this
+   took the floor out of all eight rows on Image Train. */
+/* the OUTPUT island (Record + Export) — pinned to the BOTTOM-RIGHT of the screen,
+   the exact same fixed spot on every tool. */
+#dock > .group.out, #dock > .row.out, #output.out{
+  position:fixed !important; right:20px; bottom:20px; left:auto; top:auto;
+  width:auto; min-width:208px; max-width:300px; margin:0 !important; z-index:20;
+  background:var(--island); border-radius:var(--r-island);
+  padding:14px !important; box-shadow:none; }
+
+/* NO UPPERCASE anywhere in the chrome */
+#dock, #dock *, #rail, #rail *, #panel, #panel *, #output, #output *, #sizeDock, #sizeDock *,
+.opal-subhead, .opal-subhead *, #recDot, #recDot *{ text-transform:none !important; }
+
+/* 5 — GROUP HEADING + LABELS + ACCORDION =================================== */
+.group__t{ font-size:12px; letter-spacing:0; text-transform:none; color:var(--mute); font-weight:400; }
+.knob label, .warp label, h4{ font-size:11px; letter-spacing:0; text-transform:none; color:var(--mute); font-weight:400; }
+/* a readout you can type into — click it, type an exact value, Enter */
+b.opal-typed{ cursor:text; border-radius:var(--r-input); padding:1px 4px; margin:-1px -4px;
+  outline:none; transition:background .12s ease; }
+b.opal-typed:hover{ background:rgba(0,0,0,.06); }
+b.opal-typed:focus{ background:var(--cell); box-shadow:inset 0 0 0 2px var(--accent) !important; }
+.knob b, .warp b{ color:var(--ink); font-weight:500; font-family:var(--mono);
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+/* headings never uppercase / never bold */
+.group__t, .rowhead, .ctrl-label, .oc-lbl, .lo-subhead, .sec > h3, h3, h4{
+  text-transform:none !important; letter-spacing:0 !important; font-weight:400 !important; }
+.rowhead{ font-size:12px !important; }
+/* The readout — the live number beside a control's name. The spec calls it
+   "mono · tabular · --ink", but nothing in the shell ever said so, so it was
+   whatever each tool's own CSS left it: Liquid Type's came through in Signifier
+   because the page sets a serif and a <b> inherited it, Angel Music's at 55%
+   opacity and centred, Lake Opeka's at weight 500 in a different face. A number
+   you read off a slider has one look. Tabular so the digits do not jitter as
+   the value changes. */
+:where(#dock,#rail,#panel) label b,
+:where(#dock,#rail,#panel) .knob label b,
+:where(#dock,#rail,#panel) .crow label b{
+  font-family:var(--mono) !important; font-size:11px !important; font-weight:500 !important;
+  font-variant-numeric:tabular-nums !important; letter-spacing:0 !important;
+  text-transform:none !important; color:var(--ink) !important; opacity:1 !important;
+  text-align:right !important; }
+
+/* the #rail twins' labels / hints / readouts read at the shell's sizes, never 8–10px */
+:where(#rail,#dock,#panel) .grp > label, :where(#rail,#dock,#panel) .quad label, :where(#rail,#dock,#panel) .cin label,
+:where(#rail,#dock,#panel) .klab, :where(#rail,#dock,#panel) .kval, :where(#rail,#dock,#panel) .rowhint{ font-size:11px !important; }
+.knob label, .warp label, label, .grp > label, .sec label, .ctrl label{
+  text-transform:none !important; letter-spacing:0 !important; font-weight:400 !important; }
+.btn, button, .seg button, select{ text-transform:none !important; letter-spacing:0 !important; }
+
+/* collapsible islands (accordion) — click the heading to shrink; caret shows state */
+#dock > .group:not(.out) > .group__t{ cursor:pointer; user-select:none;
+  display:flex; align-items:center; justify-content:space-between; gap:8px; }
+/* the caret is a drawn triangle, not a character */
+#dock > .group:not(.out) > .group__t::after{ content:''; width:0; height:0; flex:none;
+  border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid var(--mute);
+  transition:transform .15s ease; }
+#dock > .group.collapsed > .group__t::after{ transform:rotate(-90deg); }
+/* the same triangle on the Output island heading (opal.js's .oc-head) and the spec page's demo */
+.oc-head::after, .ds-demo .group > .group__t::after{ content:'' !important; font-size:0 !important; width:0; height:0; flex:none;
+  border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid var(--mute); }
+#dock > .group.collapsed > *:not(.group__t){ display:none !important; }
+.seg-select{ width:100%; }
+
+/* 6 — SLIDERS (base geometry — the neumorphic layer above skins the track/thumb) */
+.knob{ display:flex; flex-direction:column; gap:2px; }
+.knob label{ display:flex; justify-content:space-between; }
+input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:20px;
+  background:transparent; cursor:pointer; }
+input[type=range]:focus-visible{ outline:none; }
+input[type=range]:focus-visible::-webkit-slider-thumb{ outline:none; }
+
+/* 7 — BUTTONS + FOCUS ====================================================== */
+.btn{ appearance:none; background:var(--cell); color:var(--ink);
+  font:inherit; font-family:var(--font); font-size:11px; letter-spacing:0; text-transform:none;
+  text-align:center; padding:8px 12px; border-radius:var(--r-control) !important; cursor:pointer;
+  white-space:nowrap; }
+.btn.on{ outline:none; }
+/* A button in the chrome that never got .btn kept the browser's own 13.33px
+   Arial — the face above is set by `:where(#dock,…) button`, which paints it but
+   says nothing about type, so the only buttons on the scale were the ones a tool
+   remembered to class. Open Lab's chips, Image Train's delete, Typography Can Be
+   Fun's print buttons and the two × buttons all read a size and a face apart from
+   every control beside them. The scale belongs to the shell, not to the tool. */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock,.opal-export,.opal-save__panel) button:not(.sw),
+:where(#dock,#rail,#panel) textarea{
+  font-family:var(--font); font-size:11px; letter-spacing:0; text-transform:none; }
+.chip{ font-size:11px; padding:7px 10px; }
+.sep{ background:var(--line); }
+/* over-canvas icon buttons (theme / pause / fullscreen / •••) */
+.icon{ border-radius:var(--r-control) !important; }
+.icon[aria-pressed="true"]{ color:var(--accent); }
+/* one focus ring, IBM Blue, for every interactive control */
+.btn:focus-visible, button:focus-visible, .seg button:focus-visible, select:focus-visible, textarea:focus-visible,
+input[type=text]:focus-visible, input[type=number]:focus-visible,
+input[type=color]:focus-visible, .sw:focus-visible, a:focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px; }
+
+/* 8 — SEGMENTED · SELECTS · TEXT FIELDS ==================================== */
+.seg button{ font-family:var(--font); font-size:11px; letter-spacing:0; text-transform:none; color:var(--ink); }
+select{ background:var(--cell); color:var(--ink); font:inherit; font-family:var(--font); font-size:11px;
+  letter-spacing:0; text-transform:none; }
+textarea, input[type=text], input[type=number]{ color:var(--ink); font-family:var(--font); }
+
+/* 9 — COLOUR ROWS + SWATCHES =============================================== */
+.crow{ display:flex; align-items:center; justify-content:space-between; }
+.crow label{ font-size:12px; color:var(--ink); text-transform:none; letter-spacing:0; }
+/* Colour SWATCHES & pickers — one clean round chip that shows its colour, used both as palette
+   buttons (colour/gradient via inline background) and as <input type=color>. Swatch buttons are
+   exempt from the flat button face above, so their own colour shows through. */
+input[type=color], .sw{
+  width:26px !important; height:26px !important; min-width:26px; flex:none; padding:0 !important; cursor:pointer;
+  border-radius:50% !important; border:1px solid rgba(0,0,0,.22) !important; background:none;
+  box-shadow:none !important;
+  -webkit-appearance:none; appearance:none; overflow:hidden; vertical-align:middle;
+  transition:transform .1s ease, box-shadow .15s ease; }
+input[type=color]:hover, .sw:hover{ transform:scale(1.09); }
+input[type=color]::-webkit-color-swatch-wrapper{ padding:0; }
+input[type=color]::-webkit-color-swatch{ border:none; border-radius:50%; }
+input[type=color]::-moz-color-swatch{ border:none; border-radius:50%; }
+/* selected swatch — a crisp accent ring with a paper gap (no muddy outline) */
+.sw[aria-pressed="true"], .sw.on, .sw.active{
+  outline:2px solid var(--accent); outline-offset:2px; box-shadow:none !important; }
+
+/* 10 — TOGGLES · TOOLTIPS · SIZE DOCK · SAVE DIALOG ======================= */
+.tog{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.tog > span, .tog > label{ font-size:12px; color:var(--ink); }
+.tip{ background:#161616; color:#fff; border-color:#161616; border-radius:var(--r-input); box-shadow:none; }
+#hint{ display:none !important; }
+
+/* Size control — a floating island at the TOP-LEFT of the canvas, clear of the artwork */
+#sizeDock{
+  position:fixed !important; bottom:auto !important; right:auto !important;
+  top:calc(var(--top, 120px) + 14px) !important; left:calc(var(--rail, 0px) + 16px) !important; transform:none !important;
+  display:flex !important; align-items:center; gap:10px; z-index:9 !important;
+  background:var(--island,#fff); border-radius:var(--r-island); padding:6px 9px 6px 13px;
+  box-shadow:none;
+}
+#sizeDock #dimReadout{ font-size:12px; color:var(--mute); font-variant-numeric:tabular-nums; white-space:nowrap; }
+#sizeDock select{
+  appearance:none !important; -webkit-appearance:none !important;
+  background:#ffffff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none' stroke='%23525252' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'><path d='M1 1l4 4 4-4'/></svg>") no-repeat right 9px center !important;
+  color:var(--ink) !important; border-radius:var(--r-control) !important;
+  padding:6px 28px 6px 11px !important; font:inherit !important; font-size:12px !important; cursor:pointer;
+}
+@media (max-width:560px){ #sizeDock{ left:50% !important; } }
+#recDot{ background:#ffffff; border-color:var(--line); color:var(--rec); border-radius:var(--r-control); }
+/* recording wins over hover/active/selected — it must never read as a plain button */
+:where(#dock,#rail,#panel,#output,#sizeDock) button.is-recording,
+:where(#dock,#rail,#panel,#output,#sizeDock) button.is-recording:hover,
+.btn.is-recording, .btn.is-recording:hover, .btn.is-recording[aria-pressed="true"]{
+  background:var(--rec) !important; border-color:var(--rec) !important; color:#fff !important;
+  font-variant-numeric:tabular-nums; }
+
+/* Save dialog */
+#opal-save{ position:fixed; inset:0; z-index:80; display:flex; align-items:center; justify-content:center;
+  background:rgba(22,22,22,.32); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+.opal-save__panel{ width:340px; max-width:calc(100vw - 32px); background:var(--island); border:1px solid var(--line);
+  border-radius:var(--r-island); box-shadow:none; padding:18px; display:flex; flex-direction:column; gap:12px; }
+.opal-save__t{ font-size:14px; font-weight:600; color:var(--ink); }
+.opal-save__row{ display:flex; align-items:center; gap:10px; }
+.opal-save__row[hidden]{ display:none !important; }
+.opal-save__row > span{ flex:none; width:84px; font-size:12px; color:var(--mute); }
+.opal-save__row select, .opal-save__row input[type=range]{ flex:1; }
+.opal-save__row > b{ font-variant-numeric:tabular-nums; font-size:12px; color:var(--ink); width:28px; text-align:right; }
+.opal-save__foot{ display:flex; gap:8px; margin-top:4px; }
+.opal-save__foot .btn{ flex:1; }
+#recDot i{ background:var(--rec); }
+
+/* 11 — BESPOKE SHELLS (#rail · #panel · #output) ========================== */
+/* the flat rail twins (ash · scanner · letter-strings) rendered as floating islands,
+   to match the #dock tools' rail */
+#rail.rail-l{ background:var(--rail-bg); padding:16px; }
+#rail.rail-l .row{ background:var(--island);
+  border-radius:var(--r-island) !important; margin:0 0 16px !important; padding:16px !important;
+  box-shadow:none !important; border:1px solid var(--hair) !important; }
+#rail.rail-l .row:last-child{ margin-bottom:0 !important; }
+
+/* the standalone Output island (bespoke tools mount it at the body root, not inside #dock) —
+   same pinned bottom-right spot, same hairline-not-shadow treatment as the #dock tools */
+#output{ position:fixed; right:20px; bottom:20px; left:auto; top:auto; z-index:40;
+  background:var(--island); border-radius:var(--r-island); padding:14px; min-width:208px; }
+#output .group__t{ font-size:12px; color:var(--mute); text-transform:none; letter-spacing:0; font-weight:400; margin-bottom:8px; }
+#output .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+#output .grid2 .btn{ width:100%; }
+#output .btn[aria-pressed="true"], #output .btn.on, #output .btn.primary{ color:var(--accent); }
+
+/* 12 — MOBILE ( ≤760px ): the left rail becomes a slide-in drawer =========== */
+/* Hamburger + scrim are injected by opal.js on every tool; hidden on desktop.   */
+.opal-navtoggle{ display:none; position:fixed; top:calc(var(--top, 120px) + 10px); left:12px; z-index:62;
+  width:44px; height:44px; padding:0; border:1px solid var(--hair); border-radius:var(--r-control); background:var(--island);
+  box-shadow:none; cursor:pointer; align-items:center; justify-content:center;
+  flex-direction:column; gap:4px; }
+.opal-navtoggle i{ display:block; width:18px; height:2px; background:var(--ink); border-radius:2px;
+  transition:transform .25s ease, opacity .2s ease; }
+body.opal-nav-open .opal-navtoggle i:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+body.opal-nav-open .opal-navtoggle i:nth-child(2){ opacity:0; }
+body.opal-nav-open .opal-navtoggle i:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+.opal-navscrim{ display:none; position:fixed; inset:var(--top, 120px) 0 0 0; z-index:55;
+  background:rgba(20,24,34,.34); opacity:0; pointer-events:none; transition:opacity .28s ease; }
+
+@media (max-width:760px){
+  :root{ --rail:0px; }                       /* collapses every left:var(--rail) / calc(var(--rail)+x) */
+  .opal-navtoggle{ display:flex; }
+  .opal-navscrim{ display:block; }
+  body.opal-nav-open .opal-navscrim{ opacity:1; pointer-events:auto; }
+
+  /* rail → left slide-in drawer. Uses `left` (NOT transform) so it never becomes a
+     containing block that would trap the fixed bottom-right OUTPUT island.
+     (#panel / flux is excluded — it ships its own bespoke bottom-sheet mobile layout.) */
+  body.opal-drawer #dock, body.opal-drawer #rail, body.opal-drawer #rail.rail-l{
+    position:fixed !important; top:var(--top) !important; bottom:0 !important;
+    left:calc(-1 * min(86vw, 340px)) !important; right:auto !important;
+    width:min(86vw, 340px) !important; max-width:340px !important;
+    padding-top:60px !important;               /* clear the hamburger / close button */
+    transition:left .28s cubic-bezier(.4,0,.2,1) !important; z-index:60 !important;
+    box-shadow:none !important; border-right:1px solid var(--hair) !important;
+    overflow-y:auto !important; -webkit-overflow-scrolling:touch; }
+  body.opal-drawer.opal-nav-open #dock, body.opal-drawer.opal-nav-open #rail{ left:0 !important; }
+
+  /* size dock → top-right, clear of the hamburger at top-left */
+  #sizeDock{ left:auto !important; right:12px !important; top:calc(var(--top) + 10px) !important; }
+
+  .opal-subhead{ padding:0 16px !important; }
+  .opal-subhead__ver{ display:none; }        /* keep the name+desc; drop the version chip */
+}
+@media (max-width:440px){ .opal-subhead__desc{ display:none; } }
+
+/* 12 — CONTROL TYPE, ONE SIZE ============================================== */
+/* opal.css sets .opal-input at 13px, which is right for a page field and wrong
+   inside the rail: five tools were carrying dropdowns a notch larger than the
+   twenty-nine beside them. Same control, same size, whichever class it wears. */
+:where(#dock,#rail,#panel,.ds-demo,#output) .opal-input,
+:where(#dock,#rail,#panel,.ds-demo,#output) .opal-select{
+  font-size:11px !important; }
+/* The rail twins' fold heading is marked up as a <button>, so §7's blanket
+   button colour was painting it full-ink while every .group__t beside it sat in
+   --mute. It reads as a heading; it is coloured as one. */
+:where(#dock,#rail,#panel,.ds-demo,#output,#sizeDock) button.rowhead, .rowhead{
+  color:var(--mute) !important; }
+
+/* The two public-chrome tools load the site stylesheet as well, and it re-sets
+   the page in Signifier at 16px after opal.css has set the rail in the lab sans
+   at 13. Their controls came out in the reading face, a size larger than the
+   thirty-one tools beside them. A control rail is annotation, never reading:
+   it is set in the lab's own sans at the lab's own size, whatever the page
+   around it is set in. Readouts that ask for --mono still get it; they say so
+   on the element. */
+#dock, #rail, #panel, #output, #sizeDock{
+  font-family:var(--font) !important; font-size:13px !important; line-height:1.5 !important; }
+
+/* 13 — NO SYNTHETIC WEIGHT ================================================= */
+/* Untitled is cut at 400 and 700; mono at 400 and 500. Ask for anything else
+   and a browser will invent it by thickening an outline it already has, which
+   is a drawn letter wearing a smear. Turned off everywhere in the shell, so a
+   weight that does not exist shows up as the plain face — visible, and honest —
+   instead of quietly looking almost right. */
+#dock, #rail, #panel, #output, #sizeDock, .opal-topbar, .opal-subhead, #recDot,
+.opal-sessions-btn, .opal-sessions-pop, .opal-about, .tip,
+#dock *, #rail *, #panel *, #output *, #sizeDock *, .opal-topbar *, .opal-subhead *,
+#recDot *, .opal-sessions-pop *{
+  font-synthesis-weight:none; font-synthesis:none; }
+/* <strong> asked for 500, which Untitled does not have, so the browser served
+   400 and the emphasis disappeared. It takes the real bold. */
+:where(#dock,#rail,#panel,#output,#sizeDock,#recDot,.opal-sessions-pop) strong{ font-weight:700; }
+/* 600 resolves to the 700 file anyway; asking for it plainly keeps the
+   stylesheet honest about which of the two cut weights it means. */
+:where(#dock,#rail,#panel,#output,#sizeDock,#recDot,.opal-sessions-pop) b{ font-weight:700; }

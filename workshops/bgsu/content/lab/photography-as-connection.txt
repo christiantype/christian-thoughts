@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# The Portrait as Contract
+#
+# This is the text of the study. Edit it, save, refresh the page.
+#
+#   A heading in CAPITALS on its own line starts a section.
+#   A BLANK LINE starts a new paragraph.
+#   Inside POSITION and RESEARCH, every paragraph after the first is indented
+#   on the page automatically — you do not need to type any indents.
+#   Lines starting with # are notes to yourself and never appear on the site.
+#
+#   You can use <em>italic</em>, <strong>bold</strong>, <cite>a title</cite>
+#   and <a class="u" href="/somewhere">a link</a> anywhere in the text.
+#
+# Pictures, the assignments and the column layout live in the .js file next to
+# this one. This file is only the words.
+# ─────────────────────────────────────────────────────────────────────────────
+
+TITLE
+
+Image
+
+QUESTION
+
+What do we owe the person we photograph?
+
+PROVOCATION
+
+A photograph is usually described as something one person takes from another. Every serious account of the medium says the opposite — that the picture is the residue of an encounter, and the encounter is the work. The question is not what you captured. It is what you entered into, and what it obliges you to.
+
+RESEARCH
+
+In September 2026 I enrolled in <cite>The Portrait</cite>, a ten-week course taught by <a class="u" href="https://www.lalikhalid.com/" target="_blank" rel="noopener">Lali Khalid</a> at the <a class="u" href="https://www.chicagofotoleague.com/" target="_blank" rel="noopener">Chicago Foto League</a> — a new organization built around photography education that anyone can reach.
+
+The course is about the ways we photograph people, and about the narrative that arrives through the choices a photographer makes: composition, gaze, light, symbolism. It is being taught at a moment when photography has become possible for almost anyone, through the phone already in their hand.
+
+What it asks for is slowness. It asks you to think about how the connection between the photographer and the subject can be strengthened — because the line running from that connection to the image is made of decisions, and those decisions are what determine the picture you end up putting in front of anyone else.
+
+I came to my first camera at about ten, and what fascinated me then was the recording itself — that a moment could be transcribed, and still arrive later feeling like something.
+
+Photography is now something almost anyone can do, and a great deal of how it gets done is decided somewhere else. Instagram and its algorithms shape what we point at and how we color it. A Pinterest board hands us the picture before we have made it; a Fujifilm recipe hands us the look. What interests me is arriving at a point of view that is my own, and that holds without any of them.
+
+I also think that as technology and AI take over more of the making, being able to connect with another person through creative work becomes the discipline that matters. The pictures worth having will be the ones that came out of a relationship — technology used to get closer to someone rather than further away.
+
+A portrait is <em>made</em>, not captured. Even the language photography uses — shooting, taking, capturing — I am learning to find alarming.
+
+Throughout the course we have been exploring the work of August Sander, Philip-Lorca diCorcia, Fazal Sheikh, Gordon Parks and Diane Arbus — photographers who each answer the question of what is owed to the person in front of the camera differently, and none of them quietly.
+
+I am also pushing myself to slow down in the making, by working on a rangefinder — a Leica M11. Focusing by hand is slow on purpose. It makes me consider the composition before the frame exists, and treat the picture as a layer of moments rather than a grab at one.
+
+This page is an ongoing collection of the assignments, kept as part of the research. It is where the notes are published.

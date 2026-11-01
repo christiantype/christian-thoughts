@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Weather — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<meta name="description" content="A weather system you set the conditions of and then leave. Masses drift, meet, and sound where they meet.">
+<link rel="preconnect" href="https://api.open-meteo.com">
+<link rel="stylesheet" href="/workshops/bgsu/shared/styles.css?v=20261011A">
+<link rel="stylesheet" href="/workshops/bgsu/lab/day/transport.css?v=2">
+<script src="/workshops/bgsu/assets/js/Tone.js"></script>
+<style>
+  /* ── Weather ────────────────────────────────────────────────────────────
+     Not a score and not a sequencer. A field of slow masses with conditions
+     you set — how warm, how heavy, how much movement — and the music is what
+     happens when two of them meet. You cannot place a note here. You can only
+     make the kind of weather in which certain notes become likely.
+
+     The interface is a set of conditions and a field. Everything legible is
+     apparatus; the field is the work. */
+  :root { --pad: 3vw; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #07090e; }
+  body { font-family: 'Untitled Sans', system-ui, sans-serif; color: #fff; }
+  #field { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .w-ui { position: fixed; inset: 0; z-index: 5; pointer-events: none;
+          display: grid; grid-template-rows: auto 1fr auto; padding: var(--pad); }
+  .w-top, .w-bot { pointer-events: auto; }
+  .w-top { display: flex; justify-content: space-between; align-items: baseline;
+           font-size: var(--tag); letter-spacing: .5px; }
+  .w-top b { font-weight: 400; }
+  .w-read { opacity: .55; font-variant-numeric: tabular-nums; }
+
+  .w-bot { display: flex; flex-wrap: wrap; gap: 1.4em 2.4em; align-items: flex-end; }
+  .w-dial { position: relative; display: flex; flex-direction: column; gap: .5em; min-width: 11em; flex: 1 1 11em; }
+  .w-dial label { font-size: var(--tag); letter-spacing: .5px; opacity: .62;
+                  display: flex; justify-content: space-between; align-items: center; }
+  .w-dial__n { display: inline-flex; align-items: center; }
+  .w-dial b { font-weight: 400; opacity: .9; font-variant-numeric: tabular-nums; }
+  .w-dial input { width: 100%; accent-color: #fff; }
+
+  .w-gate { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; cursor: pointer;
+            background: radial-gradient(130% 100% at 50% 45%, #121a2c 0%, #07090e 72%); }
+  .w-gate__in { text-align: center; max-width: 34em; padding: 0 2em; }
+  .w-gate__h { font-family: 'Signifier', Georgia, serif; font-weight: 400;
+               font-size: clamp(2.4rem, 8vw, 5rem); line-height: 1.02; letter-spacing: -.015em; margin: 0 0 .6em; }
+  .w-gate__p { font-size: var(--tag); letter-spacing: .5px; line-height: 1.9; opacity: .6;
+               margin: 0 auto 2.6em; max-width: 26em; }
+  .w-gate__go { font-size: var(--tag); letter-spacing: .14em; text-indent: .14em; text-transform: uppercase;
+                border: 1px solid rgba(255,255,255,.55); padding: 1.05em 2.6em; display: inline-block; transition: .2s; }
+  .w-gate:hover .w-gate__go { background: #fff; color: #07090e; border-color: #fff; }
+  .is-on .w-gate { opacity: 0; pointer-events: none; transition: opacity 1.6s ease; }
+  .w-credit { position: fixed; left: var(--pad); bottom: var(--pad); z-index: 21;
+              font-size: var(--tag); letter-spacing: .5px; opacity: .4; }
+  .is-on .w-credit { display: none; }
+  @media (max-width: 40em) { :root { --pad: 1.2em; } .w-bot { gap: .9em 1.2em; } }
+</style>
+</head>
+<body>
+<canvas id="field"></canvas>
+<div class="w-ui">
+  <header class="w-top"><p><b>Weather</b></p><p class="w-read" id="read">—</p></header>
+  <div></div>
+  <footer class="w-bot" id="dials"></footer>
+</div>
+<div class="w-gate" id="gate">
+  <div class="w-gate__in">
+    <h1 class="w-gate__h">Set the conditions.</h1>
+    <p class="w-gate__p">
+      Masses drift across the field and sound where they meet. You do not place notes —
+      you decide what kind of weather this is, and then you leave it alone.
+    </p>
+    <span class="w-gate__go">Begin</span>
+  </div>
+</div>
+<p class="w-credit">Produced by OP/AL</p>
+<script src="/workshops/bgsu/lab/day/transport.js?v=1"></script>
+<script src="/workshops/bgsu/lab/day/field.js?v=2"></script>
+<script src="/workshops/bgsu/lab/weather/weather.js?v=2"></script>
+</body>
+</html>

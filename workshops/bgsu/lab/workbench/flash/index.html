@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Flash — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<style>
+  @font-face{ font-family:'Eunuverse'; src:url('/workshops/bgsu/shared/fonts/Eunuverse-Roman.otf') format('opentype');
+    font-weight:400; font-style:normal; font-display:block; }
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100vh; height:100dvh; overflow:hidden; background:var(--paper); font-family:var(--font,'IBM Plex Sans',system-ui,sans-serif); }
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; }
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; background:var(--mat);
+    display:flex; align-items:center; justify-content:center; padding:22px; }
+  #art{ max-width:100%; max-height:100%; display:block; }
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); right:24px; z-index:11;
+    display:none; align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .rowhint{ font-size:12px; line-height:1.5; color:var(--mute); margin:0; }
+  [hidden]{ display:none !important; }
+</style>
+  <link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body>
+<script src="/workshops/bgsu/lab/shared/opal.js?v=3"></script>
+<script>Opal.mountTopbar({ name:'Flash', desc:'A roll of names, set in Eunuverse',
+  about:'Everyone in AHA, one name to a frame, set in Eunuverse Roman over their own poster. Every name is set at the same cap height — the size is a ceiling and the longest name sets it, so the type sits still and only the name changes. With each name the colour turns further round the wheel. Set how long the whole roll should take and the pace follows. Record renders the film as fast as the machine can encode it rather than playing it out in real time, so a five-minute roll saves in well under a minute — as an MP4, at the length you asked for.',
+  version:'OP-LAB-037' });</script>
+<div id="sizeDock">
+  <span id="dimReadout">1920 × 1080</span>
+  <select id="aspect" title="Canvas size">
+    <option value="1600/900" selected>Landscape · 16:9</option>
+    <option value="1400/1400">Square · 1:1</option>
+    <option value="1280/1600">Portrait · 4:5</option>
+    <option value="1080/1920">Story · 9:16</option>
+  </select>
+</div>
+<div id="recDot"><i></i><b>0:00</b></div>
+
+<div id="dock">
+  <div class="group">
+    <div class="group__t">The roll</div>
+    <p class="rowhint" id="count">&nbsp;</p>
+    <p class="rowhint">Everyone in AHA, A to Z, each with their own poster behind their name — read off the print file, so a name can never land on somebody else's work.</p>
+    <div class="grid2"><button class="btn" id="az">A–Z</button><button class="btn" id="shuffle">Shuffle</button></div>
+  </div>
+
+  <div class="group">
+    <div class="group__t">Roll</div>
+    <div class="knob"><label>Total length, minutes <b id="durR">5</b></label><input id="dur" type="range" min="0.5" max="15" step="0.5" value="5"></div>
+    <p class="rowhint" id="pace">&nbsp;</p>
+    <p class="rowhint">The whole roll fits inside it, so the pace follows from the count.</p>
+    <div class="grid2"><button class="btn" id="restart">Restart</button><button class="btn" id="playBtn" aria-pressed="true">Pause</button></div>
+  </div>
+
+  <div class="group">
+    <div class="group__t">Type</div>
+    <p class="rowhint">Eunuverse Roman. One cap height across the whole roll — Size is the ceiling and the longest name decides, so nothing towers over anything else.</p>
+    <div class="duo">
+      <div class="knob"><label>Size <b id="sizeR">126</b></label><input id="size" type="range" min="20" max="300" value="126"></div>
+      <div class="knob"><label>Tracking <b id="trackR">0</b></label><input id="track" type="range" min="-60" max="400" value="0"></div>
+    </div>
+    <p class="rowhint">Tracking is in thousandths of an em, the way it is set in InDesign. The fit takes it into account, so opening the letters makes the type smaller rather than running it off the edge.</p>
+    <div class="duo">
+      <div class="knob"><label>Across <b id="tyXR">0.50</b></label><input id="tyX" type="range" min="-20" max="120" value="50"></div>
+      <div class="knob"><label>Down <b id="tyYR">0.50</b></label><input id="tyY" type="range" min="-20" max="120" value="50"></div>
+    </div>
+    <div class="crow"><label>Type colour</label><input type="color" class="sw" id="typeCol" value="#ffffff"></div>
+  </div>
+
+  <div class="group">
+    <div class="group__t">Colour</div>
+    <div class="knob"><label>Turn per name <b id="hueR">47</b></label><input id="hue" type="range" min="0" max="180" value="47"></div>
+    <p class="rowhint">Every name turns the type further round the wheel. White and black have no hue to turn, so give the type a colour if you want the roll to change with it. At zero the roll holds one colour.</p>
+    <div class="crow"><label>Background</label><input type="color" class="sw" id="bg" value="#000000"></div>
+  </div>
+
+  <div class="group">
+    <div class="group__t">Poster</div>
+    <div class="duo">
+      <div class="knob"><label>Show <b id="posR">52</b></label><input id="pos" type="range" min="0" max="100" value="52"></div>
+      <div class="knob"><label>Scale <b id="posScR">73</b></label><input id="posSc" type="range" min="20" max="300" value="73"></div>
+    </div>
+    <div class="duo">
+      <div class="knob"><label>Across <b id="posXR">0.50</b></label><input id="posX" type="range" min="-50" max="150" value="50"></div>
+      <div class="knob"><label>Down <b id="posYR">0.50</b></label><input id="posY" type="range" min="-50" max="150" value="50"></div>
+    </div>
+    <p class="rowhint">The posters are the 24 × 36 artwork, whole and never cropped — the caption band is trimmed off at the artwork edge. Show at zero leaves the frame to the type alone; Across and Down place it, and they run past the edges so it can bleed.</p>
+  </div>
+</div>
+
+<div id="wrap"><canvas id="art" width="1600" height="900"></canvas></div>
+
+<div class="group out" id="output" data-export-custom>
+  <div class="group__t">Output</div>
+  <p class="rowhint" id="recLen">&nbsp;</p>
+  <div class="grid2"><button class="btn" id="recBtn">Record</button><button class="btn" id="saveBtn">Save</button></div>
+</div>
+
+<script>
+'use strict';
+(function(){
+  const $=id=>document.getElementById(id);
+  const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+
+  // Name, value and poster page — read straight off AHA-Posters_Print-Final.pdf, whose
+  // every page carries "<Value> by <Name>", so the pairing comes from the artwork itself
+  // rather than from filenames. Page 33's line could not be parsed from the text layer —
+  // the poster itself reads "Resilience by Emma Bloom", which is also the only name the
+  // other 42 pages left unaccounted for.
+  const ROLL = [
+    ['John Wegner','Wellness'], ['Arianna Sanchez','Discipline'], ['Aaron Sutherland','Self-awareness'],
+    ['Tanner Woodford','Connect'], ['Amrita Haughn','Tolerance'], ['Annie Norris','Resilience'],
+    ['Bilal Syed','Self-awareness'], ['Brian M Woodard','Compassion'], ['Barry Deck','Sanity'],
+    ['BANK™','Responsibility'], ['Zoë Breillatt','Critical Thinking'], ['Carlos Segura','Self-awareness'],
+    ['Cass Pokora','Joy'], ['Cheryl Bever','Resilience'], ['Cath Dizon','Critical Thinking'],
+    ['Cristina Bottia','Resilience'], ['Cameron Sow','Originality'], ['Declan Kelly','Mindfulness'],
+    ['Frances Bedoya','Generosity'], ['Francis','Integrity'], ['Gabriella De La Hoya','Accountability'],
+    ['George Miller','Compassion'], ['Gregory Darteh','Openness'], ['Haley Helmold','Resilience'],
+    ['Kate Parks','Compassion'], ['Kyle Eertmoed','Courage'], ['Lawryn Johnson','Mindfulness'],
+    ['Lola Z.','Originality'], ['Max Epperson','Mindfulness'], ['Morgan Manasa','Responsibility'],
+    ['Neha Sunkara','Resilience'], ['Nick Adam','Integrity'], ['Emma Bloom','Resilience'],
+    ['Celeste Nunez','Tolerance'], ['Iana Evseeva','Mindfulness'], ['Reese Adara','Compassion'],
+    ['Sean Fermoyle','Joy'], ['Sadie Van Wie','Openness'], ['Carolyn Tubekis','Accountability'],
+    ['Wendy Robles','Joy'], ['David Sieren','Self-awareness'], ['Christian Solorzano','Honesty'],
+    ['Rick Valicenti','Compassion'] ].map((r,i)=>({ name:r[0], value:r[1], page:i+1 }));
+  const posters=[];   // one image per entry, from the print file's own pages
+
+  const P={ aspect:'1600/900', mins:5, dur:300, size:126, track:0, tyX:0.5, tyY:0.5,
+    typeCol:'#ffffff', bg:'#000000', hue:47,
+    pos:0.52, posSc:0.73, posX:0.5, posY:0.5, play:true };
+
+  let W=1600, H=900, t0=performance.now();
+  let names=[], idx=-1, rollT=0, inkCol=P.typeCol;
+
+  const art=$('art'), ctx=art.getContext('2d');
+  const mCv=document.createElement('canvas'), mctx=mCv.getContext('2d');   // for measuring only
+  const FONT=fp=>'400 '+fp+'px "Eunuverse",'+'"Arial Black",system-ui,sans-serif';
+
+  const hex=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+
+  // the colour walks the wheel, a step per name
+  function hueStep(hexc, deg){
+    let [r,g,b]=hex(hexc).map(v=>v/255);
+    const mx=Math.max(r,g,b), mn=Math.min(r,g,b), l=(mx+mn)/2; let h=0, sat=0;
+    if(mx!==mn){ const d=mx-mn; sat=l>0.5? d/(2-mx-mn) : d/(mx+mn);
+      h = mx===r ? (g-b)/d+(g<b?6:0) : mx===g ? (b-r)/d+2 : (r-g)/d+4; h/=6; }
+    if(sat<0.06) return hexc;                    // white or black has no hue to walk — leave it
+    h=(h+deg/360)%1; if(h<0) h+=1;
+    const q=l<0.5? l*(1+sat) : l+sat-l*sat, pp=2*l-q;
+    const hk=t=>{ t=(t%1+1)%1;
+      if(t<1/6) return pp+(q-pp)*6*t;
+      if(t<1/2) return q;
+      if(t<2/3) return pp+(q-pp)*(2/3-t)*6;
+      return pp; };
+    const to=v=>('0'+Math.round(clamp(v,0,1)*255).toString(16)).slice(-2);
+    return '#'+to(hk(h+1/3))+to(hk(h))+to(hk(h-1/3));
+  }
+
+  /* ---------- setting a name ---------------------------------------------------
+     Widths are measured once at 100px and scale linearly, tracking included, so the
+     fit is a division rather than a search. ONE size serves the whole roll: the
+     largest that still fits the longest name, so short names never tower over long
+     ones and the cap height never moves. */
+  const REF=100;
+  let _m=null, _mKey='';
+  function metrics(){
+    const key=names.join('');
+    if(_m && _mKey===key) return _m;
+    _mKey=key;
+    mctx.font=FONT(REF);
+    const cap=mctx.measureText('H');
+    const capH=(cap.actualBoundingBoxAscent||REF*0.72)/REF;     // in ems, the same for every name
+    const per=names.map(nm=>{
+      const chs=[...nm], w=chs.map(c=>mctx.measureText(c).width/REF);
+      return { chs, w, sum:w.reduce((a,b)=>a+b,0) };
+    });
+    return _m={ capH, per };
+  }
+  function fontPxFor(w,h){
+    const M=metrics(); if(!M.per.length) return 10;
+    const ceiling=h*(0.03+(P.size/100)*0.26), measure=w*0.86, tr=P.track/1000;
+    let px=ceiling;
+    for(const e of M.per){
+      const em=e.sum + tr*Math.max(0,e.chs.length-1);
+      if(em>0) px=Math.min(px, measure/em);
+    }
+    return (isFinite(px)&&px>4) ? px : ceiling;
+  }
+  function drawName(g,w,h){
+    if(!names.length) return;
+    const M=metrics(), e=M.per[((idx<0?0:idx)%names.length+names.length)%names.length];
+    if(!e) return;
+    const px=fontPxFor(w,h), tr=(P.track/1000)*px;
+    const total=e.sum*px + tr*Math.max(0,e.chs.length-1);
+    // baseline from the cap height alone, so a descender or an accent never shifts the line
+    const capPx=M.capH*px;
+    let x=P.tyX*w - total/2;
+    const base=P.tyY*h + capPx/2;
+    g.save();
+    g.font=FONT(px); g.textAlign='left'; g.textBaseline='alphabetic'; g.fillStyle=inkCol;
+    for(let k=0;k<e.chs.length;k++){ g.fillText(e.chs[k], x, base); x+=e.w[k]*px+tr; }
+    g.restore();
+  }
+
+  /* ---------- one frame ---------- */
+  function render(g,w,h){
+    g.setTransform(1,0,0,1,0,0); g.globalCompositeOperation='source-over'; g.globalAlpha=1; g.filter='none';
+    g.fillStyle=P.bg; g.fillRect(0,0,w,h);
+    if(P.pos>0.004){
+      const im=posters[order[(idx<0?0:idx)%order.length]];
+      if(im && im.naturalWidth){
+        const k=Math.min(w/im.naturalWidth, h/im.naturalHeight)*P.posSc;
+        const pw=im.naturalWidth*k, ph=im.naturalHeight*k;
+        g.save(); g.globalAlpha=P.pos;
+        g.drawImage(im, P.posX*w-pw/2, P.posY*h-ph/2, pw, ph); g.restore();
+      }
+    }
+    drawName(g,w,h);
+  }
+
+  /* ---------- the roll ---------- */
+  // A to Z on the name as it is set. Punctuation is ignored so BANK™ files under B
+  // and Lola Z. under L, and the comparison is accent-insensitive so Zoë lands at Z.
+  let order=ROLL.map((_,i)=>i);
+  function alphabetise(){
+    order=ROLL.map((_,i)=>i).sort((a,b)=>
+      ROLL[a].name.localeCompare(ROLL[b].name,'en',{sensitivity:'base',ignorePunctuation:true}));
+  }
+  const mmss = sec => Math.floor(sec/60)+':'+String(Math.round(sec%60)).padStart(2,'0');
+  function paceText(){
+    if(!names.length) return ' ';
+    const per=P.dur/names.length;
+    return names.length+' names in '+mmss(P.dur)+' — '+
+      (per>=1 ? per.toFixed(1)+'s each' : (1/per).toFixed(1)+' a second');
+  }
+  function refresh(){
+    names=order.map(i=>ROLL[i].name);
+    $('count').textContent = names.length+' names, each with their poster';
+    refreshPace();
+    _m=null; _mKey='';
+    idx=-1;
+  }
+  function refreshPace(){ $('pace').textContent = paceText();
+    const r=$('recLen'); if(r) r.textContent = 'Renders the whole roll as an MP4 — '+mmss(P.dur); }
+  function setColours(i){ inkCol = P.hue ? hueStep(P.typeCol, i*P.hue) : P.typeCol; }
+  function indexAt(t){
+    if(!names.length) return 0;
+    const per=P.dur/names.length;
+    return Math.floor(((t % P.dur)+P.dur) % P.dur / per) % names.length;
+  }
+  function seek(t){ const i=indexAt(t); if(i!==idx){ idx=i; setColours(i); } }
+
+  function aspectWH(){ const p=(P.aspect||'1600/900').split(/[/:x]/).map(Number), a=p[0]||16, b=p[1]||9, long=1920;
+    return a>=b ? [long, Math.round(long*b/a)] : [Math.round(long*a/b), long]; }
+  function fit(){ [W,H]=aspectWH(); art.width=W; art.height=H; }
+  function tick(){ const now=performance.now(), dt=Math.min(0.05,(now-t0)/1000); t0=now;
+    if(!offline){
+      if(P.play) rollT+=dt;
+      seek(rollT);
+      render(ctx,W,H);
+    }
+    requestAnimationFrame(tick); }
+
+  /* ---------- wire ---------- */
+  function bind(id,rid,set,after){ const r=$(id), v=$(rid); if(!r) return;
+    r.oninput=()=>{ set(+r.value); if(v) v.textContent=r.value; if(after) after(); }; }
+  bind('dur','durR', v=>{ P.mins=v; P.dur=v*60; }, refreshPace);
+  bind('size','sizeR', v=>P.size=v);
+  bind('track','trackR', v=>P.track=v);
+  bind('tyX','tyXR', v=>P.tyX=v/100);
+  bind('tyY','tyYR', v=>P.tyY=v/100);
+  bind('hue','hueR', v=>{ P.hue=v; setColours(idx<0?0:idx); });
+  bind('pos','posR', v=>P.pos=v/100);
+  bind('posSc','posScR', v=>P.posSc=v/100);
+  bind('posX','posXR', v=>P.posX=v/100);
+  bind('posY','posYR', v=>P.posY=v/100);
+  $('typeCol').oninput=e=>{ P.typeCol=e.target.value; setColours(idx<0?0:idx); };
+  $('bg').oninput=e=>{ P.bg=e.target.value; };
+  $('shuffle').addEventListener('click',()=>{
+    for(let i=order.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; [order[i],order[j]]=[order[j],order[i]]; }
+    refresh(); rollT=0; });
+  $('az').addEventListener('click',()=>{ alphabetise(); refresh(); rollT=0; });
+  $('restart').addEventListener('click',()=>{ rollT=0; idx=-1; });
+  $('aspect').addEventListener('change',e=>{ P.aspect=e.target.value; fit(); });
+  $('playBtn').addEventListener('click',()=>{ P.play=!P.play; $('playBtn').setAttribute('aria-pressed',String(P.play));
+    $('playBtn').textContent=P.play?'Pause':'Play'; });
+
+  // opal.js rebuilds the size dock to the canonical presets and defaults it to Square,
+  // so 16:9 is re-asserted once it has
+  function forceWide(){ const sel=$('aspect'); if(!sel) return;
+    const opt=[...sel.options].find(o=>/1600\s*[\/x]\s*900|16\s*[:\/x]\s*9|landscape/i.test(o.value+' '+o.textContent));
+    if(opt && sel.value!==opt.value){ sel.value=opt.value; P.aspect=opt.value; fit();
+      sel.dispatchEvent(new Event('change',{bubbles:true})); } }
+  setTimeout(forceWide,260); setTimeout(forceWide,700);
+
+  /* ---------- output ---------- */
+  Opal.mountOutput(art,'flash',{ render:(px)=>{
+    const [aw,ah]=aspectWH(), long=Math.max(aw,ah), sc=px/long;
+    const ew=Math.round(aw*sc), eh=Math.round(ah*sc);
+    const off=document.createElement('canvas'); off.width=ew; off.height=eh;
+    render(off.getContext('2d'), ew, eh);
+    return off; } });
+
+  /* ================= recording =================================================
+     The roll is five minutes long and there is no reason to sit through it. Frames
+     are rendered and encoded as fast as the machine will go and the timestamps are
+     written by hand, so the film comes out the right length however long the render
+     took. WebCodecs gives the encoder; the containers below are what it has to be
+     wrapped in — MP4 around H.264 for anything that has to be handed to somebody
+     else, and Matroska around VP9 only if this browser cannot encode H.264. If
+     there is no VideoEncoder at all the old real-time recorder is the fallback.
+
+     MediaRecorder cannot do this job: it stamps frames with the wall clock, so a
+     five-minute film rendered in forty seconds would come out forty seconds long.
+     Writing the container by hand is what buys the right duration. ------------- */
+
+  function cat(list){ let n=0; for(const a of list) n+=a.length;
+    const o=new Uint8Array(n); let k=0; for(const a of list){ o.set(a,k); k+=a.length; } return o; }
+  const U32=n=>new Uint8Array([(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255]);
+  const U16=n=>new Uint8Array([(n>>8)&255,n&255]);
+  const FOUR=s=>new Uint8Array([s.charCodeAt(0),s.charCodeAt(1),s.charCodeAt(2),s.charCodeAt(3)]);
+
+  /* ---- MP4 (ISO base media) around an H.264 stream ----------------------------
+     ftyp, then the samples in one mdat, then the moov that indexes them. The moov
+     goes last so every chunk offset is known by the time it is written. */
+  function mp4(w,h,fps){
+    const S=[]; let desc=null;
+    function box(type, parts){ const p=cat(parts);
+      return cat([U32(p.length+8), FOUR(type), p]); }
+    function full(type, ver, flags, parts){
+      return box(type, [new Uint8Array([ver,(flags>>16)&255,(flags>>8)&255,flags&255])].concat(parts)); }
+    const MATRIX = cat([U32(0x00010000),U32(0),U32(0),U32(0),U32(0x00010000),U32(0),U32(0),U32(0),U32(0x40000000)]);
+    return {
+      describe(d){ if(d && !desc) desc=new Uint8Array(d instanceof ArrayBuffer ? d : d.buffer ? d.buffer.slice(d.byteOffset, d.byteOffset+d.byteLength) : d); },
+      // ts is the presentation time in microseconds. Samples are kept in the order the
+      // encoder emitted them, which is decode order — the composition table below is
+      // what puts them back in the right order if the encoder used B-frames.
+      add(data,key,ts){ S.push({data,key,ts}); },
+      get ready(){ return !!desc && S.length>0; },
+      finish(){
+        const TS=90000, DT=Math.round(TS/fps), n=S.length, dur=n*DT;
+        const ftyp=box('ftyp',[FOUR('isom'),U32(512),FOUR('isom'),FOUR('iso2'),FOUR('avc1'),FOUR('mp41')]);
+        let mdat=8; for(const s of S) mdat+=s.data.length;
+        const offs=[]; let o=ftyp.length+8;
+        for(const s of S){ offs.push(o); o+=s.data.length; }
+
+        const avcC=box('avcC',[desc]);
+        const label='OP/AL Lab', name=new Uint8Array(32);      // compressorname: a length byte, then ASCII
+        name[0]=label.length; for(let i=0;i<label.length;i++) name[i+1]=label.charCodeAt(i);
+        const avc1=box('avc1',[ new Uint8Array(6), U16(1),
+          U16(0), U16(0), U32(0),U32(0),U32(0),
+          U16(w), U16(h), U32(0x00480000), U32(0x00480000), U32(0), U16(1),
+          name, U16(0x0018), new Uint8Array([0xff,0xff]), avcC ]);
+
+        const stsd=full('stsd',0,0,[U32(1), avc1]);
+        const stts=full('stts',0,0,[U32(1), U32(n), U32(DT)]);
+        const keys=[]; for(let i=0;i<n;i++) if(S[i].key) keys.push(i+1);
+        const stss=(keys.length && keys.length<n) ? full('stss',0,0,[U32(keys.length)].concat(keys.map(U32))) : null;
+        // composition offsets: zero throughout unless the encoder reordered frames
+        const co=S.map((s,i)=>Math.round(s.ts*TS/1e6) - i*DT);
+        const ctts=co.some(v=>v!==0)
+          ? full('ctts',1,0,[U32(n)].concat(co.map(v=>U32(v<0 ? v>>>0 : v))))
+          : null;
+        const stsc=full('stsc',0,0,[U32(1), U32(1), U32(1), U32(1)]);
+        const stsz=full('stsz',0,0,[U32(0), U32(n)].concat(S.map(s=>U32(s.data.length))));
+        const stco=full('stco',0,0,[U32(n)].concat(offs.map(U32)));
+        const stbl=box('stbl',[stsd,stts].concat(ctts?[ctts]:[]).concat(stss?[stss]:[]).concat([stsc,stsz,stco]));
+
+        const vmhd=full('vmhd',0,1,[U16(0),U16(0),U16(0),U16(0)]);
+        const dref=full('dref',0,0,[U32(1), full('url ',0,1,[])]);
+        const dinf=box('dinf',[dref]);
+        const minf=box('minf',[vmhd,dinf,stbl]);
+        const hdlr=full('hdlr',0,0,[U32(0), FOUR('vide'), U32(0),U32(0),U32(0),
+          new TextEncoder().encode('VideoHandler\0')]);
+        const mdhd=full('mdhd',0,0,[U32(0),U32(0),U32(TS),U32(dur),U16(0x55C4),U16(0)]);
+        const mdia=box('mdia',[mdhd,hdlr,minf]);
+        const tkhd=full('tkhd',0,7,[U32(0),U32(0),U32(1),U32(0),U32(dur),
+          U32(0),U32(0), U16(0),U16(0),U16(0),U16(0), MATRIX, U32(w*65536), U32(h*65536)]);
+        const trak=box('trak',[tkhd,mdia]);
+        const mvhd=full('mvhd',0,0,[U32(0),U32(0),U32(TS),U32(dur),
+          U32(0x00010000), U16(0x0100), U16(0), U32(0),U32(0), MATRIX,
+          U32(0),U32(0),U32(0),U32(0),U32(0),U32(0), U32(2)]);
+        const moov=box('moov',[mvhd,trak]);
+
+        return new Blob([ftyp, U32(mdat), FOUR('mdat')].concat(S.map(s=>s.data)).concat([moov]),
+          { type:'video/mp4' });
+      }
+    };
+  }
+
+  const EL={ EBML:[0x1A,0x45,0xDF,0xA3], EBMLVersion:[0x42,0x86], EBMLReadVersion:[0x42,0xF7],
+    EBMLMaxIDLength:[0x42,0xF2], EBMLMaxSizeLength:[0x42,0xF3],
+    DocType:[0x42,0x82], DocTypeVersion:[0x42,0x87], DocTypeReadVersion:[0x42,0x85],
+    Segment:[0x18,0x53,0x80,0x67], Info:[0x15,0x49,0xA9,0x66], TimecodeScale:[0x2A,0xD7,0xB1],
+    MuxingApp:[0x4D,0x80], WritingApp:[0x57,0x41], Duration:[0x44,0x89],
+    Tracks:[0x16,0x54,0xAE,0x6B], TrackEntry:[0xAE], TrackNumber:[0xD7], TrackUID:[0x73,0xC5],
+    TrackType:[0x83], CodecID:[0x86], DefaultDuration:[0x23,0xE3,0x83],
+    Video:[0xE0], PixelWidth:[0xB0], PixelHeight:[0xBA],
+    Cluster:[0x1F,0x43,0xB6,0x75], Timecode:[0xE7], SimpleBlock:[0xA3] };
+
+  function vint(n){                                   // element size, with its length marker
+    let len=1; while(n >= Math.pow(2,7*len)-1) len++;
+    const b=new Uint8Array(len); let v=n;
+    for(let i=len-1;i>=0;i--){ b[i]=v%256; v=Math.floor(v/256); }
+    b[0]|=1<<(8-len); return b; }
+  function uint(n){ const b=[]; do{ b.unshift(n%256); n=Math.floor(n/256); }while(n>0); return new Uint8Array(b); }
+  function f64(n){ const b=new Uint8Array(8); new DataView(b.buffer).setFloat64(0,n); return b; }
+  const str=s=>new TextEncoder().encode(s);
+  function el(id, payload){ const p=cat(Array.isArray(payload)?payload:[payload]);
+    return cat([new Uint8Array(id), vint(p.length), p]); }
+
+  function webm(w,h,fps,codecID,durMs){
+    const clusters=[]; let cur=null, curT=0;
+    function flushCluster(){ if(!cur||!cur.length) { cur=null; return; }
+      clusters.push(el(EL.Cluster, [el(EL.Timecode, uint(curT))].concat(cur))); cur=null; }
+    return {
+      add(data,key,tsMs){
+        if(key && (!cur || tsMs-curT>=2000)){ flushCluster(); cur=[]; curT=tsMs; }
+        if(!cur){ cur=[]; curT=tsMs; }
+        const rel=Math.max(-32768, Math.min(32767, tsMs-curT));
+        const head=new Uint8Array([0x81,(rel>>8)&0xff, rel&0xff, key?0x80:0x00]);
+        cur.push(el(EL.SimpleBlock,[head,data]));
+      },
+      finish(){
+        flushCluster();
+        const header=el(EL.EBML,[ el(EL.EBMLVersion,uint(1)), el(EL.EBMLReadVersion,uint(1)),
+          el(EL.EBMLMaxIDLength,uint(4)), el(EL.EBMLMaxSizeLength,uint(8)),
+          el(EL.DocType,str('webm')), el(EL.DocTypeVersion,uint(2)), el(EL.DocTypeReadVersion,uint(2)) ]);
+        const info=el(EL.Info,[ el(EL.TimecodeScale,uint(1000000)), el(EL.MuxingApp,str('OP/AL Lab')),
+          el(EL.WritingApp,str('Flash')), el(EL.Duration,f64(durMs)) ]);
+        const tracks=el(EL.Tracks,[ el(EL.TrackEntry,[
+          el(EL.TrackNumber,uint(1)), el(EL.TrackUID,uint(1)), el(EL.TrackType,uint(1)),
+          el(EL.CodecID,str(codecID)), el(EL.DefaultDuration,uint(Math.round(1e9/fps))),
+          el(EL.Video,[ el(EL.PixelWidth,uint(w)), el(EL.PixelHeight,uint(h)) ]) ]) ]);
+        return new Blob([header, el(EL.Segment,[info,tracks].concat(clusters))], {type:'video/webm'});
+      }
+    };
+  }
+
+  let offline=false, cancel=false, rec=null, chunks=[], rt=0, tk=0, recEnd=0;
+  function recUI(on,label){ $('recDot').classList.toggle('on',on);
+    $('recBtn').textContent = on ? 'Stop' : 'Record';
+    if(label) $('recDot').querySelector('b').textContent=label; }
+  function download(blob,ext){ const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='flash.'+ext; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000); }
+
+  async function renderOffline(){
+    const fps=30, total=Math.max(1,Math.round(P.dur*fps));
+    // H.264 first so the file that comes out is an .mp4 — the rest are only there
+    // for a browser that cannot encode it. High, Main, then Baseline at level 5.1,
+    // which covers every canvas size this tool offers.
+    const want=[ ['avc1.640033','mp4'], ['avc1.4d0033','mp4'], ['avc1.420033','mp4'],
+                 ['avc1.640028','mp4'], ['avc1.42e01f','mp4'],
+                 ['vp09.00.10.08','V_VP9'], ['vp8','V_VP8'] ];
+    const bitrate=Math.min(40e6, Math.max(6e6, Math.round(W*H*fps*0.12)));
+    let picked=null;
+    for(const [codec,cid] of want){
+      const cfg={ codec, width:W, height:H, framerate:fps, bitrate,
+        latencyMode:'quality' };
+      if(cid==='mp4') cfg.avc={ format:'avc' };          // AVCC, with an avcC description
+      try{ const s=await VideoEncoder.isConfigSupported(cfg); if(s && s.supported){ picked={cfg,cid}; break; } }catch(e){}
+    }
+    if(!picked) throw new Error('no encoder');
+    const isMp4 = picked.cid==='mp4';
+    const mux = isMp4 ? mp4(W,H,fps) : webm(W,H,fps,picked.cid,P.dur*1000);
+    let failed=null;
+    const enc=new VideoEncoder({
+      output:(chunk,meta)=>{
+        if(isMp4 && meta && meta.decoderConfig && meta.decoderConfig.description) mux.describe(meta.decoderConfig.description);
+        const buf=new Uint8Array(chunk.byteLength); chunk.copyTo(buf);
+        mux.add(buf, chunk.type==='key', isMp4 ? chunk.timestamp : Math.round(chunk.timestamp/1000)); },
+      error:e=>{ failed=e; } });
+    enc.configure(picked.cfg);
+
+    offline=true; cancel=false;
+    const started=performance.now();
+    const wasPlaying=P.play, hadT=rollT;
+    try{
+      for(let f=0; f<total; f++){
+        if(cancel || failed) break;
+        const t=f/fps;
+        seek(t);
+        render(ctx,W,H);
+        const vf=new VideoFrame(art,{ timestamp:Math.round(f*1e6/fps), duration:Math.round(1e6/fps) });
+        enc.encode(vf,{ keyFrame:(f % (fps*2))===0 });
+        vf.close();
+        while(enc.encodeQueueSize>6 && !failed) await new Promise(r=>setTimeout(r,2));
+        if((f&15)===0){
+          const pct=Math.round(f/total*100), el2=Math.round((performance.now()-started)/1000);
+          recUI(true, pct+'% · '+mmss(el2));
+          await new Promise(r=>setTimeout(r,0));
+        }
+      }
+      if(failed) throw failed;
+      await enc.flush();
+    } finally {
+      try{ enc.close(); }catch(e){}
+      offline=false; P.play=wasPlaying; rollT=hadT; seek(rollT);
+    }
+    if(cancel){ recUI(false); return; }
+    if(isMp4 && !mux.ready) throw new Error('the encoder gave no avcC');   // fall through to the fallback
+    recUI(true,'writing…');
+    download(mux.finish(), isMp4?'mp4':'webm');
+    recUI(false);
+  }
+
+  function recordRealtime(){                       // fallback: no VideoEncoder in this browser
+    rollT=0; idx=-1;
+    if(!P.play){ P.play=true; $('playBtn').setAttribute('aria-pressed','true'); $('playBtn').textContent='Pause'; }
+    const mime=['video/mp4;codecs=avc1','video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+    const bits=Math.min(120e6, Math.max(12e6, Math.round(art.width*art.height*30*0.25)));
+    rec=new MediaRecorder(art.captureStream(30), mime?{mimeType:mime,videoBitsPerSecond:bits}:undefined); chunks=[];
+    rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+    rec.onstop=()=>{ const ext=mime.indexOf('mp4')>=0?'mp4':'webm', blob=new Blob(chunks,{type:mime||'video/webm'});
+      if(blob.size>0) download(blob,ext); else alert('The recorder produced no frames. Try a smaller canvas size.');
+      clearInterval(tk); clearTimeout(recEnd); recUI(false); rec=null; };
+    rec.start(); recUI(true,'0:00');
+    recEnd=setTimeout(()=>{ if(rec) rec.stop(); }, P.dur*1000+250);
+    rt=Date.now(); tk=setInterval(()=>{ const e2=Math.floor((Date.now()-rt)/1000);
+      recUI(true,(e2/60|0)+':'+String(e2%60).padStart(2,'0')); },250);
+  }
+
+  $('recBtn').addEventListener('click',()=>{
+    if(offline){ cancel=true; return; }
+    if(rec){ rec.stop(); return; }
+    if(typeof VideoEncoder==='undefined' || typeof VideoFrame==='undefined'){ recordRealtime(); return; }
+    recUI(true,'0%');
+    renderOffline().catch(err=>{ console.warn(err); offline=false; recUI(false); recordRealtime(); });
+  });
+
+  ROLL.forEach((r,i)=>{ const im=new Image();
+    im.onload=()=>{ posters[i]=im; };
+    im.src='/workshops/bgsu/lab/workbench/flash/posters/p-'+String(r.page).padStart(2,'0')+'.jpg'; });
+  alphabetise(); refresh(); setColours(0);
+  if(document.fonts && document.fonts.load)
+    document.fonts.load('400 80px "Eunuverse"').then(()=>{ _m=null; _mKey=''; }).catch(()=>{});
+  fit();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

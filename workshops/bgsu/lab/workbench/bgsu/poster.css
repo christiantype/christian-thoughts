@@ -1,0 +1,26 @@
+/* BGSU poster instruments — the page around the sheet. The Lab's rail and
+   controls come from OPALAB.css; this only places the sheet and the few
+   controls the engine builds for itself. */
+html, body { height: 100%; margin: 0; overflow: hidden; }
+:root { --rail: 300px; --top: 120px; }
+@media (max-width: 560px) { :root { --top: 112px; } }
+* { box-sizing: border-box; }
+#wrap { position: fixed; top: var(--top); left: var(--rail); right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center; padding: 28px; background: #ececec; }
+#art { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block;
+  touch-action: none; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+@media (max-width: 760px) { #wrap { left: 0; padding: 16px; } }
+#dock { position: fixed; top: var(--top); left: 0; bottom: 0; width: var(--rail); z-index: 6; overflow-y: auto; }
+.group { display: flex; flex-direction: column; gap: 9px; }
+.knob { display: flex; flex-direction: column; gap: 2px; }
+.knob label { display: flex; justify-content: space-between; }
+.grid2, .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.types { display: flex; flex-wrap: wrap; gap: 6px; }
+.types .btn { flex: 1 0 auto; }
+.chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.chip { display: flex; align-items: center; gap: 8px; font-size: 12px; cursor: pointer; }
+.chip input { width: 22px; height: 22px; padding: 0; border: 1px solid var(--hair); border-radius: 0; background: none; }
+.seedline { align-self: center; }
+#text { width: 100%; font-size: 15px; resize: vertical; }
+.rowhint { margin: 0; font-size: 12px; color: var(--mute); line-height: 1.45; }
+[hidden] { display: none !important; }

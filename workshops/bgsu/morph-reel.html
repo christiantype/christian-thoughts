@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morph reel — OP/AL</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  /* The morph as a reel: 1080 × 1920 by default, ?w=1080&h=1350 for the feed. Opened in a browser it
+     plays and loops; the render script steps window.renderAt(seconds) frame by frame instead. */
+  html, body { margin: 0; height: 100%; background: #fff; display: grid; place-items: center; overflow: hidden; }
+  canvas { height: 100vh; width: auto; display: block; }
+</style>
+</head>
+<body>
+<canvas id="reel"></canvas>
+<script src="/workshops/bgsu/morph.js?v=3"></script>
+<script>
+  var q = new URLSearchParams(location.search), W = +q.get('w') || 1080, H = +q.get('h') || 1920;
+  var cv = document.getElementById('reel'), m = OPALMorph(cv);
+  m.resize(W, H, 1);
+  window.REEL = { length: m.LENGTH, width: W, height: H };
+  window.renderAt = function (sec) { m.frame(sec); };
+  if (!q.has('render')) {
+    var t0 = performance.now();
+    (function loop(now) { m.frame((now - t0) / 1000); requestAnimationFrame(loop); })(t0);
+  } else m.frame(0);
+</script>
+</body>
+</html>

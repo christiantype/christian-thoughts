@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System reel — OP/AL</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  /* The system as a 1080 × 1920 reel. Opened in a browser it plays and loops;
+     the render script steps window.renderAt(seconds) frame by frame instead,
+     so the video is exact at any frame rate. */
+  html, body { margin: 0; height: 100%; background: #cecfd2; display: grid; place-items: center; overflow: hidden; }
+  canvas { height: 100vh; width: auto; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="reel"></canvas>
+<script src="/workshops/bgsu/system.js?v=5"></script>
+<script>
+  var sys = OPALSystem(document.getElementById('reel'));
+  sys.resize(1080, 1920, 1);
+  var LENGTH = Math.ceil(sys.FULL + 6);           // the build, the colour coming in, then six seconds lit
+  window.REEL = { length: LENGTH, width: 1080, height: 1920 };
+  window.renderAt = function (sec) { sys.frame(sec); };
+  if (!/render/.test(location.search)) {
+    var t0 = performance.now();
+    (function loop(now) { sys.frame(((now - t0) / 1000) % LENGTH); requestAnimationFrame(loop); })(t0);
+  } else sys.frame(0);
+</script>
+</body>
+</html>

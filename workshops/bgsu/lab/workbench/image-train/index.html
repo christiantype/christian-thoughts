@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Image Train — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<style>
+  /* Layout only. Every token and control — buttons, sliders, fields, islands, the size
+     dock — is owned by shared/OPALAB.css, which loads last. The `dark` body class is
+     legacy; there is no dark mode. */
+  :root{ --top:120px; --rail:300px; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; height:100%; background:var(--paper); color:var(--ink);
+    font-family:var(--font, 'IBM Plex Sans', system-ui, -apple-system, sans-serif); overflow:hidden; }
+  /* A canvas is a replaced element and won't stretch to an inset box, so it lives inside a
+     wrapper that does — the wrapper's rect is the single source of truth for canvas size. */
+  #stagewrap{ position:fixed; top:var(--top); left:0; right:0; bottom:0; }
+  #stage{ display:block; width:100%; height:100%; touch-action:none; }
+
+  /* Topbar chrome is owned by OPALAB.css (light: white bar, dark ink) — no per-tool overrides. */
+
+  /* Full-screen: canvas only. Everything chrome-like steps out of the way. */
+  body.fs .rail, body.fs .opal-topbar, body.fs .opal-subhead{ display:none !important; }
+  body.fs #stagewrap{ top:0 !important; left:0 !important; }
+  #exitFs{ position:fixed; top:14px; right:14px; z-index:12; display:none; opacity:0; transition:opacity .25s ease; }
+  body.fs #exitFs{ display:flex; }
+  body.fs.hint #exitFs{ opacity:1; }
+
+  @media (max-width:560px){ :root{ --top:112px; } }
+
+  #status{ position:fixed; bottom:14px; left:16px; z-index:5; pointer-events:none;
+    color:var(--mute); display:none; }
+
+  /* play-pause / full screen live in the rail's View row; #exitFs keeps the .icon look */
+  .icon{ appearance:none; width:34px; height:34px; border:1px solid var(--hair);
+    background:var(--cell); color:var(--ink); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0; }
+  .icon svg{ display:block; }
+  /* Sits below the size dock, clear of the artwork. Stays put in full screen so a
+     recording always shows its own timer. */
+  #recDot{ position:fixed; top:calc(var(--top) + 64px); left:calc(var(--rail) + 16px); z-index:11;
+    display:none; align-items:center; gap:7px; padding:6px 12px;
+    border:1px solid var(--hair); }
+  #recDot.on{ display:flex; }
+  /* Count-in. Big enough that you are in no doubt what is about to happen. */
+
+  #recDot i{ width:7px;height:7px;border-radius:50%;background:#ff4d5e; animation:blink 1s infinite; flex:none; }
+  #recDot b{ font-variant-numeric:tabular-nums; font-weight:600; }
+  body.fs #recDot{ top:14px; }
+  @keyframes blink{ 50%{opacity:.2;} }
+
+  /* The left rail. Position + layout only — OPALAB.css paints it and its islands. */
+
+  .rail{ position:fixed; top:var(--top); bottom:0; width:var(--rail); z-index:6;
+    overflow-y:auto; overflow-x:hidden;
+    display:flex; flex-direction:column; }
+  .rail-l{ left:0; }
+  .rail-r{ right:0; }
+  .row{ display:flex; flex-direction:column; align-items:stretch; gap:13px; }
+  /* Section heads fold their section away. Nine sections is a lot to scroll
+     past when you only want two of them. */
+  .rowhead{ color:var(--ink); padding-bottom:2px;
+    display:flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    width:100%; background:none; border:0; font-family:inherit; text-align:left; }
+  .rowhint{ margin:0 0 2px; line-height:1.55; color:var(--mute); }
+  .rowhead::before{ content:''; width:0; height:0; flex:none;
+    border-left:4px solid currentColor; border-top:3.5px solid transparent; border-bottom:3.5px solid transparent;
+    transform:rotate(90deg); transition:transform .18s ease; opacity:.65; }
+  .row.folded .rowhead::before{ transform:rotate(0deg); }
+  .row.folded > *:not(.rowhead){ display:none; }
+  .row.folded{ padding-bottom:10px; }
+  .grp{ display:flex; flex-direction:column; gap:7px; min-width:0; }
+  /* slider is owned by OPALAB.css */
+  .rail select{ width:100%; }
+  .rail .seg{ width:100%; }
+  .rail .seg button{ flex:1; text-align:center; padding:7px 4px; }
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .quad{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  /* #dock (rail-l) is always open — the collapse toggle is gone. */
+  .rail.open{ transform:none; }
+
+  .grp > label{ line-height:1.25; color:var(--mute); white-space:nowrap; }
+  .rail .grp > label{ white-space:normal; }
+  .grp > label b{ color:var(--ink); font-variant-numeric:tabular-nums; }
+  /* overlay text / svg item editors — layout only */
+  .titem{ border:1px solid var(--hair); border-radius:var(--r-island,6px); padding:9px;
+    display:flex; flex-direction:column; gap:7px; }
+  .titem + .titem{ margin-top:8px; }
+  .thead{ display:flex; gap:6px; align-items:center; }
+  .tt{ flex:1; min-width:0; }
+  .tbadge{ flex:1; color:var(--ink); display:flex; align-items:center; gap:7px; min-width:0; }
+  .tbadge img{ width:22px; height:22px; object-fit:contain; background:rgba(127,127,127,.14); border-radius:2px; }
+  .xbtn{ width:26px; height:26px; cursor:pointer; line-height:1; flex:none; padding:0; }
+  /* seg / select / .btn / fields are owned by OPALAB.css */
+  .seg.lanes button{ display:flex; align-items:center; justify-content:center; gap:6px; }
+  .knobrow{ display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .kcell{ display:flex; flex-direction:column; align-items:center; gap:5px; width:46px; }
+  .kcell .klab{ line-height:1.15; color:var(--mute); text-align:center; white-space:nowrap; }
+  .kcell .kval{ color:var(--ink); font-variant-numeric:tabular-nums; line-height:1; }
+
+  #veil{ position:fixed; inset:0; z-index:30; background:var(--paper); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:26px; cursor:pointer; text-align:center; padding:24px; }
+  #veil h1{ font-weight:500; font-size:15px; margin:0; }
+  #veil p{ max-width:38ch; line-height:1.8; color:var(--mute); margin:0; }
+
+  /* Image Train's own */
+  #hint{ position:fixed; left:16px; bottom:14px; z-index:5; pointer-events:none; color:var(--mute); }
+  body.fs #hint{ display:none; }
+  /* Canvas and rail both start below the header; canvas sits right of the rail so the
+     artboard centres in the visible field (not behind the rail), same as every tool. */
+  #stagewrap{ top:var(--top) !important; left:var(--rail) !important; }
+  .rail{ top:var(--top) !important; }
+  .rowhint{ opacity:.72; }
+  #countdown{ position:fixed; inset:0; z-index:20; display:none; align-items:center; justify-content:center;
+    pointer-events:none; font:600 clamp(90px,22vw,220px)/1 var(--font); color:#fff; }
+  #countdown.show{ display:flex; }
+  .cin{ display:flex; align-items:center; gap:8px; }
+  .cin label{ color:var(--mute); }
+  #thumbs{ display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 2px; }
+  #thumbs img{ width:38px; height:38px; object-fit:cover; border-radius:4px; border:1px solid var(--hair); }
+  /* canvas-size dock — position + geometry are owned by OPALAB.css */
+  #sizeDock{ z-index:10; }
+</style>
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body>
+
+<div id="stagewrap"><canvas id="stage"></canvas></div>
+<div id="status"></div>
+<div id="hint"></div>
+<div id="countdown"></div>
+<div id="recDot"><i></i><span id="recLabel">REC</span> <b id="recTime">0:00</b></div>
+<div id="sizeDock">
+  <select id="aspect" title="Canvas size">
+    <option value="1080x1350">Portrait · 4:5</option>
+    <option value="1080x1920">Story · 9:16</option>
+    <option value="1080x1080">Square · 1:1</option>
+    <option value="1920x1080">Landscape · 16:9</option>
+  </select>
+</div>
+<button class="icon" id="exitFs" aria-label="exit full screen" title="Exit (Esc)">&#10005;</button>
+
+<div id="dock" class="rail rail-l">
+  <div class="row" style="padding-bottom:6px">
+    <div class="grp"><label>View</label>
+      <div style="display:flex; gap:6px;">
+        <button class="btn" id="playBtn" style="flex:1" aria-label="play or pause" title="Play / pause &#183; space" aria-pressed="true" data-tip="Pauses the motion and holds the frame still. Press again, or Space, to carry on.">Pause</button>
+        <button class="btn" id="fsBtn" style="flex:1" aria-label="full screen" title="Full screen &#8212; canvas only" data-tip="Fills the screen with the canvas alone. Press Esc or F to leave.">Full screen</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom:6px">
+    <div class="grp" data-tip="Prepopulate a ready-made layout, or save your own. Applies bands, type, colour and every placed piece."><label>Preset</label>
+      <select id="preset"><option value="">Custom…</option><option value="event">Event</option></select>
+    </div>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="presetSave" style="flex:1" data-tip="Save the current layout — bands, type, colours and every placed text/SVG piece — as a reusable preset in this browser.">Save current</button>
+      <button class="btn" id="presetDel" style="flex:none" data-tip="Delete the selected saved preset.">Delete</button>
+    </div></div>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="sessOut" style="flex:1" data-tip="Download a .json file with EVERYTHING — your uploaded images, all settings, and every text/SVG piece and its position. Re-import it anytime, or share it.">Export JSON</button>
+      <button class="btn" id="sessIn" style="flex:1" data-tip="Load a session .json — restores your images, settings and text exactly where you left off.">Import JSON</button>
+    </div></div>
+    <input id="sessFile" type="file" accept=".json,application/json" hidden />
+  </div>
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Images</button>
+    <p class="rowhint">Add a few pictures &#8212; or a PDF, and every page is pulled in as an image. They get sliced into bands and set moving. Drop files anywhere; nothing leaves this page.</p>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="addBtn" style="flex:1" data-tip="Adds images to the pool. Drop a PDF and every page is added as an image.">Add images</button>
+      <button class="btn" id="clearBtn" style="flex:1" data-tip="Removes all images.">Clear</button>
+    </div></div>
+    <input id="fileInp" type="file" accept="image/*,application/pdf,.pdf" multiple hidden />
+    <div id="thumbs"></div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Bands</button>
+    <p class="rowhint">How the frame is sliced.</p>
+    <div class="duo">
+      <div class="grp" data-tip="How many bands the frame is sliced into. A few is bold; a lot is a fine weave."><label>Count <b id="countR">43</b></label><input id="count" type="range" min="2" max="80" value="43" /></div>
+      <div class="grp" data-tip="How much the band thicknesses vary. Zero is even stripes."><label>Uneven <b id="unevenR">100</b></label><input id="uneven" type="range" min="0" max="100" value="100" /></div>
+    </div>
+    <div class="grp" data-tip="Space between bands. Low packs them tight edge-to-edge with no gaps; high scatters them apart with gaps between."><label>Gap <b id="gapR">0</b></label><input id="gap" type="range" min="0" max="100" value="0" /></div>
+    <div class="grp" data-tip="Rows scroll left and right; Columns scroll up and down; Weave lays a few crossing bands over the rows for the woven look."><label>Direction</label>
+      <div class="seg" id="axisSeg">
+        <button data-a="rows" aria-pressed="false">Rows</button>
+        <button data-a="cols" aria-pressed="false">Columns</button>
+        <button data-a="weave" aria-pressed="true">Weave</button>
+        <button data-a="radial" aria-pressed="false">Radial</button>
+      </div>
+    </div>
+    <div class="duo">
+      <div class="grp" data-tip="How many crossing bands the Weave lays over the top."><label>Cross <b id="crossR">61</b></label><input id="cross" type="range" min="0" max="100" value="61" /></div>
+      <div class="grp" data-tip="Breaks each band into scattered pieces so the images never fully assemble — sliced and dispersed across the frame."><label>Disperse <b id="fragmentR">26</b></label><input id="fragment" type="range" min="0" max="100" value="26" /></div>
+    </div>
+    <div class="grp" data-tip="Turns bands into smudge streaks (from Lake Opeka) — a single moving column stretched sideways, keeping vertical detail. Higher smears more bands."><label>Smudge <b id="smudgeR">16</b></label><input id="smudge" type="range" min="0" max="100" value="16" /></div>
+    <div class="grp" data-tip="Grunge, for Scott Clum — crushes the bands toward high-contrast xerox black-and-white, with live film grain, toner blotches and torn scratches. Works with any direction."><label>Grunge <b id="grungeR">0</b></label><input id="grunge" type="range" min="0" max="100" value="0" /></div>
+    <div class="grp" data-tip="Halftone — screens the frame into printed dots (newsprint / risograph). Higher is a coarser dot. Pairs beautifully with Grunge and Duotone."><label>Halftone <b id="halftoneR">0</b></label><input id="halftone" type="range" min="0" max="100" value="0" /></div>
+    <div class="grp" data-tip="Duotone — maps the whole frame onto just two colours: shadows to one, highlights to the other. A strong graphic palette."><label>Duotone</label>
+      <div class="seg" id="duoSeg"><button data-x="0" aria-pressed="true">Off</button><button data-x="1" aria-pressed="false">On</button></div>
+    </div>
+    <div class="duo" id="duoColors" style="display:none">
+      <div class="grp" data-tip="The shadow colour (dark tones map to this)."><div class="cin"><input type="color" id="duoLo" value="#181826"><label>Shadow</label></div></div>
+      <div class="grp" data-tip="The highlight colour (light tones map to this)."><div class="cin"><input type="color" id="duoHi" value="#f2d24a"><label>Highlight</label></div></div>
+    </div>
+    <div class="grp" data-tip="Type mask — the whole moving composition shows ONLY through big letterforms; everything outside becomes a solid colour. Pure Carson/Clum."><label>Type mask</label>
+      <div class="seg" id="maskSeg"><button data-x="0" aria-pressed="true">Off</button><button data-x="1" aria-pressed="false">On</button></div>
+    </div>
+    <div id="maskWrap" style="display:none">
+      <input id="maskText" type="text" value="WHISKEY &amp; TEA" spellcheck="false" placeholder="mask word(s)…" style="width:100%" />
+      <div class="grp" data-tip="The colour outside the letters." style="margin-top:8px"><div class="cin"><input type="color" id="maskBg" value="#ffffff"><label>Outside</label></div></div>
+    </div>
+    <div class="grp" data-tip="Overlay the frame with its own data — clinical telemetry, code fragments, time, location and per-band speeds scattered across the frame."><label>Metadata</label>
+      <div class="seg" id="metaSeg"><button data-x="0" aria-pressed="false">Off</button><button data-x="1" aria-pressed="true">On</button></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Text</button>
+    <p class="rowhint">Optional type — add as many pieces as you like and place each one anywhere: a title up top, details in a corner, a line scrolling across. Bring your own font too.</p>
+    <div class="grp" data-tip="Show or hide all the text over the piece."><label>Show</label>
+      <div class="seg" id="textOnSeg"><button data-x="0" aria-pressed="true">Off</button><button data-x="1" aria-pressed="false">On</button></div>
+    </div>
+    <div class="grp" data-tip="The letterform style for every text piece."><label>Typeface</label>
+      <div class="seg" id="textFontSeg"><button data-f="sans" aria-pressed="true">Sans</button><button data-f="serif" aria-pressed="false">Serif</button><button data-f="mono" aria-pressed="false">Mono</button><button data-f="custom" aria-pressed="false">Custom</button></div>
+    </div>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="fontBtn" style="flex:1" data-tip="Upload your own .ttf or .otf font. It stays on this page and applies to every text piece.">Upload font</button>
+      <button class="btn" id="fontClear" style="flex:1" data-tip="Drop the custom font and go back to the built-in typefaces.">Clear</button>
+    </div></div>
+    <input id="fontInp" type="file" accept=".ttf,.otf,.woff,.woff2,font/*" hidden />
+    <p class="rowhint" id="fontName" style="opacity:.55;margin:3px 0 0">built-in typeface</p>
+    <div class="grp" data-tip="A solid plate behind each still piece (and a full band behind a scrolling one), or let the type sit straight over the image."><label>Plate</label>
+      <div class="seg" id="bandOnSeg"><button data-x="1" aria-pressed="true">On</button><button data-x="0" aria-pressed="false">Off</button></div>
+    </div>
+    <div class="duo">
+      <div class="grp" data-tip="Text colour."><div class="cin"><input type="color" id="textColor" value="#ffffff"><label>Text</label></div></div>
+      <div class="grp" data-tip="Plate / band colour."><div class="cin"><input type="color" id="bandColor" value="#101014"><label>Plate</label></div></div>
+    </div>
+    <div class="grp" id="textSpeedWrap" data-tip="How fast any scrolling pieces move."><label>Scroll speed <b id="textSpeedR">40</b></label><input id="textSpeed" type="range" min="0" max="100" value="40" /></div>
+    <div id="textList"></div>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="textAdd" style="flex:1" data-tip="Add another text piece to place.">+ Text</button>
+      <button class="btn" id="svgAdd" style="flex:1" data-tip="Add an SVG — your logo or a mark. Place it, or scatter it broken-up and displaced throughout the frame.">+ SVG</button>
+    </div></div>
+    <input id="svgInp" type="file" accept=".svg,image/svg+xml" hidden />
+  </div>
+
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Motion</button>
+    <p class="rowhint">Each band runs at its own pace and direction.</p>
+    <div class="duo">
+      <div class="grp" data-tip="Overall speed of the bands."><label>Speed <b id="speedR">45</b></label><input id="speed" type="range" min="0" max="100" value="45" /></div>
+      <div class="grp" data-tip="How much speed and direction vary band to band. High sends them every which way."><label>Spread <b id="spreadR">60</b></label><input id="spread" type="range" min="0" max="100" value="60" /></div>
+    </div>
+    <div class="grp" data-tip="Cycle each band through your images over time instead of one fixed image per band — they switch, staggered, so you see every picture come around on the bands."><label>Cycle images</label>
+      <div class="seg" id="cycleSeg"><button data-x="0" aria-pressed="true">Off</button><button data-x="1" aria-pressed="false">On</button></div>
+    </div>
+    <div class="grp" id="cycrateWrap" data-tip="How fast bands switch to the next image."><label>Cycle rate <b id="cycrateR">40</b></label><input id="cycrate" type="range" min="0" max="100" value="40" /></div>
+    <div class="grp"><button class="btn" id="shuffle" style="width:100%" data-tip="Reshuffles which image, direction and speed each band gets.">Shuffle</button></div>
+    <div class="grp" data-tip="Colour behind any gaps."><div class="cin"><input type="color" id="bg" value="#ffffff"><label>Ground</label></div></div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Auto</button>
+    <p class="rowhint">Let it drift on its own &#8212; the knobs wander and the odd glitch fires.</p>
+    <div class="grp" data-tip="When on, the controls wander over time with occasional glitchy jumps — reshuffles, disperse and smudge spikes, direction flips — so the piece keeps evolving on its own. Great for a hands-off recording."><label>Auto-drift</label>
+      <div class="seg" id="autoSeg"><button data-x="0" aria-pressed="true">Off</button><button data-x="1" aria-pressed="false">On</button></div>
+    </div>
+    <div class="grp" id="autoamtWrap" data-tip="How fast and how wild the drift is."><label>Amount <b id="autoamtR">50</b></label><input id="autoamt" type="range" min="0" max="100" value="50" /></div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="rowhead" aria-expanded="true">Sound</button>
+    <p class="rowhint">A synthesized ambience, or your own track &#8212; both play live and bake into the recording.</p>
+    <div class="grp" data-tip="A synthesized ambient bed — no file needed. Projector is sprocket clatter (its pace follows Speed) over a motor hum; Wind is an airy bed; Room is a soft tone. Plays live and is recorded."><label>Ambience</label>
+      <div class="seg" id="ambSeg"><button data-m="off" aria-pressed="true">Off</button><button data-m="projector" aria-pressed="false">Projector</button><button data-m="wind" aria-pressed="false">Wind</button><button data-m="room" aria-pressed="false">Room</button></div>
+    </div>
+    <div class="grp"><div style="display:flex; gap:6px;">
+      <button class="btn" id="musicBtn" style="flex:1" data-tip="Adds an audio track that plays and is recorded together with the video.">Add music</button>
+      <button class="btn" id="musicClear" style="flex:1" data-tip="Removes the track.">Clear</button>
+    </div></div>
+    <input id="musicInp" type="file" accept="audio/*" hidden />
+    <p class="rowhint" id="trackName" style="opacity:.55;margin:3px 0 0">no track</p>
+    <div class="grp" data-tip="Overall sound level — ambience and music, live and in the recording."><label>Volume <b id="volR">85</b></label><input id="vol" type="range" min="0" max="100" value="85" /></div>
+  </div>
+
+
+  <div class="group out" id="output" data-export-custom>
+    <div class="group__t">Output</div>
+    <p class="rowhint">A still, or the motion (with your track) as a video.</p>
+    <div class="grid2">
+      <button class="btn" id="recBtn" data-tip="Records the motion as a video (MP4 where supported).">Record</button>
+      <button class="btn" id="saveBtn" data-tip="Saves the current frame as a high-resolution PNG.">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/workshops/bgsu/lab/shared/opal.js?v=3"></script>
+<script>Opal.mountTopbar({ name: 'Image Train', desc: 'Sliced bands in motion', version:'OP-LAB-008', about: 'Add a few images and the frame slices into bands that scroll past each other — some left, some right, some up or down, at their own speeds. Set how many bands, how uneven, and let it run. Export a still or a video.' });</script>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+  /* no theme toggle — Lab shell is one flat light surface */
+  const state={ count:43, uneven:100, axis:'weave', cross:61, speed:45, spread:60, bg:'#ffffff',
+    size:'1080x1350', res:3200, seed:7, meta:1, fragment:26, smudge:16, grunge:0, halftone:0, duo:'0', duoLo:'#181826', duoHi:'#f2d24a',
+    maskOn:'0', maskText:'WHISKEY & TEA', maskBg:'#ffffff', gap:0, vol:85, playing:true,
+    cycle:'0', cycrate:40, ambience:'off', auto:'0', autoamt:50,
+    textOn:'0', textFont:'sans', textColor:'#ffffff', bandOn:'1', bandColor:'#101014', textSpeed:40,
+    items:[
+      {type:'text', t:'WHISKEY & TEA', x:50, y:15, size:64, track:8, align:'center', move:'0', chop:0, seed:11},
+      {type:'text', t:'Fri 12 Sept · 8pm  ·  The Loft', x:50, y:88, size:30, track:22, align:'center', move:'0', chop:0, seed:29}
+    ] };
+  const CW=()=>+state.size.split('x')[0], CH=()=>+state.size.split('x')[1];
+  function mulberry(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function h01(a,b){ let h=(Math.imul(a|0,73856093) ^ Math.imul(b|0,19349663) ^ Math.imul(state.seed|0,83492791))>>>0; h=Math.imul(h^h>>>15,2246822519); h^=h>>>13; return (h>>>0)/4294967296; }
+
+  const imgs=[];
+  const isPDF=f=>/pdf/i.test(f.type)||/\.pdf$/i.test(f.name);
+  function addFile(f){ if(isPDF(f)) loadPDF(f); else addImage(f); }
+  // Lazy-load pdf.js (only when a PDF is dropped) and render every page to an image in the pool.
+  let pdfReady=null;
+  function ensurePDF(){ if(pdfReady) return pdfReady; pdfReady=new Promise((res,rej)=>{
+    const s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+    s.onload=()=>{ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js'; res(window.pdfjsLib); }catch(e){ rej(e); } };
+    s.onerror=()=>rej(new Error('pdf.js failed to load')); document.head.appendChild(s); }); return pdfReady; }
+  async function loadPDF(file){ setStatus('reading PDF…');
+    try{ const lib=await ensurePDF(); const buf=await file.arrayBuffer(); const pdf=await lib.getDocument({data:buf}).promise;
+      const n=pdf.numPages, name=file.name.replace(/\.pdf$/i,'');
+      for(let p=1;p<=n;p++){ setStatus(`PDF page ${p}/${n}…`); const page=await pdf.getPage(p);
+        const v0=page.getViewport({scale:1}), scale=Math.min(2000/Math.max(v0.width,v0.height),3), vp=page.getViewport({scale});
+        const c=document.createElement('canvas'); c.width=Math.ceil(vp.width); c.height=Math.ceil(vp.height);
+        const cx=c.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,c.width,c.height);
+        await page.render({canvasContext:cx,viewport:vp}).promise;
+        const im=new Image(); await new Promise((r,e)=>{ im.onload=r; im.onerror=e; im.src=c.toDataURL('image/jpeg',0.85); });
+        im.fname=`${name} p${p}`; imgs.push(im); bandsKey=''; renderThumbs(); markDirty(); }
+      setStatus(`added ${n} page${n>1?'s':''}`); setTimeout(()=>setStatus(''),1800);
+    }catch(e){ console.error(e); setStatus('could not read that PDF'); setTimeout(()=>setStatus(''),2800); } }
+  function addImage(file){ const url=URL.createObjectURL(file), im=new Image();
+    im.onload=()=>{ im.fname=file.name; imgs.push(im); bandsKey=''; renderThumbs(); markDirty();
+      setStatus(file.name+' added'); setTimeout(()=>setStatus(''),1200); };
+    im.onerror=()=>{ setStatus('could not read '+file.name); setTimeout(()=>setStatus(''),2200); }; im.src=url; }
+  function renderThumbs(){ const h=$('thumbs'); h.innerHTML=''; imgs.forEach(im=>{ const t=document.createElement('img'); t.src=im.src; h.appendChild(t); }); }
+
+  // ---- bands: fractions of the frame, stable per seed ----
+  let bands=null, bandsKey='';
+  function build(){ const key=[state.count,state.uneven,state.seed,state.cross,state.axis,state.gap,imgs.length].join(',');
+    if(bands&&bandsKey===key) return; const r=mulberry((state.seed*2654435761)>>>0), N=state.count, vr=state.uneven/100, g=state.gap/100;
+    const mainH=state.axis!=='cols'; bands=[];
+    // thickness weights (Uneven varies band sizes); normalized so at Gap=0 they pack to full coverage
+    const wts=[]; let sum=0; for(let i=0;i<N;i++){ const w=Math.max(0.25,1+(r()-0.5)*vr*1.5); wts.push(w); sum+=w; }
+    let acc=0;
+    for(let i=0;i<N;i++){
+      let horiz=mainH; if(state.axis==='weave' && r()<state.cross/100*0.55) horiz=!mainH;
+      const fThick=wts[i]/sum, packP=acc; acc+=fThick;   // contiguous partition when Gap=0
+      const thick=clamp(fThick*(1-g*0.5), 0.004, 0.6);
+      const p=clamp(packP + (r()-0.5)*g*0.95*fThick, 0, 1-thick);   // Gap adds spacing + jitter
+      const len=clamp(1 - r()*g*0.9, 0.22, 1);                      // Gap shortens some bands
+      const start=r()*(1-len)*g;
+      bands.push({ horiz, p, thick, start, len, img:imgs.length?((r()*imgs.length)|0):0,
+        dir:r()<0.5?-1:1, spd:0.3+r()*2.0, zoom:0.6+r()*1.5, phase:r(), sr:r() });
+    }
+    bandsKey=key; }
+  // Cycle: instead of one fixed image per band, each band steps through the whole image set
+  // over time — staggered by its phase so bands switch at different moments — so you see every
+  // picture come around, and the same image lands on a whole band in turn.
+  function imgAt(b,t){ const L=imgs.length; if(L<=1) return 0; if(!(+state.cycle)) return b.img%L;
+    const rate=0.05+(state.cycrate/100)*0.85;                 // ~0.05..0.9 switches per second
+    const step=Math.floor((t + b.phase*7.31)*rate);
+    return (((b.img+step)%L)+L)%L; }
+  // Smudge (from Lake Opeka): stretch a single moving source column across the band, keeping
+  // its vertical detail but smearing it sideways into a streak.
+  function drawSmudge(g,im,horiz,x,y,w,h,srcPf,srcLf,off){ if(!im) return; const iw=im.naturalWidth, ih=im.naturalHeight;
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    if(horiz){ const sh=Math.max(1,srcLf*ih), sy=clamp(srcPf,0,1-srcLf)*ih; const col=Math.floor(((off*0.6%iw)+iw)%iw); g.drawImage(im, col, sy, 1, sh, x, y, w, h); }
+    else { const sw=Math.max(1,srcLf*iw), sx=clamp(srcPf,0,1-srcLf)*iw; const row=Math.floor(((off*0.6%ih)+ih)%ih); g.drawImage(im, sx, row, sw, 1, x, y, w, h); }
+    g.restore(); }
+  // Radial slicing: wedges converging to a centre vanishing point, each a scrolling image
+  // strip drawn along its ray — a one-point-perspective tunnel.
+  function drawRadial(g,W,H,t,base){ if(!bands||!imgs.length) return; const N=bands.length;
+    const cx=W/2, cy=H/2, R=Math.hypot(W,H)/2*1.04, hw=Math.PI/N;
+    for(let i=0;i<N;i++){ const b=bands[i], im=imgs[imgAt(b,t)]; if(!im) continue;
+      const a=(i/N)*Math.PI*2, off=(t*base*0.7*b.spd)*b.dir + b.phase*600;
+      const iw=im.naturalWidth, ih=im.naturalHeight, sh=Math.max(1,b.thick*ih), sy=clamp(b.p,0,1-b.thick)*ih;
+      const halfW=Math.tan(hw)*R, dw=Math.max(10, R*0.55*b.zoom); let o=((off%dw)+dw)%dw;
+      g.save(); g.translate(cx,cy); g.rotate(a);
+      g.beginPath(); g.moveTo(0,0); g.lineTo(R,-halfW); g.lineTo(R,halfW); g.closePath(); g.clip();
+      for(let x=-o; x<R; x+=dw) g.drawImage(im, 0,sy,iw,sh, x,-halfW, dw, halfW*2);
+      g.restore(); }
+    // thin rays along the wedge seams, converging to the vanishing point
+    g.save(); g.translate(cx,cy); g.strokeStyle='rgba(255,255,255,0.16)'; g.lineWidth=Math.max(1,Math.min(W,H)*0.0008);
+    for(let i=0;i<N;i++){ const a=(i/N+0.5/N)*Math.PI*2; g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(a)*R,Math.sin(a)*R); g.stroke(); }
+    g.restore(); }
+
+  const cv=$('stage'), ctx=cv.getContext('2d'), wrap=$('stagewrap');
+  let W=0,H=0,DPR=1, view={fit:1,ox:0,oy:0};
+  function resize(){ const r=wrap.getBoundingClientRect(); DPR=Math.min(2,devicePixelRatio||1); W=r.width; H=r.height; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); markDirty(); }
+  addEventListener('resize',resize);
+
+  // draw one image scrolling along a rectangle [x,y,w,h]; `horiz` scrolls along x else y
+  // Draw a STRIP of the image (from source position srcPf, length srcLf) stretched to the band
+  // and scrolled — so the frame reads as a sliced photo, not the whole image squished.
+  function drawSlice(g,im,horiz,x,y,w,h,srcPf,srcLf,off,zoom){ if(!im) return; zoom=zoom||1;
+    const iw=im.naturalWidth, ih=im.naturalHeight;
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    // Uniform scale (h/sh == dw/iw) so pixels are never stretched. Zoom picks a thinner/thicker
+    // source slice — more/less magnification — rather than distorting the width.
+    if(horiz){ const sl=Math.min(1,Math.max(0.01,srcLf/zoom)), sh=Math.max(1,sl*ih), sy=clamp(srcPf+(srcLf-sl)/2,0,1-sl)*ih;
+      const dw=Math.max(2, iw*(h/sh)); let o=((off%dw)+dw)%dw;
+      for(let px=x-o; px<x+w; px+=dw) g.drawImage(im,0,sy,iw,sh, px,y,dw,h); }
+    else { const sl=Math.min(1,Math.max(0.01,srcLf/zoom)), sw=Math.max(1,sl*iw), sx=clamp(srcPf+(srcLf-sl)/2,0,1-sl)*iw;
+      const dh=Math.max(2, ih*(w/sw)); let o=((off%dh)+dh)%dh;
+      for(let py=y-o; py<y+h; py+=dh) g.drawImage(im,sx,0,sw,ih, x,py,w,dh); }
+    g.restore(); }
+
+  function renderCore(g,W,H,t){
+    g.globalAlpha=1; g.globalCompositeOperation='source-over'; g.filter='none';
+    g.fillStyle=state.bg; g.fillRect(0,0,W,H);
+    if(imgs.length){
+      build();
+      const base=state.speed/100*260, frag=state.fragment/100, gr=state.grunge/100, duo=+state.duo, half=state.halftone/100;
+      // Grunge (for Scott Clum): crush contrast, bleach toward xerox; Duotone forces grayscale first
+      if(gr>0||duo) g.filter='contrast('+(1+gr*1.9).toFixed(2)+') brightness('+(1+gr*0.10).toFixed(2)+') '+(duo?'grayscale(1)':'saturate('+Math.max(0.05,1-gr*0.92).toFixed(2)+')');
+      if(state.axis==="radial"){ drawRadial(g,W,H,t,base); }
+      else { let bi=0;
+        for(const b of bands){ const im=imgs[imgAt(b,t)]; const off=(t*base*b.spd)*b.dir + b.phase*500; bi++;
+          const fc = frag>0.01 ? 1+Math.round(frag*5) : 1;   // dice the band into scattered pieces
+          const sm = b.sr < state.smudge/100;                 // this band renders as a smudge streak
+          if(b.horiz){ const y=b.p*H, h=Math.max(1,b.thick*H), x=b.start*W, w=Math.max(1,b.len*W), cw=w/fc;
+            for(let k=0;k<fc;k++){ const jx=(h01(bi,k)-0.5)*frag*W*0.28, jy=(h01(bi,k+99)-0.5)*frag*H*0.34;
+              if(sm) drawSmudge(g,im,true, x+k*cw+jx, y+jy, cw, h, b.p, b.thick, off+k*cw);
+              else drawSlice(g,im,true, x+k*cw+jx, y+jy, cw, h, b.p, b.thick, off+k*cw, b.zoom); } }
+          else { const x=b.p*W, w=Math.max(1,b.thick*W), y=b.start*H, h=Math.max(1,b.len*H), ch=h/fc;
+            for(let k=0;k<fc;k++){ const jy=(h01(bi,k)-0.5)*frag*H*0.28, jx=(h01(bi,k+99)-0.5)*frag*W*0.34;
+              if(sm) drawSmudge(g,im,false, x+jx, y+k*ch+jy, w, ch, b.p, b.thick, off+k*ch);
+              else drawSlice(g,im,false, x+jx, y+k*ch+jy, w, ch, b.p, b.thick, off+k*ch, b.zoom); } } }
+      }
+      g.filter='none';
+      if(duo){ g.save(); g.globalCompositeOperation='multiply'; g.fillStyle=state.duoHi; g.fillRect(0,0,W,H);   // map grayscale → two colours
+        g.globalCompositeOperation='screen'; g.fillStyle=state.duoLo; g.fillRect(0,0,W,H); g.restore(); }
+      if(half>0) drawHalftone(g,W,H,half);
+      if(gr>0) drawGrunge(g,W,H,t,gr);
+      if(+state.meta) drawMeta(g,W,H,t);
+    }
+  }
+  // Type mask — the whole composition shows only through big letterforms; outside is a solid colour.
+  let maskCv=null;
+  function drawMaskText(g,W,H){
+    const words=(state.maskText||'').toUpperCase().trim().split(/\s+/).filter(Boolean); if(!words.length) return;
+    g.fillStyle='#000'; g.textAlign='center'; g.textBaseline='middle';
+    let fs=Math.round(H); g.font='900 '+fs+'px "Helvetica Neue",Arial,sans-serif';
+    let widest=0.5; for(const w of words){ const r=g.measureText(w).width/fs; if(r>widest) widest=r; }
+    fs=Math.max(8, Math.floor(Math.min((W*0.9)/widest, (H*0.9)/(words.length*1.02))));
+    g.font='900 '+fs+'px "Helvetica Neue",Arial,sans-serif';
+    const lh=fs*1.02, y0=H/2-(words.length-1)*lh/2;
+    words.forEach((w,i)=> g.fillText(w, W/2, y0+i*lh));
+  }
+  function renderComp(g,W,H,t){
+    if(+state.maskOn && (state.maskText||'').trim() && imgs.length){
+      if(!maskCv) maskCv=document.createElement('canvas');
+      if(maskCv.width!==W||maskCv.height!==H){ maskCv.width=W; maskCv.height=H; }
+      const m=maskCv.getContext('2d');
+      renderCore(m,W,H,t);
+      m.save(); m.globalCompositeOperation='destination-in'; drawMaskText(m,W,H); m.restore();   // keep the comp only inside the letters
+      g.globalCompositeOperation='source-over'; g.filter='none';
+      g.fillStyle=state.maskBg||'#ffffff'; g.fillRect(0,0,W,H); g.drawImage(maskCv,0,0);
+    } else renderCore(g,W,H,t);
+    if(+state.textOn) drawOverlay(g,W,H,t);
+  }
+  // Halftone — screen the frame into printed dots (newsprint / riso). Coarser dot as the slider rises.
+  function drawHalftone(g,W,H,amt){
+    const cell=3+Math.round(amt*20); let d; try{ d=g.getImageData(0,0,W,H).data; }catch(e){ return; }
+    const paper = +state.duo ? state.duoHi : state.bg, ink = +state.duo ? state.duoLo : '#141414';
+    g.fillStyle=paper; g.fillRect(0,0,W,H); g.fillStyle=ink;
+    const h=cell/2;
+    for(let y=h;y<H;y+=cell){ const yi=y|0;
+      for(let x=h;x<W;x+=cell){ const i=(yi*W+(x|0))*4, lum=(0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])/255, r=(1-lum)*cell*0.62;
+        if(r>0.4){ g.beginPath(); g.arc(x,y,r,0,6.2832); g.fill(); } } }
+  }
+  // Grunge overlay — animated film grain (overlay blend) + a few toner blotches + torn scratches. Scott Clum energy.
+  let grainCv=null;
+  function makeGrain(){ const s=256; grainCv=document.createElement('canvas'); grainCv.width=s; grainCv.height=s;
+    const x=grainCv.getContext('2d'), im=x.createImageData(s,s), d=im.data;
+    for(let i=0;i<d.length;i+=4){ const v=Math.random()*255|0; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; } x.putImageData(im,0,0); }
+  function drawGrunge(g,W,H,t,gr){
+    if(!grainCv) makeGrain();
+    g.save();
+    g.globalCompositeOperation='overlay'; g.globalAlpha=Math.min(0.62, gr*0.6);
+    const ox=(Math.random()*256)|0, oy=(Math.random()*256)|0;   // jitter grain each frame → live film noise
+    for(let y=-oy;y<H;y+=256) for(let x=-ox;x<W;x+=256) g.drawImage(grainCv,x,y);
+    // xerox toner blotches — sparse dark specks at higher grunge
+    g.globalCompositeOperation='multiply'; g.globalAlpha=Math.min(0.5,gr*0.5); g.fillStyle='#000';
+    const nb=Math.round(gr*46);
+    for(let i=0;i<nb;i++){ const r=h01(i, (t*3|0)+i), r2=h01(i+7,(t*3|0)); const bx=r*W, by=r2*H, br=(0.4+h01(i+3,i)*2.4)*(1+gr*3);
+      g.beginPath(); g.arc(bx,by,br,0,6.2832); g.fill(); }
+    // a couple of torn scratch lines
+    g.globalCompositeOperation='screen'; g.globalAlpha=Math.min(0.5,gr*0.45); g.strokeStyle='#fff'; g.lineWidth=1;
+    const ns=Math.round(gr*4);
+    for(let i=0;i<ns;i++){ const sx=h01(i*13,(t|0))*W; g.beginPath(); g.moveTo(sx,0); g.lineTo(sx+(h01(i,7)-0.5)*40, H); g.stroke(); }
+    g.restore();
+  }
+  // Studio telemetry — the piece's own data, broken up and scattered across the frame.
+  function drawMeta(g,W,H,t){ const s=Math.min(W,H); g.save(); g.textBaseline='top';
+    const fs=Math.max(8,Math.round(s*0.0112)); g.font=`${fs}px ui-monospace,SFMono-Regular,Menlo,monospace`;
+    const hz=bands.filter(b=>b.horiz).length, fast=bands.filter(b=>b.spd>1.2).length;
+    const hex=(((t*1000)|0)>>>0).toString(16).padStart(6,'0').slice(-6), ex=exportDims();
+    const L=[
+      'OP/AL — MORE THAN DESIGN',
+      '2026 · OAK PARK, IL',
+      'loc 41.8850°N 87.7845°W',
+      'IMAGE_TRAIN v1 // canvas2d',
+      `t=${t.toFixed(2)}s  fps=30  frame=0x${hex}`,
+      `out=${ex[0]}×${ex[1]}  ${state.size}`,
+      `images=${imgs.length}  seed=${state.seed}`,
+    ];
+    imgs.forEach((im,i)=>L.push(`[${i}] ${(im.fname||'src').slice(0,30)}  ${im.naturalWidth}×${im.naturalHeight}`));
+    L.push(`count=${state.count}  gap=${state.gap}  uneven=${state.uneven}`);
+    L.push(`speed=${state.speed}  spread=${state.spread}`);
+    L.push(`smudge=${state.smudge}  disperse=${state.fragment}`);
+    L.push(`axis=${state.axis}  cross=${state.cross}`);
+    L.push(`bands=${bands.length}  ${hz}→ ${bands.length-hz}↓  ${fast} active`);
+    bands.slice(0,5).forEach((b,i)=>L.push(`vel[${i}]=${(b.spd*state.speed).toFixed(0)}px/s ${b.horiz?(b.dir>0?'E':'W'):(b.dir>0?'S':'N')} z=${b.zoom.toFixed(2)}`));
+    L.push('const frame = JSON.parse(stream)');
+    L.push('await decode(buffer, offset)');
+    L.push('<slice class="band" state="run"/>');
+    const r=mulberry(90210);   // stable scatter layout; text values still update each frame
+    L.forEach((tx)=>{ const px=0.02*W + r()*0.8*W, py=0.03*H + r()*0.9*H, rot=(r()<0.18)?(r()<0.5?Math.PI/2:-Math.PI/2):0;
+      g.save(); g.translate(px,py); if(rot) g.rotate(rot); g.fillStyle=`rgba(255,255,255,${(0.24+r()*0.5).toFixed(2)})`; g.fillText(tx,0,0); g.restore(); });
+    g.restore(); }
+  // ---- overlay: text pieces + SVG marks, each placed anywhere or scattered throughout ----
+  let customFamily=null, customFF=null;
+  function fontFamily(){ return state.textFont==='custom'&&customFamily?`"${customFamily}"`
+      : state.textFont==='serif'?'Georgia,"Times New Roman",serif'
+      : state.textFont==='mono'?'ui-monospace,SFMono-Regular,Menlo,monospace'
+      : '"Helvetica Neue",Arial,sans-serif'; }
+  function fontWeight(){ return state.textFont==='custom'?'400':state.textFont==='sans'?'800':'700'; }
+  // Chop a source (image or canvas) into a grid of shards and displace each one — 0 whole & in place,
+  // 100 fully broken up and scattered across the frame. Shards keep their size; they just move.
+  function shatter(g, src, srcW, srcH, hx, hy, w, h, amount, seed, FW, FH, t, drift){
+    const f=amount/100;
+    const cols=2+Math.round(f*8), rows=Math.max(1, Math.round(cols*(h/w)))||1;
+    const r=mulberry((seed>>>0)||1);
+    const tw=w/cols, th=h/rows, stw=srcW/cols, sth=srcH/rows;
+    for(let j=0;j<rows;j++) for(let i=0;i<cols;i++){
+      const homeX=hx+i*tw, homeY=hy+j*th, rx=r()*FW, ry=r()*FH, rrot=r();
+      let dx=homeX+(rx-homeX)*f, dy=homeY+(ry-homeY)*f;
+      if(drift){ const ph=i*7.1+j*13.3; dx+=Math.sin(t*0.7+ph)*20*f; dy+=Math.cos(t*0.55+ph*1.4)*16*f; }
+      const rot=(rrot-0.5)*f*0.7;
+      g.save(); g.translate(dx+tw/2, dy+th/2); if(rot) g.rotate(rot);
+      g.drawImage(src, i*stw, j*sth, stw, sth, -tw/2, -th/2, tw, th); g.restore();
+    }
+  }
+  function textCanvas(it,fs){
+    const meas=(textCanvas._m||(textCanvas._m=document.createElement('canvas').getContext('2d')));
+    meas.font=`${fontWeight()} ${fs}px ${fontFamily()}`;
+    if('letterSpacing' in meas) meas.letterSpacing=((it.track||0)/100*fs).toFixed(2)+'px';
+    const tw=Math.ceil(meas.measureText(it.t).width)+2, plate=+state.bandOn, padX=Math.round(fs*0.5), padY=Math.round(fs*0.3);
+    const bw=Math.max(1,tw+(plate?padX*2:0)), bh=Math.max(1,Math.ceil(fs*1.3)+(plate?padY*2:0));
+    const c=document.createElement('canvas'); c.width=bw; c.height=bh; const x=c.getContext('2d');
+    x.font=`${fontWeight()} ${fs}px ${fontFamily()}`; x.textBaseline='middle'; x.textAlign='left';
+    if('letterSpacing' in x) x.letterSpacing=((it.track||0)/100*fs).toFixed(2)+'px';
+    if(plate){ x.fillStyle=state.bandColor; x.fillRect(0,0,bw,bh); }
+    x.fillStyle=state.textColor; x.fillText(it.t, plate?padX:0, bh/2);
+    return c;
+  }
+  function drawTextItem(g,it,W,H,t){
+    const txt=(it.t||'').trim(); if(!txt) return;
+    const s=Math.min(W,H), fs=Math.max(8, Math.round(s*0.014 + (it.size/100)*s*0.11)), px=it.x/100*W, py=it.y/100*H;
+    if(+it.chop>0){                                     // chopped into shards, displaced throughout
+      const c=textCanvas(it,fs), bw=c.width, bh=c.height;
+      const hx = it.align==='left'?px : it.align==='right'?px-bw : px-bw/2;
+      shatter(g, c, bw, bh, hx, py-bh/2, bw, bh, it.chop, (it.seed||1)*2654435761, W, H, t, +it.move);
+      return;
+    }
+    g.save(); g.font=`${fontWeight()} ${fs}px ${fontFamily()}`; g.textBaseline='middle';
+    if('letterSpacing' in g) g.letterSpacing=((it.track||0)/100*fs).toFixed(2)+'px';
+    if(+it.move){                                       // scroll across a full-width band at this row
+      const w0=g.measureText(txt).width, period=w0+fs*2.5, spd=(state.textSpeed/100)*280+12;
+      if(+state.bandOn){ const h=fs*1.7; g.fillStyle=state.bandColor; g.fillRect(0,py-h/2,W,h); }
+      g.fillStyle=state.textColor; g.textAlign='left';
+      let x=-((((t*spd)%period)+period)%period);
+      for(let X=x; X<W; X+=period) g.fillText(txt,X,py);
+    } else {                                            // still, anchored at (x,y) with a snug plate
+      const w=g.measureText(txt).width; g.textAlign=it.align||'center';
+      if(+state.bandOn){ const padX=fs*0.5,h=fs*1.55, bx=it.align==='left'?px:it.align==='right'?px-w:px-w/2;
+        g.fillStyle=state.bandColor; g.fillRect(bx-padX,py-h/2,w+padX*2,h); }
+      g.fillStyle=state.textColor; g.fillText(txt,px,py);
+    }
+    if('letterSpacing' in g) g.letterSpacing='0px';
+    g.restore();
+  }
+  function drawSvgItem(g,it,W,H,t){
+    const im=it.img; if(!im||!im.complete||!(im.naturalWidth||im.width)) return;
+    const s=Math.min(W,H), base=Math.max(12, s*0.03 + (it.size/100)*s*0.34);
+    const iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height, ar=iw/(ih||1);
+    const w=base, h=base/ar, px=it.x/100*W, py=it.y/100*H;
+    if(+it.chop>0){ shatter(g, im, iw, ih, px-w/2, py-h/2, w, h, it.chop, (it.seed||1)*2654435761, W, H, t, +it.move); return; }
+    g.save(); g.translate(px,py); if(it.rotate) g.rotate((it.rotate||0)*Math.PI/180); g.drawImage(im,-w/2,-h/2,w,h); g.restore();
+  }
+  function drawOverlay(g,W,H,t){ if(!(+state.textOn)) return;
+    for(const it of state.items){ if(it.type==='svg') drawSvgItem(g,it,W,H,t); else drawTextItem(g,it,W,H,t); } }
+
+  // ---- overlay item editors (dynamic list) ----
+  function escAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+  function ensureShow(){ if(state.textOn!=='1'){ state.textOn='1'; document.querySelectorAll('#textOnSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.x==='1'))); } }
+  function setFontSeg(f){ document.querySelectorAll('#textFontSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f===f))); }
+  function renderItemList(){ const host=$('textList'); if(!host) return; host.innerHTML='';
+    state.items.forEach((it,i)=>{ const d=document.createElement('div'); d.className='titem'; d.dataset.i=i;
+      const xy=`<div class="duo"><div class="grp"><label>X <b>${it.x}</b></label><input class="ts" data-k="x" type="range" min="0" max="100" value="${it.x}"></div>`+
+               `<div class="grp"><label>Y <b>${it.y}</b></label><input class="ts" data-k="y" type="range" min="0" max="100" value="${it.y}"></div></div>`;
+      if(it.type==='svg'){
+        d.innerHTML=`<div class="thead"><span class="tbadge"><img src="${it.src||''}" alt="">SVG${it.name?' · '+escAttr(it.name).slice(0,14):''}</span><button class="xbtn tdel" title="Remove">×</button></div>`+xy+
+          `<div class="duo"><div class="grp"><label>Size <b>${it.size}</b></label><input class="ts" data-k="size" type="range" min="0" max="100" value="${it.size}"></div>`+
+          `<div class="grp"><label>Rotate <b>${it.rotate||0}</b></label><input class="ts" data-k="rotate" type="range" min="-180" max="180" value="${it.rotate||0}"></div></div>`+
+          `<div class="grp"><label>Chop · displace throughout <b>${it.chop||0}</b></label><input class="ts" data-k="chop" type="range" min="0" max="100" value="${it.chop||0}"></div>`+
+          `<div class="seg tmove"><button data-x="0" ${!+it.move?'aria-pressed="true"':''}>Still</button><button data-x="1" ${+it.move?'aria-pressed="true"':''}>Drift</button></div>`;
+      } else {
+        d.innerHTML=`<div class="thead"><input class="tt" type="text" value="${escAttr(it.t)}" placeholder="text…"><button class="xbtn tdel" title="Remove">×</button></div>`+xy+
+          `<div class="duo"><div class="grp"><label>Size <b>${it.size}</b></label><input class="ts" data-k="size" type="range" min="0" max="100" value="${it.size}"></div>`+
+          `<div class="grp"><label>Tracking <b>${it.track}</b></label><input class="ts" data-k="track" type="range" min="-10" max="80" value="${it.track}"></div></div>`+
+          `<div class="grp"><label>Chop · displace throughout <b>${it.chop||0}</b></label><input class="ts" data-k="chop" type="range" min="0" max="100" value="${it.chop||0}"></div>`+
+          `<div style="display:flex; gap:6px;"><div class="seg talign"><button data-a="left" ${it.align==='left'?'aria-pressed="true"':''}>L</button><button data-a="center" ${it.align==='center'?'aria-pressed="true"':''}>C</button><button data-a="right" ${it.align==='right'?'aria-pressed="true"':''}>R</button></div>`+
+          `<div class="seg tmove"><button data-x="0" ${!+it.move?'aria-pressed="true"':''}>Still</button><button data-x="1" ${+it.move?'aria-pressed="true"':''}>Scroll</button></div></div>`;
+      }
+      host.appendChild(d); });
+  }
+  function wireItemList(){ const host=$('textList'); if(!host) return;
+    host.addEventListener('input',e=>{ const d=e.target.closest('.titem'); if(!d) return; const it=state.items[+d.dataset.i]; if(!it) return;
+      if(e.target.classList.contains('tt')){ it.t=e.target.value; markDirty(); return; }
+      if(e.target.classList.contains('ts')){ it[e.target.dataset.k]=+e.target.value; const b=e.target.parentElement.querySelector('b'); if(b)b.textContent=e.target.value; markDirty(); } });
+    host.addEventListener('click',e=>{ const d=e.target.closest('.titem'); if(!d) return; const idx=+d.dataset.i, it=state.items[idx]; if(!it) return;
+      if(e.target.classList.contains('tdel')){ state.items.splice(idx,1); renderItemList(); markDirty(); return; }
+      const seg=e.target.closest('.seg'); if(seg&&e.target.tagName==='BUTTON'){
+        if(seg.classList.contains('talign')) it.align=e.target.dataset.a; else if(seg.classList.contains('tmove')) it.move=e.target.dataset.x;
+        seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===e.target))); markDirty(); } });
+  }
+  function svgItemFromSrc(src,name,extra){ const im=new Image(); const it=Object.assign({type:'svg', img:im, src, name, x:50,y:50,size:38,rotate:0,chop:0,move:'0', seed:(Math.abs(Math.sin(state.items.length*99+3))*1e9)|0}, extra||{}); im.src=src; return it; }
+  function addSVG(file){ const rd=new FileReader();       // data URL so it survives Save-as-preset / reload
+    rd.onload=ev=>{ state.items.push(svgItemFromSrc(ev.target.result, file.name));
+      ensureShow(); renderItemList(); markDirty(); setStatus(file.name+' added'); setTimeout(()=>setStatus(''),1200); };
+    rd.onerror=()=>{ setStatus('could not read '+file.name); setTimeout(()=>setStatus(''),2400); }; rd.readAsDataURL(file); }
+  function loadFontFile(file){ const rd=new FileReader();
+    rd.onload=async ev=>{ try{ if(customFF) try{ document.fonts.delete(customFF); }catch(e){}
+        customFF=new FontFace('ITUserFont', ev.target.result); await customFF.load(); document.fonts.add(customFF);
+        customFamily='ITUserFont'; state.textFont='custom'; setFontSeg('custom'); $('fontName').textContent=file.name; markDirty();
+      }catch(err){ setStatus('could not load that font'); setTimeout(()=>setStatus(''),2400); } };
+    rd.readAsArrayBuffer(file); }
+  // ---- presets: a built-in Event layout + your own saved layouts (localStorage) ----
+  const EVENT_PRESET={
+    bands:{count:3,uneven:0,gap:0,axis:'cols',cross:20,fragment:0,smudge:26,meta:0},
+    type:{textOn:'1',textFont:'serif',textColor:'#b81f16',bandOn:'0',bandColor:'#101014',textSpeed:40},
+    items:[
+      {type:'text', t:'WHISKEY & TEA',        x:50, y:41.5, size:18, track:66, align:'center', move:'0', chop:0, seed:11},
+      {type:'text', t:'A CONVERSATION WITH',  x:50, y:45.5, size:6,  track:66, align:'center', move:'0', chop:0, seed:12},
+      {type:'text', t:'SCOTT CLUM',           x:50, y:48.7, size:36, track:2,  align:'center', move:'0', chop:0, seed:13},
+      {type:'text', t:'&',                    x:50, y:52,   size:15, track:0,  align:'center', move:'0', chop:0, seed:14},
+      {type:'text', t:'CHRISTIAN SOLORZANO',  x:50, y:55.3, size:24, track:3,  align:'center', move:'0', chop:0, seed:15},
+      {type:'text', t:'AUGUST 20 · 6p CST',   x:50, y:59,   size:7,  track:64, align:'center', move:'0', chop:0, seed:16},
+    ]
+  };
+  const PKEY='it-presets-v1';
+  function loadUserPresets(){ try{ return JSON.parse(localStorage.getItem(PKEY)||'{}'); }catch(e){ return {}; } }
+  function saveUserPresets(o){ try{ localStorage.setItem(PKEY, JSON.stringify(o)); return true; }catch(e){ return false; } }
+  function setSegP(segId,attr,val){ document.querySelectorAll('#'+segId+' button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset[attr]===String(val)))); }
+  function serializeItems(){ return state.items.map(it=> it.type==='svg'
+    ? {type:'svg', src:it.src, name:it.name, x:it.x,y:it.y,size:it.size,rotate:it.rotate||0,chop:it.chop||0,move:it.move||'0',seed:it.seed||1}
+    : {type:'text', t:it.t,x:it.x,y:it.y,size:it.size,track:it.track||0,align:it.align||'center',move:it.move||'0',chop:it.chop||0,seed:it.seed||1} ); }
+  function currentPreset(){ return {
+    bands:{count:state.count,uneven:state.uneven,gap:state.gap,axis:state.axis,cross:state.cross,fragment:state.fragment,smudge:state.smudge,grunge:state.grunge,meta:state.meta},
+    type:{textOn:state.textOn,textFont:state.textFont,textColor:state.textColor,bandOn:state.bandOn,bandColor:state.bandColor,textSpeed:state.textSpeed},
+    items:serializeItems() }; }
+  function applyPresetObj(p){ if(!p) return;
+    if(p.bands){ const b=p.bands; setControl('count',b.count); setControl('uneven',b.uneven); setControl('gap',b.gap);
+      setControl('cross',b.cross); setControl('fragment',b.fragment); setControl('smudge',b.smudge); if(b.grunge!=null) setControl('grunge',b.grunge);
+      state.axis=b.axis; setSegP('axisSeg','a',b.axis); state.meta=+b.meta?1:0; setSegP('metaSeg','x',state.meta); bandsKey=''; }
+    if(p.type){ const ty=p.type;
+      state.textOn=String(+ty.textOn?1:0); setSegP('textOnSeg','x',state.textOn);
+      state.bandOn=String(+ty.bandOn?1:0); setSegP('bandOnSeg','x',state.bandOn);
+      state.textFont=ty.textFont; setFontSeg(ty.textFont);
+      state.textSpeed=ty.textSpeed; $('textSpeed').value=ty.textSpeed; $('textSpeedR').textContent=ty.textSpeed;
+      state.textColor=ty.textColor; $('textColor').value=ty.textColor;
+      state.bandColor=ty.bandColor; $('bandColor').value=ty.bandColor; }
+    if(p.items){ state.items=p.items.map(it=> it.type==='svg' ? svgItemFromSrc(it.src,it.name||'svg',it) : Object.assign({},it) ); }
+    renderItemList(); markDirty(); }
+
+  // ── full session: a downloadable JSON with the images + every setting + text/SVG positions ──
+  const clickSeg=sel=>{ const b=document.querySelector(sel); if(b) b.click(); };
+  function imgToDataURL(im){ if(im.src && im.src.slice(0,5)==='data:') return im.src;
+    try{ const c=document.createElement('canvas'); c.width=im.naturalWidth||im.width||2; c.height=im.naturalHeight||im.height||2;
+      c.getContext('2d').drawImage(im,0,0); return c.toDataURL('image/jpeg',0.85); }catch(e){ return im.src||''; } }
+  function exportSession(){ const s=state;
+    const data={ v:1, app:'image-train',
+      state:{ count:s.count,uneven:s.uneven,gap:s.gap,axis:s.axis,cross:s.cross,speed:s.speed,spread:s.spread,bg:s.bg,
+        size:s.size,res:s.res,seed:s.seed,meta:s.meta,fragment:s.fragment,smudge:s.smudge,grunge:s.grunge,halftone:s.halftone,duo:s.duo,duoLo:s.duoLo,duoHi:s.duoHi,
+        maskOn:s.maskOn,maskText:s.maskText,maskBg:s.maskBg,
+        cycle:s.cycle,cycrate:s.cycrate,auto:s.auto,autoamt:s.autoamt,
+        textOn:s.textOn,textFont:s.textFont,textColor:s.textColor,bandOn:s.bandOn,bandColor:s.bandColor,textSpeed:s.textSpeed },
+      items:serializeItems(),
+      images: imgs.map(im=>({ fname:im.fname||'image', src:imgToDataURL(im) })) };
+    const blob=new Blob([JSON.stringify(data)],{type:'application/json'}), u=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=u; a.download='image-train-session.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500);
+    setStatus('session exported ('+imgs.length+' image'+(imgs.length===1?'':'s')+')'); setTimeout(()=>setStatus(''),1900); }
+  function applySessionState(s){
+    ['count','uneven','gap','cross','speed','spread','fragment','smudge','grunge','halftone','cycrate','autoamt','textSpeed'].forEach(k=>{ if(s[k]!=null) setControl(k,s[k]); });
+    if(s.duo!=null){ clickSeg('#duoSeg [data-x="'+(+s.duo?1:0)+'"]'); }
+    if(s.duoLo){ state.duoLo=s.duoLo; if($('duoLo')) $('duoLo').value=s.duoLo; }
+    if(s.duoHi){ state.duoHi=s.duoHi; if($('duoHi')) $('duoHi').value=s.duoHi; }
+    if(s.maskText!=null){ state.maskText=s.maskText; if($('maskText')) $('maskText').value=s.maskText; }
+    if(s.maskBg){ state.maskBg=s.maskBg; if($('maskBg')) $('maskBg').value=s.maskBg; }
+    if(s.maskOn!=null){ clickSeg('#maskSeg [data-x="'+(+s.maskOn?1:0)+'"]'); }
+    if(s.axis) clickSeg('#axisSeg [data-a="'+s.axis+'"]');
+    if(s.meta!=null) clickSeg('#metaSeg [data-x="'+(+s.meta?1:0)+'"]');
+    if(s.cycle!=null) clickSeg('#cycleSeg [data-x="'+(+s.cycle?1:0)+'"]');
+    if(s.auto!=null) clickSeg('#autoSeg [data-x="'+(+s.auto?1:0)+'"]');
+    if(s.size){ state.size=s.size; const a=$('aspect'); if(a) a.value=s.size; syncHint(); markDirty(); }
+    if(s.res!=null) setControl('res',s.res);                                   // after size so it isn't reclamped
+    if(s.textOn!=null) clickSeg('#textOnSeg [data-x="'+(+s.textOn?1:0)+'"]');
+    if(s.bandOn!=null) clickSeg('#bandOnSeg [data-x="'+(+s.bandOn?1:0)+'"]');
+    if(s.textFont){ state.textFont=s.textFont; setFontSeg(s.textFont); }
+    if(s.bg){ state.bg=s.bg; if($('bg')) $('bg').value=s.bg; }
+    if(s.textColor){ state.textColor=s.textColor; if($('textColor')) $('textColor').value=s.textColor; }
+    if(s.bandColor){ state.bandColor=s.bandColor; if($('bandColor')) $('bandColor').value=s.bandColor; }
+    if(s.seed!=null) state.seed=s.seed;
+    bandsKey=''; markDirty(); }
+  function importSession(file){ const rd=new FileReader();
+    rd.onload=ev=>{ let data; try{ data=JSON.parse(ev.target.result); }catch(e){ setStatus('not a valid session file'); setTimeout(()=>setStatus(''),2400); return; }
+      imgs.length=0;                                                            // rebuild the image pool (order preserved)
+      (data.images||[]).forEach(rec=>{ const im=new Image(); im.fname=rec.fname||'image';
+        im.onload=()=>{ renderThumbs(); bandsKey=''; markDirty(); }; im.src=rec.src; imgs.push(im); });
+      renderThumbs();
+      if(data.items){ state.items=data.items.map(it=> it.type==='svg' ? svgItemFromSrc(it.src,it.name||'svg',it) : Object.assign({},it) ); renderItemList(); }
+      applySessionState(data.state||{});
+      setStatus('session loaded ('+((data.images||[]).length)+' image'+((data.images||[]).length===1?'':'s')+')'); setTimeout(()=>setStatus(''),1900); };
+    rd.readAsText(file); }
+  function applyPreset(name){ if(name==='event'){ const u=loadUserPresets(); applyPresetObj(u['Event']||EVENT_PRESET); }   // save one named "Event" to make your tweak the default
+    else if(name && name.slice(0,5)==='user:'){ const u=loadUserPresets(); applyPresetObj(u[name.slice(5)]); } }
+  function refreshPresetOptions(sel){ const el=$('preset'), cur=sel||el.value, u=loadUserPresets();
+    el.innerHTML='<option value="">Custom…</option><option value="event">Event</option>'+
+      Object.keys(u).map(n=>`<option value="user:${escAttr(n)}">${escAttr(n)}</option>`).join('');
+    el.value=cur||''; }
+  function savePreset(){ const name=(prompt('Save the current layout as a preset — name it:','My layout')||'').trim(); if(!name) return;
+    const u=loadUserPresets(); u[name]=currentPreset();
+    if(saveUserPresets(u)){ refreshPresetOptions('user:'+name); setStatus('preset “'+name+'” saved'); }
+    else setStatus('couldn’t save (too large — try fewer/simpler SVGs)'); setTimeout(()=>setStatus(''),2000); }
+  function deletePreset(){ const v=$('preset').value; if(v.slice(0,5)!=='user:') return; const n=v.slice(5);
+    const u=loadUserPresets(); if(u[n] && confirm('Delete preset “'+n+'”?')){ delete u[n]; saveUserPresets(u); refreshPresetOptions(''); } }
+  function render(g,cw,ch,t,forExport){
+    g.setTransform(1,0,0,1,0,0); g.globalAlpha=1; g.globalCompositeOperation='source-over';
+    if(forExport){ renderComp(g,cw,ch,t); return; }
+    const fit=Math.min(cw/CW(),ch/CH())*0.9, w=Math.round(CW()*fit), h=Math.round(CH()*fit), ox=Math.round((cw-w)/2), oy=Math.round((ch-h)/2);
+    view={fit,ox,oy};
+    g.fillStyle='#ececf0'; g.fillRect(0,0,cw,ch);   // margin backdrop = the shell grey mat
+    g.save(); g.translate(ox,oy); renderComp(g,w,h,t); g.restore();
+    g.strokeStyle='rgba(0,0,0,0.28)'; g.lineWidth=Math.max(1,1.3*DPR); g.strokeRect(ox+0.5,oy+0.5,w-1,h-1);  // board edge
+  }
+
+  // ---- Auto-drift: wander the controls (knobs move too) with the odd glitch, hands-off ----
+  const AUTO=[ {id:'speed',lo:12,hi:80,f:0.70,ph:0.0}, {id:'gap',lo:0,hi:65,f:0.50,ph:1.7},
+    {id:'uneven',lo:25,hi:100,f:0.60,ph:3.1}, {id:'cross',lo:0,hi:100,f:0.90,ph:4.6},
+    {id:'fragment',lo:0,hi:55,f:0.80,ph:2.2}, {id:'smudge',lo:0,hi:50,f:0.45,ph:5.5} ];
+  let aT=0, glitchNext=1.6;
+  function nz(x){ return 0.5+0.5*(Math.sin(x)*0.62+Math.sin(x*1.73+1.3)*0.28+Math.sin(x*0.41+4.1)*0.10); }
+  function setControl(id,val){ const e=$(id); if(!e) return; const st=+e.step||1;
+    val=clamp(Math.round(val/st)*st,+e.min,+e.max); if(+e.value===val) return;
+    e.value=String(val); e.dispatchEvent(new Event('input',{bubbles:true})); if(e._rk) e._rk(); }
+  function doShuffle(){ state.seed=(state.seed*1103515245+12345)>>>0||1; bandsKey=''; markDirty(); }
+  function updateAutoGate(){ const w=$('autoamtWrap'); if(w) w.style.display=(+state.auto)?'':'none'; }
+  function updateDuoGate(){ const w=$('duoColors'); if(w) w.style.display=(+state.duo)?'':'none'; }
+  function updateMaskGate(){ const w=$('maskWrap'); if(w) w.style.display=(+state.maskOn)?'':'none'; }
+  function driveAuto(dt){ const amt=state.autoamt/100; if(amt<=0) return; aT+=dt*(0.4+amt*1.6);
+    for(const p of AUTO) setControl(p.id, p.lo + nz(aT*p.f+p.ph)*(p.hi-p.lo));    // smooth organic wander
+    glitchNext-=dt; if(glitchNext<=0){ glitchNext=0.7+Math.random()*(4.2-amt*3.2); const g=Math.random();  // glitch bursts
+      if(g<0.40) doShuffle();
+      else if(g<0.62) setControl('fragment',22+Math.random()*38);
+      else if(g<0.80) setControl('smudge',18+Math.random()*36);
+      else { const dirs=['rows','cols','weave'], btn=document.querySelector('#axisSeg [data-a="'+dirs[(Math.random()*3)|0]+'"]'); if(btn) btn.click(); } } }
+
+  let clock=0,last=null,dirty=true; const markDirty=()=>dirty=true;
+  function tick(ts){ if(last==null)last=ts; const dt=(ts-last)/1000; last=ts; if(state.playing&&imgs.length){ clock+=dt; dirty=true;
+      if(+state.auto) driveAuto(Math.min(dt,0.05)); }
+    if(dirty){ render(ctx,cv.width,cv.height,clock); dirty=false; } requestAnimationFrame(tick); }
+
+  // ---- exports ----
+  const dl=(blob,name)=>{ const u=URL.createObjectURL(blob),a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500); };
+  function exportDims(){ const long=Math.max(CW(),CH()), s=state.res/long; return [Math.round(CW()*s),Math.round(CH()*s)]; }
+  // Output-panel hook — crisp raster re-render at the chosen long-edge (honours the aspect)
+  function dimsFor(px){ const long=Math.max(CW(),CH()), s=px/long; return [Math.round(CW()*s),Math.round(CH()*s)]; }
+  function renderExport(px){ const [w,h]=dimsFor(px); const c=document.createElement('canvas'); c.width=w; c.height=h;
+    renderComp(c.getContext('2d'),w,h,clock); return c; }
+  function exportPNG(){ if(!imgs.length){ setStatus('add an image first'); setTimeout(()=>setStatus(''),1600); return; }
+    const [w,h]=exportDims(); setStatus(`rendering ${w}×${h}…`);
+    setTimeout(()=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; renderComp(c.getContext('2d'),w,h,clock);
+      c.toBlob(b=>{ dl(b,`image-train-${w}x${h}-${Date.now()}.png`); setStatus(`saved ${w}×${h}`); setTimeout(()=>setStatus(''),2000); },'image/png'); },30); }
+  function pickMime(){ const t=['video/mp4;codecs=avc1.640028','video/mp4','video/webm;codecs=vp9','video/webm']; for(const m of t) if(window.MediaRecorder&&MediaRecorder.isTypeSupported(m)) return m; return ''; }
+  let recording=false;
+  // Record with a 3-2-1 countdown, then run until the user clicks Stop.
+  let recState='idle', mrec=null, mchunks=[], mrecRAF=null, mrecCv=null, mrecG=null, mrecStart=0;
+  // ---- music: an uploaded track, routed through Web Audio so it can be muxed into the recording ----
+  let audioEl=null, musicOn=false, audioAC=null, audioSrc=null, audioDest=null, musicGain=null, masterGain=null;
+  // One master bus feeds both the speakers and the recording stream, so anything routed into it
+  // (an uploaded track, or the synthesized ambience) is heard live and muxed into the video.
+  function ensureAudioCtx(){ if(!audioAC){ audioAC=new (window.AudioContext||window.webkitAudioContext)();
+      masterGain=audioAC.createGain(); masterGain.gain.value=state.vol/100;
+      audioDest=audioAC.createMediaStreamDestination(); masterGain.connect(audioDest); masterGain.connect(audioAC.destination); }
+    if(audioAC.state==='suspended') audioAC.resume(); return audioAC; }
+  function loadAudio(file){ if(!audioEl){ audioEl=new Audio(); audioEl.loop=true; }
+    audioEl.src=URL.createObjectURL(file); audioEl.load(); musicOn=true; ensureMusicGraph();
+    $('trackName').textContent=file.name; setStatus(file.name+' added'); setTimeout(()=>setStatus(''),1400); }
+  function ensureMusicGraph(){ if(!audioEl) return null; ensureAudioCtx();
+    if(!audioSrc){ audioSrc=audioAC.createMediaElementSource(audioEl); musicGain=audioAC.createGain(); musicGain.gain.value=1; audioSrc.connect(musicGain); musicGain.connect(masterGain); }
+    return audioDest.stream; }
+  const audioActive=()=>musicOn||Ambient.on;
+
+  // ---- Ambient: a synthesized bed (projector clatter / wind / room), no file needed ----
+  const Ambient=(()=>{
+    let on=false, mode='off', out=null, voices=[], clk=null, nextT=0, nb=null;
+    const R=Math.random;
+    function noise(){ if(nb) return nb; const ac=audioAC, len=(ac.sampleRate*2)|0; nb=ac.createBuffer(1,len,ac.sampleRate);
+      const d=nb.getChannelData(0); for(let i=0;i<len;i++) d[i]=R()*2-1; return nb; }
+    function bed(freq,q,lvl,lfoRate,lfoDepth){ const ac=audioAC; const s=ac.createBufferSource(); s.buffer=noise(); s.loop=true;
+      const f=ac.createBiquadFilter(); f.type='lowpass'; f.frequency.value=freq; f.Q.value=q||0.7;
+      const g=ac.createGain(); g.gain.value=lvl; s.connect(f); f.connect(g); g.connect(out); s.start(); voices.push(s);
+      if(lfoDepth){ const lfo=ac.createOscillator(); lfo.frequency.value=lfoRate; const la=ac.createGain(); la.gain.value=lfoDepth;
+        lfo.connect(la); la.connect(f.frequency); lfo.start(); voices.push(lfo); } }
+    function motor(){ const ac=audioAC; [46,46.5].forEach(hz=>{ const o=ac.createOscillator(); o.type='sawtooth'; o.frequency.value=hz;
+      const f=ac.createBiquadFilter(); f.type='lowpass'; f.frequency.value=210; const g=ac.createGain(); g.gain.value=0.05;
+      o.connect(f); f.connect(g); g.connect(out); o.start(); voices.push(o);
+      const lfo=ac.createOscillator(); lfo.frequency.value=5.6; const la=ac.createGain(); la.gain.value=0.02; lfo.connect(la); la.connect(g.gain); lfo.start(); voices.push(lfo); }); }
+    function click(t){ const ac=audioAC; const s=ac.createBufferSource(); s.buffer=noise();
+      const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=1500+R()*1500; bp.Q.value=1.1;
+      const g=ac.createGain(); const amp=0.10+R()*0.10;
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(amp,t+0.002); g.gain.exponentialRampToValueAtTime(0.0001,t+0.03+R()*0.02);
+      s.connect(bp); bp.connect(g); g.connect(out); s.start(t,R()*1.5); s.stop(t+0.1); }
+    function startClatter(){ const ac=audioAC; nextT=ac.currentTime+0.05;
+      clk=setInterval(()=>{ if(!on) return; const now=ac.currentTime;                     // clatter pace follows Speed
+        if(!state.playing){ nextT=now+0.1; return; }                                       // film stopped → no clicks
+        const cps=6+(state.speed/100)*22, iv=1/Math.max(1,cps);
+        while(nextT<now+0.12){ click(nextT); nextT+=iv*(0.8+R()*0.5); } },30); }
+    function start(){ ensureAudioCtx(); teardown(); const ac=audioAC; out=ac.createGain(); out.gain.value=0.0001; out.connect(masterGain);
+      out.gain.exponentialRampToValueAtTime(1,ac.currentTime+0.5);
+      if(mode==='wind') bed(520,0.9,0.16,0.05,260);
+      else if(mode==='room') bed(170,0.7,0.12,0.03,40);
+      else if(mode==='projector'){ bed(240,0.7,0.045,0.05,120); motor(); startClatter(); }
+      on=true; }
+    function teardown(){ if(clk){ clearInterval(clk); clk=null; } voices.forEach(n=>{ try{n.stop();}catch(e){} }); voices=[];
+      if(out){ try{ out.disconnect(); }catch(e){} out=null; } }
+    return { get on(){return on;}, get mode(){return mode;},
+      set(m){ mode=m; if(m==='off'){ teardown(); on=false; } else start(); } };
+  })();
+
+  function fmtT(s){ return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'); }
+  function toggleRec(){ if(recState==='recording') return stopRec(); if(recState==='idle') startCountdown(); }
+  function startCountdown(){ if(!imgs.length){ setStatus('add an image first'); setTimeout(()=>setStatus(''),1600); return; }
+    if(!pickMime()){ setStatus('recording not supported here'); setTimeout(()=>setStatus(''),2600); return; }
+    ensureAudioCtx();   // create/resume the audio context inside the click gesture
+    recState='counting'; const ov=$('countdown'); let n=3; ov.textContent=n; ov.classList.add('show');
+    const iv=setInterval(()=>{ if(recState!=='counting'){ clearInterval(iv); ov.classList.remove('show'); return; }
+      n--; if(n>0){ ov.textContent=n; } else { clearInterval(iv); ov.classList.remove('show'); beginRec(); } },800); }
+  function beginRec(){ let w=CW(), h=CH(); w-=w%2; h-=h%2;   // full comp res (e.g. 1080×1920), even for H.264
+    mrecCv=document.createElement('canvas'); mrecCv.width=w; mrecCv.height=h; mrecG=mrecCv.getContext('2d');
+    const mime=pickMime(); const bitrate=Math.min(60000000, Math.max(24000000, Math.round(w*h*60*0.25)));
+    let tracks=mrecCv.captureStream(60).getVideoTracks();
+    if(audioActive()){ try{ ensureAudioCtx(); if(musicOn&&audioEl){ ensureMusicGraph(); audioEl.currentTime=0; audioEl.play().catch(()=>{}); }
+      tracks=tracks.concat(audioDest.stream.getAudioTracks()); }catch(e){ console.warn('audio',e); } }
+    mrec=new MediaRecorder(new MediaStream(tracks),{mimeType:mime,videoBitsPerSecond:bitrate}); mchunks=[];
+    mrec.ondataavailable=e=>{ if(e.data.size) mchunks.push(e.data); };
+    mrec.onstop=()=>{ if(audioEl){ try{ audioEl.pause(); }catch(e){} } const ext=mime.includes('mp4')?'mp4':'webm'; dl(new Blob(mchunks,{type:mime}),`image-train-${Date.now()}.${ext}`);
+      recState='idle'; $('recBtn').textContent='Record'; $('recBtn').classList.remove('on'); $('recDot').classList.remove('on');
+      setStatus('saved '+ext.toUpperCase()); setTimeout(()=>setStatus(''),2200); };
+    mrec.start(); recState='recording'; mrecStart=performance.now(); $('recBtn').classList.add('on'); $('recDot').classList.add('on');
+    (function rf(){ if(recState!=='recording') return; renderComp(mrecG,mrecCv.width,mrecCv.height,clock);
+      const el=(performance.now()-mrecStart)/1000; $('recBtn').textContent='Stop · '+fmtT(el); $('recTime').textContent=fmtT(el); mrecRAF=requestAnimationFrame(rf); })(); }
+  function stopRec(){ if(recState!=='recording') return; cancelAnimationFrame(mrecRAF); try{ mrec.stop(); }catch(e){} }
+
+  // ---- UI ----
+  function setStatus(t){ const s=$('status'); s.textContent=t; s.style.display=t?'block':'none'; }
+  function updateCycleGate(){ const w=$('cycrateWrap'); if(w) w.style.display=(+state.cycle)?'':'none'; }
+  function bindSeg(id,key,dk,after){ document.querySelectorAll(`#${id} button`).forEach(b=>b.addEventListener('click',()=>{
+    state[key]=b.dataset[dk]; document.querySelectorAll(`#${id} button`).forEach(x=>x.setAttribute('aria-pressed',String(x===b))); bandsKey=''; if(after)after(); markDirty(); })); }
+  const bind=(id,key,fn)=>{ const e=$(id); e.addEventListener('input',ev=>{ state[key]=+ev.target.value; const r=$(id+'R'); if(r)r.textContent=ev.target.value; bandsKey=''; if(fn)fn(); markDirty(); }); };
+  function wire(){
+    bindSeg('axisSeg','axis','a'); bindSeg('metaSeg','meta','x');
+    $('aspect').addEventListener('change',e=>{ state.size=e.target.value; syncHint(); markDirty(); });
+    bindSeg('cycleSeg','cycle','x',updateCycleGate); updateCycleGate();
+    bindSeg('ambSeg','ambience','m',()=>Ambient.set(state.ambience));
+    bindSeg('autoSeg','auto','x',updateAutoGate); updateAutoGate();
+    bind('autoamt','autoamt');
+    ['count','uneven','gap','cross','fragment','smudge','grunge','halftone','speed','spread','cycrate','textSpeed'].forEach(id=>bind(id,id));
+    bindSeg('duoSeg','duo','x',updateDuoGate); updateDuoGate();
+    $('duoLo').addEventListener('input',e=>{ state.duoLo=e.target.value; markDirty(); });
+    $('duoHi').addEventListener('input',e=>{ state.duoHi=e.target.value; markDirty(); });
+    bindSeg('maskSeg','maskOn','x',updateMaskGate); updateMaskGate();
+    $('maskText').addEventListener('input',e=>{ state.maskText=e.target.value; markDirty(); });
+    $('maskBg').addEventListener('input',e=>{ state.maskBg=e.target.value; markDirty(); });
+    // Text & SVG overlay
+    bindSeg('textOnSeg','textOn','x'); bindSeg('bandOnSeg','bandOn','x');
+    bindSeg('textFontSeg','textFont','f',()=>{ if(state.textFont==='custom'&&!customFamily) $('fontInp').click(); });
+    $('textColor').addEventListener('input',e=>{ state.textColor=e.target.value; markDirty(); });
+    $('bandColor').addEventListener('input',e=>{ state.bandColor=e.target.value; markDirty(); });
+    $('textAdd').addEventListener('click',()=>{ state.items.push({type:'text',t:'New text',x:50,y:50,size:40,track:6,align:'center',move:'0',chop:0,seed:(Math.abs(Math.sin(state.items.length*57+9))*1e9)|0}); ensureShow(); renderItemList(); markDirty(); });
+    $('svgAdd').addEventListener('click',()=>$('svgInp').click());
+    $('svgInp').addEventListener('change',e=>{ const f=e.target.files[0]; if(f) addSVG(f); e.target.value=''; });
+    $('fontBtn').addEventListener('click',()=>$('fontInp').click());
+    $('fontInp').addEventListener('change',e=>{ const f=e.target.files[0]; if(f) loadFontFile(f); e.target.value=''; });
+    $('fontClear').addEventListener('click',()=>{ customFamily=null; if(customFF){ try{document.fonts.delete(customFF);}catch(e){} customFF=null; } if(state.textFont==='custom'){ state.textFont='sans'; setFontSeg('sans'); } $('fontName').textContent='built-in typeface'; markDirty(); });
+    renderItemList(); wireItemList();
+    $('preset').addEventListener('change',e=>{ applyPreset(e.target.value); });
+    $('presetSave').addEventListener('click',savePreset);
+    $('presetDel').addEventListener('click',deletePreset);
+    $('sessOut').addEventListener('click',exportSession);
+    $('sessIn').addEventListener('click',()=>$('sessFile').click());
+    $('sessFile').addEventListener('change',e=>{ const f=e.target.files[0]; if(f) importSession(f); e.target.value=''; });
+    refreshPresetOptions('');
+    $('bg').addEventListener('input',e=>{ state.bg=e.target.value; markDirty(); });
+    $('addBtn').addEventListener('click',()=>$('fileInp').click());
+    $('clearBtn').addEventListener('click',()=>{ imgs.length=0; bandsKey=''; renderThumbs(); markDirty(); });
+    $('fileInp').addEventListener('change',e=>{ [...e.target.files].forEach(addFile); e.target.value=''; });
+    $('shuffle').addEventListener('click',doShuffle);
+    $('saveBtn').addEventListener('click',exportPNG); $('recBtn').addEventListener('click',toggleRec);
+    $('musicBtn').addEventListener('click',()=>$('musicInp').click());
+    $('musicInp').addEventListener('change',e=>{ const f=e.target.files[0]; if(f) loadAudio(f); e.target.value=''; });
+    $('musicClear').addEventListener('click',()=>{ if(audioEl){ try{ audioEl.pause(); }catch(e){} audioEl.removeAttribute('src'); } musicOn=false; $('trackName').textContent='no track'; });
+    $('vol').addEventListener('input',e=>{ state.vol=+e.target.value; $('volR').textContent=e.target.value; if(masterGain) masterGain.gain.value=state.vol/100; });
+    $('playBtn').addEventListener('click',()=>{ state.playing=!state.playing; last=null; $('playBtn').setAttribute('aria-pressed',String(state.playing));
+      $('playBtn').innerHTML=state.playing?'<svg viewBox="0 0 12 12" width="11" height="11"><rect x="2.6" y="1.8" width="2.5" height="8.4" rx="1.1" fill="currentColor"/><rect x="6.9" y="1.8" width="2.5" height="8.4" rx="1.1" fill="currentColor"/></svg>':'<svg viewBox="0 0 12 12" width="11" height="11"><path d="M3 1.8 L10 6 L3 10.2 Z" fill="currentColor"/></svg>'; });
+    $('fsBtn').addEventListener('click',()=>setFs(!document.body.classList.contains('fs')));
+    $('exitFs').addEventListener('click',()=>setFs(false));
+    ['dragover','drop'].forEach(ev=>addEventListener(ev,e=>e.preventDefault()));
+    addEventListener('drop',e=>{ const fs=e.dataTransfer&&e.dataTransfer.files; if(fs) [...fs].filter(f=>/^image\//.test(f.type)||isPDF(f)).forEach(addFile); });
+    addEventListener('keydown',e=>{ if(/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+      if(e.key===' '){ e.preventDefault(); $('playBtn').click(); }
+      if(e.key==='Escape'&&document.body.classList.contains('fs')){ setFs(false); return; }
+      if(e.key==='f'||e.key==='F') setFs(!document.body.classList.contains('fs')); });
+    document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement && document.body.classList.contains('fs')) setFs(false); });
+  }
+  function syncRes(){ const [ew,eh]=exportDims(); const el=$('resIn'); if(el) el.textContent=`${(ew/300).toFixed(1)}×${(eh/300).toFixed(1)}in @300`; }
+  function syncHint(){ $('hint').textContent=`image train · ${state.count} bands · png ${exportDims().join('×')}`; }
+  function setFs(on){ document.body.classList.toggle('fs',on);
+    if(on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+    else if(!on && document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{}); requestAnimationFrame(resize); }
+
+  // ---- knobs / folds / tooltips ----
+  function makeKnob(inp){ inp.dataset.knob='1'; const w=document.createElement('div'); w.className='knob'; w.tabIndex=0; w.setAttribute('role','slider');
+    inp.parentNode.insertBefore(w,inp); w.appendChild(inp);
+    w.insertAdjacentHTML('beforeend','<svg viewBox="0 0 44 44" width="42" height="42" aria-hidden="true"><path class="k-tr" d="M9 35 A18 18 0 1 1 35 35"/><path class="k-vl" d="M9 35 A18 18 0 1 1 35 35"/><circle class="k-hub" cx="22" cy="22" r="9"/><line class="k-pt" x1="22" y1="22" x2="22" y2="14"/></svg>');
+    const k={el:w,inp}; inp._rk=()=>paintKnob(k); const set=v=>{ inp.value=String(v); inp.dispatchEvent(new Event('input',{bubbles:true})); paintKnob(k); };
+    let dy=0,dv=0; w.addEventListener('pointerdown',e=>{ e.preventDefault(); w.setPointerCapture(e.pointerId); w.classList.add('drag'); dy=e.clientY; dv=+inp.value; });
+    w.addEventListener('pointermove',e=>{ if(!w.classList.contains('drag')) return; const span=(+inp.max)-(+inp.min), st=+inp.step||1; set(clamp(Math.round((dv+(dy-e.clientY)/150*span)/st)*st,+inp.min,+inp.max)); });
+    const up=()=>w.classList.remove('drag'); w.addEventListener('pointerup',up); w.addEventListener('pointercancel',up);
+    w.addEventListener('keydown',e=>{ const st=+inp.step||1; if(e.key==='ArrowUp'||e.key==='ArrowRight'){ e.preventDefault(); set(clamp(+inp.value+st,+inp.min,+inp.max)); } if(e.key==='ArrowDown'||e.key==='ArrowLeft'){ e.preventDefault(); set(clamp(+inp.value-st,+inp.min,+inp.max)); } }); paintKnob(k); }
+  function paintKnob(k){ const inp=k.inp,mn=+inp.min,mx=+inp.max,v=+inp.value,f=(v-mn)/(mx-mn||1); const path=k.el.querySelector('.k-vl'),len=path.getTotalLength();
+    path.style.strokeDasharray=len; path.style.strokeDashoffset=len*(1-f); const a=(-135+270*f)*Math.PI/180,pt=k.el.querySelector('.k-pt'); pt.setAttribute('x2',(22+Math.sin(a)*8).toFixed(2)); pt.setAttribute('y2',(22-Math.cos(a)*8).toFixed(2)); }
+  const FOLD_KEY='imgtrain-folded';
+  (function(){ const saved=new Set((()=>{try{return JSON.parse(localStorage.getItem(FOLD_KEY)||'[]')}catch(e){return[]}})());
+    document.querySelectorAll('.rail .rowhead').forEach(h=>{ const row=h.closest('.row'); if(!row) return; const name=h.textContent.trim();
+      if(saved.has(name)){ row.classList.add('folded'); h.setAttribute('aria-expanded','false'); }
+      h.addEventListener('click',()=>{ const f=row.classList.toggle('folded'); h.setAttribute('aria-expanded',String(!f));
+        const cur=new Set((()=>{try{return JSON.parse(localStorage.getItem(FOLD_KEY)||'[]')}catch(e){return[]}})()); f?cur.add(name):cur.delete(name); try{ localStorage.setItem(FOLD_KEY,JSON.stringify([...cur])); }catch(e){} }); }); })();
+  let tipEl=null,tipT=null,tipFor=null;
+  function hideTip(){ clearTimeout(tipT); tipFor=null; if(tipEl){ tipEl.style.opacity='0'; tipEl.style.display='none'; } }
+  function showTip(host){ const text=host.getAttribute('data-tip'); if(!text) return; if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl); }
+    tipEl.textContent=text; tipEl.style.display='block'; tipEl.style.opacity='0'; const r=host.getBoundingClientRect(),t=tipEl.getBoundingClientRect();
+    let top=r.top-t.height-8; if(top<8) top=Math.min(innerHeight-t.height-8,r.bottom+8); tipEl.style.left=Math.max(8,Math.min(r.left,innerWidth-t.width-8))+'px'; tipEl.style.top=top+'px'; tipEl.style.opacity='1'; }
+  addEventListener('pointerover',e=>{ const h=e.target.closest&&e.target.closest('[data-tip]'); if(h===tipFor) return; clearTimeout(tipT); if(!h){ hideTip(); return; } tipFor=h; tipT=setTimeout(()=>showTip(h),240); });
+  addEventListener('pointerdown',hideTip); addEventListener('scroll',hideTip,true);
+
+  wire(); document.body.classList.add('dark');
+  $('dock').classList.add('open'); document.body.classList.add('panels');   // rail is always open now (toggle removed)
+  resize();
+  /* sliders render natively as flat shell sliders — knob-wrapping disabled for Lab consistency (makeKnob/paintKnob kept but unused) */
+  syncHint();
+  requestAnimationFrame(tick);
+  // Output island: consistent export panel (format · pixels · print size · DPI · quality) with a crisp re-render
+  Opal.mountOutput(cv, 'image-train', { render: renderExport });
+  window.imgtrain={ state, imgs, render:renderComp, exportDims, addImageFile:addImage, get bands(){return bands;} };
+})();
+</script>
+</body>
+</html>

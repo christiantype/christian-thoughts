@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/workshops/bgsu/lab/shared/gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Pure Land — OP/AL</title>
+  <meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
+<style>
+  @font-face{ font-family:'Sidepiece-HoneyPie'; src:url('/workshops/bgsu/shared/fonts/Sidepiece-HoneyPie.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap; }
+  :root{ --rail:300px; --top:120px; }
+  @media (max-width:560px){ :root{ --top:112px; } }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100vh; height:100dvh; overflow:hidden; background:var(--paper); font-family:var(--font, 'IBM Plex Sans', system-ui, sans-serif); }
+  #dock{ position:fixed; top:var(--top); left:0; bottom:0; width:var(--rail); z-index:6; overflow-y:auto; }
+  #wrap{ position:fixed; top:var(--top); left:var(--rail); right:0; bottom:0; background:var(--mat);
+    display:flex; align-items:center; justify-content:center; padding:22px; }
+  #art{ max-width:100%; max-height:100%; display:block; box-shadow:none; }
+  #recDot{ position:fixed; top:calc(var(--top) + 14px); right:24px; z-index:11;
+    display:none; align-items:center; gap:7px; padding:6px 12px; font-size:11px; }
+  #recDot.on{ display:flex; }
+  #recDot i{ width:7px; height:7px; border-radius:50%; background:var(--rec); }
+  .group{ display:flex; flex-direction:column; gap:9px; }
+  .knob{ display:flex; flex-direction:column; gap:2px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .crow[hidden]{ display:none; }
+  .cend{ display:flex; align-items:center; gap:8px; }
+  .cend .rm{ width:28px; height:28px; padding:0; line-height:1; display:flex; align-items:center; justify-content:center; }
+  .group[hidden]{ display:none !important; }
+  .rowhint{ font-size:12px; line-height:1.5; color:var(--mute); margin:0; }
+</style>
+  <link rel="stylesheet" href="/workshops/bgsu/lab/shared/OPALAB.css?v=3" />
+</head>
+<body>
+  <script src="/workshops/bgsu/lab/shared/opal.js"></script>
+  <script>Opal.mountTopbar({ name:'Pure Land', desc:'A grid of squares, each one a moving gradient',
+    about:'A field of squares, tiled across the canvas. Inside every square a linear gradient travels through the colours you choose, in the direction you set. The squares can be offset against each other two ways: the gradient inside each one can run ahead of its neighbours, so colour moves across the grid as a wave; and the squares themselves can stagger sideways row by row, like a running bond. The grid always fills the canvas edge to edge — set the columns and rows and the squares resize to cover it. Order the offsets or scatter them, and let it run. WebGL, so it stays smooth and exports at full size. Save a still, or record the drift.',
+  version:'OP-LAB-032'});</script>
+  <div id="sizeDock">
+    <span id="dimReadout">1080 × 1920</span>
+    <select id="aspect" title="Canvas size">
+      <option value="1080/1920" selected>Story · 9:16</option>
+      <option value="1280/1600">Portrait · 4:5</option>
+      <option value="1400/1400">Square · 1:1</option>
+      <option value="1600/900">Landscape · 16:9</option>
+    </select>
+  </div>
+  <div id="recDot"><i></i><b>0:00</b></div>
+
+  <div id="dock">
+    <div class="group">
+      <div class="group__t">Mode</div>
+      <select class="opal-input" id="mode">
+        <option value="tiles" selected>Tiles · gradient grid</option>
+        <option value="radial">Radial · pulsing rings</option>
+        <option value="strokes">Strokes · a word in contour</option>
+      </select>
+    </div>
+
+    <div class="group mode mode-tiles">
+      <div class="group__t">Grid</div>
+      <div class="duo">
+        <div class="knob"><label>Columns <b id="colsR">4</b></label><input id="cols" type="range" min="1" max="24" value="4"></div>
+        <div class="knob"><label>Rows <b id="rowsR">7</b></label><input id="rows" type="range" min="1" max="24" value="7"></div>
+      </div>
+      <label class="tog"><span>Square tiles</span><input type="checkbox" id="square" checked></label>
+      <p class="rowhint">The grid always fills the canvas. Square tiles keeps every cell a true square, growing them so the overflowing edge crops; off, the tiles stretch to land exactly on the count.</p>
+    </div>
+
+    <div class="group mode mode-radial" hidden>
+      <div class="group__t">Radial</div>
+      <div class="duo">
+        <div class="knob"><label>Centre across <b id="cxR">0.50</b></label><input id="cx" type="range" min="-30" max="130" value="50"></div>
+        <div class="knob"><label>Centre down <b id="cyR">0.50</b></label><input id="cy" type="range" min="-30" max="130" value="50"></div>
+      </div>
+      <div class="duo">
+        <div class="knob"><label>Size <b id="radR">0.55</b></label><input id="rad" type="range" min="5" max="180" value="55"></div>
+        <div class="knob"><label>Rings <b id="ringsR">4</b></label><input id="rings" type="range" min="1" max="24" value="4"></div>
+      </div>
+      <div class="duo">
+        <div class="knob"><label>Pulse <b id="pulseR">0.25</b></label><input id="pulse" type="range" min="0" max="90" value="25"></div>
+        <div class="knob"><label>Pulse rate <b id="prateR">0.30</b></label><input id="prate" type="range" min="2" max="200" value="30"></div>
+      </div>
+      <p class="rowhint">Rings multiplies the gradient outward as concentric circles; Pulse breathes the whole field in and out.</p>
+    </div>
+
+    <div class="group mode mode-strokes" hidden>
+      <div class="group__t">Strokes</div>
+      <input class="opal-input" id="word" type="text" value="AHA" maxlength="14" spellcheck="false" autocomplete="off">
+      <select class="opal-input" id="face">
+        <option value="UniversNextPro-Bold.ttf" selected>Univers · Bold</option>
+        <option value="UniversNextPro-Medium.ttf">Univers · Medium</option>
+        <option value="UniversNextPro-Light.ttf">Univers · Light</option>
+        <option value="playfair-regular.ttf">Playfair</option>
+        <option value="zillaslab-regular.ttf">Zilla Slab</option>
+        <option value="pirata-one.ttf">Pirata One</option>
+      </select>
+      <div class="duo">
+        <div class="knob"><label>Size <b id="wsizeR">62</b></label><input id="wsize" type="range" min="10" max="95" value="62"></div>
+        <div class="knob"><label>Strokes <b id="strokesR">9</b></label><input id="strokes" type="range" min="1" max="40" value="9"></div>
+      </div>
+      <p class="rowhint">The word becomes a distance field — the strokes are contours stepping out from the letterforms, each one a band of the gradient.</p>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Gradient</div>
+      <div class="duo">
+        <div class="knob"><label>Direction <b id="angR">45°</b></label><input id="ang" type="range" min="0" max="360" value="45"></div>
+        <div class="knob"><label>Spread <b id="spreadR">0.50</b></label><input id="spread" type="range" min="10" max="200" value="50"></div>
+      </div>
+      <div id="colRows"></div>
+      <button class="btn" id="addCol">Add a colour</button>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Rim</div>
+      <div class="duo">
+        <div class="knob"><label>Width <b id="rimR">6</b></label><input id="rim" type="range" min="0" max="40" value="6"></div>
+        <div class="knob"><label>Direction <b id="rimAngR">90°</b></label><input id="rimAng" type="range" min="0" max="360" value="90"></div>
+      </div>
+      <div class="knob"><label>Strength <b id="rimAR">100</b></label><input id="rimA" type="range" min="0" max="100" value="100"></div>
+      <div class="crow"><label>Rim colour</label><input type="color" class="sw" id="rimC" value="#ffffff"></div>
+      <p class="rowhint">A stroke inside each square that holds its colour at one edge and blends to transparent across the tile. Width 0 turns it off.</p>
+    </div>
+
+    <div class="group mode mode-tiles">
+      <div class="group__t">Offset</div>
+      <div class="knob"><label>Gradient offset <b id="goffR">0.60</b></label><input id="goff" type="range" min="0" max="200" value="60"></div>
+      <p class="rowhint">How far each square's gradient runs ahead of its neighbour — colour travels across the grid as a wave.</p>
+      <div class="knob"><label>Tile offset <b id="toffR">0.00</b></label><input id="toff" type="range" min="0" max="100" value="0"></div>
+      <p class="rowhint">Staggers the squares themselves sideways, row by row.</p>
+      <div class="knob"><label>Scatter <b id="scatR">0</b></label><input id="scat" type="range" min="0" max="100" value="0"></div>
+      <p class="rowhint">Ordered at 0 — the offset runs diagonally. Turn it up to shuffle the squares out of sequence.</p>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Signature</div>
+      <label class="tog"><span>Show signature</span><input type="checkbox" id="sigOn"></label>
+      <input class="opal-input" id="sigText" type="text" value="lab colour study" maxlength="60" spellcheck="false" autocomplete="off">
+      <div class="knob"><label>Align</label>
+        <div class="seg" id="sigAlign">
+          <button data-x="left" aria-pressed="false">Left</button>
+          <button data-x="center" aria-pressed="true">Centre</button>
+          <button data-x="right" aria-pressed="false">Right</button>
+        </div>
+      </div>
+      <div class="duo">
+        <div class="knob"><label>Size <b id="sigSizeR">2.0</b></label><input id="sigSize" type="range" min="8" max="70" value="20"></div>
+        <div class="knob"><label>Margin <b id="sigMarR">4.0</b></label><input id="sigMar" type="range" min="10" max="140" value="40"></div>
+      </div>
+      <div class="crow"><label>Signature colour</label><input type="color" class="sw" id="sigC" value="#ffffff"></div>
+      <p class="rowhint">Set in Sidepiece and burned into the canvas, so it is there in the saved still and the recording. It always sits on the vertical centre; the margin holds it off the side.</p>
+    </div>
+
+    <div class="group">
+      <div class="group__t">Motion</div>
+      <div class="grid2"><button class="btn" id="reroll">Re-seed</button><button class="btn" id="playBtn" aria-pressed="true">Pause</button></div>
+      <div class="knob"><label>Speed <b id="spdR">1.0</b></label><input id="spd" type="range" min="0" max="40" value="10"></div>
+    </div>
+  </div>
+
+  <div id="wrap"><canvas id="art" width="1080" height="1920"></canvas></div>
+
+  <div class="group out" id="output" data-export-custom>
+    <div class="group__t">Output</div>
+    <div class="grid2"><button class="btn" id="recBtn">Record</button><button class="btn" id="saveBtn">Save</button></div>
+  </div>
+
+  <script id="frag" type="x-shader/x-fragment">
+#extension GL_OES_standard_derivatives : enable
+precision highp float;
+uniform vec2 uRes; uniform float uT;
+uniform float uMode;                 /* 0 tiles · 1 radial · 2 strokes */
+uniform float uCols, uRows, uAngle, uSpread, uGradOff, uTileOff, uScatter, uSeed, uSquare, uStops;
+uniform float uRim, uRimAngle, uRimA;
+uniform vec2 uCenter; uniform float uRadius, uRings, uPulse, uPrate;   /* radial */
+uniform sampler2D uTex; uniform float uStrokes;                        /* strokes */
+uniform sampler2D uSig; uniform float uSigOn;                          /* signature */
+uniform vec3 uC0, uC1, uC2, uC3, uC4, uC5, uC6, uC7, uRimC;
+const float TAU = 6.2831853;
+
+float hash21(vec2 p){ p=fract(p*vec2(123.34,345.45)); p+=dot(p,p+34.345); return fract(p.x*p.y); }
+
+vec3 stopAt(int i){
+  if(i==0) return uC0;
+  if(i==1) return uC1;
+  if(i==2) return uC2;
+  if(i==3) return uC3;
+  if(i==4) return uC4;
+  if(i==5) return uC5;
+  if(i==6) return uC6;
+  return uC7;
+}
+/* the ramp is cyclic — the last colour runs back into the first, so the travel never seams */
+vec3 ramp(float t){
+  float n = uStops;
+  float x = fract(t) * n;
+  float fi = floor(x);
+  float k = fract(x);
+  k = k*k*(3.0 - 2.0*k);                       // ease the hand-off so the stops read as one gradient
+  return mix(stopAt(int(fi)), stopAt(int(mod(fi + 1.0, n))), k);
+}
+
+void main(){
+  vec2 fc = gl_FragCoord.xy;
+
+  float t;          /* the gradient parameter — one unit is one trip round the ramp */
+  float edge;       /* distance to the edge of the repeating unit, 0 AT the edge  */
+  float aa;         /* antialias width, in the same units as edge                 */
+  vec2  fadeV;      /* -0.5..0.5 vector the rim fades along                       */
+
+  if(uMode < 0.5){
+    /* ---- TILES: a grid of squares, each holding a linear gradient ---- */
+    vec2 cells = vec2(uCols, uRows);
+    vec2 g; float cellMin;
+    if(uSquare > 0.5){
+      /* true squares, grown to COVER the canvas and centred — the grid always fills,
+         the overflowing axis simply crops. Never letterboxed. */
+      float cs = max(uRes.x/uCols, uRes.y/uRows);
+      vec2 origin = (uRes - cs*cells) * 0.5;
+      g = (fc - origin) / cs;
+      cellMin = cs;
+    } else {
+      vec2 cp = uRes / cells;                            // stretched to fill
+      g = fc / cp;
+      cellMin = min(cp.x, cp.y);
+    }
+    /* the squares themselves stagger sideways, row by row — wrapped, so a row stays whole */
+    float row = floor(g.y);
+    g.x = mod(g.x + row * uTileOff, uCols);
+
+    vec2 cell = floor(g);
+    vec2 f = fract(g);
+
+    /* the gradient inside the square, along the chosen direction */
+    vec2 dir = vec2(cos(uAngle), sin(uAngle));
+    float ext = abs(dir.x) + abs(dir.y);                 // normalise so a diagonal still spans 0..1
+    t = (dot(f - 0.5, dir) / ext + 0.5) * uSpread;
+
+    /* each square runs ahead of its neighbour: ordered diagonally, or scattered */
+    float ord = (cell.x + cell.y) / max(uCols + uRows - 2.0, 1.0);
+    float rnd = hash21(cell + uSeed);
+    t += mix(ord, rnd, uScatter) * uGradOff + uT;
+
+    edge  = 0.5 - max(abs(f.x - 0.5), abs(f.y - 0.5));   // 0 at the tile edge
+    aa    = 1.2 / max(cellMin, 1.0);
+    fadeV = f - 0.5;
+
+  } else if(uMode < 1.5){
+    /* ---- RADIAL: concentric rings from a moveable centre, breathing ---- */
+    float m = min(uRes.x, uRes.y);
+    vec2 d = (fc - uCenter * uRes) / m;                  // aspect-correct, centre-relative
+    float r = length(d);
+    float pulse = 1.0 + uPulse * sin(uT * uPrate * TAU); // the whole field breathes
+    t = (r / max(uRadius * pulse, 1e-4)) * uRings * uSpread + uT;
+
+    float fr = fract(t);
+    edge  = min(fr, 1.0 - fr);                           // 0 at each ring boundary
+    aa    = max(fwidth(t), 1e-5);
+    fadeV = 0.5 * normalize(d + vec2(1e-6));
+
+  } else {
+    /* ---- STROKES: contours stepping out from a word's distance field ---- */
+    vec2 uv = vec2(fc.x / uRes.x, 1.0 - fc.y / uRes.y);  // the field is drawn top-down
+    float sd = (texture2D(uTex, uv).r - 0.5) * 2.0;      // -1 inside … +1 outside
+    t = sd * uStrokes * uSpread + uT;
+
+    float fr = fract(t);
+    edge  = min(fr, 1.0 - fr);
+    aa    = max(fwidth(t), 1e-5);
+    fadeV = vec2(uv.x - 0.5, 0.5 - uv.y);
+  }
+
+  vec3 col = ramp(t);
+
+  /* the rim — a stroke on the edge of the repeating unit (a tile, a ring, a contour),
+     solid where its direction points and blending to transparent across the unit */
+  if(uRim > 0.0005){
+    float band = 1.0 - smoothstep(uRim - aa, uRim + aa, edge);
+    vec2 rd = vec2(cos(uRimAngle), sin(uRimAngle));
+    float rext = abs(rd.x) + abs(rd.y);
+    float fade = clamp(dot(fadeV, rd) / rext + 0.5, 0.0, 1.0);
+    col = mix(col, uRimC, band * fade * uRimA);
+  }
+
+  /* the signature rides on top of everything, so it survives into stills and video */
+  if(uSigOn > 0.5){
+    vec4 sg = texture2D(uSig, vec2(fc.x/uRes.x, 1.0 - fc.y/uRes.y));
+    col = mix(col, sg.rgb, sg.a);
+  }
+
+  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+}
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+  <script>
+  (function(){
+    const art=document.getElementById('art');
+    const gl=art.getContext('webgl',{preserveDrawingBuffer:true, antialias:true, premultipliedAlpha:false});
+    const $=id=>document.getElementById(id);
+    if(!gl){ const c=art.getContext('2d'); c.fillStyle='#111'; c.fillRect(0,0,art.width,art.height); c.fillStyle='#fff'; c.font='24px sans-serif'; c.fillText('WebGL unavailable',40,60); return; }
+    gl.getExtension('OES_standard_derivatives');
+
+    const P={ aspect:'1080/1920', seed:3, mode:'tiles', cols:4, rows:7, square:true,
+      ang:45, spread:0.5, stops:3,
+      c:['#f7de4c','#ea2b1e','#1f40e6'],
+      sigOn:false, sigText:'lab colour study', sigAlign:'center',
+      sigSize:0.020, sigMar:0.040, sigC:'#ffffff',
+      rim:0.03, rimAng:90, rimA:1.0, rimC:'#ffffff', stops:3,
+      goff:0.60, toff:0.0, scat:0, spd:1.0, play:true,
+      cx:0.5, cy:0.5, rad:0.55, rings:4, pulse:0.25, prate:0.30,
+      word:'AHA', face:'UniversNextPro-Bold.ttf', wsize:62, strokes:9 };
+    const MODES={tiles:0, radial:1, strokes:2};
+
+    const HEX=h=>{ const n=parseInt(h.slice(1),16); return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]; };
+
+    // ---- compile ----
+    function sh(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+      if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) console.warn(gl.getShaderInfoLog(s)); return s; }
+    const vs=sh(gl.VERTEX_SHADER, 'attribute vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }');
+    const fs=sh(gl.FRAGMENT_SHADER, document.getElementById('frag').textContent);
+    const prog=gl.createProgram(); gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog);
+    if(!gl.getProgramParameter(prog,gl.LINK_STATUS)) console.warn(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, 1,1]),gl.STATIC_DRAW);
+    const ploc=gl.getAttribLocation(prog,'p'); gl.enableVertexAttribArray(ploc); gl.vertexAttribPointer(ploc,2,gl.FLOAT,false,0,0);
+    const U={}; ['uRes','uT','uMode','uCols','uRows','uAngle','uSpread','uGradOff','uTileOff','uScatter','uSeed','uSquare','uStops',
+      'uRim','uRimAngle','uRimA','uCenter','uRadius','uRings','uPulse','uPrate','uTex','uStrokes','uSig','uSigOn',
+      'uC0','uC1','uC2','uC3','uC4','uC5','uC6','uC7','uRimC']
+      .forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+
+    // ---- the word's distance field, as a texture -------------------------------
+    // A signed distance field is what makes the strokes possible: each contour is
+    // just a step of that distance, so the shader gets clean concentric bands for
+    // free and they animate by sliding the ramp along it.
+    const tex=gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,1,1,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,new Uint8Array([128]));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    // exact euclidean distance transform (Felzenszwalb & Huttenlocher), 1D then 2D
+    const INF=1e20;
+    function edt1d(f,d,v,z,n){
+      v[0]=0; z[0]=-INF; z[1]=INF;
+      for(let q=1,k=0;q<n;q++){
+        let s2=((f[q]+q*q)-(f[v[k]]+v[k]*v[k]))/(2*q-2*v[k]);
+        while(k>0 && s2<=z[k]){ k--; s2=((f[q]+q*q)-(f[v[k]]+v[k]*v[k]))/(2*q-2*v[k]); }
+        k++; v[k]=q; z[k]=s2; z[k+1]=INF;
+      }
+      for(let q=0,k=0;q<n;q++){ while(z[k+1]<q) k++;
+        d[q]=(q-v[k])*(q-v[k])+f[v[k]]; }
+    }
+    function edt2d(data,w,h){
+      const m=Math.max(w,h), f=new Float64Array(m), d=new Float64Array(m),
+            v=new Int32Array(m), z=new Float64Array(m+1);
+      for(let x=0;x<w;x++){ for(let y=0;y<h;y++) f[y]=data[y*w+x];
+        edt1d(f,d,v,z,h); for(let y=0;y<h;y++) data[y*w+x]=d[y]; }
+      for(let y=0;y<h;y++){ for(let x=0;x<w;x++) f[x]=data[y*w+x];
+        edt1d(f,d,v,z,w); for(let x=0;x<w;x++) data[y*w+x]=d[x]; }
+    }
+    let font=null, fieldKey='';
+    function buildField(){
+      const key=[P.word,P.face,P.wsize,W,H].join('|');
+      if(!font || fieldKey===key) return; fieldKey=key;
+      const R=520, fw=Math.max(64, Math.round(R*(W>=H?1:W/H))), fh=Math.max(64, Math.round(R*(W>=H?H/W:1)));
+      const c=document.createElement('canvas'); c.width=fw; c.height=fh;
+      const g=c.getContext('2d');
+      g.fillStyle='#000'; g.fillRect(0,0,fw,fh);
+      // fit the whole word to the frame — Size is how much of it the word fills,
+      // so a long word shrinks to fit instead of running off the edge
+      const word=P.word||'A'; let path, bb;
+      try{
+        const ref=100, p0=font.getPath(word,0,0,ref), b0=p0.getBoundingBox();
+        const wR=Math.max(1e-3,(b0.x2-b0.x1)/ref), hR=Math.max(1e-3,(b0.y2-b0.y1)/ref);
+        const k=P.wsize/100, size=Math.min(fw*k/wR, fh*k/hR);
+        path=font.getPath(word,0,0,size); bb=path.getBoundingBox();
+      }catch(e){ return; }
+      const ox=fw/2-(bb.x1+bb.x2)/2, oy=fh/2-(bb.y1+bb.y2)/2;
+      g.save(); g.translate(ox,oy); g.fillStyle='#fff';
+      try{ g.fill(new Path2D(path.toPathData(2))); }catch(e){}
+      g.restore();
+      const px=g.getImageData(0,0,fw,fh).data, N=fw*fh;
+      const inside=new Float64Array(N), outside=new Float64Array(N);
+      for(let i=0;i<N;i++){ const on=px[i*4]>127;
+        inside[i]  = on ? INF : 0;      // distance from the ink, measured inside
+        outside[i] = on ? 0 : INF; }    // distance from the ink, measured outside
+      edt2d(inside,fw,fh); edt2d(outside,fw,fh);
+      const range=Math.min(fw,fh)*0.5, out=new Uint8Array(N);
+      for(let i=0;i<N;i++){
+        const sd=(Math.sqrt(outside[i]) - Math.sqrt(inside[i]))/range;   // -1 inside … +1 outside
+        out[i]=Math.max(0,Math.min(255, Math.round(128 + sd*127)));
+      }
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,fw,fh,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,out);
+    }
+    function loadFace(){ if(!window.opentype){ setTimeout(loadFace,120); return; }
+      opentype.load('/workshops/bgsu/shared/fonts/'+P.face,(err,f)=>{ if(err){ console.warn('font load failed',err); return; }
+        font=f; fieldKey=''; buildField(); drawNow(); }); }
+
+    // ---- the signature, drawn into a texture so it lands in stills and video ----
+    const sigTex=gl.createTexture(); const sigCv=document.createElement('canvas');
+    gl.bindTexture(gl.TEXTURE_2D,sigTex);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([0,0,0,0]));
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    let sigKey='';
+    function buildSig(w,h){
+      const key=[P.sigOn,P.sigText,P.sigAlign,P.sigSize,P.sigMar,P.sigC,w,h,sigFontReady].join('|');
+      if(sigKey===key) return; sigKey=key;
+      if(!P.sigOn) return;
+      sigCv.width=w; sigCv.height=h;
+      const g=sigCv.getContext('2d');
+      g.clearRect(0,0,w,h);
+      const m=Math.min(w,h), px=Math.max(8, m*P.sigSize), mar=m*P.sigMar;
+      g.font=px+'px "Sidepiece-HoneyPie", "IBM Plex Sans", system-ui, sans-serif';
+      g.fillStyle=P.sigC;
+      g.textAlign = P.sigAlign==='left' ? 'left' : P.sigAlign==='right' ? 'right' : 'center';
+      g.textBaseline='middle';
+      const x = P.sigAlign==='left' ? mar : P.sigAlign==='right' ? w-mar : w/2;
+      g.fillText(P.sigText||'', x, h/2);          // always on the vertical centre
+      gl.bindTexture(gl.TEXTURE_2D,sigTex);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,sigCv);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
+    }
+    // Sidepiece has to be fetched before canvas can set type in it — a @font-face is
+    // only loaded on use, and canvas doesn't count as use, so ask for it explicitly.
+    let sigFontReady=0;
+    if(document.fonts && document.fonts.load){
+      document.fonts.load('40px "Sidepiece-HoneyPie"').then(()=>{ sigFontReady=1; sigKey=''; drawNow(); }).catch(()=>{});
+    }
+
+    let W=1080,H=1920,clock=0;
+    function draw(w,h,tm){
+      gl.viewport(0,0,w,h);
+      gl.uniform2f(U.uRes,w,h); gl.uniform1f(U.uT,tm);
+      gl.uniform1f(U.uMode, MODES[P.mode]||0);
+      gl.uniform2f(U.uCenter,P.cx,P.cy); gl.uniform1f(U.uRadius,P.rad);
+      gl.uniform1f(U.uRings,P.rings); gl.uniform1f(U.uPulse,P.pulse); gl.uniform1f(U.uPrate,P.prate);
+      gl.uniform1f(U.uStrokes,P.strokes);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,tex); gl.uniform1i(U.uTex,0);
+      gl.uniform1f(U.uCols,P.cols); gl.uniform1f(U.uRows,P.rows);
+      gl.uniform1f(U.uAngle,P.ang*Math.PI/180);
+      gl.uniform1f(U.uSpread,P.spread); gl.uniform1f(U.uGradOff,P.goff);
+      gl.uniform1f(U.uTileOff,P.toff); gl.uniform1f(U.uScatter,P.scat);
+      gl.uniform1f(U.uSeed,P.seed*0.137); gl.uniform1f(U.uSquare,P.square?1:0);
+      for(let i=0;i<8;i++) gl.uniform3fv(U['uC'+i], HEX(P.c[Math.min(i,P.c.length-1)]));
+      gl.uniform1f(U.uStops, P.c.length);
+      buildSig(w,h);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,sigTex); gl.uniform1i(U.uSig,1);
+      gl.uniform1f(U.uSigOn, P.sigOn?1:0);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.uniform1f(U.uRim,P.rim); gl.uniform1f(U.uRimAngle,P.rimAng*Math.PI/180);
+      gl.uniform1f(U.uRimA,P.rimA); gl.uniform3fv(U.uRimC,HEX(P.rimC));
+      gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+    }
+    function drawNow(){ draw(W,H,clock); }
+
+    function aspectWH(){ const p=(P.aspect||'1080/1920').split(/[/:x]/).map(Number), a=p[0]||9, b=p[1]||16, long=1600;
+      return a>=b ? [long, Math.round(long*b/a)] : [Math.round(long*a/b), long]; }
+    function fit(){ [W,H]=aspectWH(); art.width=W; art.height=H; fieldKey=''; buildField(); drawNow(); }
+    let t0=performance.now();
+    function frame(now){ const dt=Math.min(0.05,(now-t0)/1000); t0=now; if(P.play){ clock += dt*(P.spd/10); drawNow(); } requestAnimationFrame(frame); }
+    requestAnimationFrame(frame);
+
+    // ---- wire ----
+    function bind(id, rid, set, fmt){ const r=$(id), v=$(rid); if(!r) return;
+      r.oninput=()=>{ set(+r.value); if(v) v.textContent=fmt?fmt(+r.value):r.value; if(!P.play) drawNow(); }; }
+    bind('cols','colsR',v=>P.cols=v);
+    bind('rows','rowsR',v=>P.rows=v);
+    bind('ang','angR',v=>P.ang=v, v=>v+'°');
+    bind('spread','spreadR',v=>P.spread=v/100, v=>(v/100).toFixed(2));
+    bind('goff','goffR',v=>P.goff=v/100, v=>(v/100).toFixed(2));
+    bind('toff','toffR',v=>P.toff=v/100, v=>(v/100).toFixed(2));
+    bind('scat','scatR',v=>P.scat=v/100);
+    bind('spd','spdR',v=>P.spd=v, v=>(v/10).toFixed(1));
+    bind('rim','rimR',v=>P.rim=v/200);
+    bind('rimAng','rimAngR',v=>P.rimAng=v, v=>v+'°');
+    bind('rimA','rimAR',v=>P.rimA=v/100);
+    bind('cx','cxR',v=>P.cx=v/100, v=>(v/100).toFixed(2));
+    bind('cy','cyR',v=>P.cy=v/100, v=>(v/100).toFixed(2));
+    bind('rad','radR',v=>P.rad=v/100, v=>(v/100).toFixed(2));
+    bind('rings','ringsR',v=>P.rings=v);
+    bind('pulse','pulseR',v=>P.pulse=v/100, v=>(v/100).toFixed(2));
+    bind('prate','prateR',v=>P.prate=v/100, v=>(v/100).toFixed(2));
+    bind('strokes','strokesR',v=>P.strokes=v);
+    $('wsize').oninput=e=>{ P.wsize=+e.target.value; $('wsizeR').textContent=P.wsize; fieldKey=''; buildField(); if(!P.play) drawNow(); };
+    $('word').oninput=e=>{ P.word=e.target.value||'A'; fieldKey=''; buildField(); if(!P.play) drawNow(); };
+    $('face').onchange=e=>{ P.face=e.target.value; loadFace(); };
+    function syncMode(){ document.querySelectorAll('#dock .group.mode').forEach(el=>{
+        el.hidden = !el.classList.contains('mode-'+P.mode); }); }
+    $('mode').addEventListener('change',e=>{ P.mode=e.target.value; syncMode();
+      if(P.mode==='strokes'){ fieldKey=''; buildField(); } drawNow(); });
+
+    // the palette is a list you add to and take from — two colours minimum, eight maximum
+    const MAXC=8;
+    function syncStops(){
+      const host=$('colRows'); host.innerHTML='';
+      P.c.forEach((hex,i)=>{
+        const row=document.createElement('div'); row.className='crow';
+        const lab=document.createElement('label'); lab.textContent='Colour '+(i+1);
+        const end=document.createElement('span'); end.className='cend';
+        const sw=document.createElement('input'); sw.type='color'; sw.className='sw'; sw.value=hex;
+        sw.oninput=e=>{ P.c[i]=e.target.value; if(!P.play) drawNow(); };
+        const rm=document.createElement('button'); rm.className='btn rm'; rm.textContent='\u2212';
+        rm.title='Remove this colour'; rm.disabled=P.c.length<=2;
+        rm.onclick=()=>{ if(P.c.length<=2) return; P.c.splice(i,1); syncStops(); drawNow(); };
+        end.append(sw,rm); row.append(lab,end); host.appendChild(row);
+      });
+      $('addCol').disabled = P.c.length>=MAXC;
+    }
+    $('addCol').addEventListener('click',()=>{
+      if(P.c.length>=MAXC) return;
+      P.c.push(P.c[P.c.length-1]||'#ffffff'); syncStops(); drawNow();
+    });
+    $('rimC').oninput=e=>{ P.rimC=e.target.value; if(!P.play) drawNow(); };
+    bind('sigSize','sigSizeR',v=>P.sigSize=v/1000, v=>(v/10).toFixed(1));
+    bind('sigMar','sigMarR',v=>P.sigMar=v/1000, v=>(v/10).toFixed(1));
+    $('sigOn').onchange=e=>{ P.sigOn=e.target.checked; drawNow(); };
+    $('sigText').oninput=e=>{ P.sigText=e.target.value; drawNow(); };
+    $('sigC').oninput=e=>{ P.sigC=e.target.value; drawNow(); };
+    function seg(id,set){ const el=$(id); if(!el) return;
+      el.addEventListener('click',ev=>{ const b=ev.target.closest('button'); if(!b) return;
+        [...el.querySelectorAll('button')].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        set(b.dataset.x); drawNow(); }); }
+    seg('sigAlign',v=>P.sigAlign=v);
+    $('square').onchange=e=>{ P.square=e.target.checked; if(!P.play) drawNow(); };
+
+    $('aspect').addEventListener('change',e=>{ P.aspect=e.target.value; fit(); });
+    $('reroll').addEventListener('click',()=>{ P.seed=1+Math.floor(Math.random()*9999); drawNow(); });
+    $('playBtn').addEventListener('click',()=>{ P.play=!P.play; $('playBtn').setAttribute('aria-pressed',String(P.play)); $('playBtn').textContent=P.play?'Pause':'Play'; if(!P.play) drawNow(); });
+
+    function forceStory(){ const sel=$('aspect'); if(!sel) return; const opt=[...sel.options].find(o=>/9\s*[:\/x]\s*16|story|1080\s*[\/x]\s*1920/i.test(o.value+' '+o.textContent));
+      if(opt && sel.value!==opt.value){ sel.value=opt.value; P.aspect=opt.value; fit();
+        sel.dispatchEvent(new Event('change', {bubbles:true})); } }   // opal.js writes the readout
+    setTimeout(forceStory,260); setTimeout(forceStory,700);
+
+    // ---- output ----
+    Opal.mountOutput(art,'pure-land',{ render:(long)=>{ const [aw,ah]=aspectWH(), s=long/Math.max(aw,ah);
+      const tw=Math.round(aw*s), th=Math.round(ah*s), ow=art.width, oh=art.height;
+      art.width=tw; art.height=th; draw(tw,th,clock);
+      const c=document.createElement('canvas'); c.width=tw; c.height=th; c.getContext('2d').drawImage(art,0,0);
+      art.width=ow; art.height=oh; draw(ow,oh,clock); return c; } });
+    let rec=null, chunks=[], rt=0, tk=0;
+    $('recBtn').addEventListener('click',()=>{ if(rec){ rec.stop(); return; }
+      if(!P.play){ P.play=true; $('playBtn').setAttribute('aria-pressed','true'); $('playBtn').textContent='Pause'; }
+      const mime=['video/mp4;codecs=avc1','video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+      rec=new MediaRecorder(art.captureStream(30), mime?{mimeType:mime,videoBitsPerSecond:24000000}:undefined); chunks=[];
+      rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+      rec.onstop=()=>{ const ext=mime.indexOf('mp4')>=0?'mp4':'webm'; const blob=new Blob(chunks,{type:mime||'video/webm'});
+        const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='pure-land.'+ext; a.click();
+        clearInterval(tk); $('recDot').classList.remove('on'); $('recBtn').textContent='Record'; rec=null; };
+      rec.start(); $('recDot').classList.add('on'); $('recBtn').textContent='Stop';
+      rt=Date.now(); tk=setInterval(()=>{ const el=Math.floor((Date.now()-rt)/1000);
+        $('recDot').querySelector('b').textContent=(el/60|0)+':'+String(el%60).padStart(2,'0'); },250); });
+
+    syncStops(); syncMode();
+    fit();
+    loadFace();
+  })();
+  </script>
+</body>
+</html>
