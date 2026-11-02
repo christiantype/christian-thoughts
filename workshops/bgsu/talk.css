@@ -67,7 +67,7 @@
   /* over the pink of Now it is plain black */
   body.tool-ctl .chrome, body.tool-ctl .count { opacity: 0; }   /* out of the way of the tool's controls */
   body.on-pink .chrome, body.on-pink .count, body.on-pink .hint { mix-blend-mode: normal; color: #000; }
-  body.on-gold .chrome, body.on-gold .count, body.on-gold .hint { mix-blend-mode: normal; color: #000; }
+  body.on-gold .chrome, body.on-gold .count, body.on-gold .hint { mix-blend-mode: normal; color: #000; }   /* (and over the grey of a melted video) */
   .center { text-align: center; }
   .hero { font-size: var(--hero); line-height: var(--lh-display); letter-spacing: -0.02em; }
   .big  { font-size: var(--big); line-height: var(--lh-display); letter-spacing: -0.015em; }
@@ -659,3 +659,7 @@ body.ui-tool .chrome, body.ui-tool .count, body.ui-tool .hint { opacity: 0; poin
 .thanks__typed span { visibility: hidden; }
 .thanks.is-on .thanks__typed span { animation: thanks-type 0s steps(1) forwards; animation-delay: calc(.4s + var(--i) * .2s); }
 @keyframes thanks-type { to { visibility: visible; } }
+
+/* a video whose own ground fills the screen: the slide takes the color at the video's edge and the edges feather into it */
+.proj--melt { background: radial-gradient(circle at 50% 50%, #d6dfeb calc((100vh - 10em) * 0.00), #d3dde8 calc((100vh - 10em) * 0.30), #d2d9e4 calc((100vh - 10em) * 0.40), #c8cdd8 calc((100vh - 10em) * 0.50), #c4cacf calc((100vh - 10em) * 0.60), #bbc1c3 calc((100vh - 10em) * 0.70)); }   /* the video's own vignette, measured, carried out to the screen's edges (radius in half-heights of the video) */
+.proj--melt video { background: transparent; -webkit-mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent); mask-composite: intersect; }

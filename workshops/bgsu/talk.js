@@ -15,7 +15,7 @@
       es.forEach(function (en) { if (en.intersectionRatio > 0.5) golds.add(en.target); else golds.delete(en.target); });
       document.body.classList.toggle('on-gold', golds.size > 0);
     }, { threshold: [0, 0.5, 1] });
-    document.querySelectorAll('.s.gold').forEach(function (sec) { goldIO.observe(sec); });
+    document.querySelectorAll('.s.gold, .s.proj--melt').forEach(function (sec) { goldIO.observe(sec); });
   }
 
   /* the title as a true particle dispersion. The two lines are drawn once, offscreen, exactly where the
