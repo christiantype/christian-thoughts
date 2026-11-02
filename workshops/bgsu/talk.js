@@ -2,12 +2,21 @@
 (function () {
   'use strict';
   /* the frame stays white while the red screen is up */
-  document.querySelectorAll('.s.red').forEach(function (sec) {
-    if (!('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (es) {
-      es.forEach(function (en) { document.body.classList.toggle('on-red', en.intersectionRatio > 0.5); });
-    }, { threshold: [0, 0.5, 1] }).observe(sec);
-  });
+  // (any red screen: the title and, since 1 Nov, the closing run of red screens)
+  var reds = new Set();
+  if ('IntersectionObserver' in window) {
+    var redIO = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.intersectionRatio > 0.5) reds.add(en.target); else reds.delete(en.target); });
+      document.body.classList.toggle('on-red', reds.size > 0);
+    }, { threshold: [0, 0.5, 1] });
+    document.querySelectorAll('.s.red, .s.black, .s.proj--fit').forEach(function (sec) { redIO.observe(sec); });   // (and the blue of Lake Opeka, where difference turned it orange)
+    // over the golden yellow of the closing screens the frame is plain black (difference turned it blue)
+    var golds = new Set(), goldIO = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.intersectionRatio > 0.5) golds.add(en.target); else golds.delete(en.target); });
+      document.body.classList.toggle('on-gold', golds.size > 0);
+    }, { threshold: [0, 0.5, 1] });
+    document.querySelectorAll('.s.gold').forEach(function (sec) { goldIO.observe(sec); });
+  }
 
   /* the title as a true particle dispersion. The two lines are drawn once, offscreen, exactly where the
      real text sits, and every few pixels of ink becomes a particle with a home. A wave runs across the
@@ -359,7 +368,7 @@
         // the tool's page must never scroll inside its frame (that left a white strip down one side)
         if (!d.__pinned) { d.__pinned = true; fr.contentWindow.addEventListener('scroll', function () { if (fr.contentWindow.scrollX || fr.contentWindow.scrollY) fr.contentWindow.scrollTo(0, 0); }); }
         if (!d.__talkKeys) { d.addEventListener('keyup', function (e) { if (e.key === 'm' || e.key === 'M') document.dispatchEvent(new KeyboardEvent('keyup', { key: e.key })); }, true); }
-        if (!d.__talkKeys) { d.__talkKeys = true; d.addEventListener('keydown', function (e) { var tgt = e.target; if (fr.hasAttribute('data-ui') && tgt && (/^(INPUT|TEXTAREA|SELECT)$/.test(tgt.tagName) || tgt.isContentEditable)) return;   /* a tool shown whole (Opeka Type): its own fields take their keys */ if (e.key === '`' || e.key === '~') { e.preventDefault(); e.stopImmediatePropagation(); if (e.key === '~') resetTool(); else toggleCtl(); return; } if ((!toolOnScreen() && /^[mgnfMGNF]$/.test(e.key)) || /^[mM]$/.test(e.key)) { document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key })); e.preventDefault(); return; } typeKey(e); if (!e.defaultPrevented && /^(Arrow|Page)/.test(e.key)) { document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key })); e.preventDefault(); } }, true); }
+        if (!d.__talkKeys) { d.__talkKeys = true; d.addEventListener('keydown', function (e) { var tgt = e.target; if (fr.hasAttribute('data-ui') && tgt && (/^(INPUT|TEXTAREA|SELECT)$/.test(tgt.tagName) || tgt.isContentEditable)) { if (/^(ArrowUp|ArrowDown|PageUp|PageDown)$/.test(e.key)) { e.preventDefault(); tgt.blur(); document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key })); } return; }   /* a tool shown whole (Opeka Type): its own fields take their keys, but up and down always change the slide */ if (e.key === '`' || e.key === '~') { e.preventDefault(); e.stopImmediatePropagation(); if (e.key === '~') resetTool(); else toggleCtl(); return; } if ((!toolOnScreen() && /^[mgnfMGNF]$/.test(e.key)) || /^[mM]$/.test(e.key)) { document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key })); e.preventDefault(); return; } typeKey(e); if (!e.defaultPrevented && /^(Arrow|Page)/.test(e.key)) { document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key })); e.preventDefault(); } }, true); }
         // a page shown as it is (OPEN, the first homepage): only its own chrome taken away
         // the wheel over a tool never zooms it (nor the page): it moves to the next or previous screen,
         // except inside the tool's own controls while they are open
@@ -738,6 +747,16 @@
       setTimeout(function () { if (k === 0) show(); }, 700);                     // the first word takes its color where it stands
       timer = setInterval(function () { if (k >= words.length - 1) { clearInterval(timer); return; } k++; show(); }, 1700);
     }); }, { threshold: 0.6 }).observe(sec);
+  });
+
+  /* a video with its sound (the Values reel): heard only while its screen is up, from the top each time it
+     arrives, silent the moment it is left (a key already pressed in the talk is the gesture browsers ask for) */
+  document.querySelectorAll('video[data-sound]').forEach(function (v) {
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) { es.forEach(function (en) {
+      if (en.isIntersecting) { v.currentTime = 0; v.muted = false; var pl = v.play(); if (pl && pl.catch) pl.catch(function () { v.muted = true; v.play().catch(function () {}); }); }
+      else v.muted = true;
+    }); }, { threshold: 0.6 }).observe(v.closest('.s'));
   });
 
   /* beginner's mind: the circle comes in each time the screen arrives */
@@ -1241,7 +1260,7 @@
     links.forEach(function (a) { a.classList.toggle('is-on', a.dataset.sec === (i >= ws ? 'workshop' : 'talk')); });
     if (i > 0) hint.classList.add('is-gone');
   }
-  function go(i) { i = Math.max(0, Math.min(secs.length - 1, i)); secs[i].scrollIntoView({ behavior: 'smooth' }); }
+  function go(i) { i = Math.max(0, Math.min(secs.length - 1, i)); secs[i].scrollIntoView({ behavior: 'instant' }); }   // a cut, like slides: no scrolling between screens
 
   document.addEventListener('keydown', function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;

@@ -16,7 +16,7 @@
     --ink: #000000;
     --display: 'Signifier', Georgia, serif;
     --label: 'Untitled Sans', system-ui, sans-serif;
-    --hero: calc(clamp(2.6rem, 9vw, 9rem) * var(--fs));
+    --hero: calc(clamp(2rem, 7vw, 7rem) * var(--fs));   /* was 9vw (116px on a 1512 screen): brought down to 90px (2 Nov) */
     --big: calc(clamp(2rem, 6.4vw, 6.4rem) * var(--fs));
     --mid: calc(clamp(1.4rem, 3.4vw, 3rem) * var(--fs));
     --tag: calc(clamp(0.8rem, 1.1vw, 1rem) * var(--fs));
@@ -42,7 +42,7 @@
   .grid-overlay i { box-shadow: inset .5px 0 0 rgba(255, 0, 80, .45), inset -.5px 0 0 rgba(255, 0, 80, .45); background: rgba(255, 0, 80, .035); }
   @media (max-width: 40em) { .grid-overlay.is-on { grid-template-columns: repeat(6, 1fr); } .grid-overlay i:nth-child(n+7) { display: none; } }
   html { font-variant-numeric: oldstyle-nums; font-feature-settings: 'onum' 1; }
-  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: var(--paper); }
+  html { scroll-snap-type: y mandatory; background: var(--paper); }
   body {
     margin: 0; background: var(--paper); color: var(--ink);
     font-family: var(--display); font-weight: 400; font-style: normal;
@@ -60,11 +60,14 @@
   }
   .s.ink { background: var(--ink); color: var(--paper); --hairline: #4a4a4a; }
   .s.red { background: #e3241b; color: #fff; }
+  .s.black { background: #000; color: #fff; }
+  .s.gold { background: #ffc416; color: #000; }
   /* over the red screen the frame is plain white; difference would turn it cyan */
   body.on-red .chrome, body.on-red .count, body.on-red .hint { mix-blend-mode: normal; }
   /* over the pink of Now it is plain black */
   body.tool-ctl .chrome, body.tool-ctl .count { opacity: 0; }   /* out of the way of the tool's controls */
   body.on-pink .chrome, body.on-pink .count, body.on-pink .hint { mix-blend-mode: normal; color: #000; }
+  body.on-gold .chrome, body.on-gold .count, body.on-gold .hint { mix-blend-mode: normal; color: #000; }
   .center { text-align: center; }
   .hero { font-size: var(--hero); line-height: var(--lh-display); letter-spacing: -0.02em; }
   .big  { font-size: var(--big); line-height: var(--lh-display); letter-spacing: -0.015em; }
@@ -354,6 +357,7 @@
   .proj--fit { background: linear-gradient(#748eb1, #647c9d); }
   .proj--fit img { left: 50%; right: auto; width: auto; max-width: none; height: 100%; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }   /* its sides feathered into the ground, so no seam */
   .proj--poster img { position: absolute; left: 50%; top: 50%; height: calc(100% - 10em); width: auto; transform: translate(-50%, -50%); box-shadow: 0 1.4em 3em -1.2em rgba(0,0,0,.35); }
+  .proj--video video { position: absolute; left: 50%; top: 50%; height: calc(100% - 10em); width: auto; max-width: calc(100% - 4em); transform: translate(-50%, -50%); background: #000; }   /* a student's video, whole, centered */
   .proj--cycle .proj__cycle img { opacity: 0; transition: opacity .9s ease; }   /* one picture after another, crossfading */
   .proj--cycle .proj__cycle img.on { opacity: 1; }
   /* faculty: a card that turns over, cover to hummingbird to first spread, each time the screen comes up */
@@ -620,3 +624,21 @@ body.ui-tool .chrome, body.ui-tool .count, body.ui-tool .hint { opacity: 0; poin
 .sys-colors__grid input::-webkit-color-swatch-wrapper { padding: 0; }
 .sys-colors__grid input::-webkit-color-swatch { border: 0; border-radius: 50%; }
 .sys-colors__reset { margin-top: 1.6rem; width: 100%; padding: .7em; font: inherit; background: #fff; color: #000; border: 1px solid #000; border-radius: 6px; cursor: pointer; }
+
+/* the twenty words, then the question under them (one screen since 1 Nov): it comes once the last word is in */
+.tn--says .tn__wrap { flex-direction: column; align-items: center; }
+.tn__ask { margin: 1.1em 0 0; text-align: center; color: #000; opacity: 0; transition: opacity .9s ease; }
+.tn--says.is-on .tn__ask { opacity: 1; transition-delay: 3.2s; }
+
+  /* slide 17: the twenty words of the next slide, thrown across the sentence in white */
+  .zoomnow__words { position: absolute; inset: 0; margin: 0; pointer-events: none; z-index: 2; }
+  .zoomnow__words > span { position: absolute; left: var(--x); top: var(--y); color: #fff; font-size: clamp(28px, 3.4vw, 64px); line-height: 1; white-space: nowrap;
+    transform: translate(-50%, -50%) rotate(var(--r)) scale(.9); opacity: 0; transition: opacity .6s, transform .9s cubic-bezier(.2, .8, .2, 1); }
+  .zoomnow.is-on .zoomnow__words > span { opacity: 1; transform: translate(-50%, -50%) rotate(var(--r)); transition-delay: calc(1.2s + var(--i) * .12s); }
+
+  /* Values: all forty-three posters in the show cutting one to the next (once round a minute), the reel on a phone beside them */
+  .proj--pair { display: flex; justify-content: center; align-items: center; gap: clamp(2rem, 5vw, 6rem); }
+  .proj--pair .proj__phone, .proj--pair .proj__posters { position: relative; left: auto; top: auto; transform: none; height: calc(100vh - 10em); height: calc(100svh - 10em); flex: none; }
+  .proj__posters { aspect-ratio: 2 / 3; }
+  .proj__posters img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; visibility: hidden; }
+  .proj__posters img.on { visibility: visible; }
