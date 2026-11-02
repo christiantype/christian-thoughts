@@ -9,7 +9,7 @@
       es.forEach(function (en) { if (en.intersectionRatio > 0.5) reds.add(en.target); else reds.delete(en.target); });
       document.body.classList.toggle('on-red', reds.size > 0);
     }, { threshold: [0, 0.5, 1] });
-    document.querySelectorAll('.s.red, .s.black, .s.proj--fit').forEach(function (sec) { redIO.observe(sec); });   // (and the blue of Lake Opeka, where difference turned it orange)
+    document.querySelectorAll('.s.red, .s.black, .s.proj--fit, .s.white-head').forEach(function (sec) { redIO.observe(sec); });   // (and the blue of Lake Opeka, where difference turned it orange)
     // over the golden yellow of the closing screens the frame is plain black (difference turned it blue)
     var golds = new Set(), goldIO = new IntersectionObserver(function (es) {
       es.forEach(function (en) { if (en.intersectionRatio > 0.5) golds.add(en.target); else golds.delete(en.target); });
