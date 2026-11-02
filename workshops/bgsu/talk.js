@@ -825,27 +825,28 @@
     }, { threshold: 0.6 }).observe(el.closest('.s'));
   });
 
-  /* a designer today is: a column of titles rising. Each locks in the middle, in its own color and
-     underlined, then moves on up as the next arrives. Designer opens it and designer closes it. */
+  /* a designer today is: a column of titles in one slow, unbroken scroll up the page. Each takes its
+     color as it crosses the middle and keeps it on the way up. Designer opens it and designer closes it. */
   document.querySelectorAll('[data-trail]').forEach(function (box) {
     var INKS = ['#e3241b', '#2e57b8', '#e0a500', '#2f8a4b', '#ee7a26', '#6b4aa0', '#e05a93', '#1f9bb3', '#8a5a34', '#4682b4', '#c2185b', '#5a8f29'];
-    var words = box.getAttribute('data-trail').split('|').map(function (w, i) {
+    var words = box.getAttribute('data-trail').split('|').map(function (w) {
       var sp = document.createElement('span'); sp.className = 'trail__w'; sp.textContent = w; box.appendChild(sp); return sp;
     });
-    var k = 0, timer = 0, lock = 0, HOLD = 1500, MOVE = 750;
-    // a title takes its color once it lands in the middle and keeps it on the way up; the ones still to come are black.
-    // The underline is only for the one locked in the middle: off before it moves, on once the next lands
-    function ink(i) { return i === 0 || i === words.length - 1 ? '#000' : INKS[(i - 1) % INKS.length]; }
-    function mark(n) { words.forEach(function (sp, i) { sp.classList.toggle('on', i === n); if (i === n) sp.style.color = ink(i); }); }
-    function place() { words.forEach(function (sp, i) { sp.style.setProperty('--o', i - k); }); }
-    function step() { mark(-1); k++; place(); clearTimeout(lock); lock = setTimeout(function () { mark(k); }, MOVE); }
-    function reset() { clearInterval(timer); clearTimeout(lock); box.classList.add('is-still'); k = 0; words.forEach(function (sp) { sp.style.color = ''; }); place(); mark(0); box.offsetWidth; box.classList.remove('is-still'); }
-    reset();
+    var RATE = .7, GAP = 1.3, raf = 0, t0 = 0, last = words.length - 1;   // titles a second; line spacing in em
+    function ink(i) { return i === 0 || i === last ? '#000' : INKS[(i - 1) % INKS.length]; }
+    function draw(o) {
+      words.forEach(function (sp, i) {
+        sp.style.transform = 'translate(-50%, -50%) translateY(' + ((i - o) * GAP).toFixed(4) + 'em)';
+        sp.style.color = i - o <= .02 ? ink(i) : '';
+      });
+    }
+    function tick(now) { var o = Math.max(0, Math.min(last, (now - t0) / 1000 * RATE)); draw(o); raf = o < last ? requestAnimationFrame(tick) : 0; }
+    draw(0);
     if (!('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (es) {
       es.forEach(function (en) {
-        reset();
-        if (en.isIntersecting) timer = setInterval(function () { if (k >= words.length - 1) { clearInterval(timer); return; } step(); }, HOLD);
+        cancelAnimationFrame(raf); raf = 0; draw(0);
+        if (en.isIntersecting) { t0 = performance.now() + 600; raf = requestAnimationFrame(tick); }
       });
     }, { threshold: 0.6 }).observe(box.closest('.s'));
   });
@@ -1269,7 +1270,7 @@
 
   /* ── moving through it ── */
   var secs = [].slice.call(document.querySelectorAll('.s'));
-  var count = document.querySelector('.count');
+  var count = document.querySelector('.count__n') || document.querySelector('.count');
   var links = [].slice.call(document.querySelectorAll('.chrome a'));
   var hint = document.querySelector('.hint');
   var ws = document.getElementById('workshop') ? secs.indexOf(document.getElementById('workshop')) : secs.length;   // the talk and the workshop are two pages now
@@ -1311,6 +1312,9 @@
       var now = Date.now(); if (Math.abs(acc) > 50 && now - lastNav > 850) { go(current() + (acc > 0 ? 1 : -1)); lastNav = now; acc = 0; }
     }, { passive: false });
   })();
+  // restart: back to the first screen with every tool fresh (a reload that lands at the top)
+  var rs = document.querySelector('.restart');
+  if (rs) rs.addEventListener('click', function () { try { history.scrollRestoration = 'manual'; } catch (e) {} window.scrollTo(0, 0); location.reload(); });
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();

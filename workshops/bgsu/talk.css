@@ -89,6 +89,10 @@
     font-family: var(--label); font-size: var(--tag);
     color: #fff; mix-blend-mode: difference; pointer-events: none;
   }
+  .count { display: flex; align-items: center; gap: .9em; }
+  /* restart: back to the first screen, every tool fresh */
+  .restart { pointer-events: auto; cursor: pointer; background: none; border: 0; padding: .2em; margin: -.2em; color: inherit; display: block; }
+  .restart svg { width: 1.15em; height: 1.15em; display: block; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
   .hint {
     position: fixed; z-index: 10; left: var(--gutter); bottom: 1.25em;
     font-family: var(--label); font-size: var(--tag);
@@ -647,13 +651,11 @@ body.ui-tool .chrome, body.ui-tool .count, body.ui-tool .hint { opacity: 0; poin
    underlined, before it moves on up and the next arrives. It starts on designer and ends on designer. */
 .trail-s { padding: 0; }
 .trail { position: absolute; inset: 0; overflow: hidden; font-family: var(--display); font-size: var(--hero); line-height: var(--lh-display); }
-.trail__w { position: absolute; left: 50%; top: 50%; white-space: nowrap; font-style: italic; padding-bottom: .14em; border-bottom: var(--rule) solid transparent;
-  transform: translate(-50%, -50%) translateY(calc(var(--o, 0) * 1.3em)); transition: transform .75s cubic-bezier(.65, 0, .25, 1); }
-.trail__w.on { border-bottom-color: currentColor; }
-.trail.is-still .trail__w { transition: none; }
+.trail__w { position: absolute; left: 50%; top: 50%; white-space: nowrap; font-style: italic; will-change: transform; }
 
-/* thank you, in Christian's own hand (Solorzano Hand): written stroke by stroke along each line's centre, like a pen */
-.thanks__word { width: min(64vw, 1100px); height: auto; overflow: visible; }
-.thanks__word path { fill: none; stroke: currentColor; stroke-width: var(--sw); stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.thanks.is-on .thanks__word path { animation: thanks-draw var(--t) cubic-bezier(.4, 0, .6, 1) forwards; animation-delay: calc(.5s + var(--d)); }
-@keyframes thanks-draw { to { stroke-dashoffset: 0; } }
+/* thank you, in Christian's own hand (Solorzano Hand, from the workshop): typed, one letter at a time */
+@font-face { font-family: 'Solorzano Hand'; src: url('/workshops/bgsu/fonts/SolorzanoHand-Regular.woff2') format('woff2'); font-display: block; }
+.thanks__typed { margin: 0; font-family: 'Solorzano Hand', var(--display); font-weight: 400; font-size: min(15vw, 26vh); line-height: 1; white-space: nowrap; }
+.thanks__typed span { visibility: hidden; }
+.thanks.is-on .thanks__typed span { animation: thanks-type 0s steps(1) forwards; animation-delay: calc(.4s + var(--i) * .2s); }
+@keyframes thanks-type { to { visibility: visible; } }
