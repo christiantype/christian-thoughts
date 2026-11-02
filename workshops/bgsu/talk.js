@@ -1274,6 +1274,18 @@
       if (document.fullscreenElement) document.exitFullscreen(); else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
     }
   });
+  // the wheel and the trackpad cut to the next screen too, as the keys do, instead of scrolling through
+  // (the same pace as over a tool; panels of controls keep their own scrolling)
+  (function () {
+    var acc = 0, accT = 0, lastNav = 0;
+    addEventListener('wheel', function (e) {
+      if (e.ctrlKey || e.defaultPrevented) return;
+      var tg = e.target; if (tg && tg.closest && tg.closest('#sys-colors, .ctl, [data-scroll]')) return;
+      e.preventDefault();
+      acc += e.deltaY; clearTimeout(accT); accT = setTimeout(function () { acc = 0; }, 220);
+      var now = Date.now(); if (Math.abs(acc) > 50 && now - lastNav > 850) { go(current() + (acc > 0 ? 1 : -1)); lastNav = now; acc = 0; }
+    }, { passive: false });
+  })();
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
