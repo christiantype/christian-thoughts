@@ -825,6 +825,31 @@
     }, { threshold: 0.6 }).observe(el.closest('.s'));
   });
 
+  /* a designer today is: a column of titles rising. Each locks in the middle, in its own color and
+     underlined, then moves on up as the next arrives. Designer opens it and designer closes it. */
+  document.querySelectorAll('[data-trail]').forEach(function (box) {
+    var INKS = ['#e3241b', '#2e57b8', '#e0a500', '#2f8a4b', '#ee7a26', '#6b4aa0', '#e05a93', '#1f9bb3', '#8a5a34', '#4682b4', '#c2185b', '#5a8f29'];
+    var words = box.getAttribute('data-trail').split('|').map(function (w, i) {
+      var sp = document.createElement('span'); sp.className = 'trail__w'; sp.textContent = w; box.appendChild(sp); return sp;
+    });
+    var k = 0, timer = 0, lock = 0, HOLD = 1500, MOVE = 750;
+    // a title takes its color once it lands in the middle and keeps it on the way up; the ones still to come are black.
+    // The underline is only for the one locked in the middle: off before it moves, on once the next lands
+    function ink(i) { return i === 0 || i === words.length - 1 ? '#000' : INKS[(i - 1) % INKS.length]; }
+    function mark(n) { words.forEach(function (sp, i) { sp.classList.toggle('on', i === n); if (i === n) sp.style.color = ink(i); }); }
+    function place() { words.forEach(function (sp, i) { sp.style.setProperty('--o', i - k); }); }
+    function step() { mark(-1); k++; place(); clearTimeout(lock); lock = setTimeout(function () { mark(k); }, MOVE); }
+    function reset() { clearInterval(timer); clearTimeout(lock); box.classList.add('is-still'); k = 0; words.forEach(function (sp) { sp.style.color = ''; }); place(); mark(0); box.offsetWidth; box.classList.remove('is-still'); }
+    reset();
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        reset();
+        if (en.isIntersecting) timer = setInterval(function () { if (k >= words.length - 1) { clearInterval(timer); return; } step(); }, HOLD);
+      });
+    }, { threshold: 0.6 }).observe(box.closest('.s'));
+  });
+
   /* one shape becomes many: thirty seconds, from the top each time the screen arrives */
   document.querySelectorAll('.morph__art').forEach(function (cv) {
     if (!window.OPALMorph) return;
@@ -1369,7 +1394,7 @@
   /* the voice also gets into the type: the louder you speak, the more the letters on screen come apart.
      They loosen, drip, tip and blur, and pull back together when you stop. Words that change on their
      own (the rotating word, the typed lines, the title) are left alone. */
-  var gather = 0, meltSec = null, SKIP = '[data-roles], [data-rotate], .typed, [data-vapour], [data-legible], .lib, .tool__frame, .particle-src, .collide__words';
+  var gather = 0, meltSec = null, SKIP = '[data-roles], [data-trail], .thanks__word, [data-rotate], .typed, [data-vapour], [data-legible], .lib, .tool__frame, .particle-src, .collide__words';
   // every piece of type on the screen comes apart, small as well as big: the slide, the pinned stage it
   // sits on (thinking/doing, the idea), and the frame's own title and links. Not the speaker notes, the
   // live tools, drawings, or the words that change by themselves.

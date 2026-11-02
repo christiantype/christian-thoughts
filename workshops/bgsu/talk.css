@@ -642,3 +642,18 @@ body.ui-tool .chrome, body.ui-tool .count, body.ui-tool .hint { opacity: 0; poin
   .proj__posters { aspect-ratio: 2 / 3; }
   .proj__posters img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; visibility: hidden; }
   .proj__posters img.on { visibility: visible; }
+
+/* a designer today is: the titles rise in a column, each one locking in the middle, in its own color and
+   underlined, before it moves on up and the next arrives. It starts on designer and ends on designer. */
+.trail-s { padding: 0; }
+.trail { position: absolute; inset: 0; overflow: hidden; font-family: var(--display); font-size: var(--hero); line-height: var(--lh-display); }
+.trail__w { position: absolute; left: 50%; top: 50%; white-space: nowrap; font-style: italic; padding-bottom: .14em; border-bottom: var(--rule) solid transparent;
+  transform: translate(-50%, -50%) translateY(calc(var(--o, 0) * 1.3em)); transition: transform .75s cubic-bezier(.65, 0, .25, 1); }
+.trail__w.on { border-bottom-color: currentColor; }
+.trail.is-still .trail__w { transition: none; }
+
+/* thank you, in Christian's own hand (Solorzano Hand): written stroke by stroke along each line's centre, like a pen */
+.thanks__word { width: min(64vw, 1100px); height: auto; overflow: visible; }
+.thanks__word path { fill: none; stroke: currentColor; stroke-width: var(--sw); stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.thanks.is-on .thanks__word path { animation: thanks-draw var(--t) cubic-bezier(.4, 0, .6, 1) forwards; animation-delay: calc(.5s + var(--d)); }
+@keyframes thanks-draw { to { stroke-dashoffset: 0; } }
