@@ -4,6 +4,13 @@ layout: default
 
 <main class="container">
 
+  {%- comment -%}
+    The hero plays in filename order — the sort is on path, so the first file
+    alphabetically is the frame that is showing when the page loads. A name
+    with a hyphen where the others have a dot (home-0-canopy.jpg against
+    home-0.jpg) sorts ahead of the whole set, which is how a photograph is
+    moved to the front without renaming the eleven behind it.
+  {%- endcomment -%}
   {%- assign home_images = site.static_files
         | where_exp: "f", "f.path contains '/assets/images/home/'"
         | sort: "path" -%}
