@@ -338,6 +338,12 @@ pre {
       line-height: 1.5;
       margin: 0 0 1.5em;
     }
+
+    // ms(-1) is 0.888em — relative, so the global `.site a` rule applies it a
+    // second time inside an li that has already taken it, and a linked
+    // organisation sets 11% smaller than the unlinked role beneath it. Same
+    // fix as .site-bio a and the post body.
+    a, a:visited { font-size: 1em; }
   }
   .site-year {
     display: block;
