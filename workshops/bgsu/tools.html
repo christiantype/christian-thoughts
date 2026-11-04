@@ -5,7 +5,7 @@
 <script src="/workshops/bgsu/lab/shared/gate.js" data-hash="19503ea6785ee1243cd3373fe0d201404089fb7c559d2cd4b025585ee36ff3c3" data-scope="bgsu-workshop"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BGSU workshop — OP/AL</title>
+<title>Tools — Heart, Intuition and Technology</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="/workshops/bgsu/lab/shared/opal.css?v=3" />
 <style>
@@ -18,15 +18,26 @@
   li a span:last-child { color: #000; }
   li a:hover span:last-child { color: #000; }
   p { font-size: 12px; line-height: 1.5; color: #000; margin: 1.5em 0 0; }
+  :root { --gutter: max(10rem, calc((100vw - 80rem) / 2)); }
+  @media (max-width: 64em) { :root { --gutter: 4rem; } }
+  @media (max-width: 40em) { :root { --gutter: 1.25rem; } }
+  /* the talk's own frame, so the tools sit inside the BGSU project */
+  .chrome { position: fixed; z-index: 10; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; gap: 1em; padding: 1.25em var(--gutter); font-family: 'Untitled Sans', system-ui, sans-serif; font-size: calc(clamp(0.8rem, 1.1vw, 1rem) * .85); background: #fff; }
+  .chrome a { color: inherit; text-decoration: none; margin-left: 1.5em; }
+  .chrome a:hover, .chrome a.is-on { text-decoration: underline; text-underline-offset: .25em; }
 </style>
 </head>
 <body>
+<div class="chrome">
+  <span>Heart, Intuition and Technology</span>
+  <nav><a href="/workshops/bgsu/">Talk</a><a href="/workshops/bgsu/workshop">Workshop</a><a href="/workshops/bgsu/tools" class="is-on">Tools</a></nav>
+</div>
 <main>
   <div class="eyebrow">Liminal Space · Bowling Green · 1 and 2 November</div>
   <h1>Five tools, five posters, and an instrument.</h1>
   <ol>
     <li><a href="/workshops/bgsu/lab/workbench/bgsu-shapes/"><span>1</span><span>Shapes</span><span>Open</span></a></li>
-    <li><a href="/workshops/bgsu/lab/workbench/bgsu-colour/"><span>2</span><span>Colour</span><span>Open</span></a></li>
+    <li><a href="/workshops/bgsu/lab/workbench/bgsu-colour/"><span>2</span><span>Color</span><span>Open</span></a></li>
     <li><a href="/workshops/bgsu/lab/workbench/bgsu-type/"><span>3</span><span>Type</span><span>Open</span></a></li>
     <li><a href="/workshops/bgsu/lab/workbench/bgsu-type-shapes/"><span>4</span><span>Type and shapes</span><span>Open</span></a></li>
     <li><a href="/workshops/bgsu/lab/workbench/bgsu-layer/"><span>5</span><span>Layer</span><span>Open</span></a></li>
