@@ -293,6 +293,7 @@
       <option value="1275x1650" selected>Letter · 8.5 × 11 in</option>
       <option value="1650x2550">Tabloid · 11 × 17 in</option>
       <option value="1650x1650">Square · 1 : 1</option>
+      <option value="1920x1080">Landscape · 16 : 9</option>
     </select>
     <button id="szMore" hidden type="button" title="Custom size &amp; print" aria-label="Custom size and print">⋯</button>
     <div id="szPop" hidden>
@@ -2691,13 +2692,17 @@ function startPlay(){if(playing)return;playing=true;$('#playBtn').textContent='F
 buildControls();
 loadFont('bentonsans').then(()=>{
   const qs=new URLSearchParams(location.search), talk=qs.has('talk');
-  if(talk){document.body.classList.add('talk');$('#docW').value=1920;$('#docH').value=1080;}   // a slide: the projector's own shape
+  if(talk){document.body.classList.add('talk');$('#docW').value=1920;$('#docH').value=1080;}
+  else if(qs.has('only')){$('#docW').value=1920;$('#docH').value=1080;   // one engine as its own tool: the talk's 16:9 too, size menu and all
+    setTimeout(()=>{const f=$('#format'); if(f){f.value='1920x1080';f.dispatchEvent(new Event('change',{bubbles:true}));}},300);}   // a slide: the projector's own shape
   applyEngine('particles');setControl('size',360);
   const qe=qs.get('engine'); if(qe)applyEngine(qe);
+  // ?only: one engine, as its own tool (the BGSU tools page): no engine menu, and it moves from the start
+  const only=qs.has('only'); if(only&&qe){const g=$('#renderStyle').closest('.grp'); if(g)g.style.display='none';}
   const qt=qs.get('text'); if(qt)$('#text').value=qt;
   // ?set=size:420,pSpread:22 opens an engine on settings of its own (each BGSU talk slide is tuned to read)
   const qset=qs.get('set'); if(qset) qset.split(',').forEach(kv=>{ const [k,v]=kv.split(':'); if(k&&v!=null) setControl(k,isNaN(+v)?v:+v); });
   render();
-  if(!qe||talk)startPlay();   // deep-linked engines load static (good for vector export); a slide always moves
+  if(!qe||talk||only)startPlay();   // deep-linked engines load static (good for vector export); a slide always moves
 });
 </script>
