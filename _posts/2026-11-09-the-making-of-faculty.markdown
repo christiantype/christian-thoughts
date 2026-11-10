@@ -27,7 +27,9 @@ client: "Self"
 published: true
 
 ---
-Photos from the production of [Faculty 3](https://chicagographicdesign.shop/products/faculty-issue-3). Printed at [M&G Graphics](https://www.mg-graphics.com). On paper by [French](https://www.frenchpaper.com) and [Finch](https://www.finchpaper.com).
+Photos from the production of [Faculty 3](https://chicagographicdesign.shop/products/faculty-issue-3).<br>
+Printed at [M&G Graphics](https://www.mg-graphics.com).<br>
+On paper by [French](https://www.frenchpaper.com) and [Finch](https://www.finchpaper.com).
 
 <figure>
   <img src="/assets/images/diary/L1007466.jpg" alt="A stack of cream text paper squared up on a pallet in the dark of the pressroom.">
