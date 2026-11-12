@@ -15,8 +15,8 @@ thumbnail is made to the size of the thumbnail.
 Two widths, because a tile is drawn at a different size on a phone and on a
 retina desktop, and the browser picks by itself from the srcset:
 
-    <name>-420.jpg   a tile at 1x
-    <name>-840.jpg   the same tile on a 2x or 3x screen
+    assets/images/photo-thumb/<name>-420.jpg   a tile at 1x
+    assets/images/photo-thumb/<name>-840.jpg   the same on a 2x or 3x screen
 
 Both are progressive, so they paint top to bottom on a slow connection
 instead of appearing all at once at the end. EXIF is dropped: the camera line
@@ -37,7 +37,11 @@ except ImportError:
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "assets", "images", "photography")
-OUT = os.path.join(SRC, "thumb")
+# NOT inside SRC. The photography layout builds the gallery from every
+# static file under assets/images/photography/, so a thumbnail parked in
+# there is read as a photograph: 163 frames became 489 tiles, each extra
+# one resolved against the wrong directory and drawn as a broken image.
+OUT = os.path.join(ROOT, "assets", "images", "photo-thumb")
 WIDTHS = (420, 840)
 QUALITY = 82
 
