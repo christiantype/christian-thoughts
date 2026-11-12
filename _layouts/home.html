@@ -9,7 +9,10 @@ layout: default
     alphabetically is the frame that is showing when the page loads. A name
     with a hyphen where the others have a dot (home-0-canopy.jpg against
     home-0.jpg) sorts ahead of the whole set, which is how a photograph is
-    moved to the front without renaming the eleven behind it.
+    moved to the front without renaming the eleven behind it. A further -0-
+    in that gap (home-0-0-shore.jpg) steps in front of the one already
+    there, for the same reason: the sort is on bytes, and 0 comes before
+    a letter.
   {%- endcomment -%}
   {%- assign home_images = site.static_files
         | where_exp: "f", "f.path contains '/assets/images/home/'"
