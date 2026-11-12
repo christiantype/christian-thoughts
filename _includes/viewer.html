@@ -62,6 +62,7 @@
     const data  = document.getElementById('viewer-data');
     if (!root || !data) return;
     const BASE  = root.dataset.base;
+    const THUMBS = {{ include.thumbs | default: '' | jsonify }};
     const all   = JSON.parse(data.textContent);
     if (!all.length) return;
 
@@ -113,6 +114,26 @@
         fig.className = 'viewer-thumb';
         const el = document.createElement('img');
         el.src = BASE + item.f;
+        /* A tile is drawn at about 360px on a desktop and 177px on a phone,
+           and the original is 2048px wide: painting the grid out of the
+           originals cost a first screen 25MB on a desktop and 31MB on a
+           phone, for roughly a thirtieth of the pixels it used. The slide
+           view still opens the original, so the photograph itself is
+           untouched — only the thumbnail is made to the size of a thumbnail.
+           bin/generate-photo-thumbs.py writes the two widths. The original
+           stays last in the list, so a photograph whose thumbnails have not
+           been built yet still loads, and a screen wide enough to want more
+           than 840px gets the full file. */
+        if (THUMBS) {
+          const stem = item.f.replace(/\.[^.]+$/, '');
+          el.srcset = THUMBS + stem + '-420.jpg 420w, ' +
+                      THUMBS + stem + '-840.jpg 840w, ' +
+                      BASE + item.f + ' 2048w';
+          // Three tiles across above 900px against two below it, and the
+          // container stops growing, so the wide case is a width and the
+          // narrow one is a share of the screen.
+          el.sizes = '(min-width: 900px) 370px, 48vw';
+        }
         el.alt = item.a || '';
         el.loading = 'lazy';
         el.decoding = 'async';
@@ -170,14 +191,41 @@
       relayout = setTimeout(layoutMasonry, 120);
     });
 
+    /* Where the reader was standing in the grid when they opened a frame. */
+    let gridAt = null;
+
     function setMode(next) {
+      /* Slide mode fixes the viewer to the viewport and takes the body's
+         padding off, so the document collapses to a single screen and the
+         browser clamps the scroll to the top. The place in the grid is kept
+         here and handed back below, once the tiles have been measured again,
+         so closing a photograph returns the reader to the photograph instead
+         of to the masthead. */
+      const from = mode;
+      if (from === 'grid' && next !== 'grid') gridAt = window.scrollY;
+
       mode = next;
       if (mode === 'grid') buildGrid();
       stage.hidden = mode !== 'slide';
       grid.hidden  = mode !== 'grid';
-      if (mode === 'grid') layoutMasonry();
+      /* These two classes decide the body's padding and whether the viewer is
+         fixed — which is to say they decide how wide a column is. They have to
+         be on BEFORE the masonry measures. Measured under the outgoing mode,
+         every tile is sized at the full-bleed width it had in slide mode and
+         given a row span that does not match the width it is about to be drawn
+         at, which is the gap-riddled grid you get on closing a photograph. */
       body.classList.toggle('mode-grid', mode === 'grid');
       body.classList.toggle('mode-slide', mode === 'slide');
+      if (mode === 'grid') {
+        layoutMasonry();
+        if (from && from !== 'grid' && gridAt != null) {
+          // Reading the height forces the new spans to lay out, so the
+          // document is tall enough to accept the scroll back.
+          void document.documentElement.scrollHeight;
+          window.scrollTo(0, gridAt);
+        }
+        gridAt = null;
+      }
       modes.forEach(b => {
         const on = b.dataset.mode === mode;
         b.classList.toggle('active', on);
