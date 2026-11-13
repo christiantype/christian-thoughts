@@ -158,9 +158,13 @@
   // container that holds it.
   .site-intro { max-width: 34em + 3em; }
 
+  // Solid, not translucent. At 80% the figure behind the list showed
+  // through it as a grey wash across the dates — the shape looked like it
+  // had an opacity on it rather than like it was passing behind the page.
+  // A surface either occludes or it does not.
   .sketch-list {
     position: relative;
-    background: rgba(255, 255, 255, 0.80);
+    background: #fff;
     padding: 1.6em 1.5em 0.1em;
   }
 
@@ -173,6 +177,7 @@
     width: min(34em + 3em, 100%);
     margin: 0 auto;
     padding: .9em 1.5em;
+    background: #fff;
   }
 
   // On a phone the window gutter is already the only margin there is, so the
@@ -192,8 +197,6 @@
 .site.site-sound:not(.has-ground) .sketch-list,
 body:not(.has-ground) .site-sound .sketch-list {
   background: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 
 
@@ -268,11 +271,7 @@ html.is-dark { background: #000; }
   .site-header {
     background: none;
     color: #fff;
-    > .site-header-top {
-      background: rgba(0, 0, 0, .55);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-    }
+    > .site-header-top { background: #000; }
   }
   .site-header a,
   .site-header a:visited { color: #fff; }
@@ -280,11 +279,7 @@ html.is-dark { background: #000; }
   // The plate becomes a dark one. Dropping it altogether put white type
   // straight onto flat yellow, which is the one pairing on the ramp that
   // cannot be read.
-  .sketch-list {
-    background: rgba(0, 0, 0, .55);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-  }
+  .sketch-list { background: #000; }
 
   .site-year,
   .sketch-time,

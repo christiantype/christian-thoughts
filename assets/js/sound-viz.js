@@ -201,16 +201,26 @@
     return den ? (num / den) / freq.length : 0;
   }
 
-  /* Gielis's superformula. One equation covers the whole HYbr:ID sequence:
-     m is the number of lobes, and n1 takes the outline from concave cusps
-     (puckered) through a straight-sided polygon to a rounded one (bloated).
-     Both are quantised, so the figure snaps between states rather than
-     morphing continuously — which is the whole look. */
-  function superR(th, m, n1) {
-    var t1 = Math.pow(Math.abs(Math.cos(m * th / 4)), 1);
-    var t2 = Math.pow(Math.abs(Math.sin(m * th / 4)), 1);
+  /* Gielis's superformula, with all four exponents live rather than three of
+     them pinned at 1.
+
+     n2 and n3 are what make it organic. Held at 1 the equation draws
+     straight edges meeting at hard points — a vector star, which is what
+     this was. Let them move, and let them differ from each other, and the
+     edges bow: concave on one axis, swollen on the other, the two never
+     quite agreeing. m is left as a real number too, so the lobes do not
+     close evenly and the figure is never symmetrical about itself. */
+  function superR(th, m, n1, n2, n3) {
+    var t1 = Math.pow(Math.abs(Math.cos(m * th / 4)), n2);
+    var t2 = Math.pow(Math.abs(Math.sin(m * th / 4)), n3);
     return Math.pow(t1 + t2, -1 / n1);
   }
+
+  /* The figure's parameters are eased toward their targets rather than set
+     to them. Snapping was right when the whole page snapped; a thing that is
+     meant to read as alive cannot teleport between shapes. */
+  var hy = { m: 4, n1: 1, n2: 1, n3: 1, R: 0.3, spin: 0 };
+  function ease(a, b, k) { return a + (b - a) * k; }
 
   function flat(i) { var c = RGB[i % RGB.length]; return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
 
@@ -243,49 +253,90 @@
          ink it stops being a shape and becomes a shadow of one. */
       g.globalAlpha = 1;
       var lv = level(), cen = centroid();
-      var m  = 3 + Math.round(cen * 9) * 1;               // 3 … 12 lobes, integer
-      /* Eight fixed curvatures, from a four-pointed star with concave sides
-         to something nearly round. The range is wider than it was — the old
-         one topped out at a soft polygon and never actually bloated. */
-      var n1 = [0.22, 0.32, 0.46, 0.66, 0.95, 1.5, 3.2, 9][Math.min(7, Math.floor(lv * 11))];
-      /* The lobes and the curvature snap; the size does not. With all three
-         quantised the figure sat perfectly still through a steady passage
-         and only jumped at a change of register — three pixels of movement
-         a frame, which reads as a static graphic. Letting the radius run
-         continuously gives it breath between the jumps.
 
-         It is sized to half the SHORT side at rest and well past it when
-         loud, so the cusps leave the window on a peak. A figure that always
-         fits inside the frame reads as an illustration of a shape; one that
-         runs off the edge reads as a thing happening behind the page. */
-      var R  = Math.min(W, H) * (0.30 + lv * 0.95);
-      /* It also turns, slowly, and only while there is something to turn
-         it — so two passes over the same bar never draw the same picture. */
-      angle += lv * 0.012;
-      /* Set a little low. Dead centre it spent its life behind the list and
-         only its points came out, which read as a mistake rather than as a
-         composition. */
-      var cx = W / 2, cy = H * 0.62, STEPS = 720, max = 0, pts = [];
-      for (var s = 0; s <= STEPS; s++) {
-        var th = s / STEPS * Math.PI * 2;
-        var r = superR(th, m, n1);
-        if (!isFinite(r)) r = 0;
-        if (r > max) max = r;
-        pts.push([th, r]);
+      /* Fourteen bands, smoothed around the circle twice, then read back
+         with cosine interpolation. Three things had to be true for the
+         ripple to read as a living edge rather than as gravel:
+
+           — few bands. Forty-eight of them put a crag every seven degrees
+             and the figure turned into a potato.
+           — smoothed CIRCULARLY. The first band sits next to the last on a
+             closed curve; unsmoothed across that join the outline had a
+             visible seam at three o'clock.
+           — interpolated between, not stepped. A stepped read gives facets,
+             and a facet is the one thing an organic edge cannot have.      */
+      var NB = 14, hb = bands(NB, false);
+      for (var pass = 0; pass < 2; pass++) {
+        var cp = hb.slice();
+        for (var bi = 0; bi < NB; bi++) {
+          hb[bi] = (cp[(bi - 1 + NB) % NB] + 2 * cp[bi] + cp[(bi + 1) % NB]) / 4;
+        }
       }
+      function bandAt(u) {
+        var f = u * NB, i0 = Math.floor(f) % NB, i1 = (i0 + 1) % NB;
+        var tt = (1 - Math.cos((f - Math.floor(f)) * Math.PI)) / 2;
+        return hb[i0] * (1 - tt) + hb[i1] * tt;
+      }
+
+      /* Targets, then eased toward. Nothing here is quantised any more:
+         a figure that is meant to breathe cannot jump between states. */
+      /* n1 is kept low. Allowed to run up past 2 it bloats the outline into
+         one mass and the lobes stop reading at all — which is what "organic"
+         must not mean. Held under about 1.8 the limbs stay separate and the
+         figure pinches between them. */
+      hy.m  = ease(hy.m,  2.6 + cen * 5.5,    0.035);
+      hy.n1 = ease(hy.n1, 0.32 + lv * 1.5,    0.045);
+      hy.n2 = ease(hy.n2, 0.55 + hb[2]  * 1.6, 0.05);   // the low end bows
+      hy.n3 = ease(hy.n3, 0.55 + hb[10] * 1.6, 0.05);   // the top end bows
+      hy.R  = ease(hy.R,  0.16 + lv * 0.38,   0.09);
+      hy.spin += 0.0012 + lv * 0.008;
+
+      var R  = Math.min(W, H) * hy.R;
+      var cx = W / 2, cy = H * 0.66, STEPS = 540, max = 0, pts = [];
+      var t = performance.now() / 1000;
+
+      for (var si = 0; si < STEPS; si++) {
+        var u  = si / STEPS;
+        var th = u * Math.PI * 2;
+        var r = superR(th, hy.m, hy.n1, hy.n2, hy.n3);
+        if (!isFinite(r)) r = 0;
+
+        /* The spectrum pushes the boundary out where its energy is, gently.
+           This is what stops the figure being a formula — the edge swells
+           where the sound is, so the same shape never draws twice. */
+        r *= 1 + bandAt(u) * 0.26;
+
+        /* And a slow wander on three periods that do not divide into each
+           other, so it is never symmetrical about itself and never repeats. */
+        r *= 1 + 0.05 * Math.sin(th * 2 + t * 0.31)
+               + 0.035 * Math.sin(th * 3 - t * 0.17)
+               + 0.02 * Math.sin(th * 5 + t * 0.11);
+
+        if (r > max) max = r;
+        pts.push([th + hy.spin, r]);
+      }
+
+      /* Drawn through the midpoints as quadratics rather than joined
+         straight. Even at 540 samples a polyline keeps a faint faceting on
+         the long flanks, and faceting is the one thing an organic outline
+         cannot have. */
+      var XY = pts.map(function (q) {
+        var rr = q[1] / (max || 1) * R;
+        return [cx + Math.cos(q[0]) * rr, cy + Math.sin(q[0]) * rr];
+      });
       g.beginPath();
-      for (var q = 0; q < pts.length; q++) {
-        var rr = pts[q][1] / (max || 1) * R;
-        var th2 = pts[q][0] + angle;
-        var x = cx + Math.cos(th2) * rr, y = cy + Math.sin(th2) * rr;
-        q ? g.lineTo(x, y) : g.moveTo(x, y);
+      var last = XY[XY.length - 1], first = XY[0];
+      g.moveTo((last[0] + first[0]) / 2, (last[1] + first[1]) / 2);
+      for (var pi2 = 0; pi2 < XY.length; pi2++) {
+        var cur = XY[pi2], nxt = XY[(pi2 + 1) % XY.length];
+        g.quadraticCurveTo(cur[0], cur[1], (cur[0] + nxt[0]) / 2, (cur[1] + nxt[1]) / 2);
       }
       g.closePath();
       g.fillStyle = BLACK; g.fill();
       /* One hairline ring at the figure's resting size, so you can read how
          far it has swollen past it. */
       g.strokeStyle = accent; g.lineWidth = 1;
-      g.beginPath(); g.arc(cx, cy, Math.min(W, H) * 0.30, 0, Math.PI * 2); g.stroke();
+      g.beginPath(); g.arc(cx, cy, Math.min(W, H) * 0.22, 0, Math.PI * 2); g.stroke();
 
     /* ── left against right: a Lissajous ─────────────────────────────────
        The literal stereo image of the recording. An H6's XY capsule is what
