@@ -32,7 +32,15 @@
     <meta name="twitter:image:alt" content="{{ og_alt | escape }}">
   {%- endif -%}
 
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- comment -%}
+    The stylesheet carries the build time. Without it a browser holds the CSS
+    it already has and the HTML arrives new against it — which is how the
+    sound page shipped and then rendered on a phone as unstyled buttons, every
+    icon at full size, because that phone was still on a stylesheet from
+    before the page existed. One site, one stylesheet, so every CSS change
+    anywhere has the same problem and this is the one place to fix it.
+  {%- endcomment -%}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M' }}">
 
   {%- comment -%} Typography: Indivisible via Typekit. {%- endcomment -%}
   <link rel="stylesheet" href="https://use.typekit.net/red7ojk.css">
