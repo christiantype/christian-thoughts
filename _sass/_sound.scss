@@ -81,8 +81,16 @@
 
   // Elapsed and total, flush right, in figures that do not shuffle as the
   // seconds change.
+  //
+  // The slot is held open at its full width — "0:00 / 7:08" — even on a row
+  // that is not playing and only shows "7:08". Sized to its content it grew
+  // by 30px the moment the elapsed counter appeared, and the name beside it,
+  // being the flexible column, gave up exactly that much and stepped right.
+  // Pressing a row must not move the row's own words.
   .sketch-time {
     flex: 0 0 auto;
+    min-width: 7.2em;
+    text-align: right;
     font-variant-numeric: tabular-nums;
     opacity: .55;
   }
@@ -156,6 +164,17 @@
     padding: 1.6em 1.5em 0.1em;
   }
 
+  // The masthead's plate is set once, here, and only its surface changes
+  // when the page inverts. Giving it its width and padding inside the dark
+  // rule meant the whole header re-laid itself the moment a sketch started.
+  .site-header { background: none; }
+  .site-header > .site-header-top {
+    box-sizing: border-box;
+    width: min(34em + 3em, 100%);
+    margin: 0 auto;
+    padding: .9em 1.5em;
+  }
+
   // On a phone the window gutter is already the only margin there is, so the
   // plate is exactly the block of type and asks for no room of its own.
   @media (max-width: 600px) {
@@ -165,13 +184,16 @@
 }
 
 // Before anything has played the page is white on white, and a plate there
-// would be a box drawn around nothing. It arrives with the ground.
+// would be a box drawn around nothing — so only the SURFACE arrives with the
+// ground. The padding never changes. It used to go to 0 here and back to
+// 1.5em on play, which stepped every line of the list 1.5em to the right the
+// moment you pressed a row: the words moved because the box behind them did.
+// Nothing in the list may move when a sketch starts.
 .site.site-sound:not(.has-ground) .sketch-list,
 body:not(.has-ground) .site-sound .sketch-list {
   background: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  padding: 0;
 }
 
 
@@ -247,10 +269,6 @@ html.is-dark { background: #000; }
     background: none;
     color: #fff;
     > .site-header-top {
-      box-sizing: border-box;
-      width: min(34em + 3em, 100%);
-      margin: 0 auto;
-      padding: .9em 1.5em;
       background: rgba(0, 0, 0, .55);
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
