@@ -1,0 +1,149 @@
+---
+layout: default
+---
+
+{%- comment -%}
+  Sound — the sketches, newest first.
+
+  The entries come from _data/sketches.yml and nothing else. A file dropped in
+  assets/audio/ does NOT appear here on its own, which is deliberate: the
+  photography page builds itself from whatever is on disk and that is right for
+  photographs, but a sound with no date, no place and no sentence beside it is
+  not a sketch yet — it is a file. Writing the entry is the publishing step.
+
+  The list is set like the lists on /about/: the quiet line first, the name
+  under it. Same markup, same classes, so there is one list on this site and
+  not two.
+{%- endcomment -%}
+
+<main class="container">
+
+  {%- comment -%}
+    No heading over the list. The page is called Sound in the menu and the
+    entries name themselves; a word sitting above two rows is labelling
+    something already in plain sight.
+  {%- endcomment -%}
+  <div class="site-intro">
+    <ul class="site-list sketch-list">
+      {%- for s in site.data.sketches -%}
+      {%- assign m = s.length | divided_by: 60 -%}
+      {%- assign sec = s.length | modulo: 60 -%}
+      {%- capture len -%}{{ m }}:{% if sec < 10 %}0{% endif %}{{ sec }}{%- endcapture -%}
+      <li class="sketch">
+        {%- comment -%}
+          There is no title. A sketch is not a piece and naming one would
+          promise that it is — "First trial", "Second trial", and the names
+          are already doing more work than the sounds asked for. What a sketch
+          actually is, is a day and an hour, so that is what it is called.
+        {%- endcomment -%}
+        {%- capture said -%}{{ s.date }}{% if s.time %} at {{ s.time }}{% endif %}{%- endcapture -%}
+        <button type="button" class="sketch-play"
+                data-src="/assets/audio/{{ s.file }}"
+                data-len="{{ s.length }}"
+                aria-label="Play the sketch from {{ said }}">
+          <span class="sketch-mark" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ic-play"><path d="M5 3.4v9.2l8-4.6z"/></svg>
+            <svg viewBox="0 0 16 16" class="ic-pause"><path d="M5 3.4h2.1v9.2H5zM8.9 3.4H11v9.2H8.9z"/></svg>
+          </span>
+          <span class="sketch-name">{{ s.date }}{% if s.time %} · {{ s.time }}{% endif %}{% if s.place and s.place != "" %} · {{ s.place }}{% endif %}</span>
+          <span class="sketch-time"><span class="sketch-at"></span>{{ len }}</span>
+        </button>
+
+        {%- comment -%}
+          The progress rule. It is a rule and not a slider: the row already
+          says how long the sketch is and where you are in it, in figures, and
+          a second control drawn under those figures would be a picture of
+          them. Press it to move.
+        {%- endcomment -%}
+        <span class="sketch-rule" role="slider" tabindex="0"
+              aria-label="Position in the sketch from {{ said }}"
+              aria-valuemin="0" aria-valuemax="{{ s.length }}" aria-valuenow="0"><i></i></span>
+
+        {%- if s.note and s.note != "" -%}<span class="sketch-note">{{ s.note }}</span>{%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+</main>
+
+<script>
+/* One <audio> for the page, moved from row to row. Several players would let
+   two sketches run over each other, which is the one thing a page of field
+   recordings must never do. */
+(function () {
+  var audio = new Audio();
+  var row   = null;                     // the <li> that owns the sound now
+
+  function clock(s) {
+    var m = Math.floor(s / 60), r = Math.round(s % 60);
+    if (r === 60) { m += 1; r = 0; }
+    return m + ':' + (r < 10 ? '0' + r : r);
+  }
+
+  function stop() {
+    if (!row) return;
+    row.classList.remove('is-playing');
+    row.querySelector('.sketch-at').textContent = '';
+    row.querySelector('.sketch-rule i').style.width = '0%';
+    row.querySelector('.sketch-play').setAttribute('aria-label',
+      'Play the sketch from ' + row.querySelector('.sketch-name').textContent);
+  }
+
+  document.querySelectorAll('.sketch-play').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var li = btn.closest('.sketch');
+      if (row === li) {                 // the one already loaded: toggle it
+        if (audio.paused) audio.play(); else audio.pause();
+        return;
+      }
+      stop();
+      row = li;
+      audio.src = btn.dataset.src;
+      audio.play().catch(function () {});
+    });
+  });
+
+  audio.addEventListener('play', function () {
+    if (!row) return;
+    row.classList.add('is-playing');
+    row.querySelector('.sketch-play').setAttribute('aria-label',
+      'Pause the sketch from ' + row.querySelector('.sketch-name').textContent);
+  });
+  audio.addEventListener('pause', function () {
+    if (row) row.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', stop);
+
+  audio.addEventListener('timeupdate', function () {
+    if (!row) return;
+    var d = audio.duration || +row.querySelector('.sketch-play').dataset.len || 1;
+    row.querySelector('.sketch-at').textContent = clock(audio.currentTime) + ' / ';
+    row.querySelector('.sketch-rule i').style.width =
+      (audio.currentTime / d * 100).toFixed(2) + '%';
+    row.querySelector('.sketch-rule').setAttribute('aria-valuenow',
+      Math.round(audio.currentTime));
+  });
+
+  /* Pressing the rule moves. Arrow keys move it by five seconds, so the
+     control is reachable without a pointer. */
+  document.querySelectorAll('.sketch-rule').forEach(function (rule) {
+    var li = rule.closest('.sketch');
+    function seek(frac) {
+      if (row !== li || !audio.duration) return;
+      audio.currentTime = Math.max(0, Math.min(audio.duration, audio.duration * frac));
+    }
+    rule.addEventListener('click', function (e) {
+      var b = rule.getBoundingClientRect();
+      seek((e.clientX - b.left) / b.width);
+    });
+    rule.addEventListener('keydown', function (e) {
+      if (row !== li || !audio.duration) return;
+      var d = { ArrowLeft: -5, ArrowRight: 5 }[e.key];
+      if (!d) return;
+      e.preventDefault();
+      seek((audio.currentTime + d) / audio.duration);
+    });
+  });
+})();
+</script>

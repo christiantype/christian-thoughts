@@ -1,0 +1,42 @@
+# ── Sound sketches ──────────────────────────────────────────────────────────
+# The field recordings on /sound/, newest first.
+#
+# A sketch is what a sound is called here. Not a track, not a piece and not a
+# recording: a sketch, in the sense drawing means it — a few minutes of a
+# place, caught quickly, kept as it was found and not worked on afterwards.
+# The word sets the terms. Nothing on this page has to be finished.
+#
+# TO POST ONE
+#
+#   1. Put the file in assets/audio/. An .mp3 is right: it is the only format
+#      every phone and every browser will play.
+#
+#   2. Run the reader over it — it takes the true length off the file:
+#
+#          python3 bin/add-sketch.py assets/audio/your-file.mp3
+#
+#   3. Paste what it prints at the top of this list and fill in the date
+#      and the hour. There is no title: a sketch is called by the day and
+#      the hour it was caught, and nothing else.
+#
+#   4. Save. Refresh.
+#
+# Dates are written the way the rest of the site writes them: the day, then
+# the month, then the year, and no commas.
+#
+# `length` is seconds and comes from the reader. Nothing else is generated —
+# the words are all yours.
+
+- file:   first-trial.mp3
+  place:  ""
+  date:   12 November 2026
+  time:   1:38pm
+  note:   ""
+  length: 90
+
+- file:   second-trial.mp3
+  place:  ""
+  date:   12 November 2026
+  time:   9:48am
+  note:   ""
+  length: 120

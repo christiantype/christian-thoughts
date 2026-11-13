@@ -1,0 +1,117 @@
+// ── Sound ──────────────────────────────────────────────────────────────────
+// The sketches list at /sound/. It borrows .site-list and .site-year from the
+// About page rather than setting its own, so there is one list on this site
+// and not two. Everything below is the play control and the progress rule —
+// the two things About does not have.
+//
+// No new type size: the site runs on one, ms(-1), and hierarchy here comes
+// from position and the same .site-year opacity the About lists already use.
+
+.site.site-sound {
+
+  // A measured column on the site's own axis. The masthead and the foot are
+  // centred, and a list pinned to the left of a 1440px window reads as the
+  // page having lost its other half. The rows inside stay left-aligned —
+  // centring a line that ends in a running clock would move the clock.
+  .site-intro {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 34em;
+    margin: 0 auto;
+    @media (max-width: 600px) { max-width: none; }
+  }
+
+  // The .site-label that used to sit above the list carried its 2em of air
+  // with it. Without the label the list has to hold its own.
+  .sketch-list { margin-top: 2em; }
+  .sketch-list li { margin-bottom: 2.25em; }
+
+  // ── The row is the button ────────────────────────────────────────────────
+  // A 16px triangle next to an unpressable line of text is a target most
+  // people miss on a phone. The name is the button, and the mark is inside it.
+  .sketch-play {
+    display: flex;
+    align-items: baseline;
+    gap: .6em;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .sketch-play:focus-visible {
+    outline: 2px solid $cursor;
+    outline-offset: 3px;
+  }
+
+  .sketch-mark {
+    flex: 0 0 auto;
+    // Optically aligned to the x-height of the line it sits on, not to the
+    // box: a triangle hung from a baseline sits visibly low.
+    align-self: center;
+    display: inline-flex;
+    width: 1.5em;
+    height: 1.5em;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+  }
+  .sketch-mark svg { width: .8em; height: .8em; fill: currentColor; }
+  .sketch-mark .ic-pause,
+  .sketch.is-playing .sketch-mark .ic-play { display: none; }
+  .sketch.is-playing .sketch-mark .ic-pause { display: block; }
+
+  // The one that is sounding takes the accent — the same red the bio links
+  // are underlined in, which is the only accent this site has.
+  .sketch.is-playing .sketch-name,
+  .sketch.is-playing .sketch-mark { color: $accent; }
+
+  // The date IS the name of the sketch now, so it is set in full ink. It was
+  // the quiet .site-year line under a title; with the title gone, a whole
+  // list set at .55 would have read as a page of captions with nothing
+  // captioned.
+  .sketch-name { flex: 1 1 auto; }
+
+  // Elapsed and total, flush right, in figures that do not shuffle as the
+  // seconds change.
+  .sketch-time {
+    flex: 0 0 auto;
+    font-variant-numeric: tabular-nums;
+    opacity: .55;
+  }
+  .sketch.is-playing .sketch-time { opacity: 1; }
+
+  // ── The progress rule ────────────────────────────────────────────────────
+  // Hairline, full width of the row, and it only has ink in it once something
+  // is playing. A full-width grey bar under every row would be the page
+  // drawing seven controls nobody has touched.
+  .sketch-rule {
+    display: block;
+    height: 1px;
+    margin: .7em 0 .55em;
+    background: rgba($maincolor, .14);
+    cursor: pointer;
+  }
+  .sketch-rule i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: $accent;
+  }
+  .sketch-rule:focus-visible { outline: 2px solid $cursor; outline-offset: 4px; }
+
+  .sketch-note { display: block; opacity: .55; margin-top: .35em; }
+
+  @media (max-width: 600px) {
+    // The hour and the place wrap on a phone, and the gap between the quiet
+    // line and the name closes up when they do.
+    .site-year { line-height: 1.45; }
+  }
+}
