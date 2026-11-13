@@ -46,8 +46,8 @@
     cursor: pointer;
   }
   .sketch-play:focus-visible {
-    outline: 2px solid $cursor;
-    outline-offset: 3px;
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
   }
 
   .sketch-mark {
@@ -105,7 +105,7 @@
     width: 0;
     background: $accent;
   }
-  .sketch-rule:focus-visible { outline: 2px solid $cursor; outline-offset: 4px; }
+  .sketch-rule:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
   .sketch-note { display: block; opacity: .55; margin-top: .35em; }
 
@@ -114,4 +114,168 @@
     // line and the name closes up when they do.
     .site-year { line-height: 1.45; }
   }
+}
+
+// ── The ground ─────────────────────────────────────────────────────────────
+// A full-bleed canvas behind everything, driven by whatever is playing. It
+// sits at z-index 0; the cursor trail is at 9000 and the content above it, so
+// nothing here reorders the page. Empty until somebody presses play.
+
+.site.site-sound {
+
+  #sound-ground {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;   // the ground is never in the way of a press
+    display: block;
+  }
+
+  // The header, the list and the foot all have to sit over it.
+  .site-header, main, footer { position: relative; z-index: 1; }
+
+  // The plate. Over Blocks or Scan the ground goes to solid colour straight
+  // behind the dates, and type on top of that stops being readable. The plate
+  // is the one thing between them — barely there on a quiet ground, doing all
+  // the work on a loud one.
+  //
+  // It is widened with padding rather than pulled out with a negative margin.
+  // A negative margin has nothing to measure itself against: at 390px the
+  // gutter is about 14px and -1.25em is 20, so the plate hung 4px off the
+  // right edge of the window and the whole page could be dragged sideways.
+  // The column takes the padding into its own max-width instead, so the type
+  // lands exactly where it did and the plate can never be wider than the
+  // container that holds it.
+  .site-intro { max-width: 34em + 3em; }
+
+  .sketch-list {
+    position: relative;
+    background: rgba(255, 255, 255, 0.80);
+    padding: 1.6em 1.5em 0.1em;
+  }
+
+  // On a phone the window gutter is already the only margin there is, so the
+  // plate is exactly the block of type and asks for no room of its own.
+  @media (max-width: 600px) {
+    .site-intro { max-width: none; }
+    .sketch-list { padding: 1.1em 0 0.1em; }
+  }
+}
+
+// Before anything has played the page is white on white, and a plate there
+// would be a box drawn around nothing. It arrives with the ground.
+.site.site-sound:not(.has-ground) .sketch-list,
+body:not(.has-ground) .site-sound .sketch-list {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+}
+
+
+// ── The ground's control ──────────────────────────────────────────────────
+// A mark, centred under the list. No label: the page carries no other one, and
+// a word here would be the loudest thing on it.
+
+.site.site-sound {
+  .sound-pick-row { display: flex; justify-content: center; margin-top: 1.4em; }
+
+  .sound-pick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    // 44px of target around a 20px mark: the drawn size is the mark, the rest
+    // is the part a thumb needs and nobody sees.
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    opacity: .5;
+    transition: opacity .15s linear;
+  }
+  .sound-pick:hover,
+  .sound-pick:focus-visible { opacity: 1; }
+  // A hairline in the page's own ink, not the cursor blue. A 2px blue box
+  // on a black ground read as another nested panel.
+  .sound-pick:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+  .sound-pick svg {
+    width: 20px; height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: square;   // square, like everything else the ground draws
+    stroke-linejoin: miter;
+  }
+}
+
+// ── The page inverts while a dark ground runs ──────────────────────────────
+// The root goes with it. <html> carries a background of its own on this site,
+// which stops the body's from propagating to the canvas — so setting black on
+// the body alone painted exactly one viewport and left the rest of a scrolled
+// page white.
+html.is-dark { background: #000; }
+
+// Four of the six grounds are flat colour, and flat colour needs black under
+// it or it is not saturated — that is the whole reason the work this comes
+// from is on black. So the page goes with it and comes back to white when the
+// sound stops. The fade is short and only on the page's own chrome; the
+// ground itself never eases anything.
+
+.site.site-sound {
+  transition: background-color .18s linear, color .18s linear;
+
+  .site-header,
+  .site-header a,
+  .site-header a:visited { transition: background-color .18s linear, color .18s linear; }
+}
+
+.site.site-sound.is-dark {
+  background: #000;
+  color: #fff;
+
+  // The masthead takes the SAME plate as the list, on the same measure. It
+  // used to run the full width of the page while the list's ran 526px — two
+  // translucent boxes of different widths stacked on a black ground, which
+  // reads as boxes inside boxes rather than as one column of page. Matching
+  // them makes the plate a single column running down the window.
+  .site-header {
+    background: none;
+    color: #fff;
+    > .site-header-top {
+      box-sizing: border-box;
+      width: min(34em + 3em, 100%);
+      margin: 0 auto;
+      padding: .9em 1.5em;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+  }
+  .site-header a,
+  .site-header a:visited { color: #fff; }
+
+  // The plate becomes a dark one. Dropping it altogether put white type
+  // straight onto flat yellow, which is the one pairing on the ramp that
+  // cannot be read.
+  .sketch-list {
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .site-year,
+  .sketch-time,
+  .sketch-note { color: #fff; }
+
+  .sketch-rule { background: rgba(255, 255, 255, .26); }
+
+  .sound-pick { color: #fff; }
+
+  // The foot of the site and its ornaments belong to the white page.
+  footer, #hummingbird { opacity: 0; pointer-events: none; }
 }

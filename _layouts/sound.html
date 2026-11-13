@@ -16,6 +16,12 @@ layout: default
   not two.
 {%- endcomment -%}
 
+{%- comment -%}
+  The ground. It is empty until something plays — an analyser has nothing to
+  read otherwise — so the page at rest is still just the list.
+{%- endcomment -%}
+<canvas id="sound-ground" aria-hidden="true"></canvas>
+
 <main class="container">
 
   {%- comment -%}
@@ -24,6 +30,12 @@ layout: default
     something already in plain sight.
   {%- endcomment -%}
   <div class="site-intro">
+    {%- comment -%}
+      The list sits on a plate. Over Blocks or Scan the ground goes to solid
+      colour behind the type, and without something between them the dates
+      stop being readable — which is the one real risk of a full-bleed
+      visualiser. The plate is nearly invisible until it is needed.
+    {%- endcomment -%}
     <ul class="site-list sketch-list">
       {%- for s in site.data.sketches -%}
       {%- assign m = s.length | divided_by: 60 -%}
@@ -65,6 +77,28 @@ layout: default
     </ul>
   </div>
 
+  {%- comment -%}
+    The ground's control. A mark and nothing else, centred under the list —
+    the page already picks a ground at random on every load and on every
+    sketch, and this is how you step through the ten deliberately. It carries
+    its name in aria-label rather than on the page, because a word beside it
+    would be the only label on a page that has none.
+
+    Hidden until the script that owns it is running, so a reader with no
+    JavaScript is never shown a control that does nothing.
+  {%- endcomment -%}
+  <div class="site-intro sound-pick-row">
+    <button type="button" class="sound-pick" id="sound-pick" hidden
+            aria-label="Change the background">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20.5 12a8.5 8.5 0 1 1-2.49-6.01"/>
+        <path d="M20.5 3.6V9h-5.4"/>
+      </svg>
+    </button>
+
+  </div>
+
+
 </main>
 
 <script>
@@ -74,6 +108,11 @@ layout: default
 (function () {
   var audio = new Audio();
   var row   = null;                     // the <li> that owns the sound now
+
+  /* Published so the ground can read it. One <audio> for the page means one
+     analyser, and createMediaElementSource can only ever be called once on a
+     given element — a second player here would silence the first. */
+  window.SOUND_AUDIO = audio;
 
   function clock(s) {
     var m = Math.floor(s / 60), r = Math.round(s % 60);
@@ -100,6 +139,8 @@ layout: default
       stop();
       row = li;
       audio.src = btn.dataset.src;
+      /* A different sketch brings a different ground with it. */
+      audio.dispatchEvent(new Event('sketch:open'));
       audio.play().catch(function () {});
     });
   });
@@ -147,3 +188,5 @@ layout: default
   });
 })();
 </script>
+
+<script src="{{ '/assets/js/sound-viz.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M' }}" defer></script>
