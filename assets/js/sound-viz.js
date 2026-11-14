@@ -482,7 +482,7 @@
           /* The base was 0.25, which meant silence still drew the whole
              field as a dead straight band. It is the sound that puts the
              dots on the screen, so at nothing there is nothing. */
-          var a = fall * fall * (0.12 + lv2 * 1.9);
+          var a = fall * fall * (0.02 + lv2 * 2.2);
           if (a < 0.03) continue;
           g.globalAlpha = Math.min(1, a);
           g.fillStyle = (Math.abs(k2) < 2) ? accent : '#fff';
@@ -687,13 +687,17 @@
     /* ── two gratings, interference ───────────────────────────────────── */
     } else if (name === 'moire') {
       var bm = bands(3, false), lvm = level();
-      var gap1 = 5 + Math.round(bm[0] * 22), gap2 = 5 + Math.round(bm[2] * 22);
+      /* Inverted. Spacing was `5 + level * 22`, so SILENCE gave the
+         tightest grating and the densest possible field — the window had
+         more ink in it with nothing playing than with everything playing.
+         Loud is dense; quiet is open. */
+      var gap1 = 5 + Math.round((1 - bm[0]) * 26), gap2 = 5 + Math.round((1 - bm[2]) * 26);
       var ang = bm[1] * 0.5;
       /* The spacings and the angle were the only things listening, so the
          pattern held full strength through silence and only re-spaced
          itself. The ink listens too now, and an empty bar empties the
          window. */
-      g.globalAlpha = Math.min(1, 0.10 + lvm * 3.4);
+      g.globalAlpha = Math.min(1, 0.03 + lvm * 3.6);
       g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1;
       for (var m1 = -H; m1 < W + H; m1 += gap1) {
         g.beginPath(); g.moveTo(m1, 0); g.lineTo(m1, H); g.stroke();
@@ -715,7 +719,10 @@
         /* Brightness rides the level as well as the swing. Without it the
            sixteen lines sat there at full white through a silent passage,
            perfectly straight, looking like ruled paper. */
-        g.globalAlpha = Math.min(1, 0.16 + lvt * 2.8);
+        /* The floor was 0.16, which drew all sixteen lines at full strength
+           through a silent passage — ruled paper, and a ground that is not
+           listening. */
+        g.globalAlpha = Math.min(1, 0.02 + lvt * 3.0);
         g.fillStyle = (rt % 5 === 0) ? accent : '#fff';
         for (var xt = 0; xt < W; xt += 6) {
           var wt = Math.floor(xt / W * (wave.length - 1));
