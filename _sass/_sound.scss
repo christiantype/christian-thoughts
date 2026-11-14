@@ -141,8 +141,14 @@
     display: block;
   }
 
-  // The header, the list and the foot all have to sit over it.
-  .site-header, main, footer { position: relative; z-index: 1; }
+  // The list and the foot have to sit over the ground. The header must NOT
+  // be given `position: relative` to do it: the header is already
+  // `position: sticky` with `top: 1em`, and relative overrode it — which
+  // stopped it sticking on scroll AND turned that 1em from "pin 1em below
+  // the top of the window" into "shift down 1em from where you are". The
+  // masthead sat 14.2px lower than on every other page because of it. It
+  // already carries z-index: 10 of its own and needs nothing here.
+  main, footer { position: relative; z-index: 1; }
 
   // The plate. Over Blocks or Scan the ground goes to solid colour straight
   // behind the dates, and type on top of that stops being readable. The plate
@@ -158,26 +164,49 @@
   // container that holds it.
   .site-intro { max-width: 34em + 3em; }
 
-  // Solid, not translucent. At 80% the figure behind the list showed
-  // through it as a grey wash across the dates — the shape looked like it
-  // had an opacity on it rather than like it was passing behind the page.
-  // A surface either occludes or it does not.
+  // Glass, so the ground is visible through the list rather than hidden by
+  // it. The blur is what makes it glass rather than a wash: at 3-6px it
+  // read as a dirty film over the figure, and the figure looked like it had
+  // an opacity on it. At 16px the ground is unmistakably BEHIND something,
+  // the type stays on its own plane, and the dates still read.
+  //
+  // The saturate() is not decoration. Blurring a flat saturated field
+  // averages it toward grey, and the whole point of these grounds is flat
+  // colour; pushing the chroma back up keeps the colour reading as colour
+  // through the pane.
+  .sketch-list,
+  .site-header > .site-header-top {
+    background: rgba(255, 255, 255, .62);
+  }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .sketch-list,
+    .site-header > .site-header-top {
+      background: rgba(255, 255, 255, .42);
+      backdrop-filter: blur(16px) saturate(1.5);
+      -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    }
+  }
+
   .sketch-list {
     position: relative;
-    background: #fff;
     padding: 1.6em 1.5em 0.1em;
   }
 
   // The masthead's plate is set once, here, and only its surface changes
   // when the page inverts. Giving it its width and padding inside the dark
   // rule meant the whole header re-laid itself the moment a sketch started.
-  .site-header { background: none; }
+  //
+  // The vertical padding is MOVED off the header and onto the plate, not
+  // added to it. Added, the masthead on this page sat 27px lower than on
+  // About, Photo and Design and the header was 25.6px taller — which is
+  // exactly the .9em top and bottom it had gained. A page that carries a
+  // background must still sit on the same line as its neighbours.
+  .site-header { background: none; padding-block: 0; }
   .site-header > .site-header-top {
     box-sizing: border-box;
     width: min(34em + 3em, 100%);
     margin: 0 auto;
-    padding: .9em 1.5em;
-    background: #fff;
+    padding: 1.25em 1.5em;
   }
 
   // On a phone the window gutter is already the only margin there is, so the
@@ -268,18 +297,25 @@ html.is-dark { background: #000; }
   // translucent boxes of different widths stacked on a black ground, which
   // reads as boxes inside boxes rather than as one column of page. Matching
   // them makes the plate a single column running down the window.
-  .site-header {
-    background: none;
-    color: #fff;
-    > .site-header-top { background: #000; }
-  }
+  .site-header { background: none; color: #fff; }
   .site-header a,
   .site-header a:visited { color: #fff; }
 
   // The plate becomes a dark one. Dropping it altogether put white type
   // straight onto flat yellow, which is the one pairing on the ramp that
   // cannot be read.
-  .sketch-list { background: #000; }
+  // The same pane, in the dark. Black glass rather than white, or the type
+  // loses its ground against a bright field.
+  .sketch-list,
+  .site-header > .site-header-top { background: rgba(0, 0, 0, .62); }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .sketch-list,
+    .site-header > .site-header-top {
+      background: rgba(0, 0, 0, .40);
+      backdrop-filter: blur(16px) saturate(1.5);
+      -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    }
+  }
 
   .site-year,
   .sketch-time,
