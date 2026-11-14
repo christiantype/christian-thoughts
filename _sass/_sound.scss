@@ -100,18 +100,32 @@
   // Hairline, full width of the row, and it only has ink in it once something
   // is playing. A full-width grey bar under every row would be the page
   // drawing seven controls nobody has touched.
+  // The scrub is 16px of target with a 1px rule drawn down the middle of it.
+  // It was 1px of both, which is a four-minute recording addressed through a
+  // one-pixel-tall strip — findable with a mouse on a good day and not at
+  // all with a thumb. The line you see is unchanged; only the part you can
+  // hit got bigger.
   .sketch-rule {
     display: block;
-    height: 1px;
-    margin: .7em 0 .55em;
-    background: rgba($maincolor, .14);
+    position: relative;
+    height: 16px;
+    margin: .25em 0 .1em;
+    background: none;
     cursor: pointer;
   }
+  .sketch-rule::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: var(--sound-rule, rgba(10,10,10,.14));
+  }
   .sketch-rule i {
-    display: block;
-    height: 100%;
+    position: absolute;
+    left: 0; top: 50%;
+    height: 1px;
     width: 0;
-    background: $accent;
+    background: var(--accent);
   }
   .sketch-rule:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
@@ -181,15 +195,35 @@
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
     .sketch-list,
     .site-header > .site-header-top {
-      background: rgba(255, 255, 255, .42);
-      backdrop-filter: blur(16px) saturate(1.5);
-      -webkit-backdrop-filter: blur(16px) saturate(1.5);
+      // A light ground can have a solid black figure behind it, and at 20%
+      // white the pane over that figure is a mid grey with black type on it
+      // — a grey box, which is the thing this was meant to stop being. The
+      // dark grounds can stay nearly clear because their type is white and
+      // their field is already dark; this one has to hold a pale pane so
+      // black type survives. The shape still reads through it.
+      background: rgba(255, 255, 255, .72);
+      backdrop-filter: blur(26px) saturate(1.7);
+      -webkit-backdrop-filter: blur(26px) saturate(1.7);
     }
   }
 
   .sketch-list {
     position: relative;
     padding: 1.6em 1.5em 0.1em;
+  }
+
+  // The contrast lives on the TYPE, not in a tint over the pane. Measured
+  // against what the clear glass actually lets through, four of the ten
+  // grounds dropped the dates to a contrast ratio between 1.1 and 1.6 —
+  // unreadable. Darkening the pane to fix that is what made it look like a
+  // panel instead of a window. A scrim carried by the letters themselves
+  // holds the type at any ground and leaves the glass clear.
+  //
+  // Two shadows, not one: a tight one for the edge of the stroke and a wide
+  // soft one for the field around it. A single wide shadow reads as a glow.
+  .sketch-list,
+  .site-header > .site-header-top {
+    text-shadow: 0 0 2px rgba(255, 255, 255, .95), 0 0 14px rgba(255, 255, 255, .85);
   }
 
   // The masthead's plate is set once, here, and only its surface changes
@@ -311,9 +345,9 @@ html.is-dark { background: #000; }
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
     .sketch-list,
     .site-header > .site-header-top {
-      background: rgba(0, 0, 0, .40);
-      backdrop-filter: blur(16px) saturate(1.5);
-      -webkit-backdrop-filter: blur(16px) saturate(1.5);
+      background: rgba(0, 0, 0, .16);
+      backdrop-filter: blur(26px) saturate(1.7);
+      -webkit-backdrop-filter: blur(26px) saturate(1.7);
     }
   }
 
@@ -321,7 +355,14 @@ html.is-dark { background: #000; }
   .sketch-time,
   .sketch-note { color: #fff; }
 
-  .sketch-rule { background: rgba(255, 255, 255, .26); }
+  // White type wants a dark scrim, for the same reason and in the same two
+  // steps.
+  .sketch-list,
+  .site-header > .site-header-top {
+    text-shadow: 0 0 2px rgba(0, 0, 0, .95), 0 0 14px rgba(0, 0, 0, .9);
+  }
+
+  .sketch-rule::before { background: rgba(255, 255, 255, .26); }
 
   .sound-pick { color: #fff; }
 

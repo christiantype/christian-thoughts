@@ -63,21 +63,28 @@
     return [Math.round((r + m) * 255), Math.round((g2 + m) * 255), Math.round((b2 + m) * 255)];
   }
 
-  function rollPalette() {
+  /* `onBlack` matters more than anything else in here. The ramp used to run
+     40% to 66% lightness whatever was under it, and a 40% blue on a black
+     page is all but invisible — which is why some grounds came up so dark
+     you could barely see them. On black the six have to be LIGHT, and on
+     paper they have to be dark enough to be seen against it. */
+  function rollPalette(onBlack) {
     var base = Math.random() * 360;
     var span = 70 + Math.random() * 250;          // how far round it travels
     var dir  = Math.random() < 0.5 ? 1 : -1;
     var sat  = 72 + Math.random() * 26;           // saturated, always
+    /* Lightness climbs across the ramp so the six stay separable even when
+       the span is narrow and the hues are nearly the same. */
+    var lo = onBlack ? 56 : 30, hi = onBlack ? 86 : 58;
     RGB = [];
     for (var i = 0; i < 6; i++) {
-      /* Lightness climbs across the ramp so the six stay separable even
-         when the span is narrow and the hues are nearly the same. */
-      RGB.push(hsl(base + dir * span * (i / 5), sat, 40 + (i / 5) * 26));
+      RGB.push(hsl(base + dir * span * (i / 5), sat, lo + (i / 5) * (hi - lo)));
     }
     /* The accent is off the same wheel but away from the ramp, so the one
        mark that has to be found — the playing row, the sweep arm — is never
        the same colour as the field behind it. */
-    accent = 'rgb(' + hsl(base + dir * (span + 120 + Math.random() * 110), 92, 54).join(',') + ')';
+    accent = 'rgb(' + hsl(base + dir * (span + 120 + Math.random() * 110), 92,
+                          onBlack ? 62 : 48).join(',') + ')';
   }
 
   /* name, label, wants a black page */
@@ -96,7 +103,8 @@
     ['pulse',   'Pulse',    true],    // hard rings fired by transients
     ['polar',   'Polar',    true],    // a radial sweep, printing the spectrum
     ['moire',   'Moiré',    true],    // two gratings, interference
-    ['traces',  'Traces',   true]     // stacked beaded waveform lines
+    ['traces',  'Traces',   true],    // stacked beaded waveform lines
+    ['sand',    'Sand',     false]    // wind on paper, the one soft ground
   ];
 
   var INK_LIGHT = 0.62;        // how much ink a white ground is allowed
@@ -106,13 +114,14 @@
   var rings = [], lastLv = 0;
   var W = 0, H = 0, DPR = 1;
   var sweep = 0, stamp = null, stc = null, raf = null, angle = 0;
+  var inkC = null, ic = null;
   var ctx, an, aL, aR, freq, wave, wl, wr, wired = false;
 
   /* `i` picks a ground by hand; left out, one is drawn at random. */
   function reroll(i) {
     mode   = MODES[(i == null) ? (Math.random() * MODES.length) | 0 : (i % MODES.length)];
-    rollPalette();
     dark   = mode[2];
+    rollPalette(dark);
     document.documentElement.style.setProperty('--accent', accent);
     /* The ground names itself on the body. It is what the stylesheet would
        hook into if one of them ever needed its own rule, and it is how the
@@ -128,8 +137,9 @@
   }
 
   function reset() {
-    sweep = 0; rings = []; lastLv = 0; angle = 0;
+    sweep = 0; rings = []; lastLv = 0; angle = 0; roll = 0.25; gain = 1;
     if (stc) stc.clearRect(0, 0, stamp.width, stamp.height);
+    if (ic) ic.clearRect(0, 0, inkC.width, inkC.height);
     g.clearRect(0, 0, W, H);
   }
 
@@ -144,6 +154,14 @@
     stamp = document.createElement('canvas');
     stamp.width = Math.max(1, Math.round(W)); stamp.height = Math.max(1, Math.round(H));
     stc = stamp.getContext('2d');
+    /* The ink is carried at half resolution and blown up. It is a feedback
+       buffer — every frame is the last one, moved and blurred — so it costs
+       a full-canvas read and write each frame, and at half size that is a
+       quarter of the work for a picture that is soft anyway. */
+    inkC = document.createElement('canvas');
+    inkC.width  = Math.max(1, Math.round(W / 2));
+    inkC.height = Math.max(1, Math.round(H / 2));
+    ic = inkC.getContext('2d');
     reset();
   }
 
@@ -174,6 +192,27 @@
     return true;
   }
 
+  /* Automatic gain, computed once a frame and applied to every reading.
+
+     Without it a quiet piece draws a quiet picture, which sounds right and
+     is wrong: the field recordings sit around -30 LUFS and the music around
+     -20, so half the library painted a nearly black window while the other
+     half filled it. The level is already a number on the row; the ground's
+     job is the SHAPE of the sound, so it is normalised against a rolling
+     peak and every sketch gets the whole frame to draw in.
+
+     The peak decays slowly rather than tracking instantly — tracking makes
+     the gain pump audibly-visibly on every bar — and it has a floor, so
+     silence is still silence and is not amplified into a full screen. */
+  var roll = 0.25, gain = 1;
+  function agc() {
+    var mx = 0;
+    for (var i = 0; i < freq.length; i++) if (freq[i] > mx) mx = freq[i];
+    mx /= 255;
+    roll = mx > roll ? mx : roll * 0.997 + mx * 0.003;
+    gain = 1 / Math.max(0.16, roll);
+  }
+
   /* Logarithmic bands. Read linearly, the bottom octave gets two pixels and
      four fifths of the window is hiss nobody can hear. */
   function bands(n, peak) {
@@ -185,13 +224,13 @@
       for (var k = lo; k <= Math.min(hi, freq.length - 1); k++) {
         if (peak) v = Math.max(v, freq[k]); else { v += freq[k]; c++; }
       }
-      out[b] = (peak ? v : (c ? v / c : 0)) / 255;
+      out[b] = Math.min(1, (peak ? v : (c ? v / c : 0)) / 255 * gain);
     }
     return out;
   }
   function snap(v, step) { return Math.round(v / step) * step; }
   function level() { var s = 0; for (var i = 0; i < freq.length; i++) s += freq[i];
-                     return s / freq.length / 255; }
+                     return Math.min(1, s / freq.length / 255 * gain); }
   /* Where the weight of the sound is sitting, 0 low to 1 high. It is what
      decides how many lobes the shape has, so the figure changes when the
      music changes register and not merely when it gets louder. */
@@ -236,6 +275,7 @@
 
     an.getByteFrequencyData(freq);
     an.getByteTimeDomainData(wave);
+    agc();
     g.setTransform(DPR, 0, 0, DPR, 0, 0);
     g.clearRect(0, 0, W, H);
     g.imageSmoothingEnabled = false;
@@ -288,11 +328,16 @@
       hy.n1 = ease(hy.n1, 0.32 + lv * 1.5,    0.045);
       hy.n2 = ease(hy.n2, 0.55 + hb[2]  * 1.6, 0.05);   // the low end bows
       hy.n3 = ease(hy.n3, 0.55 + hb[10] * 1.6, 0.05);   // the top end bows
-      hy.R  = ease(hy.R,  0.16 + lv * 0.38,   0.09);
+      /* Big enough to be the window rather than an object in it. Measured
+         on the LONG side, so it fills a wide screen as well as a tall one,
+         and at any level past about a third its lobes are already outside
+         the frame — which is what makes it read as a mass pressing on the
+         glass rather than a shape sitting on a page. */
+      hy.R  = ease(hy.R,  0.34 + lv * 0.30,   0.09);
       hy.spin += 0.0012 + lv * 0.008;
 
-      var R  = Math.min(W, H) * hy.R;
-      var cx = W / 2, cy = H * 0.66, STEPS = 540, max = 0, pts = [];
+      var R  = Math.max(W, H) * hy.R;
+      var cx = W / 2, cy = H / 2, STEPS = 540, max = 0, pts = [];
       var t = performance.now() / 1000;
 
       for (var si = 0; si < STEPS; si++) {
@@ -316,13 +361,48 @@
         pts.push([th + hy.spin, r]);
       }
 
+      /* ── Trapped in the frame ──────────────────────────────────────────
+         The figure is bigger than the window, so every frame it is pressed
+         against the walls and whatever will not fit has to go somewhere
+         else. For each angle: how far can a point travel before it leaves
+         the canvas? Clip to that, total up the radius lost to the walls,
+         and hand it back to the angles that still have room, in proportion
+         to how much room each has. Twice, because the first redistribution
+         can itself run a lobe into a wall.
+
+         The effect is the one a soft body has in a box — the side touching
+         the wall goes flat, and the mass appears somewhere it can still
+         expand. Nothing is faked: the area pushed out of one place is the
+         area that arrives in another. */
+      var PAD = 2;
+      var rr = new Array(STEPS), rmax = new Array(STEPS);
+      for (var k0 = 0; k0 < STEPS; k0++) {
+        var a0 = pts[k0][0], co = Math.cos(a0), sn = Math.sin(a0);
+        /* distance from the centre to the frame along this heading */
+        var dx = co > 0 ? (W - PAD - cx) / co : (co < 0 ? (PAD - cx) / co : Infinity);
+        var dy = sn > 0 ? (H - PAD - cy) / sn : (sn < 0 ? (PAD - cy) / sn : Infinity);
+        rmax[k0] = Math.max(1, Math.min(dx, dy));
+        rr[k0] = pts[k0][1] / (max || 1) * R;
+      }
+      for (var sweepN = 0; sweepN < 2; sweepN++) {
+        var lost = 0, room = 0;
+        for (var k1 = 0; k1 < STEPS; k1++) {
+          if (rr[k1] > rmax[k1]) { lost += rr[k1] - rmax[k1]; rr[k1] = rmax[k1]; }
+          else room += rmax[k1] - rr[k1];
+        }
+        if (lost <= 0 || room <= 0) break;
+        for (var k2 = 0; k2 < STEPS; k2++) {
+          var head = rmax[k2] - rr[k2];
+          if (head > 0) rr[k2] += lost * (head / room);
+        }
+      }
+
       /* Drawn through the midpoints as quadratics rather than joined
          straight. Even at 540 samples a polyline keeps a faint faceting on
          the long flanks, and faceting is the one thing an organic outline
          cannot have. */
-      var XY = pts.map(function (q) {
-        var rr = q[1] / (max || 1) * R;
-        return [cx + Math.cos(q[0]) * rr, cy + Math.sin(q[0]) * rr];
+      var XY = pts.map(function (q, qi) {
+        return [cx + Math.cos(q[0]) * rr[qi], cy + Math.sin(q[0]) * rr[qi]];
       });
       g.beginPath();
       var last = XY[XY.length - 1], first = XY[0];
@@ -336,7 +416,7 @@
       /* One hairline ring at the figure's resting size, so you can read how
          far it has swollen past it. */
       g.strokeStyle = accent; g.lineWidth = 1;
-      g.beginPath(); g.arc(cx, cy, Math.min(W, H) * 0.22, 0, Math.PI * 2); g.stroke();
+      g.beginPath(); g.arc(cx, cy, Math.max(W, H) * 0.34, 0, Math.PI * 2); g.stroke();
 
     /* ── left against right: a Lissajous ─────────────────────────────────
        The literal stereo image of the recording. An H6's XY capsule is what
@@ -402,7 +482,7 @@
           /* The base was 0.25, which meant silence still drew the whole
              field as a dead straight band. It is the sound that puts the
              dots on the screen, so at nothing there is nothing. */
-          var a = fall * fall * (0.03 + lv2 * 2.2);
+          var a = fall * fall * (0.12 + lv2 * 1.9);
           if (a < 0.03) continue;
           g.globalAlpha = Math.min(1, a);
           g.fillStyle = (Math.abs(k2) < 2) ? accent : '#fff';
@@ -485,6 +565,98 @@
       g.lineTo(W / 2 + Math.cos(angle) * RMAX, H / 2 + Math.sin(angle) * RMAX);
       g.stroke();
 
+    /* ── wind on paper ──────────────────────────────────────────────────
+       The one soft ground and the only one that keeps what it drew. A
+       feedback buffer: every frame the whole picture is laid back into
+       itself, shifted a little downwind and blurred a fraction, which is
+       what makes a drift.
+
+       It is grains, not smoke. Smoke is a blurred wash and reads as ink in
+       water; sand is a great many hard specks going past, and the
+       difference between the two is entirely whether the new marks are
+       discs or dots. So the marks are dots — a few hundred a frame, one or
+       two pixels, laid down almost invisibly, and it is the feedback that
+       smears them into streaks. Nothing here is loud: a single grain is
+       under 4% opacity and the whole field at its densest is a pale wash.
+
+       The wind turns, slowly, and never squarely — it is held near the
+       horizontal because a drift that runs up or down the page reads as
+       falling rather than as weather. */
+    } else if (name === 'sand') {
+      var iw = inkC.width, ih = inkC.height;
+      var lvs = level(), ts = performance.now() / 1000;
+
+      /* Direction wanders a few degrees either side of flat. */
+      var wind = Math.sin(ts * 0.043) * 0.42;
+      var wx = Math.cos(wind) * (1.5 + lvs * 4.2);
+      var wy = Math.sin(wind) * (1.5 + lvs * 1.4);
+
+      /* The two numbers below are the whole ground, and the first attempt
+         had both wrong. A feedback buffer redrawn at 97.5% and eroded at
+         1.2% does not drift — it accumulates, and inside fifteen seconds
+         the paper is a solid grey slab. The redraw has to lose more than
+         the injection puts back, every frame, or there is no wind, only
+         silt. */
+      /* `copy`, not `source-over`. Drawing a buffer onto ITSELF in
+         source-over composites it over what is already there, so an alpha
+         of 0.93 does not fade the picture — it adds 93% of the picture to
+         100% of the picture, and every frame drives the whole field closer
+         to opaque. Fifteen seconds in, the paper was a solid grey slab.
+         With copy the destination is simply replaced by 93% of the source,
+         which is the fade that was wanted, and no separate erase pass is
+         needed at all. */
+      ic.save();
+      ic.globalCompositeOperation = 'copy';
+      /* 0.988 rather than 0.978. In copy mode the field settles at an
+         equilibrium — what the grains add each frame equals what the fade
+         takes — so a slower fade lengthens the streaks without ever silting
+         up. Below about 0.98 a grain is gone in half a second and there is
+         speckle but no wind. */
+      ic.globalAlpha = 0.988;
+      ic.filter = 'blur(0.5px)';
+      ic.translate(wx, wy);
+      ic.drawImage(inkC, 0, 0);
+      ic.restore();
+      ic.filter = 'none';
+      ic.globalCompositeOperation = 'source-over';
+      ic.globalAlpha = 1;
+
+      /* New grain. Each band gets a drift line of its own across the page,
+         and its grains are scattered along that line with a soft falloff —
+         so a band that is sounding lays a streak and a band that is not
+         lays nothing at all. Height is pitch: the low end runs along the
+         foot of the page, the top end along the head of it. */
+      var sb = bands(12, true);
+      for (var si2 = 0; si2 < 12; si2++) {
+        var amt2 = sb[si2];
+        if (amt2 < 0.06) continue;
+        var lane = ih * (0.92 - si2 / 12 * 0.84);
+        var spread = ih * (0.015 + amt2 * 0.085);
+        /* Few and faint. The gain already lifts a quiet sketch to full
+           scale, so a generous count here fills the page on everything. */
+        /* A grain has to be laid down heavily enough to survive the fade
+           that is about to be applied to it — at 2% against a 0.955 fade
+           the whole field washed out to nothing in a second. */
+        var count = Math.round(5 + amt2 * 24);
+        ic.fillStyle = 'rgba(58,52,44,' + (0.045 + amt2 * 0.085).toFixed(3) + ')';
+        for (var gi = 0; gi < count; gi++) {
+          var gx = Math.random() * iw;
+          /* two randoms summed, so grains cluster on the lane instead of
+             filling the band evenly — a flat scatter reads as noise */
+          var gy = lane + (Math.random() + Math.random() - 1) * spread;
+          var gs = Math.random() < 0.14 ? 2 : 1;
+          ic.fillRect(gx | 0, gy | 0, gs, gs);
+        }
+      }
+
+      /* Paper, warm, then the sand over it. The warmth matters: a neutral
+         grey ground makes the same grains read as dust on a screen. */
+      g.fillStyle = '#efece6';
+      g.fillRect(0, 0, W, H);
+      g.imageSmoothingEnabled = true;
+      g.drawImage(inkC, 0, 0, iw, ih, 0, 0, W, H);
+      g.imageSmoothingEnabled = false;
+
     /* ── hard rings, fired by transients ──────────────────────────────── */
     } else if (name === 'pulse') {
       var lvp = level();
@@ -521,7 +693,7 @@
          pattern held full strength through silence and only re-spaced
          itself. The ink listens too now, and an empty bar empties the
          window. */
-      g.globalAlpha = Math.min(1, 0.02 + lvm * 4);
+      g.globalAlpha = Math.min(1, 0.10 + lvm * 3.4);
       g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1;
       for (var m1 = -H; m1 < W + H; m1 += gap1) {
         g.beginPath(); g.moveTo(m1, 0); g.lineTo(m1, H); g.stroke();
@@ -543,7 +715,7 @@
         /* Brightness rides the level as well as the swing. Without it the
            sixteen lines sat there at full white through a silent passage,
            perfectly straight, looking like ruled paper. */
-        g.globalAlpha = Math.min(1, 0.05 + lvt * 3.4);
+        g.globalAlpha = Math.min(1, 0.16 + lvt * 2.8);
         g.fillStyle = (rt % 5 === 0) ? accent : '#fff';
         for (var xt = 0; xt < W; xt += 6) {
           var wt = Math.floor(xt / W * (wave.length - 1));
