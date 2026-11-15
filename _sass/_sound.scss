@@ -108,11 +108,16 @@
   .sketch-rule {
     display: block;
     position: relative;
-    height: 16px;
-    margin: .25em 0 .1em;
+    height: 28px;
+    margin: .1em 0 0;
     background: none;
     cursor: pointer;
+    touch-action: none;     // the drag is ours, not the browser's scroll
   }
+  // The line thickens under the pointer, so you can see what you are aiming
+  // at before you commit to the press.
+  .sketch-rule:hover::before,
+  .sketch-rule:focus-visible::before { height: 3px; margin-top: -1px; }
   .sketch-rule::before {
     content: '';
     position: absolute;
@@ -368,4 +373,89 @@ html.is-dark { background: #000; }
 
   // The foot of the site and its ornaments belong to the white page.
   footer, #hummingbird { opacity: 0; pointer-events: none; }
+}
+
+
+// ── The stage ──────────────────────────────────────────────────────────────
+// Everything but the ground goes away. The canvas is already fixed and
+// full-window, so this is mostly a matter of hiding the page over it.
+
+.site.site-sound.is-stage {
+  .site-header,
+  main,
+  footer,
+  #hummingbird { display: none !important; }
+}
+
+.sound-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;   // the overlay is a frame for the controls, not a lid
+}
+.sound-stage__bar {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 2.2em);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: .4em;
+  pointer-events: auto;
+}
+.sound-stage__x {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 1.2em);
+  right: calc(env(safe-area-inset-right, 0px) + 1.2em);
+  pointer-events: auto;
+}
+
+.sound-stage__b,
+.sound-stage__x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  opacity: .55;
+  transition: opacity .15s linear;
+}
+.sound-stage__b--play { width: 56px; height: 56px; }
+.sound-stage__b:hover,
+.sound-stage__x:hover,
+.sound-stage__b:focus-visible,
+.sound-stage__x:focus-visible { opacity: 1; }
+.sound-stage__b svg,
+.sound-stage__x svg {
+  width: 22px; height: 22px;
+  fill: none; stroke: currentColor; stroke-width: 1.5;
+  stroke-linecap: square; stroke-linejoin: miter;
+}
+.sound-stage__b--play svg { width: 26px; height: 26px; }
+.sound-stage__b--play .ic-pause,
+.sound-stage__b--play.is-playing .ic-play { display: none; }
+.sound-stage__b--play.is-playing .ic-pause { display: block; }
+
+// The controls go when the pointer stops. A transport that sits there for
+// ever is a transport you are looking at instead of the picture.
+.is-stage.is-idle {
+  cursor: none;
+  .sound-stage__bar,
+  .sound-stage__x { opacity: 0; pointer-events: none; }
+}
+.sound-stage__bar,
+.sound-stage__x { transition: opacity .5s linear; }
+
+// The ground decides the ink the controls are drawn in, the same way the
+// list does — white over a dark ground, black over paper.
+.site.site-sound.is-stage { color: #0a0a0a; }
+.site.site-sound.is-stage.is-dark { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-stage__bar, .sound-stage__x { transition: none; }
 }

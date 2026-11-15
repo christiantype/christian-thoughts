@@ -22,6 +22,30 @@ layout: default
 {%- endcomment -%}
 <canvas id="sound-ground" aria-hidden="true"></canvas>
 
+{%- comment -%}
+  The stage. Everything but the ground goes away and the sound plays
+  straight through, sketch after sketch, each one bringing its own
+  background. Three controls and nothing else; they fade out when the
+  pointer stops and come back when it moves.
+{%- endcomment -%}
+<div class="sound-stage" id="sound-stage" hidden>
+  <div class="sound-stage__bar">
+    <button type="button" class="sound-stage__b" id="stage-prev" aria-label="Previous sketch">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg>
+    </button>
+    <button type="button" class="sound-stage__b sound-stage__b--play" id="stage-play" aria-label="Pause">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ic-play"><path d="M8 4.6v14.8L20 12z" fill="currentColor" stroke="none"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ic-pause"><path d="M7.5 4.8h3.4v14.4H7.5zM13.1 4.8h3.4v14.4h-3.4z" fill="currentColor" stroke="none"/></svg>
+    </button>
+    <button type="button" class="sound-stage__b" id="stage-next" aria-label="Next sketch">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg>
+    </button>
+  </div>
+  <button type="button" class="sound-stage__x" id="stage-exit" aria-label="Leave the stage">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.6 5.6 18.4 18.4M18.4 5.6 5.6 18.4"/></svg>
+  </button>
+</div>
+
 <main class="container">
 
   {%- comment -%}
@@ -96,6 +120,13 @@ layout: default
       </svg>
     </button>
 
+    <button type="button" class="sound-pick" id="sound-stage-in"
+            aria-label="Clear the page and play everything">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+      </svg>
+    </button>
+
   </div>
 
 
@@ -129,20 +160,27 @@ layout: default
       'Play the sketch from ' + row.querySelector('.sketch-name').textContent);
   }
 
+  var rows = [].slice.call(document.querySelectorAll('.sketch'));
+
+  /* One way in to playing a row, so the list and the stage transport are
+     doing the same thing rather than two things that drift apart. */
+  function playRow(li) {
+    if (!li) return;
+    if (row === li) { audio.paused ? audio.play() : audio.pause(); return; }
+    stop();
+    row = li;
+    audio.src = li.querySelector('.sketch-play').dataset.src;
+    /* A different sketch brings a different ground with it. */
+    audio.dispatchEvent(new Event('sketch:open'));
+    audio.play().catch(function () {});
+  }
+  function step(d) {
+    var i = rows.indexOf(row);
+    playRow(rows[(i < 0 ? 0 : i + d + rows.length) % rows.length]);
+  }
+
   document.querySelectorAll('.sketch-play').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var li = btn.closest('.sketch');
-      if (row === li) {                 // the one already loaded: toggle it
-        if (audio.paused) audio.play(); else audio.pause();
-        return;
-      }
-      stop();
-      row = li;
-      audio.src = btn.dataset.src;
-      /* A different sketch brings a different ground with it. */
-      audio.dispatchEvent(new Event('sketch:open'));
-      audio.play().catch(function () {});
-    });
+    btn.addEventListener('click', function () { playRow(btn.closest('.sketch')); });
   });
 
   audio.addEventListener('play', function () {
@@ -154,7 +192,12 @@ layout: default
   audio.addEventListener('pause', function () {
     if (row) row.classList.remove('is-playing');
   });
-  audio.addEventListener('ended', stop);
+  /* On the stage it runs on: the next sketch, and the next background with
+     it. Off the stage the list stops at the end of a row, which is what a
+     list of things you choose should do. */
+  audio.addEventListener('ended', function () {
+    if (document.body.classList.contains('is-stage')) step(1); else stop();
+  });
 
   audio.addEventListener('timeupdate', function () {
     if (!row) return;
@@ -174,9 +217,25 @@ layout: default
       if (row !== li || !audio.duration) return;
       audio.currentTime = Math.max(0, Math.min(audio.duration, audio.duration * frac));
     }
-    rule.addEventListener('click', function (e) {
+    /* Drag, not just click. Pinning a four-minute recording with a single
+       press asks for a kind of accuracy nobody has; being able to hold and
+       slide is what makes it scrubbing rather than guessing. The pointer is
+       captured, so the drag survives leaving the rule — which is exactly
+       what happens when you are moving fast along it. */
+    var dragging = false;
+    function at(e) {
       var b = rule.getBoundingClientRect();
       seek((e.clientX - b.left) / b.width);
+    }
+    rule.addEventListener('pointerdown', function (e) {
+      if (row !== li) return;
+      dragging = true;
+      rule.setPointerCapture(e.pointerId);
+      at(e);
+    });
+    rule.addEventListener('pointermove', function (e) { if (dragging) at(e); });
+    ['pointerup', 'pointercancel'].forEach(function (t) {
+      rule.addEventListener(t, function () { dragging = false; });
     });
     rule.addEventListener('keydown', function (e) {
       if (row !== li || !audio.duration) return;
@@ -186,6 +245,68 @@ layout: default
       seek((audio.currentTime + d) / audio.duration);
     });
   });
+
+  /* ── The stage ─────────────────────────────────────────────────────────
+     The page clears: the masthead, the list and the foot go, and the ground
+     has the window to itself. The BROWSER is left alone — no fullscreen
+     request, no chrome taken over; this is the page getting out of the way,
+     not the browser. Three controls, and they fade when the pointer stops,
+     because a transport that sits there for ever is a transport you are
+     looking at instead of the picture.                                  */
+  var stage   = document.getElementById('sound-stage');
+  var stageIn = document.getElementById('sound-stage-in');
+  var playBtn = document.getElementById('stage-play');
+  var idle;
+
+  function wake() {
+    document.body.classList.remove('is-idle');
+    clearTimeout(idle);
+    idle = setTimeout(function () {
+      if (document.body.classList.contains('is-stage') && !audio.paused) {
+        document.body.classList.add('is-idle');
+      }
+    }, 2600);
+  }
+
+  function enterStage() {
+    document.body.classList.add('is-stage');
+    stage.hidden = false;
+    if (!row) playRow(rows[0]); else if (audio.paused) audio.play();
+    wake();
+  }
+  function leaveStage() {
+    document.body.classList.remove('is-stage', 'is-idle');
+    stage.hidden = true;
+    clearTimeout(idle);
+  }
+
+  if (stageIn) stageIn.addEventListener('click', enterStage);
+  document.getElementById('stage-exit').addEventListener('click', leaveStage);
+  document.getElementById('stage-prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('stage-next').addEventListener('click', function () { step(1); });
+  playBtn.addEventListener('click', function () {
+    audio.paused ? audio.play() : audio.pause();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!document.body.classList.contains('is-stage')) return;
+    if (e.key === 'Escape')     leaveStage();
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); step(-1); }
+    if (e.code === 'Space')     { e.preventDefault(); audio.paused ? audio.play() : audio.pause(); }
+  });
+  ['pointermove', 'pointerdown', 'keydown'].forEach(function (t) {
+    document.addEventListener(t, wake);
+  });
+
+  function markPlaying() {
+    playBtn.classList.toggle('is-playing', !audio.paused);
+    playBtn.setAttribute('aria-label', audio.paused ? 'Play' : 'Pause');
+    if (audio.paused) { document.body.classList.remove('is-idle'); clearTimeout(idle); }
+    else wake();
+  }
+  audio.addEventListener('play', markPlaying);
+  audio.addEventListener('pause', markPlaying);
 })();
 </script>
 
