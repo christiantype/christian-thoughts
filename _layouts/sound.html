@@ -189,4 +189,17 @@ layout: default
 })();
 </script>
 
+{%- comment -%}
+  Every photograph on /photography/, at the 420px size the gallery already
+  builds. One of the backgrounds takes one of these at random and scatters
+  it — so the sound page draws out of the photography page, and a picture
+  added over there turns up here without anything being wired.
+{%- endcomment -%}
+<script>
+window.SOUND_PHOTOS = [
+{%- assign thumbs = site.static_files | where_exp: "f", "f.path contains '/assets/images/photo-thumb/'" -%}
+{%- for f in thumbs -%}{%- if f.name contains '-420.jpg' -%}"{{ f.path }}",{% endif %}{%- endfor -%}
+];
+</script>
+
 <script src="{{ '/assets/js/sound-viz.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M' }}" defer></script>

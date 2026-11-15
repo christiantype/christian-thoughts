@@ -104,7 +104,9 @@
     ['polar',   'Polar',    true],    // a radial sweep, printing the spectrum
     ['moire',   'Moiré',    true],    // two gratings, interference
     ['traces',  'Traces',   true],    // stacked beaded waveform lines
-    ['sand',    'Sand',     false]    // wind on paper, the one soft ground
+    ['sand',    'Sand',     false],   // wind on paper, the one soft ground
+    ['score',   'Score',    false],   // a plotted drawing: spine, stem, blooms
+    ['cloud',   'Cloud',    true]     // one of his photographs, scattered
   ];
 
   var INK_LIGHT = 0.62;        // how much ink a white ground is allowed
@@ -115,13 +117,72 @@
   var W = 0, H = 0, DPR = 1;
   var sweep = 0, stamp = null, stc = null, raf = null, angle = 0;
   var inkC = null, ic = null;
+  var nodes = [], halftone = null;
+  var cloud = null, cloudSrc = '';
   var ctx, an, aL, aR, freq, wave, wl, wr, wired = false;
 
   /* `i` picks a ground by hand; left out, one is drawn at random. */
+  /* ── The photographs ──────────────────────────────────────────────────
+     One of the pictures from /photography/ is read into a grid of points —
+     every other pixel of a 190px copy, each keeping its own colour — and
+     those points are what the Cloud ground draws. At rest they sit where
+     they belong and the photograph is legible; the sound pushes them off
+     it. A different picture every time the ground comes up.
+
+     Read at 190px rather than full size on purpose: six thousand points is
+     already as many as can be drawn at sixty frames, and a photograph
+     scattered into a cloud does not need more than its shape and its
+     colour. Same origin, so the pixels can be read at all. */
+  function loadCloud() {
+    var list = window.SOUND_PHOTOS;
+    if (!list || !list.length) { cloud = null; return; }
+    var src = list[(Math.random() * list.length) | 0];
+    if (src === cloudSrc && cloud) return;
+    cloudSrc = src;
+    var img = new Image();
+    img.onload = function () {
+      var CW = 190, CH = Math.max(1, Math.round(CW * img.height / img.width));
+      var cc = document.createElement('canvas');
+      cc.width = CW; cc.height = CH;
+      var cx2 = cc.getContext('2d', { willReadFrequently: true });
+      cx2.drawImage(img, 0, 0, CW, CH);
+      var px;
+      try { px = cx2.getImageData(0, 0, CW, CH).data; } catch (e) { return; }
+      var pts = [];
+      for (var y = 0; y < CH; y += 2) for (var x = 0; x < CW; x += 2) {
+        var o = (y * CW + x) * 4;
+        var r = px[o], gg = px[o + 1], bb = px[o + 2];
+        /* The near-black of a photograph is its empty space. Keeping it
+           would scatter a cloud of invisible points and halve the frame
+           rate for nothing. */
+        if (r + gg + bb < 26) continue;
+        pts.push({ u: x / CW, v: y / CH, r: r, g: gg, b: bb,
+                   a: Math.random() * Math.PI * 2, k: 0.4 + Math.random() });
+      }
+      /* Lift the whole picture to a common brightness. Half of his
+         photographs are night work and land around a mean of 40, which as
+         a cloud of points on black is a cloud of invisible points. The
+         ratios between the colours are kept; only the overall level moves,
+         which is the same thing a print would get. */
+      var mean = 0;
+      for (var mi = 0; mi < pts.length; mi++) mean += (pts[mi].r + pts[mi].g + pts[mi].b) / 3;
+      mean = pts.length ? mean / pts.length : 128;
+      var lift = Math.min(3.4, Math.max(1, 118 / Math.max(12, mean)));
+      for (var li = 0; li < pts.length; li++) {
+        pts[li].r = Math.min(255, pts[li].r * lift) | 0;
+        pts[li].g = Math.min(255, pts[li].g * lift) | 0;
+        pts[li].b = Math.min(255, pts[li].b * lift) | 0;
+      }
+      cloud = { pts: pts, w: CW, h: CH };
+    };
+    img.src = src;
+  }
+
   function reroll(i) {
     mode   = MODES[(i == null) ? (Math.random() * MODES.length) | 0 : (i % MODES.length)];
     dark   = mode[2];
     rollPalette(dark);
+    if (mode[0] === 'cloud') loadCloud();
     document.documentElement.style.setProperty('--accent', accent);
     /* The ground names itself on the body. It is what the stylesheet would
        hook into if one of them ever needed its own rule, and it is how the
@@ -137,7 +198,7 @@
   }
 
   function reset() {
-    sweep = 0; rings = []; lastLv = 0; angle = 0; roll = 0.25; gain = 1;
+    sweep = 0; rings = []; lastLv = 0; angle = 0; roll = 0.25; gain = 1; nodes = [];
     if (stc) stc.clearRect(0, 0, stamp.width, stamp.height);
     if (ic) ic.clearRect(0, 0, inkC.width, inkC.height);
     g.clearRect(0, 0, W, H);
@@ -158,6 +219,15 @@
        buffer — every frame is the last one, moved and blurred — so it costs
        a full-canvas read and write each frame, and at half size that is a
        quarter of the work for a picture that is soft anyway. */
+    /* The printed screen, built once. A 3px tile with one dot in it, tiled
+       over the whole drawing at the end — it is what makes the colour read
+       as ink laid on paper rather than as light coming out of a screen. */
+    halftone = document.createElement('canvas');
+    halftone.width = halftone.height = 3;
+    var hc = halftone.getContext('2d');
+    hc.fillStyle = 'rgba(0,0,0,.5)';
+    hc.fillRect(0, 0, 1, 1);
+
     inkC = document.createElement('canvas');
     inkC.width  = Math.max(1, Math.round(W / 2));
     inkC.height = Math.max(1, Math.round(H / 2));
@@ -426,24 +496,38 @@
       aL.getFloatTimeDomainData(wl); aR.getFloatTimeDomainData(wr);
       var cxs = W / 2, cys = H / 2, S = Math.min(W, H) * 0.42;
       /* Auto-gain, the way a real scope has it. Drawn at true amplitude a
-         field recording at -30 LUFS is a three-pixel smudge in the middle of
-         a black window — honest and useless. The figure is scaled to its own
-         peak instead, so the SHAPE is what is read: the level is already a
-         number on the row above. The floor stops silence being amplified
-         into a full-screen scribble. */
+         field recording at -30 LUFS is a three-pixel smudge in the middle
+         of a black window — honest and useless. The figure is scaled to its
+         own peak instead, so the SHAPE is what is read: the level is
+         already a number on the row above. The floor stops silence being
+         amplified into a full-screen scribble. */
       var pk = 0;
       for (var pq = 0; pq < wl.length; pq += 4) {
         var av = Math.abs(wl[pq]); if (av > pk) pk = av;
         var bv = Math.abs(wr[pq]); if (bv > pk) pk = bv;
       }
       S = S / Math.max(pk, 0.04);
-      g.strokeStyle = '#fff'; g.lineWidth = 1.2; g.beginPath();
-      for (var si = 0; si < wl.length; si++) {
-        var xs = cxs + wl[si] * S, ys = cys - wr[si] * S;
-        si ? g.lineTo(xs, ys) : g.moveTo(xs, ys);
+
+      /* Six passes at six delays, added rather than drawn over each other.
+         One pass is a wire; six of them lagged and summed is a lattice that
+         is bright where the figure keeps returning and faint where it went
+         once — which is the whole look, and it comes from the compositing
+         rather than from any blur. */
+      g.globalCompositeOperation = 'lighter';
+      for (var lg = 0; lg < 6; lg++) {
+        var off2 = lg * 97;
+        g.strokeStyle = 'rgba(150,215,255,' + (0.30 - lg * 0.035).toFixed(3) + ')';
+        g.lineWidth = 0.8 + lg * 0.35;
+        g.beginPath();
+        for (var si = 0; si < wl.length; si += 2) {
+          var j = (si + off2) % wl.length;
+          var xs = cxs + wl[j] * S, ys = cys - wr[j] * S;
+          si ? g.lineTo(xs, ys) : g.moveTo(xs, ys);
+        }
+        g.stroke();
       }
-      g.stroke();
-      /* The two axes, so the figure has something to be read against. */
+      g.globalCompositeOperation = 'source-over';
+
       /* The axes stay at a fixed size — they are the frame the figure is
          read against, and scaling them with it would hide the auto-gain. */
       var AX = Math.min(W, H) * 0.42;
@@ -656,6 +740,185 @@
       g.imageSmoothingEnabled = true;
       g.drawImage(inkC, 0, 0, iw, ih, 0, 0, W, H);
       g.imageSmoothingEnabled = false;
+
+    /* ── a plotted drawing ──────────────────────────────────────────────
+       Paper, and six things on it that each answer a different part of the
+       sound:
+
+         the blooms   soft diffused colour, one per band, drifting
+         the spine    a single ruled vertical, dead centre
+         the stem     the waveform, running DOWN the page and crossing the
+                      spine — time is vertical here, which is the one
+                      decision that makes it read as a plotted drawing
+                      rather than as an oscilloscope on its side
+         the nodes    a ring where an attack landed, left on the paper to
+                      fade rather than redrawn
+         the staff    ruled lines on the left, the low bands
+         the field    a dot matrix on the right, the high bands
+
+       Everything is multiplied onto the paper, not drawn over it, so the
+       overlaps make their own colours the way two inks would. The halftone
+       goes on last, over all of it. */
+    } else if (name === 'score') {
+      /* Full ink. This ground paints its own paper and then multiplies on
+         to it, and at the light-ground 0.62 the paper itself came out
+         semi-transparent — so everything after it was multiplying against
+         the page behind rather than against the sheet, and only the spine
+         survived. */
+      g.globalAlpha = 1;
+      var cb2 = bands(18, false), lvq = level(), tq = performance.now() / 1000;
+      var spineX = Math.round(W * 0.5) + 0.5;
+
+      g.fillStyle = '#f3f1ed';
+      g.fillRect(0, 0, W, H);
+      g.globalCompositeOperation = 'multiply';
+
+      /* The blooms. Big, soft, low — the reference is airbrush on paper and
+         the thing that kills it is a hard edge, so every one of these is a
+         gradient that reaches zero well inside its own radius. */
+      for (var bq = 0; bq < 6; bq++) {
+        var e = cb2[2 + bq * 3];
+        if (e < 0.05) continue;
+        var ph2 = bq * 1.7;
+        var bxq = W * (0.5 + 0.30 * Math.sin(tq * (0.06 + bq * 0.013) + ph2));
+        var byq = H * (0.5 + 0.34 * Math.cos(tq * (0.05 + bq * 0.011) + ph2 * 1.3));
+        var radq = Math.min(W, H) * (0.18 + e * 0.46);
+        var cq = RGB[bq % RGB.length];
+        var grq = g.createRadialGradient(bxq, byq, 0, bxq, byq, radq);
+        /* The first pass was a tenth of this and the whole drawing came
+           out as blank paper with a line on it. An airbrushed bloom has to
+           actually carry colour; it is the softness of the edge that makes
+           it read as spray, not the weakness of the ink. */
+        grq.addColorStop(0,   'rgba(' + cq[0] + ',' + cq[1] + ',' + cq[2] + ',' + (0.34 + e * 0.46).toFixed(3) + ')');
+        grq.addColorStop(0.45,'rgba(' + cq[0] + ',' + cq[1] + ',' + cq[2] + ',' + (0.16 + e * 0.26).toFixed(3) + ')');
+        grq.addColorStop(1,   'rgba(' + cq[0] + ',' + cq[1] + ',' + cq[2] + ',0)');
+        g.fillStyle = grq;
+        g.beginPath(); g.arc(bxq, byq, radq, 0, Math.PI * 2); g.fill();
+      }
+
+      /* The staff: the bottom six bands as ruled lines across the left
+         third, each with a mark where it crosses its own column. */
+      g.strokeStyle = 'rgba(26,24,22,.95)'; g.lineWidth = 1.2;
+      for (var sq = 0; sq < 9; sq++) {
+        var le = cb2[sq];
+        if (le < 0.03) continue;
+        var ly = Math.round(H * (0.18 + sq * 0.075)) + 0.5;
+        var lw = W * (0.10 + le * 0.42);
+        g.globalAlpha = 0.45 + le * 0.5;
+        g.beginPath(); g.moveTo(0, ly); g.lineTo(lw, ly); g.stroke();
+        g.fillStyle = 'rgba(26,24,22,1)';
+        g.fillRect(Math.round(lw * 0.42), ly - 3, 5, 5);
+        g.fillRect(Math.round(lw * 0.78), ly - 2, 4, 4);
+      }
+      g.globalAlpha = 1;
+
+      /* The field: the top bands as a dot matrix on the right, thinning as
+         it goes out. */
+      var stepq = 26;
+      for (var fx = Math.round(W * 0.56); fx < W; fx += stepq) {
+        var fade = 1 - (fx - W * 0.56) / (W * 0.46);
+        for (var fy = Math.round(H * 0.18); fy < H * 0.86; fy += stepq) {
+          var bi2 = 12 + ((fy / stepq) | 0) % 6;
+          var fe = cb2[bi2] * fade;
+          if (fe < 0.06) continue;
+          g.fillStyle = 'rgba(26,24,22,' + Math.min(1, 0.25 + fe * 1.6).toFixed(3) + ')';
+          var ds = fe > 0.40 ? 5 : 4;
+          g.fillRect(fx, fy, ds, ds);
+        }
+      }
+
+      /* The spine. One ruled vertical, full height, always there. */
+      g.strokeStyle = 'rgba(24,22,20,.85)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(spineX, 0); g.lineTo(spineX, H); g.stroke();
+
+      /* The stem. The waveform read DOWN the page, deviating either side of
+         the spine, drawn as one continuous curve. */
+      var stemC = RGB[2 % RGB.length];
+      g.strokeStyle = 'rgba(' + stemC[0] + ',' + stemC[1] + ',' + stemC[2] + ',1)';
+      g.lineWidth = 3.2;
+      g.lineJoin = 'round'; g.lineCap = 'round';
+      g.beginPath();
+      var NQ = 150, amp = W * (0.07 + lvq * 0.30);
+      for (var q2 = 0; q2 <= NQ; q2++) {
+        var yq = q2 / NQ * H;
+        var wq = wave[Math.floor(q2 / NQ * (wave.length - 1))];
+        var xq = spineX + (wq - 128) / 128 * amp;
+        q2 ? g.lineTo(xq, yq) : g.moveTo(xq, yq);
+      }
+      g.stroke();
+
+      /* The nodes. An attack leaves a ring on the stem, and the ring stays
+         on the paper and fades rather than being redrawn — which is what
+         makes the drawing look made over time instead of refreshed. */
+      var lvn = lvq;
+      lastLv = lastLv ? lastLv * 0.9 + lvn * 0.1 : lvn;
+      if (lvn > lastLv * 1.14 && lvn > 0.1 && nodes.length < 14) {
+        var ny = Math.random() * H;
+        var wn = wave[Math.floor(ny / H * (wave.length - 1))];
+        nodes.push({ x: spineX + (wn - 128) / 128 * amp, y: ny,
+                     r: 10 + lvn * 36, t: 1 });
+      }
+      for (var ni = nodes.length - 1; ni >= 0; ni--) {
+        var nd = nodes[ni];
+        nd.t -= 0.006;
+        if (nd.t <= 0) { nodes.splice(ni, 1); continue; }
+        g.strokeStyle = 'rgba(' + stemC[0] + ',' + stemC[1] + ',' + stemC[2] + ',' + (nd.t * 0.8).toFixed(3) + ')';
+        g.lineWidth = 2.2;
+        g.beginPath(); g.arc(nd.x, nd.y, nd.r, 0, Math.PI * 2); g.stroke();
+        g.lineWidth = 1;
+        g.beginPath(); g.arc(nd.x, nd.y, nd.r * 0.45, 0, Math.PI * 2); g.stroke();
+        g.fillStyle = 'rgba(' + stemC[0] + ',' + stemC[1] + ',' + stemC[2] + ',' + (nd.t * 0.9).toFixed(3) + ')';
+        g.beginPath(); g.arc(nd.x, nd.y, 2.5, 0, Math.PI * 2); g.fill();
+      }
+
+      /* The screen, over everything. */
+      g.globalCompositeOperation = 'multiply';
+      g.globalAlpha = 0.16;
+      g.fillStyle = g.createPattern(halftone, 'repeat');
+      g.fillRect(0, 0, W, H);
+      g.globalAlpha = 1;
+      g.globalCompositeOperation = 'source-over';
+
+    /* ── a photograph, scattered ────────────────────────────────────────
+       The picture is a grid of points, and the sound is what moves them off
+       their places. Quiet and they settle back into the photograph; loud
+       and it comes apart. Each point drifts on its own heading and at its
+       own rate, so the cloud never pulls apart evenly — an even scatter
+       reads as a zoom, not as a dispersal.
+
+       The band that moves a point is the band at its HEIGHT: the bass pulls
+       the bottom of the picture about and the top of it answers the treble,
+       so a bass note takes the ground out from under the image. */
+    } else if (name === 'cloud') {
+      if (cloud) {        // nothing to draw until the picture has loaded
+        var cbn = bands(16, true), lvc = level();
+        /* Fit the picture INSIDE the window rather than covering it. Blown
+           up to fill 1440px a 190px source puts its points fifteen pixels
+           apart, and fifteen pixels apart is a dot matrix, not a
+           photograph. At about seven tenths of the short side they are six
+           apart and the picture reads — and the empty ground around it is
+           what lets the dispersal be visible as a dispersal. */
+        var sc = Math.min(W / cloud.w, H / cloud.h) * 0.74;
+        var pw = cloud.w * sc, phh = cloud.h * sc;
+        var ox = (W - pw) / 2, oy = (H - phh) / 2;
+        var tc2 = performance.now() / 1000;
+        var pts = cloud.pts;
+        for (var ci = 0; ci < pts.length; ci++) {
+          var pt = pts[ci];
+          var bnd = cbn[Math.min(15, (pt.v * 16) | 0)];
+          /* Gentler than it was. At full strength the picture never came
+             back together between gusts and the ground was only ever a
+             cloud; the whole point is that it RESOLVES when the bar is
+             quiet and comes apart when it is not. */
+          var push = (bnd * 0.55 + lvc * 0.45) * Math.min(W, H) * 0.30 * pt.k;
+          var ang2 = pt.a + tc2 * 0.09 * pt.k;
+          var sx2 = ox + pt.u * pw + Math.cos(ang2) * push;
+          var sy2 = oy + pt.v * phh + Math.sin(ang2) * push;
+          if (sx2 < -4 || sx2 > W + 4 || sy2 < -4 || sy2 > H + 4) continue;
+          g.fillStyle = 'rgb(' + pt.r + ',' + pt.g + ',' + pt.b + ')';
+          g.fillRect(sx2 | 0, sy2 | 0, 3, 3);
+        }
+      }
 
     /* ── hard rings, fired by transients ──────────────────────────────── */
     } else if (name === 'pulse') {
