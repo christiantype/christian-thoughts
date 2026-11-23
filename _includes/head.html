@@ -2,7 +2,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index, follow">
+  {%- comment -%} a page can ask to be left out: robots: "noindex, follow" in its front matter {%- endcomment -%}
+  <meta name="robots" content="{{ page.robots | default: 'index, follow' }}">
 
   {%- seo -%}
   {%- feed_meta -%}
