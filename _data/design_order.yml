@@ -1,7 +1,13 @@
 # Display order — newest first by EXIF capture date (file date if none).
 # Regenerate with bin/generate-photo-order.py after adding images.
 
-- "barnyard-bubbly-mark.svg"   # 2026:10:11 19:15:52  (file date)
+- "print-swap-1.jpg"   # 2026:11:22 13:28:17  (file date)
+- "print-swap-2.jpg"   # 2026:11:22 13:28:17  (file date)
+- "print-swap-3.jpg"   # 2026:11:22 13:28:17  (file date)
+- "print-swap-4.jpg"   # 2026:11:22 13:28:17  (file date)
+- "print-swap-5.jpg"   # 2026:11:22 13:28:17  (file date)
+- "print-swap-6.jpg"   # 2026:11:22 13:28:17  (file date)
+- "barnyard-bubbly-mark.svg"   # 2026:11:22 13:24:45  (file date)
 - "id-cover.webp"   # 2026:10:09 07:48:11  (file date)
 - "values-trust-believe.webp"   # 2026:09:15 08:33:00  (file date)
 - "L1003605.jpg"   # 2026:07:12 14:39:07

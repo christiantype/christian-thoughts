@@ -24,11 +24,12 @@ except ImportError:
     sys.exit("Pillow is required:  python3 -m pip install Pillow")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# Only photography is masonry. The design grid keeps square tiles: a poster
-# sits on a ground, and the ground is part of the piece.
+# Both grids are masonry, so both need a shape per file before it loads.
 SETS = [
     (os.path.join(ROOT, "assets", "images", "photography"),
      os.path.join(ROOT, "_data", "photo_dims.yml")),
+    (os.path.join(ROOT, "assets", "images", "design"),
+     os.path.join(ROOT, "_data", "design_dims.yml")),
 ]
 
 

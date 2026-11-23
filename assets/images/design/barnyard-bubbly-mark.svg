@@ -5,7 +5,7 @@
        was asked for and then asked away — a logo should arrive whole.
        Square by construction: the mark is 331 × 224 and the frame is padded
        out to a square so a 1:1 crop takes nothing off the sides. */
-    svg { background: #fff; }
+    svg { background: #00AEEF; }  /* process cyan ground */
     .p { fill: #000; }
   ]]></style>
   <g transform="translate(18.00 71.33)">

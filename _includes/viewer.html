@@ -48,9 +48,10 @@
   </div>
 
   {%- comment -%}
-    Photography lays its grid out as masonry, so a frame keeps the shape it was
-    made in rather than being cropped square. Design does not: a poster sits on
-    a ground and the ground is part of the piece, so those tiles stay equal.
+    Both galleries lay their grid out as masonry, so a piece keeps the shape it
+    was made in rather than being cropped square. Work that runs light to its
+    own edge still names a ground in _data/design_ground.yml, and is contained
+    on it rather than cropped.
   {%- endcomment -%}
   <div class="viewer-grid{% if include.masonry %} viewer-grid--masonry{% endif %}" hidden></div>
 
@@ -73,7 +74,7 @@
     const modes   = root.querySelectorAll('.viewer-modes button');
     const body    = document.body;
 
-    let i = 0, mode = 'slide', gridBuilt = false;
+    let i = 0, mode = 'slide', gridBuilt = false, slideCycle = 0;
     const cache = new Map();
 
     function preload(n) {
@@ -90,6 +91,8 @@
       img.src = BASE + item.f;
       img.alt = item.a || '';
       setGround(img, item);
+      if (slideCycle) { clearInterval(slideCycle); slideCycle = 0; }
+      slideCycle = cycle(img, item);
       exifEl.textContent  = item.m || '';
       preload(i + 1); preload(i - 1);
       syncURL();
@@ -99,6 +102,27 @@
        nothing to say where it stops. Those pieces name a ground in
        _data/design_ground.yml; the image is then contained on it rather
        than cropped, and the ground shows around it as a margin. */
+    /* A cycling tile — several files behind one entry, named in
+       _data/design_cycle.yml. The page swaps the source rather than a GIF
+       doing it: six different pictures cannot share one 256-colour palette
+       without the greys going to mud, and a JPEG each keeps them clean.
+       Every frame is fetched once up front, so the change is instant and
+       never shows a half-loaded picture. */
+    const CYCLE_MS = 1800;
+    function cycle(el, item) {
+      if (!item.c || !item.c.length) return 0;
+      const frames = [item.f].concat(item.c).map(f => BASE + f);
+      frames.slice(1).forEach(src => { const p = new Image(); p.src = src; });
+      let n = 0;
+      const id = setInterval(() => {
+        if (!el.isConnected) { clearInterval(id); return; }
+        n = (n + 1) % frames.length;
+        el.removeAttribute('srcset');
+        el.src = frames[n];
+      }, CYCLE_MS);
+      return id;
+    }
+
     function setGround(el, item) {
       const g = item.g || '';
       el.classList.toggle('on-ground', !!g);
@@ -147,6 +171,7 @@
           el.height = item.d[1];
         }
         setGround(el, item);
+        cycle(el, item);
         fig.appendChild(el);
         // clicking a thumbnail opens it in slide mode
         fig.addEventListener('click', () => { show(n); setMode('slide'); });

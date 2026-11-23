@@ -1,0 +1,12 @@
+# A tile that cycles rather than sits still. The key is the file the gallery
+# lists; the files under it are its other frames, kept out of the grid and
+# swapped in by the viewer on a timer. A GIF would do this too, but a GIF has
+# one palette per frame and these are six different pictures — the greys went
+# to mud. These are plain JPEGs, changed by the page.
+
+"print-swap-1.jpg":
+  - "print-swap-2.jpg"
+  - "print-swap-3.jpg"
+  - "print-swap-4.jpg"
+  - "print-swap-5.jpg"
+  - "print-swap-6.jpg"
