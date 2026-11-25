@@ -1,0 +1,39 @@
+---
+layout: diary
+
+title:  "7am"
+
+date:   2026-11-11 07:00:00 -0600
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "A poem."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+long before roshi<br>
+i was roshi<br>
+long before buddha<br>
+i was buddha<br>
+long before oak park<br>
+i was oak park<br>
+long before fossils<br>
+i was<br>
+eating apples<br>
+straight from trees
+
+i am the tree<br>
+and i sit underneath<br>
+just like roots

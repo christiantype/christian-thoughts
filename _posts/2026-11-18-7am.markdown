@@ -1,0 +1,34 @@
+---
+layout: diary
+
+title:  "7am"
+
+date:   2026-11-18 07:00:00 -0600
+
+categories: diary
+
+type: "diary"
+
+
+tags: [project]
+
+description: "A poem."
+
+about: "NA"
+
+caption: "NA"
+
+client: "Self"
+
+published: true
+
+---
+i gave birth<br>
+to my parents
+
+and they did<br>
+the same<br>
+for me
+
+there is<br>
+no difference.
