@@ -561,6 +561,102 @@ pre {
     }
   }
 
+  /* No grid — the photography page. Twelve columns and a fixed rhythm set in
+     the script: a frame takes four of them or eight, sits beside a smaller one
+     with the page left open underneath, or runs off the edge of the screen
+     altogether. Rows are as tall as their tallest frame and everything sits to
+     the top of its row, which is where the white space comes from. */
+  /* Black, on the photography page alone. A photograph sits better against
+     nothing than against a white page: the ground stops competing with the
+     picture's own highlights, and a frame that runs off the edge of the screen
+     runs off into the dark rather than into paper. Everything that was ink
+     becomes paper and the other way about — never a dimmed grey, which is what
+     a half-measure here would give. */
+  &.photo-dark {
+    background: #000000;
+    color: #ffffff;
+    // The body is a centred column; without this the canvas either side of it
+    // stays the colour html was given, and the page has white margins.
+    min-height: 100vh;
+
+    .site-header,
+    .site-header a,
+    .site-header a:visited,
+    .site-header .site-mark-name,
+    .site-footer,
+    .site-footer a,
+    .site-footer a:visited,
+    a,
+    a:visited { color: #ffffff; }
+
+    /* The masthead sits on the same measure as the photographs: its box already
+       starts where column 1 does, but its own side padding pushed the type a
+       further 1.5em in, so the two were off by that much. */
+    .site-header {
+      background: #000000;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    // The masthead's own underline, and any rule on the page, on black.
+    hr,
+    .site-footer { border-color: rgba(255, 255, 255, .22); }
+  }
+
+  .viewer-grid--scatter {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 1.6em;
+    row-gap: 5.5em;
+    align-items: start;
+    overflow: visible;        // a frame runs past the column, so nothing clips it
+    padding-bottom: 6em;
+
+    @media (max-width: 900px) { grid-template-columns: repeat(12, 1fr); }
+    @media (max-width: 600px) { grid-template-columns: repeat(12, 1fr); }
+
+    .viewer-thumb {
+      grid-column: 1 / span 12;   // until the script places it
+      margin: 0;
+
+      img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: var(--ar, 1 / 1);
+        object-fit: contain;
+      }
+    }
+
+    // Off the edge: --edge-l and --edge-r are the distance from the grid to
+    // each side of the screen, measured in the script.
+    .viewer-thumb[data-bleed="l"]    { margin-left:  calc(-1 * var(--edge-l, 0px)); }
+    .viewer-thumb[data-bleed="r"]    { margin-right: calc(-1 * var(--edge-r, 0px)); }
+    .viewer-thumb[data-bleed="full"] {
+      margin-left:  calc(-1 * var(--edge-l, 0px));
+      margin-right: calc(-1 * var(--edge-r, 0px));
+    }
+
+    // Set down the page from the frame beside it.
+    .viewer-thumb[data-drop="1"] { margin-top: 5em; }
+    .viewer-thumb[data-drop="2"] { margin-top: 9em; }
+
+    /* A phone has one column. Every frame takes the full measure, the drops
+       come off — a set-down means nothing when nothing sits beside it — and a
+       frame that ran off an edge runs off both. */
+    @media (max-width: 700px) {
+      column-gap: 0;
+      row-gap: 3.5em;
+
+      .viewer-thumb {
+        grid-column: 1 / -1 !important;
+        margin-top: 0 !important;
+      }
+      .viewer-thumb[data-bleed] {
+        margin-left:  calc(-1 * var(--edge-l, 0px)) !important;
+        margin-right: calc(-1 * var(--edge-r, 0px)) !important;
+      }
+    }
+  }
+
   // Masonry — photography and design. A square tile crops every piece to the
   // same shape, which throws away the decision it was made with: an upright
   // frame is upright on purpose, and a 4 × 6 postcard is a 4 × 6. Here the
@@ -909,3 +1005,8 @@ pre {
   .video-spot__sound.is-on { background: rgba(126, 156, 247, .5); }
   .video-spot__sound.is-on .spk-wave  { opacity: 1; }
   .video-spot__sound.is-on .spk-slash { opacity: 0; }
+
+/* The canvas behind everything, for a page that is black. body is a centred
+   column — its ground stops at the column's edges, and the rest of the window
+   is whatever html was given. */
+html.dark-page { background: #000000; }

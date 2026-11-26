@@ -38,10 +38,16 @@ layout: default
     shove the column down. A photograph with no entry falls back to a square.
   {%- endcomment -%}
   {%- assign dims = site.data.photo_dims[fname] -%}
-{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":{{ meta | default: "" | jsonify }}{%- if dims -%},"d":{{ dims | jsonify }}{%- endif -%}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- comment -%}
+    "w" marks a photograph that runs the full width of the screen, named in
+    _data/photo_full.yml. Without it the rhythm decides the measure.
+  {%- endcomment -%}
+  {%- assign wide = false -%}
+  {%- if site.data.photo_full contains fname -%}{%- assign wide = true -%}{%- endif -%}
+{"f":{{ fname | jsonify }},"a":{{ alt | jsonify }},"m":{{ meta | default: "" | jsonify }}{%- if dims -%},"d":{{ dims | jsonify }}{%- endif -%}{%- if wide -%},"w":1{%- endif -%}}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 </script>
 
-{% include viewer.html base="/assets/images/photography/" masonry=true
+{% include viewer.html base="/assets/images/photography/" scatter=true modes=false
    thumbs="/assets/images/photo-thumb/" %}

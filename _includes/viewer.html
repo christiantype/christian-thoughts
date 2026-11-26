@@ -13,6 +13,12 @@
 
 <main class="site-viewer" data-base="{{ include.base }}">
 
+  {%- comment -%}
+    modes=false — the photography page is one long scroll of photographs and
+    nothing else. A photograph still opens full screen when it is clicked;
+    clicking it again, or Escape, comes back to the page.
+  {%- endcomment -%}
+  {%- unless include.modes == false -%}
   <nav class="viewer-modes" aria-label="View mode">
     <button type="button" data-mode="slide" class="active" aria-pressed="true" aria-label="Slide view" title="Slide">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -22,13 +28,13 @@
     </button>
     <button type="button" data-mode="grid" aria-pressed="false" aria-label="Grid view" title="Grid">
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3.5"  y="3.5"  width="7" height="7" rx="1.5"/>
-        <rect x="13.5" y="3.5"  width="7" height="7" rx="1.5"/>
-        <rect x="3.5"  y="13.5" width="7" height="7" rx="1.5"/>
-        <rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>
+        <rect x="2"    y="3.5"  width="12" height="8" rx="1.5"/>
+        <rect x="16"   y="3.5"  width="6"  height="5" rx="1.5"/>
+        <rect x="7"    y="14"   width="15" height="7" rx="1.5"/>
       </svg>
     </button>
   </nav>
+  {%- endunless -%}
 
   <div class="viewer-stage">
     <button type="button" class="viewer-nav viewer-prev" aria-label="Previous image">
@@ -53,7 +59,7 @@
     own edge still names a ground in _data/design_ground.yml, and is contained
     on it rather than cropped.
   {%- endcomment -%}
-  <div class="viewer-grid{% if include.masonry %} viewer-grid--masonry{% endif %}" hidden></div>
+  <div class="viewer-grid{% if include.scatter %} viewer-grid--scatter{% elsif include.masonry %} viewer-grid--masonry{% endif %}" hidden></div>
 
 </main>
 
@@ -172,6 +178,16 @@
         }
         setGround(el, item);
         cycle(el, item);
+        if (isScatter) {
+          const pl = placeOf(n, item);
+          fig.style.gridColumn = pl.c + ' / span ' + pl.s;
+          if (pl.bleed) fig.dataset.bleed = pl.bleed;
+          if (pl.drop) fig.dataset.drop = String(pl.drop);
+          // What the browser should fetch: the share of the screen this frame
+          // actually takes, not a thumbnail's worth.
+          const share = pl.bleed === 'full' ? 100 : Math.round(pl.s / 12 * 100);
+          el.sizes = '(max-width: 700px) 100vw, ' + share + 'vw';
+        }
         fig.appendChild(el);
         // clicking a thumbnail opens it in slide mode
         fig.addEventListener('click', () => { show(n); setMode('slide'); });
@@ -191,6 +207,56 @@
        Measured rather than calculated from the ratio: the tile's own height
        already accounts for the column width at this breakpoint, and the CSS
        aspect-ratio has reserved it before the file arrives. */
+    /* ── the page, placed ───────────────────────────────────────────────
+       Twelve columns, and no grid: a photograph takes as many of them as its
+       shape and its turn in the rhythm ask for. Some run off the edge of the
+       screen, some sit beside a smaller one with the page left open
+       underneath, some take the whole width. The rhythm is fixed rather than
+       random, so a photograph lands in the same place every time the page is
+       opened and the order still reads newest first.
+
+       c is the column it starts on, s how many it spans, bleed which edge it
+       runs off, drop how far down it sits from the one beside it. */
+    const RHYTHM = [
+      { c: 1,  s: 8, bleed: 'l' },
+      { c: 9,  s: 4 },
+      { c: 1,  s: 6, bleed: 'l' },
+      { c: 7,  s: 6, bleed: 'r' },
+      { c: 4,  s: 6, drop: 1 },
+      { c: 5,  s: 8, bleed: 'r' },
+      { c: 1,  s: 12, bleed: 'full' },
+      { c: 2,  s: 5, drop: 1 },
+      { c: 8,  s: 4 },
+      { c: 1,  s: 7, bleed: 'l' },
+      { c: 9,  s: 4, drop: 2 },
+      { c: 3,  s: 7 },
+      { c: 1,  s: 5, drop: 1 },
+      { c: 7,  s: 6, bleed: 'r' }
+    ];
+    /* A slot is written for a frame on its side. An upright one given the whole
+       screen would stand taller than the screen, so it takes the middle instead;
+       an upright in a wide slot is brought in to six columns and keeps its edge. */
+    function placeOf(n, item) {
+      const slot = RHYTHM[n % RHYTHM.length];
+      const ar = item.d && item.d[0] && item.d[1] ? item.d[0] / item.d[1] : 1;
+      // Named in _data/photo_full.yml: this one takes the whole screen,
+      // whatever the rhythm had in mind for it.
+      if (item.w) return { c: 1, s: 12, bleed: 'full', drop: 0 };
+      let c = slot.c, s = slot.s, bleed = slot.bleed || '', drop = slot.drop || 0;
+      if (ar < 1.15 && bleed === 'full') { bleed = ''; c = 4; s = 6; }
+      else if (ar < 0.95 && s > 6) { s = 6; if (c + s > 13) c = 13 - s; }
+      return { c: c, s: s, bleed: bleed, drop: drop };
+    }
+    const isScatter = grid.classList.contains('viewer-grid--scatter');
+    /* How far the grid sits from each edge of the screen, so a frame can be
+       told to run out to it. Measured, because the page's gutter is a padding
+       on an ancestor and a grid item cannot see it. */
+    function measureEdges() {
+      if (!isScatter) return;
+      const r = grid.getBoundingClientRect();
+      grid.style.setProperty('--edge-l', r.left + 'px');
+      grid.style.setProperty('--edge-r', (document.documentElement.clientWidth - r.right) + 'px');
+    }
     const isMasonry = grid.classList.contains('viewer-grid--masonry');
     function layoutMasonry() {
       if (!isMasonry || !gridBuilt || grid.hidden) return;
@@ -212,6 +278,7 @@
 
     let relayout;
     addEventListener('resize', () => {
+      measureEdges();
       clearTimeout(relayout);
       relayout = setTimeout(layoutMasonry, 120);
     });
@@ -242,6 +309,7 @@
       body.classList.toggle('mode-grid', mode === 'grid');
       body.classList.toggle('mode-slide', mode === 'slide');
       if (mode === 'grid') {
+        measureEdges();
         layoutMasonry();
         if (from && from !== 'grid' && gridAt != null) {
           // Reading the height forces the new spans to lay out, so the
@@ -267,6 +335,8 @@
       history.replaceState(null, '', url);
     }
 
+    // No toggle on the page: the photograph is its own way out.
+    if (!modes.length) img.addEventListener('click', () => setMode('grid'));
     root.querySelector('.viewer-prev').addEventListener('click', () => show(i - 1));
     root.querySelector('.viewer-next').addEventListener('click', () => show(i + 1));
     modes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));

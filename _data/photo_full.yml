@@ -1,0 +1,6 @@
+# Photographs that run the full width of the screen, edge to edge, wherever
+# they fall. Everything else is placed by the rhythm in _includes/viewer.html:
+# four columns or eight, beside a smaller frame, or off one edge. Add a file
+# name here and it takes the whole measure instead.
+- "L1008368.jpg"
+- "L1007963.jpg"
