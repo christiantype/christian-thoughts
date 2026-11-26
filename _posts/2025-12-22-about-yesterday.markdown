@@ -29,4 +29,4 @@ published: true
 ---
 Generational Wisdom
 
-![Christian Solorzano Photography](/assets/images/diary/20251221.JPG)
+![Christian Solorzano Photography](/assets/images/diary/20251221.jpg)

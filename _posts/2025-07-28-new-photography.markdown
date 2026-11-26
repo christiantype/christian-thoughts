@@ -30,12 +30,12 @@ published: true
 Recent photos taken in and around Chicago...
 
 ![Christian Solorzano Photography](/assets/images/photography/L1000259.jpg)
-![Christian Solorzano Photography](/assets/images/photography/L1000516.jpg)
-![Christian Solorzano Photography](/assets/images/photography/L1000533.jpg)
-![Christian Solorzano Photography](/assets/images/photography/L1001480.jpg)
-![Christian Solorzano Photography](/assets/images/photography/L1001519.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1000516.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1000533.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1001480.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1001519.jpg)
 ![Christian Solorzano Photography](/assets/images/photography/L1001531.jpg)
-![Christian Solorzano Photography](/assets/images/photography/L1020092.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1020092.jpg)
 
 
 

@@ -29,10 +29,10 @@ published: true
 ---
 Recent photos taken in the month of September
 
-![Christian Solorzano Photography](/assets/images/photography/L1002396.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1002396.jpg)
 Outside my home.
 
-![Christian Solorzano Photography](/assets/images/photography/L1002429.jpg)
+![Christian Solorzano Photography](/assets/images/diary/L1002429.jpg)
 Taken during a seven day Sesshin.
 
 ![Christian Solorzano Photography](/assets/images/photography/L1002618.jpg)
